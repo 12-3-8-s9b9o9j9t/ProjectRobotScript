@@ -1,4 +1,4 @@
-## Memo
+## Mémo
 
 ### Modèle Ecore
 Setup :
@@ -26,7 +26,7 @@ Setup :
 - Help > Install New Software > saisir `https://typefox.github.io/xtext2langium/download/updates/v0.4.0/`
 - Sélectionner Xtext2Langium Generator Fragment et l'installer (accepter toutes les licences et faire confiance à chaque fois qu'on nous le demande)
 - Ouvrir `META-INF/MANIFEST.MF` > Dependencies > Add > ajouter `io.typefox.xtext2langium`
-- Dans `<xxx>/Generate<xxx>.mwe2` ajouter le paramètre suivant à la configuration du langage :
+- Dans `<xxx>/Generate<xxx>.mwe2`\* ajouter le paramètre suivant à la configuration du langage :
 ```js
 fragment = io.typefox.xtext2langium.Xtext2LangiumFragment {
     outputPath = './langium'
@@ -46,7 +46,7 @@ npm i -g yo generator-langium
 ```sh
 yo langium
 ```
-- Copier le contenu du dossier `langium` généré précédement (dans le projet Xtext) dans le dossier `<xxx>/src/language`
+- Copier le contenu du dossier `langium` généré précédement (dans le projet Xtext) dans le dossier `<xxx>/src/language`\*
 
 \* *`<xxx>` est le nom de l'extension*
 
