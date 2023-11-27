@@ -12,5 +12,5 @@ package robotScriptModel;
  * @model
  * @generated
  */
-public interface And extends BoolBinary {
+public interface And extends BinOp {
 } // And

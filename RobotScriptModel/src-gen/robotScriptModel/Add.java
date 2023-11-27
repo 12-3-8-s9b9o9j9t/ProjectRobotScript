@@ -12,5 +12,5 @@ package robotScriptModel;
  * @model
  * @generated
  */
-public interface Add extends AriBinary {
+public interface Add extends BinOp {
 } // Add

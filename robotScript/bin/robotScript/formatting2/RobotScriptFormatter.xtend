@@ -7,26 +7,30 @@ import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import robotScript.services.RobotScriptGrammarAccess
-import robotScriptModel.Model
-import robotScriptModel.Rotation
+import robotScriptModel.EntryPoint
+import robotScriptModel.FunctionDef
 
 class RobotScriptFormatter extends AbstractFormatter2 {
 	
 	@Inject extension RobotScriptGrammarAccess
 
-	def dispatch void format(Model model, extension IFormattableDocument document) {
+	def dispatch void format(EntryPoint entryPoint, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (command : model.command) {
-			command.format
+		for (functionDef : entryPoint.functions) {
+			functionDef.format
 		}
 	}
 
-	def dispatch void format(Rotation rotation, extension IFormattableDocument document) {
+	def dispatch void format(FunctionDef functionDef, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (command : rotation.defvar) {
+		functionDef.returnType.format
+		for (command : functionDef.body) {
 			command.format
+		}
+		for (varDecl : functionDef.inputs) {
+			varDecl.format
 		}
 	}
 	
-	// TODO: implement for Linear, Clock, UltraSound, Speed, Loop, Switch, DefVar, And, Or, Not, Add, AriLiteral, Sub, Neg, Meter, Second, Degree
+	// TODO: implement for VarDecl, Loop, If, IfElse, AssignAtDecl, ReAssign, SetSpeed, Rotation, Front, Back, Right, Left, FunCall, Neg, Not, Greater, And, Add, Less, Or, Sub, GEq, Equ, Mul, LEq, NEq, Div
 }

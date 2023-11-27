@@ -1,143 +1,177 @@
 
-interface Model {
-	command: Command[]
+type Unit = Unit_M | Unit_DM | Unit_CM | Unit_MM;
+type Unit_M = 'm';
+type Unit_DM = 'dm';
+type Unit_CM = 'cm';
+type Unit_MM = 'mm';
+
+interface EntryPoint {
+	functions: FunctionDef[]
+}
+
+interface FunctionDef {
+	name?: string
+	returnType: AnyType
+	body: Command[]
+	inputs: VarDecl[]
+}
+
+interface AnyType {
 }
 
 interface Command {
 }
 
-interface Boolean extends Expressions {
+interface VarDecl extends Command {
+	^type: DataType
+	name?: string
 }
 
-interface Expressions {
+interface DataType extends AnyType {
 }
 
-interface Units {
-	prefix?: Prefix
+interface Expression {
 }
 
-interface Prefix {
+interface VoidType extends AnyType {
 }
 
-interface Arithmetic extends Expressions {
+interface NumberType extends DataType {
+}
+
+interface BooleanType extends DataType {
+}
+
+interface Loop extends ControlStructure {
+}
+
+interface ControlStructure extends Command {
+	body: Command[]
+	cond: Expression
+}
+
+interface If extends ControlStructure {
+}
+
+interface IfElse extends If {
+	bodyElse: Command[]
+}
+
+interface AssignAtDecl extends Assign {
+	vardecl: VarDecl
+}
+
+interface Assign extends Command {
+	expression: Expression
+}
+
+interface ReAssign extends Assign {
+	var: @VarDecl
+}
+
+interface SetSpeed extends Assign {
+	unit?: Unit
+	speedstate: @SpeedState
+}
+
+interface SpeedState extends Value {
+}
+
+interface Value extends Expression {
 }
 
 interface Rotation extends Movement {
 }
 
-interface Movement extends Functions {
+interface Movement extends Command {
+	expression: Expression
 }
 
-interface Functions extends Command {
-	defvar: Command[]
+interface Front extends Linear {
 }
 
 interface Linear extends Movement {
+	unit?: Unit
 }
 
-interface Clock extends Sensors {
+interface Back extends Linear {
 }
 
-interface Sensors extends Functions {
+interface Right extends Linear {
 }
 
-interface UltraSound extends Sensors {
+interface Left extends Linear {
 }
 
-interface Speed extends State {
+interface FunCall extends Value, Command {
+	fun: @FunctionDef
+	inputs: Expression[]
 }
 
-interface State extends Functions {
+interface Neg extends UnOp {
 }
 
-interface Loop extends ControlStructure {
-	loopCondition: Boolean
-	body: Command[]
+interface UnOp extends Expression {
+	op: Expression
 }
 
-interface ControlStructure extends Command {
+interface Not extends UnOp {
 }
 
-interface Switch extends ControlStructure {
-	switchCondition: Boolean
-	body: Command[]
+interface Greater extends BinOp {
 }
 
-interface DefVar extends Command {
-	name?: string
-	expressions: Expressions
-	units?: Units
+interface BinOp extends Expression {
+	rightOp: Expression
+	leftOp: Expression
 }
 
-interface BoolVariables extends BoolValues {
-	reference: @DefVar
+interface And extends BinOp {
 }
 
-interface BoolValues extends Boolean {
+interface Add extends BinOp {
 }
 
-interface And extends BoolBinary {
+interface Less extends BinOp {
 }
 
-interface BoolBinary extends Boolean {
-	left: Boolean
-	right: Boolean
+interface Or extends BinOp {
 }
 
-interface Or extends BoolBinary {
+interface Sub extends BinOp {
 }
 
-interface Not extends BoolUnary {
+interface GEq extends BinOp {
 }
 
-interface BoolUnary extends Boolean {
-	operand: Boolean
+interface Equ extends BinOp {
 }
 
-interface BoolLiteral extends BoolValues {
+interface Mul extends BinOp {
 }
 
-interface Add extends AriBinary {
+interface LEq extends BinOp {
 }
 
-interface AriBinary extends Arithmetic {
-	right: Arithmetic
-	left: Arithmetic
+interface NEq extends BinOp {
 }
 
-interface AriLiteral extends AriValues {
-	units?: Units
+interface Div extends BinOp {
 }
 
-interface AriValues extends Arithmetic {
+interface TimeSensor extends Value {
 }
 
-interface AriVariables extends AriValues {
-	reference: @DefVar
+interface DistSensor extends Value {
 }
 
-interface Sub extends AriBinary {
+interface BoolLiteral extends Value {
 }
 
-interface Neg extends AriUnary {
+interface NumberLiteral extends Value {
 }
 
-interface AriUnary extends Arithmetic {
-	operand: Arithmetic
-}
-
-interface Meter extends Units {
-}
-
-interface Second extends Units {
-}
-
-interface Degree extends Units {
-}
-
-interface Mili extends Prefix {
-}
-
-interface Centi extends Prefix {
+interface Variable extends Value {
+	var: @VarDecl
 }
 

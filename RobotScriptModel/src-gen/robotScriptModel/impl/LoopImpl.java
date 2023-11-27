@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import robotScriptModel.Command;
+import robotScriptModel.Expression;
 import robotScriptModel.Loop;
 import robotScriptModel.RobotScriptModelPackage;
 
@@ -30,23 +31,13 @@ import robotScriptModel.RobotScriptModelPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.LoopImpl#getLoopCondition <em>Loop Condition</em>}</li>
  *   <li>{@link robotScriptModel.impl.LoopImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link robotScriptModel.impl.LoopImpl#getCond <em>Cond</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
-	/**
-	 * The cached value of the '{@link #getLoopCondition() <em>Loop Condition</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLoopCondition()
-	 * @generated
-	 * @ordered
-	 */
-	protected robotScriptModel.Boolean loopCondition;
-
 	/**
 	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -56,6 +47,16 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	 * @ordered
 	 */
 	protected EList<Command> body;
+
+	/**
+	 * The cached value of the '{@link #getCond() <em>Cond</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getCond()
+	 * @generated
+	 * @ordered
+	 */
+	protected Expression cond;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -82,8 +83,11 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	 * @generated
 	 */
 	@Override
-	public robotScriptModel.Boolean getLoopCondition() {
-		return loopCondition;
+	public EList<Command> getBody() {
+		if (body == null) {
+			body = new EObjectContainmentEList<Command>(Command.class, this, RobotScriptModelPackage.LOOP__BODY);
+		}
+		return body;
 	}
 
 	/**
@@ -91,12 +95,22 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLoopCondition(robotScriptModel.Boolean newLoopCondition, NotificationChain msgs) {
-		robotScriptModel.Boolean oldLoopCondition = loopCondition;
-		loopCondition = newLoopCondition;
+	@Override
+	public Expression getCond() {
+		return cond;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetCond(Expression newCond, NotificationChain msgs) {
+		Expression oldCond = cond;
+		cond = newCond;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.LOOP__LOOP_CONDITION, oldLoopCondition, newLoopCondition);
+					RobotScriptModelPackage.LOOP__COND, oldCond, newCond);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -111,34 +125,21 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	 * @generated
 	 */
 	@Override
-	public void setLoopCondition(robotScriptModel.Boolean newLoopCondition) {
-		if (newLoopCondition != loopCondition) {
+	public void setCond(Expression newCond) {
+		if (newCond != cond) {
 			NotificationChain msgs = null;
-			if (loopCondition != null)
-				msgs = ((InternalEObject) loopCondition).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.LOOP__LOOP_CONDITION, null, msgs);
-			if (newLoopCondition != null)
-				msgs = ((InternalEObject) newLoopCondition).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.LOOP__LOOP_CONDITION, null, msgs);
-			msgs = basicSetLoopCondition(newLoopCondition, msgs);
+			if (cond != null)
+				msgs = ((InternalEObject) cond).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.LOOP__COND, null, msgs);
+			if (newCond != null)
+				msgs = ((InternalEObject) newCond).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.LOOP__COND, null, msgs);
+			msgs = basicSetCond(newCond, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.LOOP__LOOP_CONDITION,
-					newLoopCondition, newLoopCondition));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EList<Command> getBody() {
-		if (body == null) {
-			body = new EObjectContainmentEList<Command>(Command.class, this, RobotScriptModelPackage.LOOP__BODY);
-		}
-		return body;
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.LOOP__COND, newCond,
+					newCond));
 	}
 
 	/**
@@ -149,10 +150,10 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.LOOP__LOOP_CONDITION:
-			return basicSetLoopCondition(null, msgs);
 		case RobotScriptModelPackage.LOOP__BODY:
 			return ((InternalEList<?>) getBody()).basicRemove(otherEnd, msgs);
+		case RobotScriptModelPackage.LOOP__COND:
+			return basicSetCond(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -165,10 +166,10 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.LOOP__LOOP_CONDITION:
-			return getLoopCondition();
 		case RobotScriptModelPackage.LOOP__BODY:
 			return getBody();
+		case RobotScriptModelPackage.LOOP__COND:
+			return getCond();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -182,12 +183,12 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.LOOP__LOOP_CONDITION:
-			setLoopCondition((robotScriptModel.Boolean) newValue);
-			return;
 		case RobotScriptModelPackage.LOOP__BODY:
 			getBody().clear();
 			getBody().addAll((Collection<? extends Command>) newValue);
+			return;
+		case RobotScriptModelPackage.LOOP__COND:
+			setCond((Expression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -201,11 +202,11 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.LOOP__LOOP_CONDITION:
-			setLoopCondition((robotScriptModel.Boolean) null);
-			return;
 		case RobotScriptModelPackage.LOOP__BODY:
 			getBody().clear();
+			return;
+		case RobotScriptModelPackage.LOOP__COND:
+			setCond((Expression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -219,10 +220,10 @@ public class LoopImpl extends MinimalEObjectImpl.Container implements Loop {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.LOOP__LOOP_CONDITION:
-			return loopCondition != null;
 		case RobotScriptModelPackage.LOOP__BODY:
 			return body != null && !body.isEmpty();
+		case RobotScriptModelPackage.LOOP__COND:
+			return cond != null;
 		}
 		return super.eIsSet(featureID);
 	}

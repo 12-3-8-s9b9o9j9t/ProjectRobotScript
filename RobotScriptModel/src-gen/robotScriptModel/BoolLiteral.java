@@ -12,5 +12,5 @@ package robotScriptModel;
  * @model
  * @generated
  */
-public interface BoolLiteral extends BoolValues {
+public interface BoolLiteral extends Value {
 } // BoolLiteral

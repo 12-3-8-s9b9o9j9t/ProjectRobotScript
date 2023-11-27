@@ -2,127 +2,183 @@ grammar RobotScript
 import 'Terminals'
 import 'robotScriptModel-types'
 
-entry Model returns Model:
-    {Model} 'Model' '{' ('command' '{' command+=Command  ("," command+=Command  )* '}' )? '}'  
+entry EntryPoint returns EntryPoint:
+    {EntryPoint} 'EntryPoint' '{' ('functions' '{' functions+=FunctionDef  ("," functions+=FunctionDef  )* '}' )? '}'  
+;
+
+AnyType returns AnyType:
+    VoidType | NumberType | BooleanType 
 ;
 
 Command returns Command:
-    Rotation | Linear | Clock | UltraSound | Speed | Loop | Switch | DefVar 
+    VarDecl | Loop | If_Impl | IfElse | AssignAtDecl | ReAssign | SetSpeed | Rotation | Front | Back | Right | Left | FunCall 
 ;
 
-Boolean returns Boolean:
-    BoolVariables | And | Or | Not | BoolLiteral 
+DataType returns DataType:
+    NumberType | BooleanType 
 ;
 
-Expressions returns Expressions:
-    BoolVariables | And | Or | Not | BoolLiteral | Add | AriLiteral | AriVariables | Sub | Neg 
+Expression returns Expression:
+    Neg | Not | Greater | And | Add | Less | Or | Sub | GEq | Equ | Mul | LEq | NEq | Div | TimeSensor | DistSensor | BoolLiteral | NumberLiteral | SpeedState | Variable | FunCall 
 ;
 
-Units returns Units:
-    Meter | Second | Degree 
-;
-
-Arithmetic returns Arithmetic:
-    Add | AriLiteral | AriVariables | Sub | Neg 
-;
-
-Prefix returns Prefix:
-    Mili | Centi 
-;
-
-Rotation returns Rotation:
-    'Rotation' '{' 'defvar' '{' defvar+=Command  ("," defvar+=Command  )* '}' '}'  
-;
-
-Linear returns Linear:
-    'Linear' '{' 'defvar' '{' defvar+=Command  ("," defvar+=Command  )* '}' '}'  
-;
-
-Clock returns Clock:
-    'Clock' '{' 'defvar' '{' defvar+=Command  ("," defvar+=Command  )* '}' '}'  
-;
-
-UltraSound returns UltraSound:
-    'UltraSound' '{' 'defvar' '{' defvar+=Command  ("," defvar+=Command  )* '}' '}'  
-;
-
-Speed returns Speed:
-    'Speed' '{' 'defvar' '{' defvar+=Command  ("," defvar+=Command  )* '}' '}'  
-;
-
-Loop returns Loop:
-    'Loop' '{' 'loopCondition' loopCondition=Boolean  'body' '{' body+=Command  ("," body+=Command  )* '}' '}'  
-;
-
-Switch returns Switch:
-    'Switch' '{' 'switchCondition' switchCondition=Boolean  'body' '{' body+=Command  ("," body+=Command  )* '}' '}'  
-;
-
-DefVar returns DefVar:
-    'DefVar' name=EString  '{' 'expressions' expressions=Expressions  ('units' units=Units  )? '}'  
-;
-
-BoolVariables returns BoolVariables:
-    'BoolVariables' '{' 'reference' reference=[DefVar:EString ] '}'  
-;
-
-And returns And:
-    'And' '{' 'left' left=Boolean  'right' right=Boolean  '}'  
-;
-
-Or returns Or:
-    'Or' '{' 'left' left=Boolean  'right' right=Boolean  '}'  
-;
-
-Not returns Not:
-    'Not' '{' 'operand' operand=Boolean  '}'  
-;
-
-BoolLiteral returns BoolLiteral:
-    {BoolLiteral} 'BoolLiteral'  
+FunctionDef returns FunctionDef:
+    'FunctionDef' name=EString  '{' 'returnType' returnType=AnyType  ('body' '{' body+=Command  ("," body+=Command  )* '}' )? ('inputs' '{' inputs+=VarDecl  ("," inputs+=VarDecl  )* '}' )? '}'  
 ;
 
 EString returns string:
     STRING | ID 
 ;
 
-Add returns Add:
-    'Add' '{' 'right' right=Arithmetic  'left' left=Arithmetic  '}'  
+VarDecl returns VarDecl:
+    'VarDecl' name=EString  '{' 'type' ^type=DataType  '}'  
 ;
 
-AriLiteral returns AriLiteral:
-    {AriLiteral} 'AriLiteral' '{' ('units' units=Units  )? '}'  
+VoidType returns VoidType:
+    {VoidType} 'VoidType'  
 ;
 
-AriVariables returns AriVariables:
-    'AriVariables' '{' 'reference' reference=[DefVar:EString ] '}'  
+NumberType returns NumberType:
+    {NumberType} 'NumberType'  
 ;
 
-Sub returns Sub:
-    'Sub' '{' 'right' right=Arithmetic  'left' left=Arithmetic  '}'  
+BooleanType returns BooleanType:
+    {BooleanType} 'BooleanType'  
+;
+
+Loop returns Loop:
+    'Loop' '{' ('body' '{' body+=Command  ("," body+=Command  )* '}' )? 'cond' cond=Expression  '}'  
+;
+
+If_Impl returns If:
+    'If' '{' ('body' '{' body+=Command  ("," body+=Command  )* '}' )? 'cond' cond=Expression  '}'  
+;
+
+IfElse returns IfElse:
+    'IfElse' '{' ('body' '{' body+=Command  ("," body+=Command  )* '}' )? 'cond' cond=Expression  ('bodyElse' '{' bodyElse+=Command  ("," bodyElse+=Command  )* '}' )? '}'  
+;
+
+AssignAtDecl returns AssignAtDecl:
+    'AssignAtDecl' '{' 'expression' expression=Expression  'vardecl' vardecl=VarDecl  '}'  
+;
+
+ReAssign returns ReAssign:
+    'ReAssign' '{' 'var' var=[VarDecl:EString ] 'expression' expression=Expression  '}'  
+;
+
+SetSpeed returns SetSpeed:
+    'SetSpeed' '{' ('unit' unit=Unit  )? 'speedstate' speedstate=[SpeedState:EString ] 'expression' expression=Expression  '}'  
+;
+
+Rotation returns Rotation:
+    'Rotation' '{' 'expression' expression=Expression  '}'  
+;
+
+Front returns Front:
+    'Front' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
+;
+
+Back returns Back:
+    'Back' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
+;
+
+Right returns Right:
+    'Right' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
+;
+
+Left returns Left:
+    'Left' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
+;
+
+FunCall returns FunCall:
+    'FunCall' '{' 'fun' fun=[FunctionDef:EString ] ('inputs' '{' inputs+=Expression  ("," inputs+=Expression  )* '}' )? '}'  
 ;
 
 Neg returns Neg:
-    'Neg' '{' 'operand' operand=Arithmetic  '}'  
+    'Neg' '{' 'op' op=Expression  '}'  
 ;
 
-Meter returns Meter:
-    {Meter} 'Meter' '{' ('prefix' prefix=Prefix  )? '}'  
+Not returns Not:
+    'Not' '{' 'op' op=Expression  '}'  
 ;
 
-Second returns Second:
-    {Second} 'Second' '{' ('prefix' prefix=Prefix  )? '}'  
+Greater returns Greater:
+    'Greater' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
 ;
 
-Degree returns Degree:
-    {Degree} 'Degree' '{' ('prefix' prefix=Prefix  )? '}'  
+And returns And:
+    'And' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
 ;
 
-Mili returns Mili:
-    {Mili} 'Mili'  
+Add returns Add:
+    'Add' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
 ;
 
-Centi returns Centi:
-    {Centi} 'Centi'  
+Less returns Less:
+    'Less' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
 ;
+
+Or returns Or:
+    'Or' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+Sub returns Sub:
+    'Sub' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+GEq returns GEq:
+    'GEq' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+Equ returns Equ:
+    'Equ' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+Mul returns Mul:
+    'Mul' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+LEq returns LEq:
+    'LEq' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+NEq returns NEq:
+    'NEq' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+Div returns Div:
+    'Div' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+;
+
+TimeSensor returns TimeSensor:
+    {TimeSensor} 'TimeSensor'  
+;
+
+DistSensor returns DistSensor:
+    {DistSensor} 'DistSensor'  
+;
+
+BoolLiteral returns BoolLiteral:
+    {BoolLiteral} 'BoolLiteral'  
+;
+
+NumberLiteral returns NumberLiteral:
+    {NumberLiteral} 'NumberLiteral'  
+;
+
+SpeedState returns SpeedState:
+    {SpeedState} 'SpeedState'  
+;
+
+Variable returns Variable:
+    'Variable' '{' 'var' var=[VarDecl:EString ] '}'  
+;
+
+Unit returns Unit:
+    Unit_M | Unit_DM | Unit_CM | Unit_MM
+;
+Unit_M returns Unit_M: 'm' ;
+Unit_DM returns Unit_DM: 'dm' ;
+Unit_CM returns Unit_CM: 'cm' ;
+Unit_MM returns Unit_MM: 'mm' ;
 

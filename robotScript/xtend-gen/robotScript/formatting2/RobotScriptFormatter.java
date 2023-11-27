@@ -12,9 +12,11 @@ import org.eclipse.xtext.formatting2.IFormattableDocument;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import robotScript.services.RobotScriptGrammarAccess;
+import robotScriptModel.AnyType;
 import robotScriptModel.Command;
-import robotScriptModel.Model;
-import robotScriptModel.Rotation;
+import robotScriptModel.EntryPoint;
+import robotScriptModel.FunctionDef;
+import robotScriptModel.VarDecl;
 
 @SuppressWarnings("all")
 public class RobotScriptFormatter extends AbstractFormatter2 {
@@ -22,42 +24,47 @@ public class RobotScriptFormatter extends AbstractFormatter2 {
   @Extension
   private RobotScriptGrammarAccess _robotScriptGrammarAccess;
 
-  protected void _format(final Model model, @Extension final IFormattableDocument document) {
-    EList<Command> _command = model.getCommand();
-    for (final Command command : _command) {
-      document.<Command>format(command);
+  protected void _format(final EntryPoint entryPoint, @Extension final IFormattableDocument document) {
+    EList<FunctionDef> _functions = entryPoint.getFunctions();
+    for (final FunctionDef functionDef : _functions) {
+      document.<FunctionDef>format(functionDef);
     }
   }
 
-  protected void _format(final Rotation rotation, @Extension final IFormattableDocument document) {
-    EList<Command> _defvar = rotation.getDefvar();
-    for (final Command command : _defvar) {
+  protected void _format(final FunctionDef functionDef, @Extension final IFormattableDocument document) {
+    document.<AnyType>format(functionDef.getReturnType());
+    EList<Command> _body = functionDef.getBody();
+    for (final Command command : _body) {
       document.<Command>format(command);
+    }
+    EList<VarDecl> _inputs = functionDef.getInputs();
+    for (final VarDecl varDecl : _inputs) {
+      document.<VarDecl>format(varDecl);
     }
   }
 
-  public void format(final Object rotation, final IFormattableDocument document) {
-    if (rotation instanceof Rotation) {
-      _format((Rotation)rotation, document);
+  public void format(final Object entryPoint, final IFormattableDocument document) {
+    if (entryPoint instanceof XtextResource) {
+      _format((XtextResource)entryPoint, document);
       return;
-    } else if (rotation instanceof XtextResource) {
-      _format((XtextResource)rotation, document);
+    } else if (entryPoint instanceof EntryPoint) {
+      _format((EntryPoint)entryPoint, document);
       return;
-    } else if (rotation instanceof Model) {
-      _format((Model)rotation, document);
+    } else if (entryPoint instanceof FunctionDef) {
+      _format((FunctionDef)entryPoint, document);
       return;
-    } else if (rotation instanceof EObject) {
-      _format((EObject)rotation, document);
+    } else if (entryPoint instanceof EObject) {
+      _format((EObject)entryPoint, document);
       return;
-    } else if (rotation == null) {
+    } else if (entryPoint == null) {
       _format((Void)null, document);
       return;
-    } else if (rotation != null) {
-      _format(rotation, document);
+    } else if (entryPoint != null) {
+      _format(entryPoint, document);
       return;
     } else {
       throw new IllegalArgumentException("Unhandled parameter types: " +
-        Arrays.<Object>asList(rotation, document).toString());
+        Arrays.<Object>asList(entryPoint, document).toString());
     }
   }
 }

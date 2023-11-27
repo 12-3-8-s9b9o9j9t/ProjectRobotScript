@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import robotScriptModel.Expression;
 import robotScriptModel.Not;
 import robotScriptModel.RobotScriptModelPackage;
 
@@ -22,21 +23,21 @@ import robotScriptModel.RobotScriptModelPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.NotImpl#getOperand <em>Operand</em>}</li>
+ *   <li>{@link robotScriptModel.impl.NotImpl#getOp <em>Op</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	/**
-	 * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
+	 * The cached value of the '{@link #getOp() <em>Op</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperand()
+	 * @see #getOp()
 	 * @generated
 	 * @ordered
 	 */
-	protected robotScriptModel.Boolean operand;
+	protected Expression op;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -63,8 +64,8 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	 * @generated
 	 */
 	@Override
-	public robotScriptModel.Boolean getOperand() {
-		return operand;
+	public Expression getOp() {
+		return op;
 	}
 
 	/**
@@ -72,12 +73,12 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperand(robotScriptModel.Boolean newOperand, NotificationChain msgs) {
-		robotScriptModel.Boolean oldOperand = operand;
-		operand = newOperand;
+	public NotificationChain basicSetOp(Expression newOp, NotificationChain msgs) {
+		Expression oldOp = op;
+		op = newOp;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.NOT__OPERAND, oldOperand, newOperand);
+					RobotScriptModelPackage.NOT__OP, oldOp, newOp);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -92,21 +93,20 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	 * @generated
 	 */
 	@Override
-	public void setOperand(robotScriptModel.Boolean newOperand) {
-		if (newOperand != operand) {
+	public void setOp(Expression newOp) {
+		if (newOp != op) {
 			NotificationChain msgs = null;
-			if (operand != null)
-				msgs = ((InternalEObject) operand).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NOT__OPERAND, null, msgs);
-			if (newOperand != null)
-				msgs = ((InternalEObject) newOperand).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NOT__OPERAND, null, msgs);
-			msgs = basicSetOperand(newOperand, msgs);
+			if (op != null)
+				msgs = ((InternalEObject) op).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NOT__OP, null, msgs);
+			if (newOp != null)
+				msgs = ((InternalEObject) newOp).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NOT__OP, null, msgs);
+			msgs = basicSetOp(newOp, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.NOT__OPERAND, newOperand,
-					newOperand));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.NOT__OP, newOp, newOp));
 	}
 
 	/**
@@ -117,8 +117,8 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NOT__OPERAND:
-			return basicSetOperand(null, msgs);
+		case RobotScriptModelPackage.NOT__OP:
+			return basicSetOp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -131,8 +131,8 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NOT__OPERAND:
-			return getOperand();
+		case RobotScriptModelPackage.NOT__OP:
+			return getOp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -145,8 +145,8 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NOT__OPERAND:
-			setOperand((robotScriptModel.Boolean) newValue);
+		case RobotScriptModelPackage.NOT__OP:
+			setOp((Expression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -160,8 +160,8 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NOT__OPERAND:
-			setOperand((robotScriptModel.Boolean) null);
+		case RobotScriptModelPackage.NOT__OP:
+			setOp((Expression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -175,8 +175,8 @@ public class NotImpl extends MinimalEObjectImpl.Container implements Not {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NOT__OPERAND:
-			return operand != null;
+		case RobotScriptModelPackage.NOT__OP:
+			return op != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -12,5 +12,5 @@ package robotScriptModel;
  * @model
  * @generated
  */
-public interface Neg extends AriUnary {
+public interface Neg extends UnOp {
 } // Neg

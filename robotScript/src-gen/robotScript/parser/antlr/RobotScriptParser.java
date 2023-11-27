@@ -27,7 +27,7 @@ public class RobotScriptParser extends AbstractAntlrParser {
 
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Model";
+		return "EntryPoint";
 	}
 
 	public RobotScriptGrammarAccess getGrammarAccess() {

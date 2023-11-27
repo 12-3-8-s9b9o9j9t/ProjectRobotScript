@@ -7,46 +7,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.util.Switch;
 
-import robotScriptModel.Add;
-import robotScriptModel.And;
-import robotScriptModel.AriBinary;
-import robotScriptModel.AriLiteral;
-import robotScriptModel.AriUnary;
-import robotScriptModel.AriValues;
-import robotScriptModel.AriVariables;
-import robotScriptModel.Arithmetic;
-import robotScriptModel.BoolBinary;
-import robotScriptModel.BoolLiteral;
-import robotScriptModel.BoolUnary;
-import robotScriptModel.BoolValues;
-import robotScriptModel.BoolVariables;
-import robotScriptModel.Centi;
-import robotScriptModel.Clock;
-import robotScriptModel.Command;
-import robotScriptModel.ControlStructure;
-import robotScriptModel.DefVar;
-import robotScriptModel.Degree;
-import robotScriptModel.Expressions;
-import robotScriptModel.Functions;
-import robotScriptModel.Linear;
-import robotScriptModel.Loop;
-import robotScriptModel.Meter;
-import robotScriptModel.Mili;
-import robotScriptModel.Model;
-import robotScriptModel.Movement;
-import robotScriptModel.Neg;
-import robotScriptModel.Not;
-import robotScriptModel.Or;
-import robotScriptModel.Prefix;
-import robotScriptModel.RobotScriptModelPackage;
-import robotScriptModel.Rotation;
-import robotScriptModel.Second;
-import robotScriptModel.Sensors;
-import robotScriptModel.Speed;
-import robotScriptModel.State;
-import robotScriptModel.Sub;
-import robotScriptModel.UltraSound;
-import robotScriptModel.Units;
+import robotScriptModel.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -105,134 +66,79 @@ public class RobotScriptModelSwitch<T> extends Switch<T> {
 	@Override
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-		case RobotScriptModelPackage.MOVEMENT: {
-			Movement movement = (Movement) theEObject;
-			T result = caseMovement(movement);
-			if (result == null)
-				result = caseFunctions(movement);
-			if (result == null)
-				result = caseCommand(movement);
+		case RobotScriptModelPackage.ENTRY_POINT: {
+			EntryPoint entryPoint = (EntryPoint) theEObject;
+			T result = caseEntryPoint(entryPoint);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.ROTATION: {
-			Rotation rotation = (Rotation) theEObject;
-			T result = caseRotation(rotation);
-			if (result == null)
-				result = caseMovement(rotation);
-			if (result == null)
-				result = caseFunctions(rotation);
-			if (result == null)
-				result = caseCommand(rotation);
+		case RobotScriptModelPackage.FUNCTION_DEF: {
+			FunctionDef functionDef = (FunctionDef) theEObject;
+			T result = caseFunctionDef(functionDef);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.SENSORS: {
-			Sensors sensors = (Sensors) theEObject;
-			T result = caseSensors(sensors);
-			if (result == null)
-				result = caseFunctions(sensors);
-			if (result == null)
-				result = caseCommand(sensors);
+		case RobotScriptModelPackage.ANY_TYPE: {
+			AnyType anyType = (AnyType) theEObject;
+			T result = caseAnyType(anyType);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.UNITS: {
-			Units units = (Units) theEObject;
-			T result = caseUnits(units);
+		case RobotScriptModelPackage.COMMAND: {
+			Command command = (Command) theEObject;
+			T result = caseCommand(command);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.CONTROL_STRUCTURE: {
-			ControlStructure controlStructure = (ControlStructure) theEObject;
-			T result = caseControlStructure(controlStructure);
+		case RobotScriptModelPackage.VAR_DECL: {
+			VarDecl varDecl = (VarDecl) theEObject;
+			T result = caseVarDecl(varDecl);
 			if (result == null)
-				result = caseCommand(controlStructure);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.MODEL: {
-			Model model = (Model) theEObject;
-			T result = caseModel(model);
+				result = caseCommand(varDecl);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.FUNCTIONS: {
-			Functions functions = (Functions) theEObject;
-			T result = caseFunctions(functions);
+		case RobotScriptModelPackage.VOID_TYPE: {
+			VoidType voidType = (VoidType) theEObject;
+			T result = caseVoidType(voidType);
 			if (result == null)
-				result = caseCommand(functions);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.BOOL_VARIABLES: {
-			BoolVariables boolVariables = (BoolVariables) theEObject;
-			T result = caseBoolVariables(boolVariables);
-			if (result == null)
-				result = caseBoolValues(boolVariables);
-			if (result == null)
-				result = caseBoolean(boolVariables);
-			if (result == null)
-				result = caseExpressions(boolVariables);
+				result = caseAnyType(voidType);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.LINEAR: {
-			Linear linear = (Linear) theEObject;
-			T result = caseLinear(linear);
+		case RobotScriptModelPackage.DATA_TYPE: {
+			DataType dataType = (DataType) theEObject;
+			T result = caseDataType(dataType);
 			if (result == null)
-				result = caseMovement(linear);
-			if (result == null)
-				result = caseFunctions(linear);
-			if (result == null)
-				result = caseCommand(linear);
+				result = caseAnyType(dataType);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.CLOCK: {
-			Clock clock = (Clock) theEObject;
-			T result = caseClock(clock);
+		case RobotScriptModelPackage.NUMBER_TYPE: {
+			NumberType numberType = (NumberType) theEObject;
+			T result = caseNumberType(numberType);
 			if (result == null)
-				result = caseSensors(clock);
+				result = caseDataType(numberType);
 			if (result == null)
-				result = caseFunctions(clock);
-			if (result == null)
-				result = caseCommand(clock);
+				result = caseAnyType(numberType);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.ULTRA_SOUND: {
-			UltraSound ultraSound = (UltraSound) theEObject;
-			T result = caseUltraSound(ultraSound);
+		case RobotScriptModelPackage.BOOLEAN_TYPE: {
+			BooleanType booleanType = (BooleanType) theEObject;
+			T result = caseBooleanType(booleanType);
 			if (result == null)
-				result = caseSensors(ultraSound);
+				result = caseDataType(booleanType);
 			if (result == null)
-				result = caseFunctions(ultraSound);
-			if (result == null)
-				result = caseCommand(ultraSound);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.SPEED: {
-			Speed speed = (Speed) theEObject;
-			T result = caseSpeed(speed);
-			if (result == null)
-				result = caseState(speed);
-			if (result == null)
-				result = caseFunctions(speed);
-			if (result == null)
-				result = caseCommand(speed);
+				result = caseAnyType(booleanType);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -248,226 +154,102 @@ public class RobotScriptModelSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.METER: {
-			Meter meter = (Meter) theEObject;
-			T result = caseMeter(meter);
+		case RobotScriptModelPackage.IF: {
+			If if_ = (If) theEObject;
+			T result = caseIf(if_);
 			if (result == null)
-				result = caseUnits(meter);
+				result = caseControlStructure(if_);
 			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.SECOND: {
-			Second second = (Second) theEObject;
-			T result = caseSecond(second);
-			if (result == null)
-				result = caseUnits(second);
+				result = caseCommand(if_);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.SWITCH: {
-			robotScriptModel.Switch switch_ = (robotScriptModel.Switch) theEObject;
-			T result = caseSwitch(switch_);
+		case RobotScriptModelPackage.IF_ELSE: {
+			IfElse ifElse = (IfElse) theEObject;
+			T result = caseIfElse(ifElse);
 			if (result == null)
-				result = caseControlStructure(switch_);
+				result = caseIf(ifElse);
 			if (result == null)
-				result = caseCommand(switch_);
+				result = caseControlStructure(ifElse);
 			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.EXPRESSIONS: {
-			Expressions expressions = (Expressions) theEObject;
-			T result = caseExpressions(expressions);
+				result = caseCommand(ifElse);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.BOOLEAN: {
-			robotScriptModel.Boolean boolean_ = (robotScriptModel.Boolean) theEObject;
-			T result = caseBoolean(boolean_);
-			if (result == null)
-				result = caseExpressions(boolean_);
+		case RobotScriptModelPackage.EXPRESSION: {
+			Expression expression = (Expression) theEObject;
+			T result = caseExpression(expression);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.BOOL_BINARY: {
-			BoolBinary boolBinary = (BoolBinary) theEObject;
-			T result = caseBoolBinary(boolBinary);
+		case RobotScriptModelPackage.CONTROL_STRUCTURE: {
+			ControlStructure controlStructure = (ControlStructure) theEObject;
+			T result = caseControlStructure(controlStructure);
 			if (result == null)
-				result = caseBoolean(boolBinary);
-			if (result == null)
-				result = caseExpressions(boolBinary);
+				result = caseCommand(controlStructure);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.BOOL_UNARY: {
-			BoolUnary boolUnary = (BoolUnary) theEObject;
-			T result = caseBoolUnary(boolUnary);
+		case RobotScriptModelPackage.ASSIGN: {
+			Assign assign = (Assign) theEObject;
+			T result = caseAssign(assign);
 			if (result == null)
-				result = caseBoolean(boolUnary);
-			if (result == null)
-				result = caseExpressions(boolUnary);
+				result = caseCommand(assign);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.AND: {
-			And and = (And) theEObject;
-			T result = caseAnd(and);
+		case RobotScriptModelPackage.ASSIGN_AT_DECL: {
+			AssignAtDecl assignAtDecl = (AssignAtDecl) theEObject;
+			T result = caseAssignAtDecl(assignAtDecl);
 			if (result == null)
-				result = caseBoolBinary(and);
+				result = caseAssign(assignAtDecl);
 			if (result == null)
-				result = caseBoolean(and);
-			if (result == null)
-				result = caseExpressions(and);
+				result = caseCommand(assignAtDecl);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.OR: {
-			Or or = (Or) theEObject;
-			T result = caseOr(or);
+		case RobotScriptModelPackage.RE_ASSIGN: {
+			ReAssign reAssign = (ReAssign) theEObject;
+			T result = caseReAssign(reAssign);
 			if (result == null)
-				result = caseBoolBinary(or);
+				result = caseAssign(reAssign);
 			if (result == null)
-				result = caseBoolean(or);
-			if (result == null)
-				result = caseExpressions(or);
+				result = caseCommand(reAssign);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.ARITHMETIC: {
-			Arithmetic arithmetic = (Arithmetic) theEObject;
-			T result = caseArithmetic(arithmetic);
+		case RobotScriptModelPackage.SET_SPEED: {
+			SetSpeed setSpeed = (SetSpeed) theEObject;
+			T result = caseSetSpeed(setSpeed);
 			if (result == null)
-				result = caseExpressions(arithmetic);
+				result = caseAssign(setSpeed);
 			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.NOT: {
-			Not not = (Not) theEObject;
-			T result = caseNot(not);
-			if (result == null)
-				result = caseBoolUnary(not);
-			if (result == null)
-				result = caseBoolean(not);
-			if (result == null)
-				result = caseExpressions(not);
+				result = caseCommand(setSpeed);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.BOOL_VALUES: {
-			BoolValues boolValues = (BoolValues) theEObject;
-			T result = caseBoolValues(boolValues);
+		case RobotScriptModelPackage.UN_OP: {
+			UnOp unOp = (UnOp) theEObject;
+			T result = caseUnOp(unOp);
 			if (result == null)
-				result = caseBoolean(boolValues);
-			if (result == null)
-				result = caseExpressions(boolValues);
+				result = caseExpression(unOp);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.BOOL_LITERAL: {
-			BoolLiteral boolLiteral = (BoolLiteral) theEObject;
-			T result = caseBoolLiteral(boolLiteral);
+		case RobotScriptModelPackage.BIN_OP: {
+			BinOp binOp = (BinOp) theEObject;
+			T result = caseBinOp(binOp);
 			if (result == null)
-				result = caseBoolValues(boolLiteral);
-			if (result == null)
-				result = caseBoolean(boolLiteral);
-			if (result == null)
-				result = caseExpressions(boolLiteral);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.ARI_BINARY: {
-			AriBinary ariBinary = (AriBinary) theEObject;
-			T result = caseAriBinary(ariBinary);
-			if (result == null)
-				result = caseArithmetic(ariBinary);
-			if (result == null)
-				result = caseExpressions(ariBinary);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.ARI_UNARY: {
-			AriUnary ariUnary = (AriUnary) theEObject;
-			T result = caseAriUnary(ariUnary);
-			if (result == null)
-				result = caseArithmetic(ariUnary);
-			if (result == null)
-				result = caseExpressions(ariUnary);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.ADD: {
-			Add add = (Add) theEObject;
-			T result = caseAdd(add);
-			if (result == null)
-				result = caseAriBinary(add);
-			if (result == null)
-				result = caseArithmetic(add);
-			if (result == null)
-				result = caseExpressions(add);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.ARI_VALUES: {
-			AriValues ariValues = (AriValues) theEObject;
-			T result = caseAriValues(ariValues);
-			if (result == null)
-				result = caseArithmetic(ariValues);
-			if (result == null)
-				result = caseExpressions(ariValues);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.ARI_LITERAL: {
-			AriLiteral ariLiteral = (AriLiteral) theEObject;
-			T result = caseAriLiteral(ariLiteral);
-			if (result == null)
-				result = caseAriValues(ariLiteral);
-			if (result == null)
-				result = caseArithmetic(ariLiteral);
-			if (result == null)
-				result = caseExpressions(ariLiteral);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.ARI_VARIABLES: {
-			AriVariables ariVariables = (AriVariables) theEObject;
-			T result = caseAriVariables(ariVariables);
-			if (result == null)
-				result = caseAriValues(ariVariables);
-			if (result == null)
-				result = caseArithmetic(ariVariables);
-			if (result == null)
-				result = caseExpressions(ariVariables);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.SUB: {
-			Sub sub = (Sub) theEObject;
-			T result = caseSub(sub);
-			if (result == null)
-				result = caseAriBinary(sub);
-			if (result == null)
-				result = caseArithmetic(sub);
-			if (result == null)
-				result = caseExpressions(sub);
+				result = caseExpression(binOp);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -476,79 +258,323 @@ public class RobotScriptModelSwitch<T> extends Switch<T> {
 			Neg neg = (Neg) theEObject;
 			T result = caseNeg(neg);
 			if (result == null)
-				result = caseAriUnary(neg);
+				result = caseUnOp(neg);
 			if (result == null)
-				result = caseArithmetic(neg);
-			if (result == null)
-				result = caseExpressions(neg);
+				result = caseExpression(neg);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.DEF_VAR: {
-			DefVar defVar = (DefVar) theEObject;
-			T result = caseDefVar(defVar);
+		case RobotScriptModelPackage.NOT: {
+			Not not = (Not) theEObject;
+			T result = caseNot(not);
 			if (result == null)
-				result = caseCommand(defVar);
+				result = caseUnOp(not);
 			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.COMMAND: {
-			Command command = (Command) theEObject;
-			T result = caseCommand(command);
+				result = caseExpression(not);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.STATE: {
-			State state = (State) theEObject;
-			T result = caseState(state);
+		case RobotScriptModelPackage.GREATER: {
+			Greater greater = (Greater) theEObject;
+			T result = caseGreater(greater);
 			if (result == null)
-				result = caseFunctions(state);
+				result = caseBinOp(greater);
 			if (result == null)
-				result = caseCommand(state);
-			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.PREFIX: {
-			Prefix prefix = (Prefix) theEObject;
-			T result = casePrefix(prefix);
+				result = caseExpression(greater);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.MILI: {
-			Mili mili = (Mili) theEObject;
-			T result = caseMili(mili);
+		case RobotScriptModelPackage.AND: {
+			And and = (And) theEObject;
+			T result = caseAnd(and);
 			if (result == null)
-				result = casePrefix(mili);
+				result = caseBinOp(and);
 			if (result == null)
-				result = defaultCase(theEObject);
-			return result;
-		}
-		case RobotScriptModelPackage.CENTI: {
-			Centi centi = (Centi) theEObject;
-			T result = caseCenti(centi);
-			if (result == null)
-				result = casePrefix(centi);
+				result = caseExpression(and);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.DEGREE: {
-			Degree degree = (Degree) theEObject;
-			T result = caseDegree(degree);
+		case RobotScriptModelPackage.ADD: {
+			Add add = (Add) theEObject;
+			T result = caseAdd(add);
 			if (result == null)
-				result = caseUnits(degree);
+				result = caseBinOp(add);
+			if (result == null)
+				result = caseExpression(add);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
 		}
-		case RobotScriptModelPackage.NUMBER: {
-			robotScriptModel.Number number = (robotScriptModel.Number) theEObject;
-			T result = caseNumber(number);
+		case RobotScriptModelPackage.LESS: {
+			Less less = (Less) theEObject;
+			T result = caseLess(less);
+			if (result == null)
+				result = caseBinOp(less);
+			if (result == null)
+				result = caseExpression(less);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.OR: {
+			Or or = (Or) theEObject;
+			T result = caseOr(or);
+			if (result == null)
+				result = caseBinOp(or);
+			if (result == null)
+				result = caseExpression(or);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.SUB: {
+			Sub sub = (Sub) theEObject;
+			T result = caseSub(sub);
+			if (result == null)
+				result = caseBinOp(sub);
+			if (result == null)
+				result = caseExpression(sub);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.GEQ: {
+			GEq gEq = (GEq) theEObject;
+			T result = caseGEq(gEq);
+			if (result == null)
+				result = caseBinOp(gEq);
+			if (result == null)
+				result = caseExpression(gEq);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.EQU: {
+			Equ equ = (Equ) theEObject;
+			T result = caseEqu(equ);
+			if (result == null)
+				result = caseBinOp(equ);
+			if (result == null)
+				result = caseExpression(equ);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.MUL: {
+			Mul mul = (Mul) theEObject;
+			T result = caseMul(mul);
+			if (result == null)
+				result = caseBinOp(mul);
+			if (result == null)
+				result = caseExpression(mul);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.LEQ: {
+			LEq lEq = (LEq) theEObject;
+			T result = caseLEq(lEq);
+			if (result == null)
+				result = caseBinOp(lEq);
+			if (result == null)
+				result = caseExpression(lEq);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.NEQ: {
+			NEq nEq = (NEq) theEObject;
+			T result = caseNEq(nEq);
+			if (result == null)
+				result = caseBinOp(nEq);
+			if (result == null)
+				result = caseExpression(nEq);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.DIV: {
+			Div div = (Div) theEObject;
+			T result = caseDiv(div);
+			if (result == null)
+				result = caseBinOp(div);
+			if (result == null)
+				result = caseExpression(div);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.MOVEMENT: {
+			Movement movement = (Movement) theEObject;
+			T result = caseMovement(movement);
+			if (result == null)
+				result = caseCommand(movement);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.ROTATION: {
+			Rotation rotation = (Rotation) theEObject;
+			T result = caseRotation(rotation);
+			if (result == null)
+				result = caseMovement(rotation);
+			if (result == null)
+				result = caseCommand(rotation);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.LINEAR: {
+			Linear linear = (Linear) theEObject;
+			T result = caseLinear(linear);
+			if (result == null)
+				result = caseMovement(linear);
+			if (result == null)
+				result = caseCommand(linear);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.FRONT: {
+			Front front = (Front) theEObject;
+			T result = caseFront(front);
+			if (result == null)
+				result = caseLinear(front);
+			if (result == null)
+				result = caseMovement(front);
+			if (result == null)
+				result = caseCommand(front);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.BACK: {
+			Back back = (Back) theEObject;
+			T result = caseBack(back);
+			if (result == null)
+				result = caseLinear(back);
+			if (result == null)
+				result = caseMovement(back);
+			if (result == null)
+				result = caseCommand(back);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.RIGHT: {
+			Right right = (Right) theEObject;
+			T result = caseRight(right);
+			if (result == null)
+				result = caseLinear(right);
+			if (result == null)
+				result = caseMovement(right);
+			if (result == null)
+				result = caseCommand(right);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.LEFT: {
+			Left left = (Left) theEObject;
+			T result = caseLeft(left);
+			if (result == null)
+				result = caseLinear(left);
+			if (result == null)
+				result = caseMovement(left);
+			if (result == null)
+				result = caseCommand(left);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.VALUE: {
+			Value value = (Value) theEObject;
+			T result = caseValue(value);
+			if (result == null)
+				result = caseExpression(value);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.TIME_SENSOR: {
+			TimeSensor timeSensor = (TimeSensor) theEObject;
+			T result = caseTimeSensor(timeSensor);
+			if (result == null)
+				result = caseValue(timeSensor);
+			if (result == null)
+				result = caseExpression(timeSensor);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.DIST_SENSOR: {
+			DistSensor distSensor = (DistSensor) theEObject;
+			T result = caseDistSensor(distSensor);
+			if (result == null)
+				result = caseValue(distSensor);
+			if (result == null)
+				result = caseExpression(distSensor);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.BOOL_LITERAL: {
+			BoolLiteral boolLiteral = (BoolLiteral) theEObject;
+			T result = caseBoolLiteral(boolLiteral);
+			if (result == null)
+				result = caseValue(boolLiteral);
+			if (result == null)
+				result = caseExpression(boolLiteral);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.NUMBER_LITERAL: {
+			NumberLiteral numberLiteral = (NumberLiteral) theEObject;
+			T result = caseNumberLiteral(numberLiteral);
+			if (result == null)
+				result = caseValue(numberLiteral);
+			if (result == null)
+				result = caseExpression(numberLiteral);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.SPEED_STATE: {
+			SpeedState speedState = (SpeedState) theEObject;
+			T result = caseSpeedState(speedState);
+			if (result == null)
+				result = caseValue(speedState);
+			if (result == null)
+				result = caseExpression(speedState);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.VARIABLE: {
+			Variable variable = (Variable) theEObject;
+			T result = caseVariable(variable);
+			if (result == null)
+				result = caseValue(variable);
+			if (result == null)
+				result = caseExpression(variable);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case RobotScriptModelPackage.FUN_CALL: {
+			FunCall funCall = (FunCall) theEObject;
+			T result = caseFunCall(funCall);
+			if (result == null)
+				result = caseValue(funCall);
+			if (result == null)
+				result = caseCommand(funCall);
+			if (result == null)
+				result = caseExpression(funCall);
 			if (result == null)
 				result = defaultCase(theEObject);
 			return result;
@@ -556,6 +582,516 @@ public class RobotScriptModelSwitch<T> extends Switch<T> {
 		default:
 			return defaultCase(theEObject);
 		}
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Entry Point</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Entry Point</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEntryPoint(EntryPoint object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Function Def</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Function Def</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseFunctionDef(FunctionDef object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Any Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Any Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnyType(AnyType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Command</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Command</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseCommand(Command object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Var Decl</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Var Decl</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVarDecl(VarDecl object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Void Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseVoidType(VoidType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Data Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDataType(DataType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Number Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Number Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNumberType(NumberType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Boolean Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Boolean Type</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBooleanType(BooleanType object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Loop</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Loop</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLoop(Loop object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>If</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>If</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIf(If object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>If Else</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>If Else</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseIfElse(IfElse object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExpression(Expression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Control Structure</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Control Structure</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseControlStructure(ControlStructure object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assign</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assign</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssign(Assign object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Assign At Decl</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Assign At Decl</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAssignAtDecl(AssignAtDecl object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Re Assign</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Re Assign</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseReAssign(ReAssign object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Set Speed</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Set Speed</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSetSpeed(SetSpeed object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Un Op</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Un Op</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseUnOp(UnOp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Bin Op</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Bin Op</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseBinOp(BinOp object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Neg</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Neg</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNeg(Neg object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Not</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Not</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNot(Not object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Greater</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Greater</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGreater(Greater object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>And</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>And</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAnd(And object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Add</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Add</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseAdd(Add object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Less</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Less</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLess(Less object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Or</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Or</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseOr(Or object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Sub</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Sub</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSub(Sub object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>GEq</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>GEq</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGEq(GEq object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Equ</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Equ</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseEqu(Equ object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Mul</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Mul</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseMul(Mul object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>LEq</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>LEq</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseLEq(LEq object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>NEq</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>NEq</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNEq(NEq object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Div</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Div</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDiv(Div object) {
+		return null;
 	}
 
 	/**
@@ -589,96 +1125,6 @@ public class RobotScriptModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Sensors</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Sensors</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSensors(Sensors object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Units</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Units</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseUnits(Units object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Control Structure</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Control Structure</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseControlStructure(ControlStructure object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Model</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseModel(Model object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Functions</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Functions</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseFunctions(Functions object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bool Variables</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bool Variables</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBoolVariables(BoolVariables object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Linear</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -694,242 +1140,107 @@ public class RobotScriptModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Clock</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Front</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Clock</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Front</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClock(Clock object) {
+	public T caseFront(Front object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ultra Sound</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Back</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ultra Sound</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Back</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUltraSound(UltraSound object) {
+	public T caseBack(Back object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Speed</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Right</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Speed</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Right</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSpeed(Speed object) {
+	public T caseRight(Right object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Loop</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Left</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Loop</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Left</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLoop(Loop object) {
+	public T caseLeft(Left object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Meter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Meter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Value</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMeter(Meter object) {
+	public T caseValue(Value object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Second</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Time Sensor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Second</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Time Sensor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSecond(Second object) {
+	public T caseTimeSensor(TimeSensor object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Switch</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Dist Sensor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Switch</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Dist Sensor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSwitch(robotScriptModel.Switch object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expressions</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expressions</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseExpressions(Expressions object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBoolean(robotScriptModel.Boolean object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bool Binary</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bool Binary</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBoolBinary(BoolBinary object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bool Unary</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bool Unary</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBoolUnary(BoolUnary object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>And</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>And</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAnd(And object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Or</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Or</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseOr(Or object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Arithmetic</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseArithmetic(Arithmetic object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Not</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Not</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNot(Not object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Bool Values</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Bool Values</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseBoolValues(BoolValues object) {
+	public T caseDistSensor(DistSensor object) {
 		return null;
 	}
 
@@ -949,242 +1260,62 @@ public class RobotScriptModelSwitch<T> extends Switch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ari Binary</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Number Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ari Binary</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Number Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAriBinary(AriBinary object) {
+	public T caseNumberLiteral(NumberLiteral object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ari Unary</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Speed State</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ari Unary</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Speed State</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAriUnary(AriUnary object) {
+	public T caseSpeedState(SpeedState object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Add</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Variable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Add</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Variable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAdd(Add object) {
+	public T caseVariable(Variable object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ari Values</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Fun Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ari Values</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Fun Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAriValues(AriValues object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ari Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ari Literal</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAriLiteral(AriLiteral object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Ari Variables</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Ari Variables</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseAriVariables(AriVariables object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Sub</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Sub</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSub(Sub object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Neg</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Neg</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNeg(Neg object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Def Var</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Def Var</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDefVar(DefVar object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Command</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Command</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCommand(Command object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>State</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>State</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseState(State object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Prefix</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Prefix</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T casePrefix(Prefix object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Mili</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Mili</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseMili(Mili object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Centi</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Centi</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseCenti(Centi object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Degree</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Degree</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseDegree(Degree object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Number</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Number</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseNumber(robotScriptModel.Number object) {
+	public T caseFunCall(FunCall object) {
 		return null;
 	}
 

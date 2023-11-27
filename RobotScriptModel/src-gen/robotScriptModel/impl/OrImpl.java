@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import robotScriptModel.Expression;
 import robotScriptModel.Or;
 import robotScriptModel.RobotScriptModelPackage;
 
@@ -22,32 +23,32 @@ import robotScriptModel.RobotScriptModelPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.OrImpl#getLeft <em>Left</em>}</li>
- *   <li>{@link robotScriptModel.impl.OrImpl#getRight <em>Right</em>}</li>
+ *   <li>{@link robotScriptModel.impl.OrImpl#getRightOp <em>Right Op</em>}</li>
+ *   <li>{@link robotScriptModel.impl.OrImpl#getLeftOp <em>Left Op</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	/**
-	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
+	 * The cached value of the '{@link #getRightOp() <em>Right Op</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLeft()
+	 * @see #getRightOp()
 	 * @generated
 	 * @ordered
 	 */
-	protected robotScriptModel.Boolean left;
+	protected Expression rightOp;
 
 	/**
-	 * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
+	 * The cached value of the '{@link #getLeftOp() <em>Left Op</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRight()
+	 * @see #getLeftOp()
 	 * @generated
 	 * @ordered
 	 */
-	protected robotScriptModel.Boolean right;
+	protected Expression leftOp;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -74,8 +75,8 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	 * @generated
 	 */
 	@Override
-	public robotScriptModel.Boolean getLeft() {
-		return left;
+	public Expression getRightOp() {
+		return rightOp;
 	}
 
 	/**
@@ -83,12 +84,12 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLeft(robotScriptModel.Boolean newLeft, NotificationChain msgs) {
-		robotScriptModel.Boolean oldLeft = left;
-		left = newLeft;
+	public NotificationChain basicSetRightOp(Expression newRightOp, NotificationChain msgs) {
+		Expression oldRightOp = rightOp;
+		rightOp = newRightOp;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.OR__LEFT, oldLeft, newLeft);
+					RobotScriptModelPackage.OR__RIGHT_OP, oldRightOp, newRightOp);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -103,20 +104,21 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	 * @generated
 	 */
 	@Override
-	public void setLeft(robotScriptModel.Boolean newLeft) {
-		if (newLeft != left) {
+	public void setRightOp(Expression newRightOp) {
+		if (newRightOp != rightOp) {
 			NotificationChain msgs = null;
-			if (left != null)
-				msgs = ((InternalEObject) left).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__LEFT, null, msgs);
-			if (newLeft != null)
-				msgs = ((InternalEObject) newLeft).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__LEFT, null, msgs);
-			msgs = basicSetLeft(newLeft, msgs);
+			if (rightOp != null)
+				msgs = ((InternalEObject) rightOp).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__RIGHT_OP, null, msgs);
+			if (newRightOp != null)
+				msgs = ((InternalEObject) newRightOp).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__RIGHT_OP, null, msgs);
+			msgs = basicSetRightOp(newRightOp, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.OR__LEFT, newLeft, newLeft));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.OR__RIGHT_OP, newRightOp,
+					newRightOp));
 	}
 
 	/**
@@ -125,8 +127,8 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	 * @generated
 	 */
 	@Override
-	public robotScriptModel.Boolean getRight() {
-		return right;
+	public Expression getLeftOp() {
+		return leftOp;
 	}
 
 	/**
@@ -134,12 +136,12 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRight(robotScriptModel.Boolean newRight, NotificationChain msgs) {
-		robotScriptModel.Boolean oldRight = right;
-		right = newRight;
+	public NotificationChain basicSetLeftOp(Expression newLeftOp, NotificationChain msgs) {
+		Expression oldLeftOp = leftOp;
+		leftOp = newLeftOp;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.OR__RIGHT, oldRight, newRight);
+					RobotScriptModelPackage.OR__LEFT_OP, oldLeftOp, newLeftOp);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -154,21 +156,21 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	 * @generated
 	 */
 	@Override
-	public void setRight(robotScriptModel.Boolean newRight) {
-		if (newRight != right) {
+	public void setLeftOp(Expression newLeftOp) {
+		if (newLeftOp != leftOp) {
 			NotificationChain msgs = null;
-			if (right != null)
-				msgs = ((InternalEObject) right).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__RIGHT, null, msgs);
-			if (newRight != null)
-				msgs = ((InternalEObject) newRight).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__RIGHT, null, msgs);
-			msgs = basicSetRight(newRight, msgs);
+			if (leftOp != null)
+				msgs = ((InternalEObject) leftOp).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__LEFT_OP, null, msgs);
+			if (newLeftOp != null)
+				msgs = ((InternalEObject) newLeftOp).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.OR__LEFT_OP, null, msgs);
+			msgs = basicSetLeftOp(newLeftOp, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.OR__RIGHT, newRight,
-					newRight));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.OR__LEFT_OP, newLeftOp,
+					newLeftOp));
 	}
 
 	/**
@@ -179,10 +181,10 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.OR__LEFT:
-			return basicSetLeft(null, msgs);
-		case RobotScriptModelPackage.OR__RIGHT:
-			return basicSetRight(null, msgs);
+		case RobotScriptModelPackage.OR__RIGHT_OP:
+			return basicSetRightOp(null, msgs);
+		case RobotScriptModelPackage.OR__LEFT_OP:
+			return basicSetLeftOp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -195,10 +197,10 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.OR__LEFT:
-			return getLeft();
-		case RobotScriptModelPackage.OR__RIGHT:
-			return getRight();
+		case RobotScriptModelPackage.OR__RIGHT_OP:
+			return getRightOp();
+		case RobotScriptModelPackage.OR__LEFT_OP:
+			return getLeftOp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -211,11 +213,11 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.OR__LEFT:
-			setLeft((robotScriptModel.Boolean) newValue);
+		case RobotScriptModelPackage.OR__RIGHT_OP:
+			setRightOp((Expression) newValue);
 			return;
-		case RobotScriptModelPackage.OR__RIGHT:
-			setRight((robotScriptModel.Boolean) newValue);
+		case RobotScriptModelPackage.OR__LEFT_OP:
+			setLeftOp((Expression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -229,11 +231,11 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.OR__LEFT:
-			setLeft((robotScriptModel.Boolean) null);
+		case RobotScriptModelPackage.OR__RIGHT_OP:
+			setRightOp((Expression) null);
 			return;
-		case RobotScriptModelPackage.OR__RIGHT:
-			setRight((robotScriptModel.Boolean) null);
+		case RobotScriptModelPackage.OR__LEFT_OP:
+			setLeftOp((Expression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -247,10 +249,10 @@ public class OrImpl extends MinimalEObjectImpl.Container implements Or {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.OR__LEFT:
-			return left != null;
-		case RobotScriptModelPackage.OR__RIGHT:
-			return right != null;
+		case RobotScriptModelPackage.OR__RIGHT_OP:
+			return rightOp != null;
+		case RobotScriptModelPackage.OR__LEFT_OP:
+			return leftOp != null;
 		}
 		return super.eIsSet(featureID);
 	}

@@ -3,6 +3,7 @@
 package robotScriptModel.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -10,32 +11,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import robotScriptModel.Add;
-import robotScriptModel.And;
-import robotScriptModel.AriLiteral;
-import robotScriptModel.AriVariables;
-import robotScriptModel.BoolLiteral;
-import robotScriptModel.BoolVariables;
-import robotScriptModel.Centi;
-import robotScriptModel.Clock;
-import robotScriptModel.DefVar;
-import robotScriptModel.Degree;
-import robotScriptModel.Linear;
-import robotScriptModel.Loop;
-import robotScriptModel.Meter;
-import robotScriptModel.Mili;
-import robotScriptModel.Model;
-import robotScriptModel.Neg;
-import robotScriptModel.Not;
-import robotScriptModel.Or;
-import robotScriptModel.RobotScriptModelFactory;
-import robotScriptModel.RobotScriptModelPackage;
-import robotScriptModel.Rotation;
-import robotScriptModel.Second;
-import robotScriptModel.Speed;
-import robotScriptModel.Sub;
-import robotScriptModel.Switch;
-import robotScriptModel.UltraSound;
+import robotScriptModel.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -81,56 +57,82 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-		case RobotScriptModelPackage.ROTATION:
-			return createRotation();
-		case RobotScriptModelPackage.MODEL:
-			return createModel();
-		case RobotScriptModelPackage.BOOL_VARIABLES:
-			return createBoolVariables();
-		case RobotScriptModelPackage.LINEAR:
-			return createLinear();
-		case RobotScriptModelPackage.CLOCK:
-			return createClock();
-		case RobotScriptModelPackage.ULTRA_SOUND:
-			return createUltraSound();
-		case RobotScriptModelPackage.SPEED:
-			return createSpeed();
+		case RobotScriptModelPackage.ENTRY_POINT:
+			return createEntryPoint();
+		case RobotScriptModelPackage.FUNCTION_DEF:
+			return createFunctionDef();
+		case RobotScriptModelPackage.VAR_DECL:
+			return createVarDecl();
+		case RobotScriptModelPackage.VOID_TYPE:
+			return createVoidType();
+		case RobotScriptModelPackage.NUMBER_TYPE:
+			return createNumberType();
+		case RobotScriptModelPackage.BOOLEAN_TYPE:
+			return createBooleanType();
 		case RobotScriptModelPackage.LOOP:
 			return createLoop();
-		case RobotScriptModelPackage.METER:
-			return createMeter();
-		case RobotScriptModelPackage.SECOND:
-			return createSecond();
-		case RobotScriptModelPackage.SWITCH:
-			return createSwitch();
-		case RobotScriptModelPackage.AND:
-			return createAnd();
-		case RobotScriptModelPackage.OR:
-			return createOr();
-		case RobotScriptModelPackage.NOT:
-			return createNot();
-		case RobotScriptModelPackage.BOOL_LITERAL:
-			return createBoolLiteral();
-		case RobotScriptModelPackage.ADD:
-			return createAdd();
-		case RobotScriptModelPackage.ARI_LITERAL:
-			return createAriLiteral();
-		case RobotScriptModelPackage.ARI_VARIABLES:
-			return createAriVariables();
-		case RobotScriptModelPackage.SUB:
-			return createSub();
+		case RobotScriptModelPackage.IF:
+			return createIf();
+		case RobotScriptModelPackage.IF_ELSE:
+			return createIfElse();
+		case RobotScriptModelPackage.ASSIGN_AT_DECL:
+			return createAssignAtDecl();
+		case RobotScriptModelPackage.RE_ASSIGN:
+			return createReAssign();
+		case RobotScriptModelPackage.SET_SPEED:
+			return createSetSpeed();
 		case RobotScriptModelPackage.NEG:
 			return createNeg();
-		case RobotScriptModelPackage.DEF_VAR:
-			return createDefVar();
-		case RobotScriptModelPackage.MILI:
-			return createMili();
-		case RobotScriptModelPackage.CENTI:
-			return createCenti();
-		case RobotScriptModelPackage.DEGREE:
-			return createDegree();
-		case RobotScriptModelPackage.NUMBER:
-			return createNumber();
+		case RobotScriptModelPackage.NOT:
+			return createNot();
+		case RobotScriptModelPackage.GREATER:
+			return createGreater();
+		case RobotScriptModelPackage.AND:
+			return createAnd();
+		case RobotScriptModelPackage.ADD:
+			return createAdd();
+		case RobotScriptModelPackage.LESS:
+			return createLess();
+		case RobotScriptModelPackage.OR:
+			return createOr();
+		case RobotScriptModelPackage.SUB:
+			return createSub();
+		case RobotScriptModelPackage.GEQ:
+			return createGEq();
+		case RobotScriptModelPackage.EQU:
+			return createEqu();
+		case RobotScriptModelPackage.MUL:
+			return createMul();
+		case RobotScriptModelPackage.LEQ:
+			return createLEq();
+		case RobotScriptModelPackage.NEQ:
+			return createNEq();
+		case RobotScriptModelPackage.DIV:
+			return createDiv();
+		case RobotScriptModelPackage.ROTATION:
+			return createRotation();
+		case RobotScriptModelPackage.FRONT:
+			return createFront();
+		case RobotScriptModelPackage.BACK:
+			return createBack();
+		case RobotScriptModelPackage.RIGHT:
+			return createRight();
+		case RobotScriptModelPackage.LEFT:
+			return createLeft();
+		case RobotScriptModelPackage.TIME_SENSOR:
+			return createTimeSensor();
+		case RobotScriptModelPackage.DIST_SENSOR:
+			return createDistSensor();
+		case RobotScriptModelPackage.BOOL_LITERAL:
+			return createBoolLiteral();
+		case RobotScriptModelPackage.NUMBER_LITERAL:
+			return createNumberLiteral();
+		case RobotScriptModelPackage.SPEED_STATE:
+			return createSpeedState();
+		case RobotScriptModelPackage.VARIABLE:
+			return createVariable();
+		case RobotScriptModelPackage.FUN_CALL:
+			return createFunCall();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -142,9 +144,13 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Rotation createRotation() {
-		RotationImpl rotation = new RotationImpl();
-		return rotation;
+	public Object createFromString(EDataType eDataType, String initialValue) {
+		switch (eDataType.getClassifierID()) {
+		case RobotScriptModelPackage.UNIT:
+			return createUnitFromString(eDataType, initialValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
 	}
 
 	/**
@@ -153,9 +159,13 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Model createModel() {
-		ModelImpl model = new ModelImpl();
-		return model;
+	public String convertToString(EDataType eDataType, Object instanceValue) {
+		switch (eDataType.getClassifierID()) {
+		case RobotScriptModelPackage.UNIT:
+			return convertUnitToString(eDataType, instanceValue);
+		default:
+			throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+		}
 	}
 
 	/**
@@ -164,9 +174,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public BoolVariables createBoolVariables() {
-		BoolVariablesImpl boolVariables = new BoolVariablesImpl();
-		return boolVariables;
+	public EntryPoint createEntryPoint() {
+		EntryPointImpl entryPoint = new EntryPointImpl();
+		return entryPoint;
 	}
 
 	/**
@@ -175,9 +185,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Linear createLinear() {
-		LinearImpl linear = new LinearImpl();
-		return linear;
+	public FunctionDef createFunctionDef() {
+		FunctionDefImpl functionDef = new FunctionDefImpl();
+		return functionDef;
 	}
 
 	/**
@@ -186,9 +196,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Clock createClock() {
-		ClockImpl clock = new ClockImpl();
-		return clock;
+	public VarDecl createVarDecl() {
+		VarDeclImpl varDecl = new VarDeclImpl();
+		return varDecl;
 	}
 
 	/**
@@ -197,9 +207,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public UltraSound createUltraSound() {
-		UltraSoundImpl ultraSound = new UltraSoundImpl();
-		return ultraSound;
+	public VoidType createVoidType() {
+		VoidTypeImpl voidType = new VoidTypeImpl();
+		return voidType;
 	}
 
 	/**
@@ -208,9 +218,20 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Speed createSpeed() {
-		SpeedImpl speed = new SpeedImpl();
-		return speed;
+	public NumberType createNumberType() {
+		NumberTypeImpl numberType = new NumberTypeImpl();
+		return numberType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BooleanType createBooleanType() {
+		BooleanTypeImpl booleanType = new BooleanTypeImpl();
+		return booleanType;
 	}
 
 	/**
@@ -230,9 +251,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Meter createMeter() {
-		MeterImpl meter = new MeterImpl();
-		return meter;
+	public If createIf() {
+		IfImpl if_ = new IfImpl();
+		return if_;
 	}
 
 	/**
@@ -241,9 +262,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Second createSecond() {
-		SecondImpl second = new SecondImpl();
-		return second;
+	public IfElse createIfElse() {
+		IfElseImpl ifElse = new IfElseImpl();
+		return ifElse;
 	}
 
 	/**
@@ -252,9 +273,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Switch createSwitch() {
-		SwitchImpl switch_ = new SwitchImpl();
-		return switch_;
+	public AssignAtDecl createAssignAtDecl() {
+		AssignAtDeclImpl assignAtDecl = new AssignAtDeclImpl();
+		return assignAtDecl;
 	}
 
 	/**
@@ -263,9 +284,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public And createAnd() {
-		AndImpl and = new AndImpl();
-		return and;
+	public ReAssign createReAssign() {
+		ReAssignImpl reAssign = new ReAssignImpl();
+		return reAssign;
 	}
 
 	/**
@@ -274,75 +295,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Or createOr() {
-		OrImpl or = new OrImpl();
-		return or;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Not createNot() {
-		NotImpl not = new NotImpl();
-		return not;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public BoolLiteral createBoolLiteral() {
-		BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
-		return boolLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Add createAdd() {
-		AddImpl add = new AddImpl();
-		return add;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public AriLiteral createAriLiteral() {
-		AriLiteralImpl ariLiteral = new AriLiteralImpl();
-		return ariLiteral;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public AriVariables createAriVariables() {
-		AriVariablesImpl ariVariables = new AriVariablesImpl();
-		return ariVariables;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Sub createSub() {
-		SubImpl sub = new SubImpl();
-		return sub;
+	public SetSpeed createSetSpeed() {
+		SetSpeedImpl setSpeed = new SetSpeedImpl();
+		return setSpeed;
 	}
 
 	/**
@@ -362,9 +317,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public DefVar createDefVar() {
-		DefVarImpl defVar = new DefVarImpl();
-		return defVar;
+	public Not createNot() {
+		NotImpl not = new NotImpl();
+		return not;
 	}
 
 	/**
@@ -373,9 +328,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Mili createMili() {
-		MiliImpl mili = new MiliImpl();
-		return mili;
+	public Greater createGreater() {
+		GreaterImpl greater = new GreaterImpl();
+		return greater;
 	}
 
 	/**
@@ -384,9 +339,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Centi createCenti() {
-		CentiImpl centi = new CentiImpl();
-		return centi;
+	public And createAnd() {
+		AndImpl and = new AndImpl();
+		return and;
 	}
 
 	/**
@@ -395,9 +350,9 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public Degree createDegree() {
-		DegreeImpl degree = new DegreeImpl();
-		return degree;
+	public Add createAdd() {
+		AddImpl add = new AddImpl();
+		return add;
 	}
 
 	/**
@@ -406,9 +361,251 @@ public class RobotScriptModelFactoryImpl extends EFactoryImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public robotScriptModel.Number createNumber() {
-		NumberImpl number = new NumberImpl();
-		return number;
+	public Less createLess() {
+		LessImpl less = new LessImpl();
+		return less;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Or createOr() {
+		OrImpl or = new OrImpl();
+		return or;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Sub createSub() {
+		SubImpl sub = new SubImpl();
+		return sub;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public GEq createGEq() {
+		GEqImpl gEq = new GEqImpl();
+		return gEq;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Equ createEqu() {
+		EquImpl equ = new EquImpl();
+		return equ;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Mul createMul() {
+		MulImpl mul = new MulImpl();
+		return mul;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public LEq createLEq() {
+		LEqImpl lEq = new LEqImpl();
+		return lEq;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NEq createNEq() {
+		NEqImpl nEq = new NEqImpl();
+		return nEq;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Div createDiv() {
+		DivImpl div = new DivImpl();
+		return div;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Rotation createRotation() {
+		RotationImpl rotation = new RotationImpl();
+		return rotation;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Front createFront() {
+		FrontImpl front = new FrontImpl();
+		return front;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Back createBack() {
+		BackImpl back = new BackImpl();
+		return back;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Right createRight() {
+		RightImpl right = new RightImpl();
+		return right;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Left createLeft() {
+		LeftImpl left = new LeftImpl();
+		return left;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public TimeSensor createTimeSensor() {
+		TimeSensorImpl timeSensor = new TimeSensorImpl();
+		return timeSensor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public DistSensor createDistSensor() {
+		DistSensorImpl distSensor = new DistSensorImpl();
+		return distSensor;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public BoolLiteral createBoolLiteral() {
+		BoolLiteralImpl boolLiteral = new BoolLiteralImpl();
+		return boolLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NumberLiteral createNumberLiteral() {
+		NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
+		return numberLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public SpeedState createSpeedState() {
+		SpeedStateImpl speedState = new SpeedStateImpl();
+		return speedState;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Variable createVariable() {
+		VariableImpl variable = new VariableImpl();
+		return variable;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public FunCall createFunCall() {
+		FunCallImpl funCall = new FunCallImpl();
+		return funCall;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public Unit createUnitFromString(EDataType eDataType, String initialValue) {
+		Unit result = Unit.get(initialValue);
+		if (result == null)
+			throw new IllegalArgumentException(
+					"The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+		return result;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String convertUnitToString(EDataType eDataType, Object instanceValue) {
+		return instanceValue == null ? null : instanceValue.toString();
 	}
 
 	/**

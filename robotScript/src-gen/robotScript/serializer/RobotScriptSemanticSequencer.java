@@ -17,29 +17,43 @@ import org.eclipse.xtext.serializer.sequencer.ITransientValueService.ValueTransi
 import robotScript.services.RobotScriptGrammarAccess;
 import robotScriptModel.Add;
 import robotScriptModel.And;
-import robotScriptModel.AriLiteral;
-import robotScriptModel.AriVariables;
+import robotScriptModel.AssignAtDecl;
+import robotScriptModel.Back;
 import robotScriptModel.BoolLiteral;
-import robotScriptModel.BoolVariables;
-import robotScriptModel.Centi;
-import robotScriptModel.Clock;
-import robotScriptModel.DefVar;
-import robotScriptModel.Degree;
-import robotScriptModel.Linear;
+import robotScriptModel.BooleanType;
+import robotScriptModel.DistSensor;
+import robotScriptModel.Div;
+import robotScriptModel.EntryPoint;
+import robotScriptModel.Equ;
+import robotScriptModel.Front;
+import robotScriptModel.FunCall;
+import robotScriptModel.FunctionDef;
+import robotScriptModel.GEq;
+import robotScriptModel.Greater;
+import robotScriptModel.If;
+import robotScriptModel.IfElse;
+import robotScriptModel.LEq;
+import robotScriptModel.Left;
+import robotScriptModel.Less;
 import robotScriptModel.Loop;
-import robotScriptModel.Meter;
-import robotScriptModel.Mili;
-import robotScriptModel.Model;
+import robotScriptModel.Mul;
+import robotScriptModel.NEq;
 import robotScriptModel.Neg;
 import robotScriptModel.Not;
+import robotScriptModel.NumberLiteral;
+import robotScriptModel.NumberType;
 import robotScriptModel.Or;
+import robotScriptModel.ReAssign;
+import robotScriptModel.Right;
 import robotScriptModel.RobotScriptModelPackage;
 import robotScriptModel.Rotation;
-import robotScriptModel.Second;
-import robotScriptModel.Speed;
+import robotScriptModel.SetSpeed;
+import robotScriptModel.SpeedState;
 import robotScriptModel.Sub;
-import robotScriptModel.Switch;
-import robotScriptModel.UltraSound;
+import robotScriptModel.TimeSensor;
+import robotScriptModel.VarDecl;
+import robotScriptModel.Variable;
+import robotScriptModel.VoidType;
 
 @SuppressWarnings("all")
 public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequencer {
@@ -61,44 +75,68 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 			case RobotScriptModelPackage.AND:
 				sequence_And(context, (And) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.ARI_LITERAL:
-				sequence_AriLiteral(context, (AriLiteral) semanticObject); 
+			case RobotScriptModelPackage.ASSIGN_AT_DECL:
+				sequence_AssignAtDecl(context, (AssignAtDecl) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.ARI_VARIABLES:
-				sequence_AriVariables(context, (AriVariables) semanticObject); 
+			case RobotScriptModelPackage.BACK:
+				sequence_Back(context, (Back) semanticObject); 
 				return; 
 			case RobotScriptModelPackage.BOOL_LITERAL:
 				sequence_BoolLiteral(context, (BoolLiteral) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.BOOL_VARIABLES:
-				sequence_BoolVariables(context, (BoolVariables) semanticObject); 
+			case RobotScriptModelPackage.BOOLEAN_TYPE:
+				sequence_BooleanType(context, (BooleanType) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.CENTI:
-				sequence_Centi(context, (Centi) semanticObject); 
+			case RobotScriptModelPackage.DIST_SENSOR:
+				sequence_DistSensor(context, (DistSensor) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.CLOCK:
-				sequence_Clock(context, (Clock) semanticObject); 
+			case RobotScriptModelPackage.DIV:
+				sequence_Div(context, (Div) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.DEF_VAR:
-				sequence_DefVar(context, (DefVar) semanticObject); 
+			case RobotScriptModelPackage.ENTRY_POINT:
+				sequence_EntryPoint(context, (EntryPoint) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.DEGREE:
-				sequence_Degree(context, (Degree) semanticObject); 
+			case RobotScriptModelPackage.EQU:
+				sequence_Equ(context, (Equ) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.LINEAR:
-				sequence_Linear(context, (Linear) semanticObject); 
+			case RobotScriptModelPackage.FRONT:
+				sequence_Front(context, (Front) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.FUN_CALL:
+				sequence_FunCall(context, (FunCall) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.FUNCTION_DEF:
+				sequence_FunctionDef(context, (FunctionDef) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.GEQ:
+				sequence_GEq(context, (GEq) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.GREATER:
+				sequence_Greater(context, (Greater) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.IF:
+				sequence_If_Impl(context, (If) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.IF_ELSE:
+				sequence_IfElse(context, (IfElse) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.LEQ:
+				sequence_LEq(context, (LEq) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.LEFT:
+				sequence_Left(context, (Left) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.LESS:
+				sequence_Less(context, (Less) semanticObject); 
 				return; 
 			case RobotScriptModelPackage.LOOP:
 				sequence_Loop(context, (Loop) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.METER:
-				sequence_Meter(context, (Meter) semanticObject); 
+			case RobotScriptModelPackage.MUL:
+				sequence_Mul(context, (Mul) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.MILI:
-				sequence_Mili(context, (Mili) semanticObject); 
-				return; 
-			case RobotScriptModelPackage.MODEL:
-				sequence_Model(context, (Model) semanticObject); 
+			case RobotScriptModelPackage.NEQ:
+				sequence_NEq(context, (NEq) semanticObject); 
 				return; 
 			case RobotScriptModelPackage.NEG:
 				sequence_Neg(context, (Neg) semanticObject); 
@@ -106,26 +144,44 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 			case RobotScriptModelPackage.NOT:
 				sequence_Not(context, (Not) semanticObject); 
 				return; 
+			case RobotScriptModelPackage.NUMBER_LITERAL:
+				sequence_NumberLiteral(context, (NumberLiteral) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.NUMBER_TYPE:
+				sequence_NumberType(context, (NumberType) semanticObject); 
+				return; 
 			case RobotScriptModelPackage.OR:
 				sequence_Or(context, (Or) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.RE_ASSIGN:
+				sequence_ReAssign(context, (ReAssign) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.RIGHT:
+				sequence_Right(context, (Right) semanticObject); 
 				return; 
 			case RobotScriptModelPackage.ROTATION:
 				sequence_Rotation(context, (Rotation) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.SECOND:
-				sequence_Second(context, (Second) semanticObject); 
+			case RobotScriptModelPackage.SET_SPEED:
+				sequence_SetSpeed(context, (SetSpeed) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.SPEED:
-				sequence_Speed(context, (Speed) semanticObject); 
+			case RobotScriptModelPackage.SPEED_STATE:
+				sequence_SpeedState(context, (SpeedState) semanticObject); 
 				return; 
 			case RobotScriptModelPackage.SUB:
 				sequence_Sub(context, (Sub) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.SWITCH:
-				sequence_Switch(context, (Switch) semanticObject); 
+			case RobotScriptModelPackage.TIME_SENSOR:
+				sequence_TimeSensor(context, (TimeSensor) semanticObject); 
 				return; 
-			case RobotScriptModelPackage.ULTRA_SOUND:
-				sequence_UltraSound(context, (UltraSound) semanticObject); 
+			case RobotScriptModelPackage.VAR_DECL:
+				sequence_VarDecl(context, (VarDecl) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.VARIABLE:
+				sequence_Variable(context, (Variable) semanticObject); 
+				return; 
+			case RobotScriptModelPackage.VOID_TYPE:
+				sequence_VoidType(context, (VoidType) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -135,24 +191,23 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Expressions returns Add
-	 *     Arithmetic returns Add
+	 *     Expression returns Add
 	 *     Add returns Add
 	 *
 	 * Constraint:
-	 *     (right=Arithmetic left=Arithmetic)
+	 *     (rightOp=Expression leftOp=Expression)
 	 * </pre>
 	 */
 	protected void sequence_Add(ISerializationContext context, Add semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__RIGHT));
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__LEFT));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAddAccess().getRightArithmeticParserRuleCall_3_0(), semanticObject.getRight());
-		feeder.accept(grammarAccess.getAddAccess().getLeftArithmeticParserRuleCall_5_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getAddAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getAddAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
 		feeder.finish();
 	}
 	
@@ -160,24 +215,23 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Boolean returns And
-	 *     Expressions returns And
+	 *     Expression returns And
 	 *     And returns And
 	 *
 	 * Constraint:
-	 *     (left=Boolean right=Boolean)
+	 *     (rightOp=Expression leftOp=Expression)
 	 * </pre>
 	 */
 	protected void sequence_And(ISerializationContext context, And semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__LEFT));
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__RIGHT));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAndAccess().getLeftBooleanParserRuleCall_3_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getAndAccess().getRightBooleanParserRuleCall_5_0(), semanticObject.getRight());
+		feeder.accept(grammarAccess.getAndAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getAndAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
 		feeder.finish();
 	}
 	
@@ -185,15 +239,38 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Expressions returns AriLiteral
-	 *     Arithmetic returns AriLiteral
-	 *     AriLiteral returns AriLiteral
+	 *     Command returns AssignAtDecl
+	 *     AssignAtDecl returns AssignAtDecl
 	 *
 	 * Constraint:
-	 *     units=Units?
+	 *     (expression=Expression vardecl=VarDecl)
 	 * </pre>
 	 */
-	protected void sequence_AriLiteral(ISerializationContext context, AriLiteral semanticObject) {
+	protected void sequence_AssignAtDecl(ISerializationContext context, AssignAtDecl semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ASSIGN__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ASSIGN__EXPRESSION));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ASSIGN_AT_DECL__VARDECL) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ASSIGN_AT_DECL__VARDECL));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getAssignAtDeclAccess().getExpressionExpressionParserRuleCall_3_0(), semanticObject.getExpression());
+		feeder.accept(grammarAccess.getAssignAtDeclAccess().getVardeclVarDeclParserRuleCall_5_0(), semanticObject.getVardecl());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns Back
+	 *     Back returns Back
+	 *
+	 * Constraint:
+	 *     (unit=Unit? expression=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Back(ISerializationContext context, Back semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -201,30 +278,7 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Expressions returns AriVariables
-	 *     Arithmetic returns AriVariables
-	 *     AriVariables returns AriVariables
-	 *
-	 * Constraint:
-	 *     reference=[DefVar|EString]
-	 * </pre>
-	 */
-	protected void sequence_AriVariables(ISerializationContext context, AriVariables semanticObject) {
-		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ARI_VARIABLES__REFERENCE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ARI_VARIABLES__REFERENCE));
-		}
-		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getAriVariablesAccess().getReferenceDefVarEStringParserRuleCall_3_0_1(), semanticObject.eGet(RobotScriptModelPackage.Literals.ARI_VARIABLES__REFERENCE, false));
-		feeder.finish();
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Boolean returns BoolLiteral
-	 *     Expressions returns BoolLiteral
+	 *     Expression returns BoolLiteral
 	 *     BoolLiteral returns BoolLiteral
 	 *
 	 * Constraint:
@@ -239,21 +293,54 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Boolean returns BoolVariables
-	 *     Expressions returns BoolVariables
-	 *     BoolVariables returns BoolVariables
+	 *     AnyType returns BooleanType
+	 *     DataType returns BooleanType
+	 *     BooleanType returns BooleanType
 	 *
 	 * Constraint:
-	 *     reference=[DefVar|EString]
+	 *     {BooleanType}
 	 * </pre>
 	 */
-	protected void sequence_BoolVariables(ISerializationContext context, BoolVariables semanticObject) {
+	protected void sequence_BooleanType(ISerializationContext context, BooleanType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns DistSensor
+	 *     DistSensor returns DistSensor
+	 *
+	 * Constraint:
+	 *     {DistSensor}
+	 * </pre>
+	 */
+	protected void sequence_DistSensor(ISerializationContext context, DistSensor semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns Div
+	 *     Div returns Div
+	 *
+	 * Constraint:
+	 *     (rightOp=Expression leftOp=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Div(ISerializationContext context, Div semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BOOL_VARIABLES__REFERENCE) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BOOL_VARIABLES__REFERENCE));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getBoolVariablesAccess().getReferenceDefVarEStringParserRuleCall_3_0_1(), semanticObject.eGet(RobotScriptModelPackage.Literals.BOOL_VARIABLES__REFERENCE, false));
+		feeder.accept(grammarAccess.getDivAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getDivAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
 		feeder.finish();
 	}
 	
@@ -261,14 +348,13 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Prefix returns Centi
-	 *     Centi returns Centi
+	 *     EntryPoint returns EntryPoint
 	 *
 	 * Constraint:
-	 *     {Centi}
+	 *     (functions+=FunctionDef functions+=FunctionDef*)?
 	 * </pre>
 	 */
-	protected void sequence_Centi(ISerializationContext context, Centi semanticObject) {
+	protected void sequence_EntryPoint(ISerializationContext context, EntryPoint semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -276,14 +362,38 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Command returns Clock
-	 *     Clock returns Clock
+	 *     Expression returns Equ
+	 *     Equ returns Equ
 	 *
 	 * Constraint:
-	 *     (defvar+=Command defvar+=Command*)
+	 *     (rightOp=Expression leftOp=Expression)
 	 * </pre>
 	 */
-	protected void sequence_Clock(ISerializationContext context, Clock semanticObject) {
+	protected void sequence_Equ(ISerializationContext context, Equ semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getEquAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getEquAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns Front
+	 *     Front returns Front
+	 *
+	 * Constraint:
+	 *     (unit=Unit? expression=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Front(ISerializationContext context, Front semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -291,14 +401,15 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Command returns DefVar
-	 *     DefVar returns DefVar
+	 *     Command returns FunCall
+	 *     Expression returns FunCall
+	 *     FunCall returns FunCall
 	 *
 	 * Constraint:
-	 *     (name=EString expressions=Expressions units=Units?)
+	 *     (fun=[FunctionDef|EString] (inputs+=Expression inputs+=Expression*)?)
 	 * </pre>
 	 */
-	protected void sequence_DefVar(ISerializationContext context, DefVar semanticObject) {
+	protected void sequence_FunCall(ISerializationContext context, FunCall semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -306,14 +417,13 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Units returns Degree
-	 *     Degree returns Degree
+	 *     FunctionDef returns FunctionDef
 	 *
 	 * Constraint:
-	 *     prefix=Prefix?
+	 *     (name=EString returnType=AnyType (body+=Command body+=Command*)? (inputs+=VarDecl inputs+=VarDecl*)?)
 	 * </pre>
 	 */
-	protected void sequence_Degree(ISerializationContext context, Degree semanticObject) {
+	protected void sequence_FunctionDef(ISerializationContext context, FunctionDef semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -321,15 +431,141 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Command returns Linear
-	 *     Linear returns Linear
+	 *     Expression returns GEq
+	 *     GEq returns GEq
 	 *
 	 * Constraint:
-	 *     (defvar+=Command defvar+=Command*)
+	 *     (rightOp=Expression leftOp=Expression)
 	 * </pre>
 	 */
-	protected void sequence_Linear(ISerializationContext context, Linear semanticObject) {
+	protected void sequence_GEq(ISerializationContext context, GEq semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGEqAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getGEqAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns Greater
+	 *     Greater returns Greater
+	 *
+	 * Constraint:
+	 *     (rightOp=Expression leftOp=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Greater(ISerializationContext context, Greater semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getGreaterAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getGreaterAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns IfElse
+	 *     IfElse returns IfElse
+	 *
+	 * Constraint:
+	 *     ((body+=Command body+=Command*)? cond=Expression (bodyElse+=Command bodyElse+=Command*)?)
+	 * </pre>
+	 */
+	protected void sequence_IfElse(ISerializationContext context, IfElse semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns If
+	 *     If_Impl returns If
+	 *
+	 * Constraint:
+	 *     ((body+=Command body+=Command*)? cond=Expression)
+	 * </pre>
+	 */
+	protected void sequence_If_Impl(ISerializationContext context, If semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns LEq
+	 *     LEq returns LEq
+	 *
+	 * Constraint:
+	 *     (rightOp=Expression leftOp=Expression)
+	 * </pre>
+	 */
+	protected void sequence_LEq(ISerializationContext context, LEq semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLEqAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getLEqAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns Left
+	 *     Left returns Left
+	 *
+	 * Constraint:
+	 *     (unit=Unit? expression=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Left(ISerializationContext context, Left semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns Less
+	 *     Less returns Less
+	 *
+	 * Constraint:
+	 *     (rightOp=Expression leftOp=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Less(ISerializationContext context, Less semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getLessAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getLessAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
 	}
 	
 	
@@ -340,7 +576,7 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     Loop returns Loop
 	 *
 	 * Constraint:
-	 *     (loopCondition=Boolean body+=Command body+=Command*)
+	 *     ((body+=Command body+=Command*)? cond=Expression)
 	 * </pre>
 	 */
 	protected void sequence_Loop(ISerializationContext context, Loop semanticObject) {
@@ -351,65 +587,68 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Units returns Meter
-	 *     Meter returns Meter
+	 *     Expression returns Mul
+	 *     Mul returns Mul
 	 *
 	 * Constraint:
-	 *     prefix=Prefix?
+	 *     (rightOp=Expression leftOp=Expression)
 	 * </pre>
 	 */
-	protected void sequence_Meter(ISerializationContext context, Meter semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_Mul(ISerializationContext context, Mul semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getMulAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getMulAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Prefix returns Mili
-	 *     Mili returns Mili
+	 *     Expression returns NEq
+	 *     NEq returns NEq
 	 *
 	 * Constraint:
-	 *     {Mili}
+	 *     (rightOp=Expression leftOp=Expression)
 	 * </pre>
 	 */
-	protected void sequence_Mili(ISerializationContext context, Mili semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
+	protected void sequence_NEq(ISerializationContext context, NEq semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getNEqAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getNEqAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
 	}
 	
 	
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Model returns Model
-	 *
-	 * Constraint:
-	 *     (command+=Command command+=Command*)?
-	 * </pre>
-	 */
-	protected void sequence_Model(ISerializationContext context, Model semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Expressions returns Neg
-	 *     Arithmetic returns Neg
+	 *     Expression returns Neg
 	 *     Neg returns Neg
 	 *
 	 * Constraint:
-	 *     operand=Arithmetic
+	 *     op=Expression
 	 * </pre>
 	 */
 	protected void sequence_Neg(ISerializationContext context, Neg semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ARI_UNARY__OPERAND) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ARI_UNARY__OPERAND));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.UN_OP__OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.UN_OP__OP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNegAccess().getOperandArithmeticParserRuleCall_3_0(), semanticObject.getOperand());
+		feeder.accept(grammarAccess.getNegAccess().getOpExpressionParserRuleCall_3_0(), semanticObject.getOp());
 		feeder.finish();
 	}
 	
@@ -417,21 +656,20 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Boolean returns Not
-	 *     Expressions returns Not
+	 *     Expression returns Not
 	 *     Not returns Not
 	 *
 	 * Constraint:
-	 *     operand=Boolean
+	 *     op=Expression
 	 * </pre>
 	 */
 	protected void sequence_Not(ISerializationContext context, Not semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BOOL_UNARY__OPERAND) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BOOL_UNARY__OPERAND));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.UN_OP__OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.UN_OP__OP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getNotAccess().getOperandBooleanParserRuleCall_3_0(), semanticObject.getOperand());
+		feeder.accept(grammarAccess.getNotAccess().getOpExpressionParserRuleCall_3_0(), semanticObject.getOp());
 		feeder.finish();
 	}
 	
@@ -439,25 +677,94 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Boolean returns Or
-	 *     Expressions returns Or
+	 *     Expression returns NumberLiteral
+	 *     NumberLiteral returns NumberLiteral
+	 *
+	 * Constraint:
+	 *     {NumberLiteral}
+	 * </pre>
+	 */
+	protected void sequence_NumberLiteral(ISerializationContext context, NumberLiteral semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AnyType returns NumberType
+	 *     DataType returns NumberType
+	 *     NumberType returns NumberType
+	 *
+	 * Constraint:
+	 *     {NumberType}
+	 * </pre>
+	 */
+	protected void sequence_NumberType(ISerializationContext context, NumberType semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns Or
 	 *     Or returns Or
 	 *
 	 * Constraint:
-	 *     (left=Boolean right=Boolean)
+	 *     (rightOp=Expression leftOp=Expression)
 	 * </pre>
 	 */
 	protected void sequence_Or(ISerializationContext context, Or semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__LEFT));
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BOOL_BINARY__RIGHT));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getOrAccess().getLeftBooleanParserRuleCall_3_0(), semanticObject.getLeft());
-		feeder.accept(grammarAccess.getOrAccess().getRightBooleanParserRuleCall_5_0(), semanticObject.getRight());
+		feeder.accept(grammarAccess.getOrAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getOrAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns ReAssign
+	 *     ReAssign returns ReAssign
+	 *
+	 * Constraint:
+	 *     (var=[VarDecl|EString] expression=Expression)
+	 * </pre>
+	 */
+	protected void sequence_ReAssign(ISerializationContext context, ReAssign semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.RE_ASSIGN__VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.RE_ASSIGN__VAR));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ASSIGN__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ASSIGN__EXPRESSION));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getReAssignAccess().getVarVarDeclEStringParserRuleCall_3_0_1(), semanticObject.eGet(RobotScriptModelPackage.Literals.RE_ASSIGN__VAR, false));
+		feeder.accept(grammarAccess.getReAssignAccess().getExpressionExpressionParserRuleCall_5_0(), semanticObject.getExpression());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns Right
+	 *     Right returns Right
+	 *
+	 * Constraint:
+	 *     (unit=Unit? expression=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Right(ISerializationContext context, Right semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	
@@ -468,65 +775,16 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	 *     Rotation returns Rotation
 	 *
 	 * Constraint:
-	 *     (defvar+=Command defvar+=Command*)
+	 *     expression=Expression
 	 * </pre>
 	 */
 	protected void sequence_Rotation(ISerializationContext context, Rotation semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Units returns Second
-	 *     Second returns Second
-	 *
-	 * Constraint:
-	 *     prefix=Prefix?
-	 * </pre>
-	 */
-	protected void sequence_Second(ISerializationContext context, Second semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Command returns Speed
-	 *     Speed returns Speed
-	 *
-	 * Constraint:
-	 *     (defvar+=Command defvar+=Command*)
-	 * </pre>
-	 */
-	protected void sequence_Speed(ISerializationContext context, Speed semanticObject) {
-		genericSequencer.createSequence(context, semanticObject);
-	}
-	
-	
-	/**
-	 * <pre>
-	 * Contexts:
-	 *     Expressions returns Sub
-	 *     Arithmetic returns Sub
-	 *     Sub returns Sub
-	 *
-	 * Constraint:
-	 *     (right=Arithmetic left=Arithmetic)
-	 * </pre>
-	 */
-	protected void sequence_Sub(ISerializationContext context, Sub semanticObject) {
 		if (errorAcceptor != null) {
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__RIGHT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__RIGHT));
-			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__LEFT) == ValueTransient.YES)
-				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.ARI_BINARY__LEFT));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.MOVEMENT__EXPRESSION) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.MOVEMENT__EXPRESSION));
 		}
 		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
-		feeder.accept(grammarAccess.getSubAccess().getRightArithmeticParserRuleCall_3_0(), semanticObject.getRight());
-		feeder.accept(grammarAccess.getSubAccess().getLeftArithmeticParserRuleCall_5_0(), semanticObject.getLeft());
+		feeder.accept(grammarAccess.getRotationAccess().getExpressionExpressionParserRuleCall_3_0(), semanticObject.getExpression());
 		feeder.finish();
 	}
 	
@@ -534,14 +792,14 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Command returns Switch
-	 *     Switch returns Switch
+	 *     Command returns SetSpeed
+	 *     SetSpeed returns SetSpeed
 	 *
 	 * Constraint:
-	 *     (switchCondition=Boolean body+=Command body+=Command*)
+	 *     (unit=Unit? speedstate=[SpeedState|EString] expression=Expression)
 	 * </pre>
 	 */
-	protected void sequence_Switch(ISerializationContext context, Switch semanticObject) {
+	protected void sequence_SetSpeed(ISerializationContext context, SetSpeed semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	
@@ -549,14 +807,113 @@ public class RobotScriptSemanticSequencer extends AbstractDelegatingSemanticSequ
 	/**
 	 * <pre>
 	 * Contexts:
-	 *     Command returns UltraSound
-	 *     UltraSound returns UltraSound
+	 *     Expression returns SpeedState
+	 *     SpeedState returns SpeedState
 	 *
 	 * Constraint:
-	 *     (defvar+=Command defvar+=Command*)
+	 *     {SpeedState}
 	 * </pre>
 	 */
-	protected void sequence_UltraSound(ISerializationContext context, UltraSound semanticObject) {
+	protected void sequence_SpeedState(ISerializationContext context, SpeedState semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns Sub
+	 *     Sub returns Sub
+	 *
+	 * Constraint:
+	 *     (rightOp=Expression leftOp=Expression)
+	 * </pre>
+	 */
+	protected void sequence_Sub(ISerializationContext context, Sub semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__RIGHT_OP));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.BIN_OP__LEFT_OP));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getSubAccess().getRightOpExpressionParserRuleCall_3_0(), semanticObject.getRightOp());
+		feeder.accept(grammarAccess.getSubAccess().getLeftOpExpressionParserRuleCall_5_0(), semanticObject.getLeftOp());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns TimeSensor
+	 *     TimeSensor returns TimeSensor
+	 *
+	 * Constraint:
+	 *     {TimeSensor}
+	 * </pre>
+	 */
+	protected void sequence_TimeSensor(ISerializationContext context, TimeSensor semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Command returns VarDecl
+	 *     VarDecl returns VarDecl
+	 *
+	 * Constraint:
+	 *     (name=EString type=DataType)
+	 * </pre>
+	 */
+	protected void sequence_VarDecl(ISerializationContext context, VarDecl semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.VAR_DECL__NAME) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.VAR_DECL__NAME));
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.VAR_DECL__TYPE) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.VAR_DECL__TYPE));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVarDeclAccess().getNameEStringParserRuleCall_1_0(), semanticObject.getName());
+		feeder.accept(grammarAccess.getVarDeclAccess().getTypeDataTypeParserRuleCall_4_0(), semanticObject.getType());
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     Expression returns Variable
+	 *     Variable returns Variable
+	 *
+	 * Constraint:
+	 *     var=[VarDecl|EString]
+	 * </pre>
+	 */
+	protected void sequence_Variable(ISerializationContext context, Variable semanticObject) {
+		if (errorAcceptor != null) {
+			if (transientValues.isValueTransient(semanticObject, RobotScriptModelPackage.Literals.VARIABLE__VAR) == ValueTransient.YES)
+				errorAcceptor.accept(diagnosticProvider.createFeatureValueMissing(semanticObject, RobotScriptModelPackage.Literals.VARIABLE__VAR));
+		}
+		SequenceFeeder feeder = createSequencerFeeder(context, semanticObject);
+		feeder.accept(grammarAccess.getVariableAccess().getVarVarDeclEStringParserRuleCall_3_0_1(), semanticObject.eGet(RobotScriptModelPackage.Literals.VARIABLE__VAR, false));
+		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     AnyType returns VoidType
+	 *     VoidType returns VoidType
+	 *
+	 * Constraint:
+	 *     {VoidType}
+	 * </pre>
+	 */
+	protected void sequence_VoidType(ISerializationContext context, VoidType semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

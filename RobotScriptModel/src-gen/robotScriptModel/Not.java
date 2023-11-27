@@ -12,5 +12,5 @@ package robotScriptModel;
  * @model
  * @generated
  */
-public interface Not extends BoolUnary {
+public interface Not extends UnOp {
 } // Not

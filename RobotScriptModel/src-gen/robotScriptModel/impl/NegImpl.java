@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import robotScriptModel.Arithmetic;
+import robotScriptModel.Expression;
 import robotScriptModel.Neg;
 import robotScriptModel.RobotScriptModelPackage;
 
@@ -23,21 +23,21 @@ import robotScriptModel.RobotScriptModelPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.NegImpl#getOperand <em>Operand</em>}</li>
+ *   <li>{@link robotScriptModel.impl.NegImpl#getOp <em>Op</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	/**
-	 * The cached value of the '{@link #getOperand() <em>Operand</em>}' containment reference.
+	 * The cached value of the '{@link #getOp() <em>Op</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getOperand()
+	 * @see #getOp()
 	 * @generated
 	 * @ordered
 	 */
-	protected Arithmetic operand;
+	protected Expression op;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -64,8 +64,8 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	 * @generated
 	 */
 	@Override
-	public Arithmetic getOperand() {
-		return operand;
+	public Expression getOp() {
+		return op;
 	}
 
 	/**
@@ -73,12 +73,12 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetOperand(Arithmetic newOperand, NotificationChain msgs) {
-		Arithmetic oldOperand = operand;
-		operand = newOperand;
+	public NotificationChain basicSetOp(Expression newOp, NotificationChain msgs) {
+		Expression oldOp = op;
+		op = newOp;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.NEG__OPERAND, oldOperand, newOperand);
+					RobotScriptModelPackage.NEG__OP, oldOp, newOp);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -93,21 +93,20 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	 * @generated
 	 */
 	@Override
-	public void setOperand(Arithmetic newOperand) {
-		if (newOperand != operand) {
+	public void setOp(Expression newOp) {
+		if (newOp != op) {
 			NotificationChain msgs = null;
-			if (operand != null)
-				msgs = ((InternalEObject) operand).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NEG__OPERAND, null, msgs);
-			if (newOperand != null)
-				msgs = ((InternalEObject) newOperand).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NEG__OPERAND, null, msgs);
-			msgs = basicSetOperand(newOperand, msgs);
+			if (op != null)
+				msgs = ((InternalEObject) op).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NEG__OP, null, msgs);
+			if (newOp != null)
+				msgs = ((InternalEObject) newOp).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.NEG__OP, null, msgs);
+			msgs = basicSetOp(newOp, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.NEG__OPERAND, newOperand,
-					newOperand));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.NEG__OP, newOp, newOp));
 	}
 
 	/**
@@ -118,8 +117,8 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NEG__OPERAND:
-			return basicSetOperand(null, msgs);
+		case RobotScriptModelPackage.NEG__OP:
+			return basicSetOp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -132,8 +131,8 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NEG__OPERAND:
-			return getOperand();
+		case RobotScriptModelPackage.NEG__OP:
+			return getOp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -146,8 +145,8 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NEG__OPERAND:
-			setOperand((Arithmetic) newValue);
+		case RobotScriptModelPackage.NEG__OP:
+			setOp((Expression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -161,8 +160,8 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NEG__OPERAND:
-			setOperand((Arithmetic) null);
+		case RobotScriptModelPackage.NEG__OP:
+			setOp((Expression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -176,8 +175,8 @@ public class NegImpl extends MinimalEObjectImpl.Container implements Neg {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.NEG__OPERAND:
-			return operand != null;
+		case RobotScriptModelPackage.NEG__OP:
+			return op != null;
 		}
 		return super.eIsSet(featureID);
 	}

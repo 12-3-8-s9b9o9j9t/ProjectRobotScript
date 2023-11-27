@@ -2,21 +2,16 @@
  */
 package robotScriptModel.impl;
 
-import java.util.Collection;
-
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-
-import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
-import org.eclipse.emf.ecore.util.EObjectContainmentEList;
-import org.eclipse.emf.ecore.util.InternalEList;
-
-import robotScriptModel.Command;
+import robotScriptModel.Expression;
 import robotScriptModel.RobotScriptModelPackage;
 import robotScriptModel.Rotation;
 
@@ -28,21 +23,21 @@ import robotScriptModel.Rotation;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.RotationImpl#getDefvar <em>Defvar</em>}</li>
+ *   <li>{@link robotScriptModel.impl.RotationImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class RotationImpl extends MinimalEObjectImpl.Container implements Rotation {
 	/**
-	 * The cached value of the '{@link #getDefvar() <em>Defvar</em>}' containment reference list.
+	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getDefvar()
+	 * @see #getExpression()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Command> defvar;
+	protected Expression expression;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -69,12 +64,50 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	 * @generated
 	 */
 	@Override
-	public EList<Command> getDefvar() {
-		if (defvar == null) {
-			defvar = new EObjectContainmentEList<Command>(Command.class, this,
-					RobotScriptModelPackage.ROTATION__DEFVAR);
+	public Expression getExpression() {
+		return expression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
+		Expression oldExpression = expression;
+		expression = newExpression;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotScriptModelPackage.ROTATION__EXPRESSION, oldExpression, newExpression);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
-		return defvar;
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setExpression(Expression newExpression) {
+		if (newExpression != expression) {
+			NotificationChain msgs = null;
+			if (expression != null)
+				msgs = ((InternalEObject) expression).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ROTATION__EXPRESSION, null, msgs);
+			if (newExpression != null)
+				msgs = ((InternalEObject) newExpression).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ROTATION__EXPRESSION, null, msgs);
+			msgs = basicSetExpression(newExpression, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ROTATION__EXPRESSION,
+					newExpression, newExpression));
 	}
 
 	/**
@@ -85,8 +118,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__DEFVAR:
-			return ((InternalEList<?>) getDefvar()).basicRemove(otherEnd, msgs);
+		case RobotScriptModelPackage.ROTATION__EXPRESSION:
+			return basicSetExpression(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -99,8 +132,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__DEFVAR:
-			return getDefvar();
+		case RobotScriptModelPackage.ROTATION__EXPRESSION:
+			return getExpression();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -110,13 +143,11 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__DEFVAR:
-			getDefvar().clear();
-			getDefvar().addAll((Collection<? extends Command>) newValue);
+		case RobotScriptModelPackage.ROTATION__EXPRESSION:
+			setExpression((Expression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -130,8 +161,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__DEFVAR:
-			getDefvar().clear();
+		case RobotScriptModelPackage.ROTATION__EXPRESSION:
+			setExpression((Expression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -145,8 +176,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__DEFVAR:
-			return defvar != null && !defvar.isEmpty();
+		case RobotScriptModelPackage.ROTATION__EXPRESSION:
+			return expression != null;
 		}
 		return super.eIsSet(featureID);
 	}

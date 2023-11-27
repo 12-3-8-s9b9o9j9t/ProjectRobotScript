@@ -12,7 +12,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import robotScriptModel.Add;
-import robotScriptModel.Arithmetic;
+import robotScriptModel.Expression;
 import robotScriptModel.RobotScriptModelPackage;
 
 /**
@@ -23,32 +23,32 @@ import robotScriptModel.RobotScriptModelPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.AddImpl#getRight <em>Right</em>}</li>
- *   <li>{@link robotScriptModel.impl.AddImpl#getLeft <em>Left</em>}</li>
+ *   <li>{@link robotScriptModel.impl.AddImpl#getRightOp <em>Right Op</em>}</li>
+ *   <li>{@link robotScriptModel.impl.AddImpl#getLeftOp <em>Left Op</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	/**
-	 * The cached value of the '{@link #getRight() <em>Right</em>}' containment reference.
+	 * The cached value of the '{@link #getRightOp() <em>Right Op</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRight()
+	 * @see #getRightOp()
 	 * @generated
 	 * @ordered
 	 */
-	protected Arithmetic right;
+	protected Expression rightOp;
 
 	/**
-	 * The cached value of the '{@link #getLeft() <em>Left</em>}' containment reference.
+	 * The cached value of the '{@link #getLeftOp() <em>Left Op</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getLeft()
+	 * @see #getLeftOp()
 	 * @generated
 	 * @ordered
 	 */
-	protected Arithmetic left;
+	protected Expression leftOp;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,8 +75,8 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * @generated
 	 */
 	@Override
-	public Arithmetic getRight() {
-		return right;
+	public Expression getRightOp() {
+		return rightOp;
 	}
 
 	/**
@@ -84,12 +84,12 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetRight(Arithmetic newRight, NotificationChain msgs) {
-		Arithmetic oldRight = right;
-		right = newRight;
+	public NotificationChain basicSetRightOp(Expression newRightOp, NotificationChain msgs) {
+		Expression oldRightOp = rightOp;
+		rightOp = newRightOp;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.ADD__RIGHT, oldRight, newRight);
+					RobotScriptModelPackage.ADD__RIGHT_OP, oldRightOp, newRightOp);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -104,21 +104,21 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * @generated
 	 */
 	@Override
-	public void setRight(Arithmetic newRight) {
-		if (newRight != right) {
+	public void setRightOp(Expression newRightOp) {
+		if (newRightOp != rightOp) {
 			NotificationChain msgs = null;
-			if (right != null)
-				msgs = ((InternalEObject) right).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__RIGHT, null, msgs);
-			if (newRight != null)
-				msgs = ((InternalEObject) newRight).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__RIGHT, null, msgs);
-			msgs = basicSetRight(newRight, msgs);
+			if (rightOp != null)
+				msgs = ((InternalEObject) rightOp).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__RIGHT_OP, null, msgs);
+			if (newRightOp != null)
+				msgs = ((InternalEObject) newRightOp).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__RIGHT_OP, null, msgs);
+			msgs = basicSetRightOp(newRightOp, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ADD__RIGHT, newRight,
-					newRight));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ADD__RIGHT_OP, newRightOp,
+					newRightOp));
 	}
 
 	/**
@@ -127,8 +127,8 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * @generated
 	 */
 	@Override
-	public Arithmetic getLeft() {
-		return left;
+	public Expression getLeftOp() {
+		return leftOp;
 	}
 
 	/**
@@ -136,12 +136,12 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetLeft(Arithmetic newLeft, NotificationChain msgs) {
-		Arithmetic oldLeft = left;
-		left = newLeft;
+	public NotificationChain basicSetLeftOp(Expression newLeftOp, NotificationChain msgs) {
+		Expression oldLeftOp = leftOp;
+		leftOp = newLeftOp;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.ADD__LEFT, oldLeft, newLeft);
+					RobotScriptModelPackage.ADD__LEFT_OP, oldLeftOp, newLeftOp);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -156,20 +156,21 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * @generated
 	 */
 	@Override
-	public void setLeft(Arithmetic newLeft) {
-		if (newLeft != left) {
+	public void setLeftOp(Expression newLeftOp) {
+		if (newLeftOp != leftOp) {
 			NotificationChain msgs = null;
-			if (left != null)
-				msgs = ((InternalEObject) left).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__LEFT, null, msgs);
-			if (newLeft != null)
-				msgs = ((InternalEObject) newLeft).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__LEFT, null, msgs);
-			msgs = basicSetLeft(newLeft, msgs);
+			if (leftOp != null)
+				msgs = ((InternalEObject) leftOp).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__LEFT_OP, null, msgs);
+			if (newLeftOp != null)
+				msgs = ((InternalEObject) newLeftOp).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__LEFT_OP, null, msgs);
+			msgs = basicSetLeftOp(newLeftOp, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ADD__LEFT, newLeft, newLeft));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ADD__LEFT_OP, newLeftOp,
+					newLeftOp));
 	}
 
 	/**
@@ -180,10 +181,10 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT:
-			return basicSetRight(null, msgs);
-		case RobotScriptModelPackage.ADD__LEFT:
-			return basicSetLeft(null, msgs);
+		case RobotScriptModelPackage.ADD__RIGHT_OP:
+			return basicSetRightOp(null, msgs);
+		case RobotScriptModelPackage.ADD__LEFT_OP:
+			return basicSetLeftOp(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -196,10 +197,10 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT:
-			return getRight();
-		case RobotScriptModelPackage.ADD__LEFT:
-			return getLeft();
+		case RobotScriptModelPackage.ADD__RIGHT_OP:
+			return getRightOp();
+		case RobotScriptModelPackage.ADD__LEFT_OP:
+			return getLeftOp();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -212,11 +213,11 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT:
-			setRight((Arithmetic) newValue);
+		case RobotScriptModelPackage.ADD__RIGHT_OP:
+			setRightOp((Expression) newValue);
 			return;
-		case RobotScriptModelPackage.ADD__LEFT:
-			setLeft((Arithmetic) newValue);
+		case RobotScriptModelPackage.ADD__LEFT_OP:
+			setLeftOp((Expression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -230,11 +231,11 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT:
-			setRight((Arithmetic) null);
+		case RobotScriptModelPackage.ADD__RIGHT_OP:
+			setRightOp((Expression) null);
 			return;
-		case RobotScriptModelPackage.ADD__LEFT:
-			setLeft((Arithmetic) null);
+		case RobotScriptModelPackage.ADD__LEFT_OP:
+			setLeftOp((Expression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -248,10 +249,10 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT:
-			return right != null;
-		case RobotScriptModelPackage.ADD__LEFT:
-			return left != null;
+		case RobotScriptModelPackage.ADD__RIGHT_OP:
+			return rightOp != null;
+		case RobotScriptModelPackage.ADD__LEFT_OP:
+			return leftOp != null;
 		}
 		return super.eIsSet(featureID);
 	}
