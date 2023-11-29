@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import robotScriptModel.Expression;
 import robotScriptModel.RobotScriptModelPackage;
 import robotScriptModel.SetSpeed;
-import robotScriptModel.SpeedState;
+import robotScriptModel.Speed;
 import robotScriptModel.Unit;
 
 /**
@@ -25,23 +25,23 @@ import robotScriptModel.Unit;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.SetSpeedImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link robotScriptModel.impl.SetSpeedImpl#getExpr <em>Expr</em>}</li>
  *   <li>{@link robotScriptModel.impl.SetSpeedImpl#getUnit <em>Unit</em>}</li>
- *   <li>{@link robotScriptModel.impl.SetSpeedImpl#getSpeedstate <em>Speedstate</em>}</li>
+ *   <li>{@link robotScriptModel.impl.SetSpeedImpl#getSpeed <em>Speed</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpeed {
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getExpr()
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression expression;
+	protected Expression expr;
 
 	/**
 	 * The default value of the '{@link #getUnit() <em>Unit</em>}' attribute.
@@ -64,14 +64,14 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	protected Unit unit = UNIT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getSpeedstate() <em>Speedstate</em>}' reference.
+	 * The cached value of the '{@link #getSpeed() <em>Speed</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getSpeedstate()
+	 * @see #getSpeed()
 	 * @generated
 	 * @ordered
 	 */
-	protected SpeedState speedstate;
+	protected Speed speed;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -98,8 +98,8 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	 * @generated
 	 */
 	@Override
-	public Expression getExpression() {
-		return expression;
+	public Expression getExpr() {
+		return expr;
 	}
 
 	/**
@@ -107,12 +107,12 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
-		Expression oldExpression = expression;
-		expression = newExpression;
+	public NotificationChain basicSetExpr(Expression newExpr, NotificationChain msgs) {
+		Expression oldExpr = expr;
+		expr = newExpr;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.SET_SPEED__EXPRESSION, oldExpression, newExpression);
+					RobotScriptModelPackage.SET_SPEED__EXPR, oldExpr, newExpr);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -127,21 +127,21 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	 * @generated
 	 */
 	@Override
-	public void setExpression(Expression newExpression) {
-		if (newExpression != expression) {
+	public void setExpr(Expression newExpr) {
+		if (newExpr != expr) {
 			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject) expression).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.SET_SPEED__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject) newExpression).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.SET_SPEED__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
+			if (expr != null)
+				msgs = ((InternalEObject) expr).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.SET_SPEED__EXPR, null, msgs);
+			if (newExpr != null)
+				msgs = ((InternalEObject) newExpr).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.SET_SPEED__EXPR, null, msgs);
+			msgs = basicSetExpr(newExpr, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.SET_SPEED__EXPRESSION,
-					newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.SET_SPEED__EXPR, newExpr,
+					newExpr));
 	}
 
 	/**
@@ -174,17 +174,8 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	 * @generated
 	 */
 	@Override
-	public SpeedState getSpeedstate() {
-		if (speedstate != null && speedstate.eIsProxy()) {
-			InternalEObject oldSpeedstate = (InternalEObject) speedstate;
-			speedstate = (SpeedState) eResolveProxy(oldSpeedstate);
-			if (speedstate != oldSpeedstate) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE,
-							RobotScriptModelPackage.SET_SPEED__SPEEDSTATE, oldSpeedstate, speedstate));
-			}
-		}
-		return speedstate;
+	public Speed getSpeed() {
+		return speed;
 	}
 
 	/**
@@ -192,8 +183,18 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SpeedState basicGetSpeedstate() {
-		return speedstate;
+	public NotificationChain basicSetSpeed(Speed newSpeed, NotificationChain msgs) {
+		Speed oldSpeed = speed;
+		speed = newSpeed;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotScriptModelPackage.SET_SPEED__SPEED, oldSpeed, newSpeed);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
+		}
+		return msgs;
 	}
 
 	/**
@@ -202,12 +203,21 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	 * @generated
 	 */
 	@Override
-	public void setSpeedstate(SpeedState newSpeedstate) {
-		SpeedState oldSpeedstate = speedstate;
-		speedstate = newSpeedstate;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.SET_SPEED__SPEEDSTATE,
-					oldSpeedstate, speedstate));
+	public void setSpeed(Speed newSpeed) {
+		if (newSpeed != speed) {
+			NotificationChain msgs = null;
+			if (speed != null)
+				msgs = ((InternalEObject) speed).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.SET_SPEED__SPEED, null, msgs);
+			if (newSpeed != null)
+				msgs = ((InternalEObject) newSpeed).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.SET_SPEED__SPEED, null, msgs);
+			msgs = basicSetSpeed(newSpeed, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.SET_SPEED__SPEED, newSpeed,
+					newSpeed));
 	}
 
 	/**
@@ -218,8 +228,10 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.SET_SPEED__EXPRESSION:
-			return basicSetExpression(null, msgs);
+		case RobotScriptModelPackage.SET_SPEED__EXPR:
+			return basicSetExpr(null, msgs);
+		case RobotScriptModelPackage.SET_SPEED__SPEED:
+			return basicSetSpeed(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -232,14 +244,12 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.SET_SPEED__EXPRESSION:
-			return getExpression();
+		case RobotScriptModelPackage.SET_SPEED__EXPR:
+			return getExpr();
 		case RobotScriptModelPackage.SET_SPEED__UNIT:
 			return getUnit();
-		case RobotScriptModelPackage.SET_SPEED__SPEEDSTATE:
-			if (resolve)
-				return getSpeedstate();
-			return basicGetSpeedstate();
+		case RobotScriptModelPackage.SET_SPEED__SPEED:
+			return getSpeed();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -252,14 +262,14 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.SET_SPEED__EXPRESSION:
-			setExpression((Expression) newValue);
+		case RobotScriptModelPackage.SET_SPEED__EXPR:
+			setExpr((Expression) newValue);
 			return;
 		case RobotScriptModelPackage.SET_SPEED__UNIT:
 			setUnit((Unit) newValue);
 			return;
-		case RobotScriptModelPackage.SET_SPEED__SPEEDSTATE:
-			setSpeedstate((SpeedState) newValue);
+		case RobotScriptModelPackage.SET_SPEED__SPEED:
+			setSpeed((Speed) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -273,14 +283,14 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.SET_SPEED__EXPRESSION:
-			setExpression((Expression) null);
+		case RobotScriptModelPackage.SET_SPEED__EXPR:
+			setExpr((Expression) null);
 			return;
 		case RobotScriptModelPackage.SET_SPEED__UNIT:
 			setUnit(UNIT_EDEFAULT);
 			return;
-		case RobotScriptModelPackage.SET_SPEED__SPEEDSTATE:
-			setSpeedstate((SpeedState) null);
+		case RobotScriptModelPackage.SET_SPEED__SPEED:
+			setSpeed((Speed) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -294,12 +304,12 @@ public class SetSpeedImpl extends MinimalEObjectImpl.Container implements SetSpe
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.SET_SPEED__EXPRESSION:
-			return expression != null;
+		case RobotScriptModelPackage.SET_SPEED__EXPR:
+			return expr != null;
 		case RobotScriptModelPackage.SET_SPEED__UNIT:
 			return unit != UNIT_EDEFAULT;
-		case RobotScriptModelPackage.SET_SPEED__SPEEDSTATE:
-			return speedstate != null;
+		case RobotScriptModelPackage.SET_SPEED__SPEED:
+			return speed != null;
 		}
 		return super.eIsSet(featureID);
 	}

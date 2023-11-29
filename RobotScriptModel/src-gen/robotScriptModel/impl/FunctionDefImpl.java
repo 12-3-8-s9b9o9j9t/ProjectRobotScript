@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import robotScriptModel.AnyType;
-import robotScriptModel.Command;
+import robotScriptModel.Block;
 import robotScriptModel.FunctionDef;
 import robotScriptModel.RobotScriptModelPackage;
-import robotScriptModel.VarDecl;
+import robotScriptModel.SimpleVarDecl;
 
 /**
  * <!-- begin-user-doc -->
@@ -34,7 +34,7 @@ import robotScriptModel.VarDecl;
  * <ul>
  *   <li>{@link robotScriptModel.impl.FunctionDefImpl#getName <em>Name</em>}</li>
  *   <li>{@link robotScriptModel.impl.FunctionDefImpl#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link robotScriptModel.impl.FunctionDefImpl#getBody <em>Body</em>}</li>
+ *   <li>{@link robotScriptModel.impl.FunctionDefImpl#getBlock <em>Block</em>}</li>
  *   <li>{@link robotScriptModel.impl.FunctionDefImpl#getInputs <em>Inputs</em>}</li>
  * </ul>
  *
@@ -72,14 +72,14 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 	protected AnyType returnType;
 
 	/**
-	 * The cached value of the '{@link #getBody() <em>Body</em>}' containment reference list.
+	 * The cached value of the '{@link #getBlock() <em>Block</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getBody()
+	 * @see #getBlock()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Command> body;
+	protected Block block;
 
 	/**
 	 * The cached value of the '{@link #getInputs() <em>Inputs</em>}' containment reference list.
@@ -89,7 +89,7 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<VarDecl> inputs;
+	protected EList<SimpleVarDecl> inputs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,12 +192,27 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 	 * @generated
 	 */
 	@Override
-	public EList<Command> getBody() {
-		if (body == null) {
-			body = new EObjectContainmentEList<Command>(Command.class, this,
-					RobotScriptModelPackage.FUNCTION_DEF__BODY);
+	public Block getBlock() {
+		return block;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetBlock(Block newBlock, NotificationChain msgs) {
+		Block oldBlock = block;
+		block = newBlock;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
+					RobotScriptModelPackage.FUNCTION_DEF__BLOCK, oldBlock, newBlock);
+			if (msgs == null)
+				msgs = notification;
+			else
+				msgs.add(notification);
 		}
-		return body;
+		return msgs;
 	}
 
 	/**
@@ -206,9 +221,32 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 	 * @generated
 	 */
 	@Override
-	public EList<VarDecl> getInputs() {
+	public void setBlock(Block newBlock) {
+		if (newBlock != block) {
+			NotificationChain msgs = null;
+			if (block != null)
+				msgs = ((InternalEObject) block).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.FUNCTION_DEF__BLOCK, null, msgs);
+			if (newBlock != null)
+				msgs = ((InternalEObject) newBlock).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.FUNCTION_DEF__BLOCK, null, msgs);
+			msgs = basicSetBlock(newBlock, msgs);
+			if (msgs != null)
+				msgs.dispatch();
+		} else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.FUNCTION_DEF__BLOCK, newBlock,
+					newBlock));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<SimpleVarDecl> getInputs() {
 		if (inputs == null) {
-			inputs = new EObjectContainmentEList<VarDecl>(VarDecl.class, this,
+			inputs = new EObjectContainmentEList<SimpleVarDecl>(SimpleVarDecl.class, this,
 					RobotScriptModelPackage.FUNCTION_DEF__INPUTS);
 		}
 		return inputs;
@@ -224,8 +262,8 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 		switch (featureID) {
 		case RobotScriptModelPackage.FUNCTION_DEF__RETURN_TYPE:
 			return basicSetReturnType(null, msgs);
-		case RobotScriptModelPackage.FUNCTION_DEF__BODY:
-			return ((InternalEList<?>) getBody()).basicRemove(otherEnd, msgs);
+		case RobotScriptModelPackage.FUNCTION_DEF__BLOCK:
+			return basicSetBlock(null, msgs);
 		case RobotScriptModelPackage.FUNCTION_DEF__INPUTS:
 			return ((InternalEList<?>) getInputs()).basicRemove(otherEnd, msgs);
 		}
@@ -244,8 +282,8 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 			return getName();
 		case RobotScriptModelPackage.FUNCTION_DEF__RETURN_TYPE:
 			return getReturnType();
-		case RobotScriptModelPackage.FUNCTION_DEF__BODY:
-			return getBody();
+		case RobotScriptModelPackage.FUNCTION_DEF__BLOCK:
+			return getBlock();
 		case RobotScriptModelPackage.FUNCTION_DEF__INPUTS:
 			return getInputs();
 		}
@@ -267,13 +305,12 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 		case RobotScriptModelPackage.FUNCTION_DEF__RETURN_TYPE:
 			setReturnType((AnyType) newValue);
 			return;
-		case RobotScriptModelPackage.FUNCTION_DEF__BODY:
-			getBody().clear();
-			getBody().addAll((Collection<? extends Command>) newValue);
+		case RobotScriptModelPackage.FUNCTION_DEF__BLOCK:
+			setBlock((Block) newValue);
 			return;
 		case RobotScriptModelPackage.FUNCTION_DEF__INPUTS:
 			getInputs().clear();
-			getInputs().addAll((Collection<? extends VarDecl>) newValue);
+			getInputs().addAll((Collection<? extends SimpleVarDecl>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -293,8 +330,8 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 		case RobotScriptModelPackage.FUNCTION_DEF__RETURN_TYPE:
 			setReturnType((AnyType) null);
 			return;
-		case RobotScriptModelPackage.FUNCTION_DEF__BODY:
-			getBody().clear();
+		case RobotScriptModelPackage.FUNCTION_DEF__BLOCK:
+			setBlock((Block) null);
 			return;
 		case RobotScriptModelPackage.FUNCTION_DEF__INPUTS:
 			getInputs().clear();
@@ -315,8 +352,8 @@ public class FunctionDefImpl extends MinimalEObjectImpl.Container implements Fun
 			return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 		case RobotScriptModelPackage.FUNCTION_DEF__RETURN_TYPE:
 			return returnType != null;
-		case RobotScriptModelPackage.FUNCTION_DEF__BODY:
-			return body != null && !body.isEmpty();
+		case RobotScriptModelPackage.FUNCTION_DEF__BLOCK:
+			return block != null;
 		case RobotScriptModelPackage.FUNCTION_DEF__INPUTS:
 			return inputs != null && !inputs.isEmpty();
 		}

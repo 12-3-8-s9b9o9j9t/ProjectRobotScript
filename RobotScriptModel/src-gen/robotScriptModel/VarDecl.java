@@ -16,10 +16,10 @@ package robotScriptModel;
  * </ul>
  *
  * @see robotScriptModel.RobotScriptModelPackage#getVarDecl()
- * @model
+ * @model interface="true" abstract="true"
  * @generated
  */
-public interface VarDecl extends Command {
+public interface VarDecl extends Statement {
 	/**
 	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->

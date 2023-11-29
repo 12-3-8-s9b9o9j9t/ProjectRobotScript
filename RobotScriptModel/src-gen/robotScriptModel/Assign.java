@@ -11,34 +11,34 @@ package robotScriptModel;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.Assign#getExpression <em>Expression</em>}</li>
+ *   <li>{@link robotScriptModel.Assign#getExpr <em>Expr</em>}</li>
  * </ul>
  *
  * @see robotScriptModel.RobotScriptModelPackage#getAssign()
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface Assign extends Command {
+public interface Assign extends Statement {
 	/**
-	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
+	 * Returns the value of the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Expression</em>' containment reference.
-	 * @see #setExpression(Expression)
-	 * @see robotScriptModel.RobotScriptModelPackage#getAssign_Expression()
+	 * @return the value of the '<em>Expr</em>' containment reference.
+	 * @see #setExpr(Expression)
+	 * @see robotScriptModel.RobotScriptModelPackage#getAssign_Expr()
 	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	Expression getExpression();
+	Expression getExpr();
 
 	/**
-	 * Sets the value of the '{@link robotScriptModel.Assign#getExpression <em>Expression</em>}' containment reference.
+	 * Sets the value of the '{@link robotScriptModel.Assign#getExpr <em>Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Expression</em>' containment reference.
-	 * @see #getExpression()
+	 * @param value the new value of the '<em>Expr</em>' containment reference.
+	 * @see #getExpr()
 	 * @generated
 	 */
-	void setExpression(Expression value);
+	void setExpr(Expression value);
 
 } // Assign

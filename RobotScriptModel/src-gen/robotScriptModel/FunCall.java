@@ -21,7 +21,7 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface FunCall extends Value, Command {
+public interface FunCall extends Value, Statement {
 	/**
 	 * Returns the value of the '<em><b>Fun</b></em>' reference.
 	 * <!-- begin-user-doc -->

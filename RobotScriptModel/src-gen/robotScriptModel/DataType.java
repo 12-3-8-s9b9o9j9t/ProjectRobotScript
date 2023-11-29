@@ -9,7 +9,7 @@ package robotScriptModel;
  *
  *
  * @see robotScriptModel.RobotScriptModelPackage#getDataType()
- * @model interface="true" abstract="true"
+ * @model
  * @generated
  */
 public interface DataType extends AnyType {

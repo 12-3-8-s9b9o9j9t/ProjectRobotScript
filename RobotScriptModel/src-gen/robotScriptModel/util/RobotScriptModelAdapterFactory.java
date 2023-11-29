@@ -82,11 +82,6 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseCommand(Command object) {
-			return createCommandAdapter();
-		}
-
-		@Override
 		public Adapter caseVarDecl(VarDecl object) {
 			return createVarDeclAdapter();
 		}
@@ -102,38 +97,8 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseNumberType(NumberType object) {
-			return createNumberTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseBooleanType(BooleanType object) {
-			return createBooleanTypeAdapter();
-		}
-
-		@Override
-		public Adapter caseLoop(Loop object) {
-			return createLoopAdapter();
-		}
-
-		@Override
-		public Adapter caseIf(If object) {
-			return createIfAdapter();
-		}
-
-		@Override
-		public Adapter caseIfElse(IfElse object) {
-			return createIfElseAdapter();
-		}
-
-		@Override
 		public Adapter caseExpression(Expression object) {
 			return createExpressionAdapter();
-		}
-
-		@Override
-		public Adapter caseControlStructure(ControlStructure object) {
-			return createControlStructureAdapter();
 		}
 
 		@Override
@@ -142,13 +107,8 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseAssignAtDecl(AssignAtDecl object) {
-			return createAssignAtDeclAdapter();
-		}
-
-		@Override
-		public Adapter caseReAssign(ReAssign object) {
-			return createReAssignAdapter();
+		public Adapter caseAssignVar(AssignVar object) {
+			return createAssignVarAdapter();
 		}
 
 		@Override
@@ -157,28 +117,8 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseUnOp(UnOp object) {
-			return createUnOpAdapter();
-		}
-
-		@Override
-		public Adapter caseBinOp(BinOp object) {
-			return createBinOpAdapter();
-		}
-
-		@Override
-		public Adapter caseNeg(Neg object) {
-			return createNegAdapter();
-		}
-
-		@Override
-		public Adapter caseNot(Not object) {
-			return createNotAdapter();
-		}
-
-		@Override
-		public Adapter caseGreater(Greater object) {
-			return createGreaterAdapter();
+		public Adapter casePrimaryBoolExpr(PrimaryBoolExpr object) {
+			return createPrimaryBoolExprAdapter();
 		}
 
 		@Override
@@ -192,48 +132,8 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseLess(Less object) {
-			return createLessAdapter();
-		}
-
-		@Override
 		public Adapter caseOr(Or object) {
 			return createOrAdapter();
-		}
-
-		@Override
-		public Adapter caseSub(Sub object) {
-			return createSubAdapter();
-		}
-
-		@Override
-		public Adapter caseGEq(GEq object) {
-			return createGEqAdapter();
-		}
-
-		@Override
-		public Adapter caseEqu(Equ object) {
-			return createEquAdapter();
-		}
-
-		@Override
-		public Adapter caseMul(Mul object) {
-			return createMulAdapter();
-		}
-
-		@Override
-		public Adapter caseLEq(LEq object) {
-			return createLEqAdapter();
-		}
-
-		@Override
-		public Adapter caseNEq(NEq object) {
-			return createNEqAdapter();
-		}
-
-		@Override
-		public Adapter caseDiv(Div object) {
-			return createDivAdapter();
 		}
 
 		@Override
@@ -252,53 +152,23 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
-		public Adapter caseFront(Front object) {
-			return createFrontAdapter();
-		}
-
-		@Override
-		public Adapter caseBack(Back object) {
-			return createBackAdapter();
-		}
-
-		@Override
-		public Adapter caseRight(Right object) {
-			return createRightAdapter();
-		}
-
-		@Override
-		public Adapter caseLeft(Left object) {
-			return createLeftAdapter();
-		}
-
-		@Override
 		public Adapter caseValue(Value object) {
 			return createValueAdapter();
 		}
 
 		@Override
-		public Adapter caseTimeSensor(TimeSensor object) {
-			return createTimeSensorAdapter();
+		public Adapter caseSensor(Sensor object) {
+			return createSensorAdapter();
 		}
 
 		@Override
-		public Adapter caseDistSensor(DistSensor object) {
-			return createDistSensorAdapter();
+		public Adapter caseLiteral(Literal object) {
+			return createLiteralAdapter();
 		}
 
 		@Override
-		public Adapter caseBoolLiteral(BoolLiteral object) {
-			return createBoolLiteralAdapter();
-		}
-
-		@Override
-		public Adapter caseNumberLiteral(NumberLiteral object) {
-			return createNumberLiteralAdapter();
-		}
-
-		@Override
-		public Adapter caseSpeedState(SpeedState object) {
-			return createSpeedStateAdapter();
+		public Adapter caseSpeed(Speed object) {
+			return createSpeedAdapter();
 		}
 
 		@Override
@@ -309,6 +179,66 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseFunCall(FunCall object) {
 			return createFunCallAdapter();
+		}
+
+		@Override
+		public Adapter casePrimaryAriExpr(PrimaryAriExpr object) {
+			return createPrimaryAriExprAdapter();
+		}
+
+		@Override
+		public Adapter caseNot(Not object) {
+			return createNotAdapter();
+		}
+
+		@Override
+		public Adapter caseCompare(Compare object) {
+			return createCompareAdapter();
+		}
+
+		@Override
+		public Adapter caseMul(Mul object) {
+			return createMulAdapter();
+		}
+
+		@Override
+		public Adapter caseAriUnOp(AriUnOp object) {
+			return createAriUnOpAdapter();
+		}
+
+		@Override
+		public Adapter caseStatement(Statement object) {
+			return createStatementAdapter();
+		}
+
+		@Override
+		public Adapter caseBlock(Block object) {
+			return createBlockAdapter();
+		}
+
+		@Override
+		public Adapter caseSimpleVarDecl(SimpleVarDecl object) {
+			return createSimpleVarDeclAdapter();
+		}
+
+		@Override
+		public Adapter caseVarDeclInit(VarDeclInit object) {
+			return createVarDeclInitAdapter();
+		}
+
+		@Override
+		public Adapter caseLoopStmt(LoopStmt object) {
+			return createLoopStmtAdapter();
+		}
+
+		@Override
+		public Adapter caseIfStmt(IfStmt object) {
+			return createIfStmtAdapter();
+		}
+
+		@Override
+		public Adapter caseReturnStmt(ReturnStmt object) {
+			return createReturnStmtAdapter();
 		}
 
 		@Override
@@ -373,20 +303,6 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Command <em>Command</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Command
-	 * @generated
-	 */
-	public Adapter createCommandAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link robotScriptModel.VarDecl <em>Var Decl</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -429,76 +345,6 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.NumberType <em>Number Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.NumberType
-	 * @generated
-	 */
-	public Adapter createNumberTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.BooleanType <em>Boolean Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.BooleanType
-	 * @generated
-	 */
-	public Adapter createBooleanTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Loop <em>Loop</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Loop
-	 * @generated
-	 */
-	public Adapter createLoopAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.If <em>If</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.If
-	 * @generated
-	 */
-	public Adapter createIfAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.IfElse <em>If Else</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.IfElse
-	 * @generated
-	 */
-	public Adapter createIfElseAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link robotScriptModel.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -509,20 +355,6 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExpressionAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.ControlStructure <em>Control Structure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.ControlStructure
-	 * @generated
-	 */
-	public Adapter createControlStructureAdapter() {
 		return null;
 	}
 
@@ -541,30 +373,16 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.AssignAtDecl <em>Assign At Decl</em>}'.
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.AssignVar <em>Assign Var</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robotScriptModel.AssignAtDecl
+	 * @see robotScriptModel.AssignVar
 	 * @generated
 	 */
-	public Adapter createAssignAtDeclAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.ReAssign <em>Re Assign</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.ReAssign
-	 * @generated
-	 */
-	public Adapter createReAssignAdapter() {
+	public Adapter createAssignVarAdapter() {
 		return null;
 	}
 
@@ -583,72 +401,16 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.UnOp <em>Un Op</em>}'.
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.PrimaryBoolExpr <em>Primary Bool Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robotScriptModel.UnOp
+	 * @see robotScriptModel.PrimaryBoolExpr
 	 * @generated
 	 */
-	public Adapter createUnOpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.BinOp <em>Bin Op</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.BinOp
-	 * @generated
-	 */
-	public Adapter createBinOpAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Neg <em>Neg</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Neg
-	 * @generated
-	 */
-	public Adapter createNegAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Not <em>Not</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Not
-	 * @generated
-	 */
-	public Adapter createNotAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Greater <em>Greater</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Greater
-	 * @generated
-	 */
-	public Adapter createGreaterAdapter() {
+	public Adapter createPrimaryBoolExprAdapter() {
 		return null;
 	}
 
@@ -681,20 +443,6 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Less <em>Less</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Less
-	 * @generated
-	 */
-	public Adapter createLessAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link robotScriptModel.Or <em>Or</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -705,104 +453,6 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createOrAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Sub <em>Sub</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Sub
-	 * @generated
-	 */
-	public Adapter createSubAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.GEq <em>GEq</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.GEq
-	 * @generated
-	 */
-	public Adapter createGEqAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Equ <em>Equ</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Equ
-	 * @generated
-	 */
-	public Adapter createEquAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Mul <em>Mul</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Mul
-	 * @generated
-	 */
-	public Adapter createMulAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.LEq <em>LEq</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.LEq
-	 * @generated
-	 */
-	public Adapter createLEqAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.NEq <em>NEq</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.NEq
-	 * @generated
-	 */
-	public Adapter createNEqAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Div <em>Div</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Div
-	 * @generated
-	 */
-	public Adapter createDivAdapter() {
 		return null;
 	}
 
@@ -849,62 +499,6 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Front <em>Front</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Front
-	 * @generated
-	 */
-	public Adapter createFrontAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Back <em>Back</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Back
-	 * @generated
-	 */
-	public Adapter createBackAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Right <em>Right</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Right
-	 * @generated
-	 */
-	public Adapter createRightAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.Left <em>Left</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.Left
-	 * @generated
-	 */
-	public Adapter createLeftAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link robotScriptModel.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -919,72 +513,44 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.TimeSensor <em>Time Sensor</em>}'.
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Sensor <em>Sensor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robotScriptModel.TimeSensor
+	 * @see robotScriptModel.Sensor
 	 * @generated
 	 */
-	public Adapter createTimeSensorAdapter() {
+	public Adapter createSensorAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.DistSensor <em>Dist Sensor</em>}'.
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Literal <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robotScriptModel.DistSensor
+	 * @see robotScriptModel.Literal
 	 * @generated
 	 */
-	public Adapter createDistSensorAdapter() {
+	public Adapter createLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.BoolLiteral <em>Bool Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Speed <em>Speed</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see robotScriptModel.BoolLiteral
+	 * @see robotScriptModel.Speed
 	 * @generated
 	 */
-	public Adapter createBoolLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.NumberLiteral <em>Number Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.NumberLiteral
-	 * @generated
-	 */
-	public Adapter createNumberLiteralAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link robotScriptModel.SpeedState <em>Speed State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see robotScriptModel.SpeedState
-	 * @generated
-	 */
-	public Adapter createSpeedStateAdapter() {
+	public Adapter createSpeedAdapter() {
 		return null;
 	}
 
@@ -1013,6 +579,174 @@ public class RobotScriptModelAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createFunCallAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.PrimaryAriExpr <em>Primary Ari Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.PrimaryAriExpr
+	 * @generated
+	 */
+	public Adapter createPrimaryAriExprAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Not <em>Not</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.Not
+	 * @generated
+	 */
+	public Adapter createNotAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Compare <em>Compare</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.Compare
+	 * @generated
+	 */
+	public Adapter createCompareAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Mul <em>Mul</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.Mul
+	 * @generated
+	 */
+	public Adapter createMulAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.AriUnOp <em>Ari Un Op</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.AriUnOp
+	 * @generated
+	 */
+	public Adapter createAriUnOpAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.Statement
+	 * @generated
+	 */
+	public Adapter createStatementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.Block <em>Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.Block
+	 * @generated
+	 */
+	public Adapter createBlockAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.SimpleVarDecl <em>Simple Var Decl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.SimpleVarDecl
+	 * @generated
+	 */
+	public Adapter createSimpleVarDeclAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.VarDeclInit <em>Var Decl Init</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.VarDeclInit
+	 * @generated
+	 */
+	public Adapter createVarDeclInitAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.LoopStmt <em>Loop Stmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.LoopStmt
+	 * @generated
+	 */
+	public Adapter createLoopStmtAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.IfStmt <em>If Stmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.IfStmt
+	 * @generated
+	 */
+	public Adapter createIfStmtAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link robotScriptModel.ReturnStmt <em>Return Stmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see robotScriptModel.ReturnStmt
+	 * @generated
+	 */
+	public Adapter createReturnStmtAdapter() {
 		return null;
 	}
 

@@ -2,17 +2,22 @@
  */
 package robotScriptModel.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
+
 import org.eclipse.emf.common.notify.NotificationChain;
+
+import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+
 import robotScriptModel.Add;
-import robotScriptModel.Expression;
+import robotScriptModel.Mul;
 import robotScriptModel.RobotScriptModelPackage;
 
 /**
@@ -23,32 +28,21 @@ import robotScriptModel.RobotScriptModelPackage;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.AddImpl#getRightOp <em>Right Op</em>}</li>
- *   <li>{@link robotScriptModel.impl.AddImpl#getLeftOp <em>Left Op</em>}</li>
+ *   <li>{@link robotScriptModel.impl.AddImpl#getExprs <em>Exprs</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	/**
-	 * The cached value of the '{@link #getRightOp() <em>Right Op</em>}' containment reference.
+	 * The cached value of the '{@link #getExprs() <em>Exprs</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getRightOp()
+	 * @see #getExprs()
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression rightOp;
-
-	/**
-	 * The cached value of the '{@link #getLeftOp() <em>Left Op</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getLeftOp()
-	 * @generated
-	 * @ordered
-	 */
-	protected Expression leftOp;
+	protected EList<Mul> exprs;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -75,102 +69,11 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * @generated
 	 */
 	@Override
-	public Expression getRightOp() {
-		return rightOp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetRightOp(Expression newRightOp, NotificationChain msgs) {
-		Expression oldRightOp = rightOp;
-		rightOp = newRightOp;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.ADD__RIGHT_OP, oldRightOp, newRightOp);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
+	public EList<Mul> getExprs() {
+		if (exprs == null) {
+			exprs = new EObjectContainmentEList<Mul>(Mul.class, this, RobotScriptModelPackage.ADD__EXPRS);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setRightOp(Expression newRightOp) {
-		if (newRightOp != rightOp) {
-			NotificationChain msgs = null;
-			if (rightOp != null)
-				msgs = ((InternalEObject) rightOp).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__RIGHT_OP, null, msgs);
-			if (newRightOp != null)
-				msgs = ((InternalEObject) newRightOp).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__RIGHT_OP, null, msgs);
-			msgs = basicSetRightOp(newRightOp, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ADD__RIGHT_OP, newRightOp,
-					newRightOp));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Expression getLeftOp() {
-		return leftOp;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetLeftOp(Expression newLeftOp, NotificationChain msgs) {
-		Expression oldLeftOp = leftOp;
-		leftOp = newLeftOp;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.ADD__LEFT_OP, oldLeftOp, newLeftOp);
-			if (msgs == null)
-				msgs = notification;
-			else
-				msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void setLeftOp(Expression newLeftOp) {
-		if (newLeftOp != leftOp) {
-			NotificationChain msgs = null;
-			if (leftOp != null)
-				msgs = ((InternalEObject) leftOp).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__LEFT_OP, null, msgs);
-			if (newLeftOp != null)
-				msgs = ((InternalEObject) newLeftOp).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ADD__LEFT_OP, null, msgs);
-			msgs = basicSetLeftOp(newLeftOp, msgs);
-			if (msgs != null)
-				msgs.dispatch();
-		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ADD__LEFT_OP, newLeftOp,
-					newLeftOp));
+		return exprs;
 	}
 
 	/**
@@ -181,10 +84,8 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT_OP:
-			return basicSetRightOp(null, msgs);
-		case RobotScriptModelPackage.ADD__LEFT_OP:
-			return basicSetLeftOp(null, msgs);
+		case RobotScriptModelPackage.ADD__EXPRS:
+			return ((InternalEList<?>) getExprs()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -197,10 +98,8 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT_OP:
-			return getRightOp();
-		case RobotScriptModelPackage.ADD__LEFT_OP:
-			return getLeftOp();
+		case RobotScriptModelPackage.ADD__EXPRS:
+			return getExprs();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -210,14 +109,13 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT_OP:
-			setRightOp((Expression) newValue);
-			return;
-		case RobotScriptModelPackage.ADD__LEFT_OP:
-			setLeftOp((Expression) newValue);
+		case RobotScriptModelPackage.ADD__EXPRS:
+			getExprs().clear();
+			getExprs().addAll((Collection<? extends Mul>) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -231,11 +129,8 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT_OP:
-			setRightOp((Expression) null);
-			return;
-		case RobotScriptModelPackage.ADD__LEFT_OP:
-			setLeftOp((Expression) null);
+		case RobotScriptModelPackage.ADD__EXPRS:
+			getExprs().clear();
 			return;
 		}
 		super.eUnset(featureID);
@@ -249,10 +144,8 @@ public class AddImpl extends MinimalEObjectImpl.Container implements Add {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ADD__RIGHT_OP:
-			return rightOp != null;
-		case RobotScriptModelPackage.ADD__LEFT_OP:
-			return leftOp != null;
+		case RobotScriptModelPackage.ADD__EXPRS:
+			return exprs != null && !exprs.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}

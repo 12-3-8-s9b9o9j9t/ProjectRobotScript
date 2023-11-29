@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link robotScriptModel.FunctionDef#getName <em>Name</em>}</li>
  *   <li>{@link robotScriptModel.FunctionDef#getReturnType <em>Return Type</em>}</li>
- *   <li>{@link robotScriptModel.FunctionDef#getBody <em>Body</em>}</li>
+ *   <li>{@link robotScriptModel.FunctionDef#getBlock <em>Block</em>}</li>
  *   <li>{@link robotScriptModel.FunctionDef#getInputs <em>Inputs</em>}</li>
  * </ul>
  *
@@ -71,20 +71,30 @@ public interface FunctionDef extends EObject {
 	void setReturnType(AnyType value);
 
 	/**
-	 * Returns the value of the '<em><b>Body</b></em>' containment reference list.
-	 * The list contents are of type {@link robotScriptModel.Command}.
+	 * Returns the value of the '<em><b>Block</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Body</em>' containment reference list.
-	 * @see robotScriptModel.RobotScriptModelPackage#getFunctionDef_Body()
-	 * @model containment="true"
+	 * @return the value of the '<em>Block</em>' containment reference.
+	 * @see #setBlock(Block)
+	 * @see robotScriptModel.RobotScriptModelPackage#getFunctionDef_Block()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	EList<Command> getBody();
+	Block getBlock();
+
+	/**
+	 * Sets the value of the '{@link robotScriptModel.FunctionDef#getBlock <em>Block</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Block</em>' containment reference.
+	 * @see #getBlock()
+	 * @generated
+	 */
+	void setBlock(Block value);
 
 	/**
 	 * Returns the value of the '<em><b>Inputs</b></em>' containment reference list.
-	 * The list contents are of type {@link robotScriptModel.VarDecl}.
+	 * The list contents are of type {@link robotScriptModel.SimpleVarDecl}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Inputs</em>' containment reference list.
@@ -92,6 +102,6 @@ public interface FunctionDef extends EObject {
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<VarDecl> getInputs();
+	EList<SimpleVarDecl> getInputs();
 
 } // FunctionDef

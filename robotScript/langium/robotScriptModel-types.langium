@@ -1,9 +1,9 @@
 
-type Unit = Unit_M | Unit_DM | Unit_CM | Unit_MM;
-type Unit_M = 'M';
-type Unit_DM = 'DM';
-type Unit_CM = 'CM';
-type Unit_MM = 'MM';
+type Unit = Unit_m | Unit_dm | Unit_cm | Unit_mm;
+type Unit_m = 'm';
+type Unit_dm = 'dm';
+type Unit_cm = 'cm';
+type Unit_mm = 'mm';
 
 interface EntryPoint {
 	functions: FunctionDef[]
@@ -12,17 +12,24 @@ interface EntryPoint {
 interface FunctionDef {
 	name?: string
 	returnType: AnyType
-	body: Command[]
-	inputs: VarDecl[]
+	block: Block
+	inputs: SimpleVarDecl[]
 }
 
 interface AnyType {
 }
 
-interface Command {
+interface Block extends Statement {
+	stmts: Statement[]
 }
 
-interface VarDecl extends Command {
+interface Statement {
+}
+
+interface SimpleVarDecl extends VarDecl {
+}
+
+interface VarDecl extends Statement {
 	^type: DataType
 	name?: string
 }
@@ -33,145 +40,104 @@ interface DataType extends AnyType {
 interface Expression {
 }
 
+interface PrimaryBoolExpr extends Expression {
+}
+
+interface PrimaryAriExpr extends Expression {
+}
+
 interface VoidType extends AnyType {
 }
 
-interface NumberType extends DataType {
-}
-
-interface BooleanType extends DataType {
-}
-
-interface Loop extends ControlStructure {
-}
-
-interface ControlStructure extends Command {
-	body: Command[]
-	cond: Expression
-}
-
-interface If extends ControlStructure {
-}
-
-interface IfElse extends If {
-	bodyElse: Command[]
-}
-
-interface AssignAtDecl extends Assign {
-	vardecl: VarDecl
-}
-
-interface Assign extends Command {
-	expression: Expression
-}
-
-interface ReAssign extends Assign {
+interface AssignVar extends Assign {
 	var: @VarDecl
+}
+
+interface Assign extends Statement {
+	expr: Expression
 }
 
 interface SetSpeed extends Assign {
 	unit?: Unit
-	speedstate: @SpeedState
+	speed: Speed
 }
 
-interface SpeedState extends Value {
+interface Speed extends Value {
 }
 
-interface Value extends Expression {
+interface Value extends PrimaryAriExpr {
 }
 
 interface Rotation extends Movement {
 }
 
-interface Movement extends Command {
-	expression: Expression
-}
-
-interface Front extends Linear {
+interface Movement extends Statement {
+	expr: Expression
 }
 
 interface Linear extends Movement {
 	unit?: Unit
 }
 
-interface Back extends Linear {
-}
-
-interface Right extends Linear {
-}
-
-interface Left extends Linear {
-}
-
-interface FunCall extends Value, Command {
+interface FunCall extends Value, Statement {
 	fun: @FunctionDef
 	inputs: Expression[]
 }
 
-interface Neg extends UnOp {
+interface VarDeclInit extends VarDecl {
+	expr: Expression
 }
 
-interface UnOp extends Expression {
-	op: Expression
+interface LoopStmt extends Statement {
+	expr: Expression
+	stmt: Statement
 }
 
-interface Not extends UnOp {
+interface IfStmt extends Statement {
+	expr: Expression
+	ifstmt: Statement
+	elsestmt?: Statement
 }
 
-interface Greater extends BinOp {
+interface ReturnStmt extends Statement {
+	expr?: Expression
 }
 
-interface BinOp extends Expression {
-	rightOp: Expression
-	leftOp: Expression
+interface And extends Expression {
+	exprs: PrimaryBoolExpr[]
 }
 
-interface And extends BinOp {
+interface Add extends Expression {
+	exprs: Mul[]
 }
 
-interface Add extends BinOp {
+interface Mul extends Expression {
+	exprs: PrimaryAriExpr[]
 }
 
-interface Less extends BinOp {
+interface Or extends Expression {
+	exprs: And[]
 }
 
-interface Or extends BinOp {
+interface Sensor extends Value {
 }
 
-interface Sub extends BinOp {
-}
-
-interface GEq extends BinOp {
-}
-
-interface Equ extends BinOp {
-}
-
-interface Mul extends BinOp {
-}
-
-interface LEq extends BinOp {
-}
-
-interface NEq extends BinOp {
-}
-
-interface Div extends BinOp {
-}
-
-interface TimeSensor extends Value {
-}
-
-interface DistSensor extends Value {
-}
-
-interface BoolLiteral extends Value {
-}
-
-interface NumberLiteral extends Value {
+interface Literal extends Value {
 }
 
 interface Variable extends Value {
 	var: @VarDecl
+}
+
+interface Not extends PrimaryBoolExpr {
+	expr: Compare
+}
+
+interface Compare extends PrimaryBoolExpr {
+	exprs: Add[]
+}
+
+interface AriUnOp extends PrimaryAriExpr {
+	expr: Expression
 }
 

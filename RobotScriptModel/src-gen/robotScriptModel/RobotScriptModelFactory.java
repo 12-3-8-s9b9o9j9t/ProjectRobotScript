@@ -40,15 +40,6 @@ public interface RobotScriptModelFactory extends EFactory {
 	FunctionDef createFunctionDef();
 
 	/**
-	 * Returns a new object of class '<em>Var Decl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Var Decl</em>'.
-	 * @generated
-	 */
-	VarDecl createVarDecl();
-
-	/**
 	 * Returns a new object of class '<em>Void Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -58,67 +49,22 @@ public interface RobotScriptModelFactory extends EFactory {
 	VoidType createVoidType();
 
 	/**
-	 * Returns a new object of class '<em>Number Type</em>'.
+	 * Returns a new object of class '<em>Data Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Number Type</em>'.
+	 * @return a new object of class '<em>Data Type</em>'.
 	 * @generated
 	 */
-	NumberType createNumberType();
+	DataType createDataType();
 
 	/**
-	 * Returns a new object of class '<em>Boolean Type</em>'.
+	 * Returns a new object of class '<em>Assign Var</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Type</em>'.
+	 * @return a new object of class '<em>Assign Var</em>'.
 	 * @generated
 	 */
-	BooleanType createBooleanType();
-
-	/**
-	 * Returns a new object of class '<em>Loop</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Loop</em>'.
-	 * @generated
-	 */
-	Loop createLoop();
-
-	/**
-	 * Returns a new object of class '<em>If</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>If</em>'.
-	 * @generated
-	 */
-	If createIf();
-
-	/**
-	 * Returns a new object of class '<em>If Else</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>If Else</em>'.
-	 * @generated
-	 */
-	IfElse createIfElse();
-
-	/**
-	 * Returns a new object of class '<em>Assign At Decl</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assign At Decl</em>'.
-	 * @generated
-	 */
-	AssignAtDecl createAssignAtDecl();
-
-	/**
-	 * Returns a new object of class '<em>Re Assign</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Re Assign</em>'.
-	 * @generated
-	 */
-	ReAssign createReAssign();
+	AssignVar createAssignVar();
 
 	/**
 	 * Returns a new object of class '<em>Set Speed</em>'.
@@ -128,33 +74,6 @@ public interface RobotScriptModelFactory extends EFactory {
 	 * @generated
 	 */
 	SetSpeed createSetSpeed();
-
-	/**
-	 * Returns a new object of class '<em>Neg</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Neg</em>'.
-	 * @generated
-	 */
-	Neg createNeg();
-
-	/**
-	 * Returns a new object of class '<em>Not</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Not</em>'.
-	 * @generated
-	 */
-	Not createNot();
-
-	/**
-	 * Returns a new object of class '<em>Greater</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Greater</em>'.
-	 * @generated
-	 */
-	Greater createGreater();
 
 	/**
 	 * Returns a new object of class '<em>And</em>'.
@@ -175,15 +94,6 @@ public interface RobotScriptModelFactory extends EFactory {
 	Add createAdd();
 
 	/**
-	 * Returns a new object of class '<em>Less</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Less</em>'.
-	 * @generated
-	 */
-	Less createLess();
-
-	/**
 	 * Returns a new object of class '<em>Or</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -191,69 +101,6 @@ public interface RobotScriptModelFactory extends EFactory {
 	 * @generated
 	 */
 	Or createOr();
-
-	/**
-	 * Returns a new object of class '<em>Sub</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Sub</em>'.
-	 * @generated
-	 */
-	Sub createSub();
-
-	/**
-	 * Returns a new object of class '<em>GEq</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>GEq</em>'.
-	 * @generated
-	 */
-	GEq createGEq();
-
-	/**
-	 * Returns a new object of class '<em>Equ</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Equ</em>'.
-	 * @generated
-	 */
-	Equ createEqu();
-
-	/**
-	 * Returns a new object of class '<em>Mul</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Mul</em>'.
-	 * @generated
-	 */
-	Mul createMul();
-
-	/**
-	 * Returns a new object of class '<em>LEq</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>LEq</em>'.
-	 * @generated
-	 */
-	LEq createLEq();
-
-	/**
-	 * Returns a new object of class '<em>NEq</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>NEq</em>'.
-	 * @generated
-	 */
-	NEq createNEq();
-
-	/**
-	 * Returns a new object of class '<em>Div</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Div</em>'.
-	 * @generated
-	 */
-	Div createDiv();
 
 	/**
 	 * Returns a new object of class '<em>Rotation</em>'.
@@ -265,85 +112,40 @@ public interface RobotScriptModelFactory extends EFactory {
 	Rotation createRotation();
 
 	/**
-	 * Returns a new object of class '<em>Front</em>'.
+	 * Returns a new object of class '<em>Linear</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Front</em>'.
+	 * @return a new object of class '<em>Linear</em>'.
 	 * @generated
 	 */
-	Front createFront();
+	Linear createLinear();
 
 	/**
-	 * Returns a new object of class '<em>Back</em>'.
+	 * Returns a new object of class '<em>Sensor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Back</em>'.
+	 * @return a new object of class '<em>Sensor</em>'.
 	 * @generated
 	 */
-	Back createBack();
+	Sensor createSensor();
 
 	/**
-	 * Returns a new object of class '<em>Right</em>'.
+	 * Returns a new object of class '<em>Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Right</em>'.
+	 * @return a new object of class '<em>Literal</em>'.
 	 * @generated
 	 */
-	Right createRight();
+	Literal createLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Left</em>'.
+	 * Returns a new object of class '<em>Speed</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Left</em>'.
+	 * @return a new object of class '<em>Speed</em>'.
 	 * @generated
 	 */
-	Left createLeft();
-
-	/**
-	 * Returns a new object of class '<em>Time Sensor</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Time Sensor</em>'.
-	 * @generated
-	 */
-	TimeSensor createTimeSensor();
-
-	/**
-	 * Returns a new object of class '<em>Dist Sensor</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Dist Sensor</em>'.
-	 * @generated
-	 */
-	DistSensor createDistSensor();
-
-	/**
-	 * Returns a new object of class '<em>Bool Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Bool Literal</em>'.
-	 * @generated
-	 */
-	BoolLiteral createBoolLiteral();
-
-	/**
-	 * Returns a new object of class '<em>Number Literal</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Number Literal</em>'.
-	 * @generated
-	 */
-	NumberLiteral createNumberLiteral();
-
-	/**
-	 * Returns a new object of class '<em>Speed State</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Speed State</em>'.
-	 * @generated
-	 */
-	SpeedState createSpeedState();
+	Speed createSpeed();
 
 	/**
 	 * Returns a new object of class '<em>Variable</em>'.
@@ -362,6 +164,96 @@ public interface RobotScriptModelFactory extends EFactory {
 	 * @generated
 	 */
 	FunCall createFunCall();
+
+	/**
+	 * Returns a new object of class '<em>Not</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Not</em>'.
+	 * @generated
+	 */
+	Not createNot();
+
+	/**
+	 * Returns a new object of class '<em>Compare</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Compare</em>'.
+	 * @generated
+	 */
+	Compare createCompare();
+
+	/**
+	 * Returns a new object of class '<em>Mul</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Mul</em>'.
+	 * @generated
+	 */
+	Mul createMul();
+
+	/**
+	 * Returns a new object of class '<em>Ari Un Op</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Ari Un Op</em>'.
+	 * @generated
+	 */
+	AriUnOp createAriUnOp();
+
+	/**
+	 * Returns a new object of class '<em>Block</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Block</em>'.
+	 * @generated
+	 */
+	Block createBlock();
+
+	/**
+	 * Returns a new object of class '<em>Simple Var Decl</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Simple Var Decl</em>'.
+	 * @generated
+	 */
+	SimpleVarDecl createSimpleVarDecl();
+
+	/**
+	 * Returns a new object of class '<em>Var Decl Init</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Var Decl Init</em>'.
+	 * @generated
+	 */
+	VarDeclInit createVarDeclInit();
+
+	/**
+	 * Returns a new object of class '<em>Loop Stmt</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Loop Stmt</em>'.
+	 * @generated
+	 */
+	LoopStmt createLoopStmt();
+
+	/**
+	 * Returns a new object of class '<em>If Stmt</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>If Stmt</em>'.
+	 * @generated
+	 */
+	IfStmt createIfStmt();
+
+	/**
+	 * Returns a new object of class '<em>Return Stmt</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Return Stmt</em>'.
+	 * @generated
+	 */
+	ReturnStmt createReturnStmt();
 
 	/**
 	 * Returns the package supported by this factory.

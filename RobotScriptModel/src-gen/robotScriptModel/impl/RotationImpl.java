@@ -23,21 +23,21 @@ import robotScriptModel.Rotation;
  * The following features are implemented:
  * </p>
  * <ul>
- *   <li>{@link robotScriptModel.impl.RotationImpl#getExpression <em>Expression</em>}</li>
+ *   <li>{@link robotScriptModel.impl.RotationImpl#getExpr <em>Expr</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class RotationImpl extends MinimalEObjectImpl.Container implements Rotation {
 	/**
-	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
+	 * The cached value of the '{@link #getExpr() <em>Expr</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getExpression()
+	 * @see #getExpr()
 	 * @generated
 	 * @ordered
 	 */
-	protected Expression expression;
+	protected Expression expr;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -64,8 +64,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	 * @generated
 	 */
 	@Override
-	public Expression getExpression() {
-		return expression;
+	public Expression getExpr() {
+		return expr;
 	}
 
 	/**
@@ -73,12 +73,12 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetExpression(Expression newExpression, NotificationChain msgs) {
-		Expression oldExpression = expression;
-		expression = newExpression;
+	public NotificationChain basicSetExpr(Expression newExpr, NotificationChain msgs) {
+		Expression oldExpr = expr;
+		expr = newExpr;
 		if (eNotificationRequired()) {
 			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET,
-					RobotScriptModelPackage.ROTATION__EXPRESSION, oldExpression, newExpression);
+					RobotScriptModelPackage.ROTATION__EXPR, oldExpr, newExpr);
 			if (msgs == null)
 				msgs = notification;
 			else
@@ -93,21 +93,21 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	 * @generated
 	 */
 	@Override
-	public void setExpression(Expression newExpression) {
-		if (newExpression != expression) {
+	public void setExpr(Expression newExpr) {
+		if (newExpr != expr) {
 			NotificationChain msgs = null;
-			if (expression != null)
-				msgs = ((InternalEObject) expression).eInverseRemove(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ROTATION__EXPRESSION, null, msgs);
-			if (newExpression != null)
-				msgs = ((InternalEObject) newExpression).eInverseAdd(this,
-						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ROTATION__EXPRESSION, null, msgs);
-			msgs = basicSetExpression(newExpression, msgs);
+			if (expr != null)
+				msgs = ((InternalEObject) expr).eInverseRemove(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ROTATION__EXPR, null, msgs);
+			if (newExpr != null)
+				msgs = ((InternalEObject) newExpr).eInverseAdd(this,
+						EOPPOSITE_FEATURE_BASE - RobotScriptModelPackage.ROTATION__EXPR, null, msgs);
+			msgs = basicSetExpr(newExpr, msgs);
 			if (msgs != null)
 				msgs.dispatch();
 		} else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ROTATION__EXPRESSION,
-					newExpression, newExpression));
+			eNotify(new ENotificationImpl(this, Notification.SET, RobotScriptModelPackage.ROTATION__EXPR, newExpr,
+					newExpr));
 	}
 
 	/**
@@ -118,8 +118,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__EXPRESSION:
-			return basicSetExpression(null, msgs);
+		case RobotScriptModelPackage.ROTATION__EXPR:
+			return basicSetExpr(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -132,8 +132,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__EXPRESSION:
-			return getExpression();
+		case RobotScriptModelPackage.ROTATION__EXPR:
+			return getExpr();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -146,8 +146,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__EXPRESSION:
-			setExpression((Expression) newValue);
+		case RobotScriptModelPackage.ROTATION__EXPR:
+			setExpr((Expression) newValue);
 			return;
 		}
 		super.eSet(featureID, newValue);
@@ -161,8 +161,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__EXPRESSION:
-			setExpression((Expression) null);
+		case RobotScriptModelPackage.ROTATION__EXPR:
+			setExpr((Expression) null);
 			return;
 		}
 		super.eUnset(featureID);
@@ -176,8 +176,8 @@ public class RotationImpl extends MinimalEObjectImpl.Container implements Rotati
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-		case RobotScriptModelPackage.ROTATION__EXPRESSION:
-			return expression != null;
+		case RobotScriptModelPackage.ROTATION__EXPR:
+			return expr != null;
 		}
 		return super.eIsSet(featureID);
 	}

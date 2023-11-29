@@ -15,7 +15,7 @@ package robotScriptModel;
  * </ul>
  *
  * @see robotScriptModel.RobotScriptModelPackage#getLinear()
- * @model interface="true" abstract="true"
+ * @model
  * @generated
  */
 public interface Linear extends Movement {

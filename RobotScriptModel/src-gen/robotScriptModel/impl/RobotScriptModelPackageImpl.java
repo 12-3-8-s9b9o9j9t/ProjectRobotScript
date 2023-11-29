@@ -13,53 +13,39 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import robotScriptModel.Add;
 import robotScriptModel.And;
 import robotScriptModel.AnyType;
+import robotScriptModel.AriUnOp;
 import robotScriptModel.Assign;
-import robotScriptModel.AssignAtDecl;
-import robotScriptModel.Back;
-import robotScriptModel.BinOp;
-import robotScriptModel.BoolLiteral;
-import robotScriptModel.BooleanType;
-import robotScriptModel.Command;
-import robotScriptModel.ControlStructure;
+import robotScriptModel.AssignVar;
+import robotScriptModel.Block;
+import robotScriptModel.Compare;
 import robotScriptModel.DataType;
-import robotScriptModel.DistSensor;
-import robotScriptModel.Div;
 import robotScriptModel.EntryPoint;
-import robotScriptModel.Equ;
 import robotScriptModel.Expression;
-import robotScriptModel.Front;
 import robotScriptModel.FunCall;
 import robotScriptModel.FunctionDef;
-import robotScriptModel.GEq;
-import robotScriptModel.Greater;
-import robotScriptModel.If;
-import robotScriptModel.IfElse;
-import robotScriptModel.LEq;
-import robotScriptModel.Left;
-import robotScriptModel.Less;
+import robotScriptModel.IfStmt;
 import robotScriptModel.Linear;
-import robotScriptModel.Loop;
+import robotScriptModel.Literal;
+import robotScriptModel.LoopStmt;
 import robotScriptModel.Movement;
 import robotScriptModel.Mul;
-import robotScriptModel.NEq;
-import robotScriptModel.Neg;
 import robotScriptModel.Not;
-import robotScriptModel.NumberLiteral;
-import robotScriptModel.NumberType;
 import robotScriptModel.Or;
-import robotScriptModel.ReAssign;
-import robotScriptModel.Right;
+import robotScriptModel.PrimaryAriExpr;
+import robotScriptModel.PrimaryBoolExpr;
+import robotScriptModel.ReturnStmt;
 import robotScriptModel.RobotScriptModelFactory;
 import robotScriptModel.RobotScriptModelPackage;
 import robotScriptModel.Rotation;
+import robotScriptModel.Sensor;
 import robotScriptModel.SetSpeed;
-import robotScriptModel.SpeedState;
-import robotScriptModel.Sub;
-import robotScriptModel.TimeSensor;
-import robotScriptModel.UnOp;
+import robotScriptModel.SimpleVarDecl;
+import robotScriptModel.Speed;
+import robotScriptModel.Statement;
 import robotScriptModel.Unit;
 import robotScriptModel.Value;
 import robotScriptModel.VarDecl;
+import robotScriptModel.VarDeclInit;
 import robotScriptModel.Variable;
 import robotScriptModel.VoidType;
 
@@ -96,13 +82,6 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass commandEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass varDeclEClass = null;
 
 	/**
@@ -124,49 +103,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass numberTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass booleanTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass loopEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass ifEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass ifElseEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass expressionEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass controlStructureEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -180,14 +117,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass assignAtDeclEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass reAssignEClass = null;
+	private EClass assignVarEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -201,35 +131,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass unOpEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass binOpEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass negEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass notEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass greaterEClass = null;
+	private EClass primaryBoolExprEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -250,63 +152,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass lessEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass orEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass subEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass gEqEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass equEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass mulEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass lEqEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass nEqEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass divEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -334,34 +180,6 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass frontEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass backEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass rightEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass leftEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass valueEClass = null;
 
 	/**
@@ -369,35 +187,21 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass timeSensorEClass = null;
+	private EClass sensorEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass distSensorEClass = null;
+	private EClass literalEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass boolLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass numberLiteralEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass speedStateEClass = null;
+	private EClass speedEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -412,6 +216,90 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	private EClass funCallEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass primaryAriExprEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass notEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass compareEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass mulEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ariUnOpEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass statementEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass blockEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass simpleVarDeclEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass varDeclInitEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass loopStmtEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass ifStmtEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass returnStmtEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -540,7 +428,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EReference getFunctionDef_Body() {
+	public EReference getFunctionDef_Block() {
 		return (EReference) functionDefEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -562,16 +450,6 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	@Override
 	public EClass getAnyType() {
 		return anyTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getCommand() {
-		return commandEClass;
 	}
 
 	/**
@@ -630,98 +508,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getNumberType() {
-		return numberTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getBooleanType() {
-		return booleanTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getLoop() {
-		return loopEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getIf() {
-		return ifEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getIfElse() {
-		return ifElseEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getIfElse_BodyElse() {
-		return (EReference) ifElseEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getExpression() {
 		return expressionEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getControlStructure() {
-		return controlStructureEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getControlStructure_Body() {
-		return (EReference) controlStructureEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getControlStructure_Cond() {
-		return (EReference) controlStructureEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -740,7 +528,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EReference getAssign_Expression() {
+	public EReference getAssign_Expr() {
 		return (EReference) assignEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -750,8 +538,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getAssignAtDecl() {
-		return assignAtDeclEClass;
+	public EClass getAssignVar() {
+		return assignVarEClass;
 	}
 
 	/**
@@ -760,28 +548,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EReference getAssignAtDecl_Vardecl() {
-		return (EReference) assignAtDeclEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getReAssign() {
-		return reAssignEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getReAssign_Var() {
-		return (EReference) reAssignEClass.getEStructuralFeatures().get(0);
+	public EReference getAssignVar_Var() {
+		return (EReference) assignVarEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -810,7 +578,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EReference getSetSpeed_Speedstate() {
+	public EReference getSetSpeed_Speed() {
 		return (EReference) setSpeedEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -820,78 +588,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getUnOp() {
-		return unOpEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getUnOp_Op() {
-		return (EReference) unOpEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getBinOp() {
-		return binOpEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getBinOp_RightOp() {
-		return (EReference) binOpEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EReference getBinOp_LeftOp() {
-		return (EReference) binOpEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNeg() {
-		return negEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNot() {
-		return notEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getGreater() {
-		return greaterEClass;
+	public EClass getPrimaryBoolExpr() {
+		return primaryBoolExprEClass;
 	}
 
 	/**
@@ -910,6 +608,16 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
+	public EReference getAnd_Exprs() {
+		return (EReference) andEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getAdd() {
 		return addEClass;
 	}
@@ -920,8 +628,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getLess() {
-		return lessEClass;
+	public EReference getAdd_Exprs() {
+		return (EReference) addEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -940,68 +648,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getSub() {
-		return subEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getGEq() {
-		return gEqEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getEqu() {
-		return equEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getMul() {
-		return mulEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getLEq() {
-		return lEqEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNEq() {
-		return nEqEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getDiv() {
-		return divEClass;
+	public EReference getOr_Exprs() {
+		return (EReference) orEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -1020,7 +668,7 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EReference getMovement_Expression() {
+	public EReference getMovement_Expr() {
 		return (EReference) movementEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -1060,46 +708,6 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getFront() {
-		return frontEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getBack() {
-		return backEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getRight() {
-		return rightEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getLeft() {
-		return leftEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
 	public EClass getValue() {
 		return valueEClass;
 	}
@@ -1110,8 +718,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getTimeSensor() {
-		return timeSensorEClass;
+	public EClass getSensor() {
+		return sensorEClass;
 	}
 
 	/**
@@ -1120,8 +728,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getDistSensor() {
-		return distSensorEClass;
+	public EClass getLiteral() {
+		return literalEClass;
 	}
 
 	/**
@@ -1130,28 +738,8 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
-	public EClass getBoolLiteral() {
-		return boolLiteralEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getNumberLiteral() {
-		return numberLiteralEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public EClass getSpeedState() {
-		return speedStateEClass;
+	public EClass getSpeed() {
+		return speedEClass;
 	}
 
 	/**
@@ -1210,6 +798,246 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 	 * @generated
 	 */
 	@Override
+	public EClass getPrimaryAriExpr() {
+		return primaryAriExprEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getNot() {
+		return notEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getNot_Expr() {
+		return (EReference) notEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getCompare() {
+		return compareEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getCompare_Exprs() {
+		return (EReference) compareEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getMul() {
+		return mulEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getMul_Exprs() {
+		return (EReference) mulEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getAriUnOp() {
+		return ariUnOpEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getAriUnOp_Expr() {
+		return (EReference) ariUnOpEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getStatement() {
+		return statementEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getBlock() {
+		return blockEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getBlock_Stmts() {
+		return (EReference) blockEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getSimpleVarDecl() {
+		return simpleVarDeclEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getVarDeclInit() {
+		return varDeclInitEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getVarDeclInit_Expr() {
+		return (EReference) varDeclInitEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getLoopStmt() {
+		return loopStmtEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getLoopStmt_Expr() {
+		return (EReference) loopStmtEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getLoopStmt_Stmt() {
+		return (EReference) loopStmtEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getIfStmt() {
+		return ifStmtEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStmt_Expr() {
+		return (EReference) ifStmtEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStmt_Ifstmt() {
+		return (EReference) ifStmtEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getIfStmt_Elsestmt() {
+		return (EReference) ifStmtEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getReturnStmt() {
+		return returnStmtEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getReturnStmt_Expr() {
+		return (EReference) returnStmtEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EEnum getUnit() {
 		return unitEEnum;
 	}
@@ -1250,12 +1078,10 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 		functionDefEClass = createEClass(FUNCTION_DEF);
 		createEAttribute(functionDefEClass, FUNCTION_DEF__NAME);
 		createEReference(functionDefEClass, FUNCTION_DEF__RETURN_TYPE);
-		createEReference(functionDefEClass, FUNCTION_DEF__BODY);
+		createEReference(functionDefEClass, FUNCTION_DEF__BLOCK);
 		createEReference(functionDefEClass, FUNCTION_DEF__INPUTS);
 
 		anyTypeEClass = createEClass(ANY_TYPE);
-
-		commandEClass = createEClass(COMMAND);
 
 		varDeclEClass = createEClass(VAR_DECL);
 		createEReference(varDeclEClass, VAR_DECL__TYPE);
@@ -1265,98 +1091,44 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 
 		dataTypeEClass = createEClass(DATA_TYPE);
 
-		numberTypeEClass = createEClass(NUMBER_TYPE);
-
-		booleanTypeEClass = createEClass(BOOLEAN_TYPE);
-
-		loopEClass = createEClass(LOOP);
-
-		ifEClass = createEClass(IF);
-
-		ifElseEClass = createEClass(IF_ELSE);
-		createEReference(ifElseEClass, IF_ELSE__BODY_ELSE);
-
 		expressionEClass = createEClass(EXPRESSION);
 
-		controlStructureEClass = createEClass(CONTROL_STRUCTURE);
-		createEReference(controlStructureEClass, CONTROL_STRUCTURE__BODY);
-		createEReference(controlStructureEClass, CONTROL_STRUCTURE__COND);
-
 		assignEClass = createEClass(ASSIGN);
-		createEReference(assignEClass, ASSIGN__EXPRESSION);
+		createEReference(assignEClass, ASSIGN__EXPR);
 
-		assignAtDeclEClass = createEClass(ASSIGN_AT_DECL);
-		createEReference(assignAtDeclEClass, ASSIGN_AT_DECL__VARDECL);
-
-		reAssignEClass = createEClass(RE_ASSIGN);
-		createEReference(reAssignEClass, RE_ASSIGN__VAR);
+		assignVarEClass = createEClass(ASSIGN_VAR);
+		createEReference(assignVarEClass, ASSIGN_VAR__VAR);
 
 		setSpeedEClass = createEClass(SET_SPEED);
 		createEAttribute(setSpeedEClass, SET_SPEED__UNIT);
-		createEReference(setSpeedEClass, SET_SPEED__SPEEDSTATE);
+		createEReference(setSpeedEClass, SET_SPEED__SPEED);
 
-		unOpEClass = createEClass(UN_OP);
-		createEReference(unOpEClass, UN_OP__OP);
-
-		binOpEClass = createEClass(BIN_OP);
-		createEReference(binOpEClass, BIN_OP__RIGHT_OP);
-		createEReference(binOpEClass, BIN_OP__LEFT_OP);
-
-		negEClass = createEClass(NEG);
-
-		notEClass = createEClass(NOT);
-
-		greaterEClass = createEClass(GREATER);
+		primaryBoolExprEClass = createEClass(PRIMARY_BOOL_EXPR);
 
 		andEClass = createEClass(AND);
+		createEReference(andEClass, AND__EXPRS);
 
 		addEClass = createEClass(ADD);
-
-		lessEClass = createEClass(LESS);
+		createEReference(addEClass, ADD__EXPRS);
 
 		orEClass = createEClass(OR);
-
-		subEClass = createEClass(SUB);
-
-		gEqEClass = createEClass(GEQ);
-
-		equEClass = createEClass(EQU);
-
-		mulEClass = createEClass(MUL);
-
-		lEqEClass = createEClass(LEQ);
-
-		nEqEClass = createEClass(NEQ);
-
-		divEClass = createEClass(DIV);
+		createEReference(orEClass, OR__EXPRS);
 
 		movementEClass = createEClass(MOVEMENT);
-		createEReference(movementEClass, MOVEMENT__EXPRESSION);
+		createEReference(movementEClass, MOVEMENT__EXPR);
 
 		rotationEClass = createEClass(ROTATION);
 
 		linearEClass = createEClass(LINEAR);
 		createEAttribute(linearEClass, LINEAR__UNIT);
 
-		frontEClass = createEClass(FRONT);
-
-		backEClass = createEClass(BACK);
-
-		rightEClass = createEClass(RIGHT);
-
-		leftEClass = createEClass(LEFT);
-
 		valueEClass = createEClass(VALUE);
 
-		timeSensorEClass = createEClass(TIME_SENSOR);
+		sensorEClass = createEClass(SENSOR);
 
-		distSensorEClass = createEClass(DIST_SENSOR);
+		literalEClass = createEClass(LITERAL);
 
-		boolLiteralEClass = createEClass(BOOL_LITERAL);
-
-		numberLiteralEClass = createEClass(NUMBER_LITERAL);
-
-		speedStateEClass = createEClass(SPEED_STATE);
+		speedEClass = createEClass(SPEED);
 
 		variableEClass = createEClass(VARIABLE);
 		createEReference(variableEClass, VARIABLE__VAR);
@@ -1364,6 +1136,42 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 		funCallEClass = createEClass(FUN_CALL);
 		createEReference(funCallEClass, FUN_CALL__FUN);
 		createEReference(funCallEClass, FUN_CALL__INPUTS);
+
+		primaryAriExprEClass = createEClass(PRIMARY_ARI_EXPR);
+
+		notEClass = createEClass(NOT);
+		createEReference(notEClass, NOT__EXPR);
+
+		compareEClass = createEClass(COMPARE);
+		createEReference(compareEClass, COMPARE__EXPRS);
+
+		mulEClass = createEClass(MUL);
+		createEReference(mulEClass, MUL__EXPRS);
+
+		ariUnOpEClass = createEClass(ARI_UN_OP);
+		createEReference(ariUnOpEClass, ARI_UN_OP__EXPR);
+
+		statementEClass = createEClass(STATEMENT);
+
+		blockEClass = createEClass(BLOCK);
+		createEReference(blockEClass, BLOCK__STMTS);
+
+		simpleVarDeclEClass = createEClass(SIMPLE_VAR_DECL);
+
+		varDeclInitEClass = createEClass(VAR_DECL_INIT);
+		createEReference(varDeclInitEClass, VAR_DECL_INIT__EXPR);
+
+		loopStmtEClass = createEClass(LOOP_STMT);
+		createEReference(loopStmtEClass, LOOP_STMT__EXPR);
+		createEReference(loopStmtEClass, LOOP_STMT__STMT);
+
+		ifStmtEClass = createEClass(IF_STMT);
+		createEReference(ifStmtEClass, IF_STMT__EXPR);
+		createEReference(ifStmtEClass, IF_STMT__IFSTMT);
+		createEReference(ifStmtEClass, IF_STMT__ELSESTMT);
+
+		returnStmtEClass = createEClass(RETURN_STMT);
+		createEReference(returnStmtEClass, RETURN_STMT__EXPR);
 
 		// Create enums
 		unitEEnum = createEEnum(UNIT);
@@ -1398,51 +1206,37 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		varDeclEClass.getESuperTypes().add(this.getCommand());
+		varDeclEClass.getESuperTypes().add(this.getStatement());
 		voidTypeEClass.getESuperTypes().add(this.getAnyType());
 		dataTypeEClass.getESuperTypes().add(this.getAnyType());
-		numberTypeEClass.getESuperTypes().add(this.getDataType());
-		booleanTypeEClass.getESuperTypes().add(this.getDataType());
-		loopEClass.getESuperTypes().add(this.getControlStructure());
-		ifEClass.getESuperTypes().add(this.getControlStructure());
-		ifElseEClass.getESuperTypes().add(this.getIf());
-		controlStructureEClass.getESuperTypes().add(this.getCommand());
-		assignEClass.getESuperTypes().add(this.getCommand());
-		assignAtDeclEClass.getESuperTypes().add(this.getAssign());
-		reAssignEClass.getESuperTypes().add(this.getAssign());
+		assignEClass.getESuperTypes().add(this.getStatement());
+		assignVarEClass.getESuperTypes().add(this.getAssign());
 		setSpeedEClass.getESuperTypes().add(this.getAssign());
-		unOpEClass.getESuperTypes().add(this.getExpression());
-		binOpEClass.getESuperTypes().add(this.getExpression());
-		negEClass.getESuperTypes().add(this.getUnOp());
-		notEClass.getESuperTypes().add(this.getUnOp());
-		greaterEClass.getESuperTypes().add(this.getBinOp());
-		andEClass.getESuperTypes().add(this.getBinOp());
-		addEClass.getESuperTypes().add(this.getBinOp());
-		lessEClass.getESuperTypes().add(this.getBinOp());
-		orEClass.getESuperTypes().add(this.getBinOp());
-		subEClass.getESuperTypes().add(this.getBinOp());
-		gEqEClass.getESuperTypes().add(this.getBinOp());
-		equEClass.getESuperTypes().add(this.getBinOp());
-		mulEClass.getESuperTypes().add(this.getBinOp());
-		lEqEClass.getESuperTypes().add(this.getBinOp());
-		nEqEClass.getESuperTypes().add(this.getBinOp());
-		divEClass.getESuperTypes().add(this.getBinOp());
-		movementEClass.getESuperTypes().add(this.getCommand());
+		primaryBoolExprEClass.getESuperTypes().add(this.getExpression());
+		andEClass.getESuperTypes().add(this.getExpression());
+		addEClass.getESuperTypes().add(this.getExpression());
+		orEClass.getESuperTypes().add(this.getExpression());
+		movementEClass.getESuperTypes().add(this.getStatement());
 		rotationEClass.getESuperTypes().add(this.getMovement());
 		linearEClass.getESuperTypes().add(this.getMovement());
-		frontEClass.getESuperTypes().add(this.getLinear());
-		backEClass.getESuperTypes().add(this.getLinear());
-		rightEClass.getESuperTypes().add(this.getLinear());
-		leftEClass.getESuperTypes().add(this.getLinear());
-		valueEClass.getESuperTypes().add(this.getExpression());
-		timeSensorEClass.getESuperTypes().add(this.getValue());
-		distSensorEClass.getESuperTypes().add(this.getValue());
-		boolLiteralEClass.getESuperTypes().add(this.getValue());
-		numberLiteralEClass.getESuperTypes().add(this.getValue());
-		speedStateEClass.getESuperTypes().add(this.getValue());
+		valueEClass.getESuperTypes().add(this.getPrimaryAriExpr());
+		sensorEClass.getESuperTypes().add(this.getValue());
+		literalEClass.getESuperTypes().add(this.getValue());
+		speedEClass.getESuperTypes().add(this.getValue());
 		variableEClass.getESuperTypes().add(this.getValue());
 		funCallEClass.getESuperTypes().add(this.getValue());
-		funCallEClass.getESuperTypes().add(this.getCommand());
+		funCallEClass.getESuperTypes().add(this.getStatement());
+		primaryAriExprEClass.getESuperTypes().add(this.getExpression());
+		notEClass.getESuperTypes().add(this.getPrimaryBoolExpr());
+		compareEClass.getESuperTypes().add(this.getPrimaryBoolExpr());
+		mulEClass.getESuperTypes().add(this.getExpression());
+		ariUnOpEClass.getESuperTypes().add(this.getPrimaryAriExpr());
+		blockEClass.getESuperTypes().add(this.getStatement());
+		simpleVarDeclEClass.getESuperTypes().add(this.getVarDecl());
+		varDeclInitEClass.getESuperTypes().add(this.getVarDecl());
+		loopStmtEClass.getESuperTypes().add(this.getStatement());
+		ifStmtEClass.getESuperTypes().add(this.getStatement());
+		returnStmtEClass.getESuperTypes().add(this.getStatement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(entryPointEClass, EntryPoint.class, "EntryPoint", !IS_ABSTRACT, !IS_INTERFACE,
@@ -1458,18 +1252,16 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 		initEReference(getFunctionDef_ReturnType(), this.getAnyType(), null, "returnType", null, 1, 1,
 				FunctionDef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionDef_Body(), this.getCommand(), null, "body", null, 0, -1, FunctionDef.class,
+		initEReference(getFunctionDef_Block(), this.getBlock(), null, "block", null, 1, 1, FunctionDef.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionDef_Inputs(), this.getVarDecl(), null, "inputs", null, 0, -1, FunctionDef.class,
+		initEReference(getFunctionDef_Inputs(), this.getSimpleVarDecl(), null, "inputs", null, 0, -1, FunctionDef.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(anyTypeEClass, AnyType.class, "AnyType", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(commandEClass, Command.class, "Command", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(varDeclEClass, VarDecl.class, "VarDecl", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(varDeclEClass, VarDecl.class, "VarDecl", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getVarDecl_Type(), this.getDataType(), null, "type", null, 1, 1, VarDecl.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
@@ -1479,49 +1271,20 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 		initEClass(voidTypeEClass, VoidType.class, "VoidType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(dataTypeEClass, DataType.class, "DataType", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(numberTypeEClass, NumberType.class, "NumberType", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(dataTypeEClass, DataType.class, "DataType", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(booleanTypeEClass, BooleanType.class, "BooleanType", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(loopEClass, Loop.class, "Loop", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(ifEClass, If.class, "If", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(ifElseEClass, IfElse.class, "IfElse", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getIfElse_BodyElse(), this.getCommand(), null, "bodyElse", null, 0, -1, IfElse.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(expressionEClass, Expression.class, "Expression", IS_ABSTRACT, IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(controlStructureEClass, ControlStructure.class, "ControlStructure", IS_ABSTRACT, IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getControlStructure_Body(), this.getCommand(), null, "body", null, 0, -1, ControlStructure.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getControlStructure_Cond(), this.getExpression(), null, "cond", null, 1, 1,
-				ControlStructure.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
-				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(assignEClass, Assign.class, "Assign", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssign_Expression(), this.getExpression(), null, "expression", null, 1, 1, Assign.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getAssign_Expr(), this.getExpression(), null, "expr", null, 1, 1, Assign.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
-		initEClass(assignAtDeclEClass, AssignAtDecl.class, "AssignAtDecl", !IS_ABSTRACT, !IS_INTERFACE,
+		initEClass(assignVarEClass, AssignVar.class, "AssignVar", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getAssignAtDecl_Vardecl(), this.getVarDecl(), null, "vardecl", null, 1, 1, AssignAtDecl.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(reAssignEClass, ReAssign.class, "ReAssign", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReAssign_Var(), this.getVarDecl(), null, "var", null, 1, 1, ReAssign.class, !IS_TRANSIENT,
+		initEReference(getAssignVar_Var(), this.getVarDecl(), null, "var", null, 1, 1, AssignVar.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
@@ -1529,87 +1292,46 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getSetSpeed_Unit(), this.getUnit(), "unit", null, 0, 1, SetSpeed.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSetSpeed_Speedstate(), this.getSpeedState(), null, "speedstate", null, 1, 1, SetSpeed.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-		initEClass(unOpEClass, UnOp.class, "UnOp", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getUnOp_Op(), this.getExpression(), null, "op", null, 1, 1, UnOp.class, !IS_TRANSIENT,
+		initEReference(getSetSpeed_Speed(), this.getSpeed(), null, "speed", null, 1, 1, SetSpeed.class, !IS_TRANSIENT,
 				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 
-		initEClass(binOpEClass, BinOp.class, "BinOp", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBinOp_RightOp(), this.getExpression(), null, "rightOp", null, 1, 1, BinOp.class,
-				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
-				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBinOp_LeftOp(), this.getExpression(), null, "leftOp", null, 1, 1, BinOp.class, !IS_TRANSIENT,
-				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
-				IS_ORDERED);
-
-		initEClass(negEClass, Neg.class, "Neg", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(notEClass, Not.class, "Not", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(greaterEClass, Greater.class, "Greater", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(primaryBoolExprEClass, PrimaryBoolExpr.class, "PrimaryBoolExpr", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(andEClass, And.class, "And", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAnd_Exprs(), this.getPrimaryBoolExpr(), null, "exprs", null, 1, -1, And.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		initEClass(addEClass, Add.class, "Add", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(lessEClass, Less.class, "Less", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAdd_Exprs(), this.getMul(), null, "exprs", null, 1, -1, Add.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
 
 		initEClass(orEClass, Or.class, "Or", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(subEClass, Sub.class, "Sub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(gEqEClass, GEq.class, "GEq", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(equEClass, Equ.class, "Equ", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(mulEClass, Mul.class, "Mul", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(lEqEClass, LEq.class, "LEq", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(nEqEClass, NEq.class, "NEq", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(divEClass, Div.class, "Div", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getOr_Exprs(), this.getAnd(), null, "exprs", null, 1, -1, Or.class, !IS_TRANSIENT, !IS_VOLATILE,
+				IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(movementEClass, Movement.class, "Movement", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getMovement_Expression(), this.getExpression(), null, "expression", null, 1, 1, Movement.class,
+		initEReference(getMovement_Expr(), this.getExpression(), null, "expr", null, 1, 1, Movement.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(rotationEClass, Rotation.class, "Rotation", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(linearEClass, Linear.class, "Linear", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(linearEClass, Linear.class, "Linear", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getLinear_Unit(), this.getUnit(), "unit", null, 0, 1, Linear.class, !IS_TRANSIENT, !IS_VOLATILE,
 				IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(frontEClass, Front.class, "Front", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(backEClass, Back.class, "Back", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(rightEClass, Right.class, "Right", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(leftEClass, Left.class, "Left", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(valueEClass, Value.class, "Value", IS_ABSTRACT, IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(timeSensorEClass, TimeSensor.class, "TimeSensor", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(sensorEClass, Sensor.class, "Sensor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(distSensorEClass, DistSensor.class, "DistSensor", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(literalEClass, Literal.class, "Literal", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(boolLiteralEClass, BoolLiteral.class, "BoolLiteral", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
-
-		initEClass(speedStateEClass, SpeedState.class, "SpeedState", !IS_ABSTRACT, !IS_INTERFACE,
-				IS_GENERATED_INSTANCE_CLASS);
+		initEClass(speedEClass, Speed.class, "Speed", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		initEClass(variableEClass, Variable.class, "Variable", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
@@ -1622,6 +1344,72 @@ public class RobotScriptModelPackageImpl extends EPackageImpl implements RobotSc
 				!IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
 				IS_ORDERED);
 		initEReference(getFunCall_Inputs(), this.getExpression(), null, "inputs", null, 0, -1, FunCall.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(primaryAriExprEClass, PrimaryAriExpr.class, "PrimaryAriExpr", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(notEClass, Not.class, "Not", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getNot_Expr(), this.getCompare(), null, "expr", null, 1, 1, Not.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(compareEClass, Compare.class, "Compare", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getCompare_Exprs(), this.getAdd(), null, "exprs", null, 1, -1, Compare.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(mulEClass, Mul.class, "Mul", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getMul_Exprs(), this.getPrimaryAriExpr(), null, "exprs", null, 1, -1, Mul.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(ariUnOpEClass, AriUnOp.class, "AriUnOp", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getAriUnOp_Expr(), this.getExpression(), null, "expr", null, 1, 1, AriUnOp.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(statementEClass, Statement.class, "Statement", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(blockEClass, Block.class, "Block", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getBlock_Stmts(), this.getStatement(), null, "stmts", null, 0, -1, Block.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(simpleVarDeclEClass, SimpleVarDecl.class, "SimpleVarDecl", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEClass(varDeclInitEClass, VarDeclInit.class, "VarDeclInit", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getVarDeclInit_Expr(), this.getExpression(), null, "expr", null, 1, 1, VarDeclInit.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(loopStmtEClass, LoopStmt.class, "LoopStmt", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getLoopStmt_Expr(), this.getExpression(), null, "expr", null, 1, 1, LoopStmt.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getLoopStmt_Stmt(), this.getStatement(), null, "stmt", null, 1, 1, LoopStmt.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+
+		initEClass(ifStmtEClass, IfStmt.class, "IfStmt", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getIfStmt_Expr(), this.getExpression(), null, "expr", null, 1, 1, IfStmt.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getIfStmt_Ifstmt(), this.getStatement(), null, "ifstmt", null, 1, 1, IfStmt.class, !IS_TRANSIENT,
+				!IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED,
+				IS_ORDERED);
+		initEReference(getIfStmt_Elsestmt(), this.getStatement(), null, "elsestmt", null, 0, 1, IfStmt.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(returnStmtEClass, ReturnStmt.class, "ReturnStmt", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getReturnStmt_Expr(), this.getExpression(), null, "expr", null, 0, 1, ReturnStmt.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 

@@ -12,5 +12,5 @@ package robotScriptModel;
  * @model interface="true" abstract="true"
  * @generated
  */
-public interface Value extends Expression {
+public interface Value extends PrimaryAriExpr {
 } // Value

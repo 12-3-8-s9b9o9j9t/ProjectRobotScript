@@ -7,178 +7,138 @@ entry EntryPoint returns EntryPoint:
 ;
 
 AnyType returns AnyType:
-    VoidType | NumberType | BooleanType 
+    VoidType | DataType 
 ;
 
-Command returns Command:
-    VarDecl | Loop | If_Impl | IfElse | AssignAtDecl | ReAssign | SetSpeed | Rotation | Front | Back | Right | Left | FunCall 
-;
-
-DataType returns DataType:
-    NumberType | BooleanType 
+Statement returns Statement:
+    AssignVar | SetSpeed | Rotation | Linear | FunCall | Block | SimpleVarDecl | VarDeclInit | LoopStmt | IfStmt | ReturnStmt 
 ;
 
 Expression returns Expression:
-    Neg | Not | Greater | And | Add | Less | Or | Sub | GEq | Equ | Mul | LEq | NEq | Div | TimeSensor | DistSensor | BoolLiteral | NumberLiteral | SpeedState | Variable | FunCall 
+    And | Add | Or | Sensor | Literal | Speed | Variable | FunCall | Not | Compare | Mul | AriUnOp 
+;
+
+VarDecl returns VarDecl:
+    SimpleVarDecl | VarDeclInit 
+;
+
+PrimaryBoolExpr returns PrimaryBoolExpr:
+    Not | Compare 
+;
+
+PrimaryAriExpr returns PrimaryAriExpr:
+    Sensor | Literal | Speed | Variable | FunCall | AriUnOp 
 ;
 
 FunctionDef returns FunctionDef:
-    'FunctionDef' name=EString  '{' 'returnType' returnType=AnyType  ('body' '{' body+=Command  ("," body+=Command  )* '}' )? ('inputs' '{' inputs+=VarDecl  ("," inputs+=VarDecl  )* '}' )? '}'  
+    'FunctionDef' name=EString  '{' 'returnType' returnType=AnyType  'block' block=Block  ('inputs' '{' inputs+=SimpleVarDecl  ("," inputs+=SimpleVarDecl  )* '}' )? '}'  
 ;
 
 EString returns string:
     STRING | ID 
 ;
 
-VarDecl returns VarDecl:
-    'VarDecl' name=EString  '{' 'type' ^type=DataType  '}'  
+Block returns Block:
+    {Block} 'Block' '{' ('stmts' '{' stmts+=Statement  ("," stmts+=Statement  )* '}' )? '}'  
+;
+
+SimpleVarDecl returns SimpleVarDecl:
+    'SimpleVarDecl' name=EString  '{' 'type' ^type=DataType  '}'  
 ;
 
 VoidType returns VoidType:
     {VoidType} 'VoidType'  
 ;
 
-NumberType returns NumberType:
-    {NumberType} 'NumberType'  
+DataType returns DataType:
+    {DataType} 'DataType'  
 ;
 
-BooleanType returns BooleanType:
-    {BooleanType} 'BooleanType'  
-;
-
-Loop returns Loop:
-    'Loop' '{' ('body' '{' body+=Command  ("," body+=Command  )* '}' )? 'cond' cond=Expression  '}'  
-;
-
-If_Impl returns If:
-    'If' '{' ('body' '{' body+=Command  ("," body+=Command  )* '}' )? 'cond' cond=Expression  '}'  
-;
-
-IfElse returns IfElse:
-    'IfElse' '{' ('body' '{' body+=Command  ("," body+=Command  )* '}' )? 'cond' cond=Expression  ('bodyElse' '{' bodyElse+=Command  ("," bodyElse+=Command  )* '}' )? '}'  
-;
-
-AssignAtDecl returns AssignAtDecl:
-    'AssignAtDecl' '{' 'expression' expression=Expression  'vardecl' vardecl=VarDecl  '}'  
-;
-
-ReAssign returns ReAssign:
-    'ReAssign' '{' 'var' var=[VarDecl:EString ] 'expression' expression=Expression  '}'  
+AssignVar returns AssignVar:
+    'AssignVar' '{' 'var' var=[VarDecl:EString ] 'expr' expr=Expression  '}'  
 ;
 
 SetSpeed returns SetSpeed:
-    'SetSpeed' '{' ('unit' unit=Unit  )? 'speedstate' speedstate=[SpeedState:EString ] 'expression' expression=Expression  '}'  
+    'SetSpeed' '{' ('unit' unit=Unit  )? 'expr' expr=Expression  'speed' speed=Speed  '}'  
 ;
 
 Rotation returns Rotation:
-    'Rotation' '{' 'expression' expression=Expression  '}'  
+    'Rotation' '{' 'expr' expr=Expression  '}'  
 ;
 
-Front returns Front:
-    'Front' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
-;
-
-Back returns Back:
-    'Back' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
-;
-
-Right returns Right:
-    'Right' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
-;
-
-Left returns Left:
-    'Left' '{' ('unit' unit=Unit  )? 'expression' expression=Expression  '}'  
+Linear returns Linear:
+    'Linear' '{' ('unit' unit=Unit  )? 'expr' expr=Expression  '}'  
 ;
 
 FunCall returns FunCall:
     'FunCall' '{' 'fun' fun=[FunctionDef:EString ] ('inputs' '{' inputs+=Expression  ("," inputs+=Expression  )* '}' )? '}'  
 ;
 
-Neg returns Neg:
-    'Neg' '{' 'op' op=Expression  '}'  
+VarDeclInit returns VarDeclInit:
+    'VarDeclInit' name=EString  '{' 'type' ^type=DataType  'expr' expr=Expression  '}'  
 ;
 
-Not returns Not:
-    'Not' '{' 'op' op=Expression  '}'  
+LoopStmt returns LoopStmt:
+    'LoopStmt' '{' 'expr' expr=Expression  'stmt' stmt=Statement  '}'  
 ;
 
-Greater returns Greater:
-    'Greater' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+IfStmt returns IfStmt:
+    'IfStmt' '{' 'expr' expr=Expression  'ifstmt' ifstmt=Statement  ('elsestmt' elsestmt=Statement  )? '}'  
+;
+
+ReturnStmt returns ReturnStmt:
+    {ReturnStmt} 'ReturnStmt' '{' ('expr' expr=Expression  )? '}'  
 ;
 
 And returns And:
-    'And' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+    'And' '{' 'exprs' '{' exprs+=PrimaryBoolExpr  ("," exprs+=PrimaryBoolExpr  )* '}' '}'  
 ;
 
 Add returns Add:
-    'Add' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
-;
-
-Less returns Less:
-    'Less' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+    'Add' '{' 'exprs' '{' exprs+=Mul  ("," exprs+=Mul  )* '}' '}'  
 ;
 
 Or returns Or:
-    'Or' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+    'Or' '{' 'exprs' '{' exprs+=And  ("," exprs+=And  )* '}' '}'  
 ;
 
-Sub returns Sub:
-    'Sub' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+Sensor returns Sensor:
+    {Sensor} 'Sensor'  
 ;
 
-GEq returns GEq:
-    'GEq' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
+Literal returns Literal:
+    {Literal} 'Literal'  
 ;
 
-Equ returns Equ:
-    'Equ' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
-;
-
-Mul returns Mul:
-    'Mul' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
-;
-
-LEq returns LEq:
-    'LEq' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
-;
-
-NEq returns NEq:
-    'NEq' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
-;
-
-Div returns Div:
-    'Div' '{' 'rightOp' rightOp=Expression  'leftOp' leftOp=Expression  '}'  
-;
-
-TimeSensor returns TimeSensor:
-    {TimeSensor} 'TimeSensor'  
-;
-
-DistSensor returns DistSensor:
-    {DistSensor} 'DistSensor'  
-;
-
-BoolLiteral returns BoolLiteral:
-    {BoolLiteral} 'BoolLiteral'  
-;
-
-NumberLiteral returns NumberLiteral:
-    {NumberLiteral} 'NumberLiteral'  
-;
-
-SpeedState returns SpeedState:
-    {SpeedState} 'SpeedState'  
+Speed returns Speed:
+    {Speed} 'Speed'  
 ;
 
 Variable returns Variable:
     'Variable' '{' 'var' var=[VarDecl:EString ] '}'  
 ;
 
-Unit returns Unit:
-    Unit_M | Unit_DM | Unit_CM | Unit_MM
+Not returns Not:
+    'Not' '{' 'expr' expr=Compare  '}'  
 ;
-Unit_M returns Unit_M: 'm' ;
-Unit_DM returns Unit_DM: 'dm' ;
-Unit_CM returns Unit_CM: 'cm' ;
-Unit_MM returns Unit_MM: 'mm' ;
+
+Compare returns Compare:
+    'Compare' '{' 'exprs' '{' exprs+=Add  ("," exprs+=Add  )* '}' '}'  
+;
+
+Mul returns Mul:
+    'Mul' '{' 'exprs' '{' exprs+=PrimaryAriExpr  ("," exprs+=PrimaryAriExpr  )* '}' '}'  
+;
+
+AriUnOp returns AriUnOp:
+    'AriUnOp' '{' 'expr' expr=Expression  '}'  
+;
+
+Unit returns Unit:
+    Unit_m | Unit_dm | Unit_cm | Unit_mm
+;
+Unit_m returns Unit_m: 'm' ;
+Unit_dm returns Unit_dm: 'dm' ;
+Unit_cm returns Unit_cm: 'cm' ;
+Unit_mm returns Unit_mm: 'mm' ;
 

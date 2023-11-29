@@ -24,13 +24,11 @@ class RobotScriptFormatter extends AbstractFormatter2 {
 	def dispatch void format(FunctionDef functionDef, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
 		functionDef.returnType.format
-		for (command : functionDef.body) {
-			command.format
-		}
-		for (varDecl : functionDef.inputs) {
-			varDecl.format
+		functionDef.block.format
+		for (simpleVarDecl : functionDef.inputs) {
+			simpleVarDecl.format
 		}
 	}
 	
-	// TODO: implement for VarDecl, Loop, If, IfElse, AssignAtDecl, ReAssign, SetSpeed, Rotation, Front, Back, Right, Left, FunCall, Neg, Not, Greater, And, Add, Less, Or, Sub, GEq, Equ, Mul, LEq, NEq, Div
+	// TODO: implement for Block, SimpleVarDecl, AssignVar, SetSpeed, Rotation, Linear, FunCall, VarDeclInit, LoopStmt, IfStmt, ReturnStmt, And, Add, Or, Not, Compare, Mul, AriUnOp
 }

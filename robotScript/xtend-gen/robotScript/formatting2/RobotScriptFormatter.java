@@ -13,10 +13,10 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.xbase.lib.Extension;
 import robotScript.services.RobotScriptGrammarAccess;
 import robotScriptModel.AnyType;
-import robotScriptModel.Command;
+import robotScriptModel.Block;
 import robotScriptModel.EntryPoint;
 import robotScriptModel.FunctionDef;
-import robotScriptModel.VarDecl;
+import robotScriptModel.SimpleVarDecl;
 
 @SuppressWarnings("all")
 public class RobotScriptFormatter extends AbstractFormatter2 {
@@ -33,13 +33,10 @@ public class RobotScriptFormatter extends AbstractFormatter2 {
 
   protected void _format(final FunctionDef functionDef, @Extension final IFormattableDocument document) {
     document.<AnyType>format(functionDef.getReturnType());
-    EList<Command> _body = functionDef.getBody();
-    for (final Command command : _body) {
-      document.<Command>format(command);
-    }
-    EList<VarDecl> _inputs = functionDef.getInputs();
-    for (final VarDecl varDecl : _inputs) {
-      document.<VarDecl>format(varDecl);
+    document.<Block>format(functionDef.getBlock());
+    EList<SimpleVarDecl> _inputs = functionDef.getInputs();
+    for (final SimpleVarDecl simpleVarDecl : _inputs) {
+      document.<SimpleVarDecl>format(simpleVarDecl);
     }
   }
 

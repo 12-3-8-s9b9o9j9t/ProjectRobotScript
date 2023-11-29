@@ -26,77 +26,77 @@ public enum Unit implements Enumerator {
 	 * @generated
 	 * @ordered
 	 */
-	M(0, "M", "M"),
+	M(0, "m", "m"),
 
 	/**
-	 * The '<em><b>DM</b></em>' literal object.
+	 * The '<em><b>Dm</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #DM_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	DM(1, "DM", "DM"),
+	DM(1, "dm", "dm"),
 
 	/**
-	 * The '<em><b>CM</b></em>' literal object.
+	 * The '<em><b>Cm</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #CM_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	CM(2, "CM", "CM"),
+	CM(2, "cm", "cm"),
 
 	/**
-	 * The '<em><b>MM</b></em>' literal object.
+	 * The '<em><b>Mm</b></em>' literal object.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #MM_VALUE
 	 * @generated
 	 * @ordered
 	 */
-	MM(3, "MM", "MM");
+	MM(3, "mm", "mm");
 
 	/**
 	 * The '<em><b>M</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #M
-	 * @model
+	 * @model name="m"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int M_VALUE = 0;
 
 	/**
-	 * The '<em><b>DM</b></em>' literal value.
+	 * The '<em><b>Dm</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #DM
-	 * @model
+	 * @model name="dm"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int DM_VALUE = 1;
 
 	/**
-	 * The '<em><b>CM</b></em>' literal value.
+	 * The '<em><b>Cm</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #CM
-	 * @model
+	 * @model name="cm"
 	 * @generated
 	 * @ordered
 	 */
 	public static final int CM_VALUE = 2;
 
 	/**
-	 * The '<em><b>MM</b></em>' literal value.
+	 * The '<em><b>Mm</b></em>' literal value.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #MM
-	 * @model
+	 * @model name="mm"
 	 * @generated
 	 * @ordered
 	 */

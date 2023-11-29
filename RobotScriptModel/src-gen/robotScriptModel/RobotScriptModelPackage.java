@@ -123,13 +123,13 @@ public interface RobotScriptModelPackage extends EPackage {
 	int FUNCTION_DEF__RETURN_TYPE = 1;
 
 	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Block</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_DEF__BODY = 2;
+	int FUNCTION_DEF__BLOCK = 2;
 
 	/**
 	 * The feature id for the '<em><b>Inputs</b></em>' containment reference list.
@@ -187,42 +187,42 @@ public interface RobotScriptModelPackage extends EPackage {
 	int ANY_TYPE_OPERATION_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.Command <em>Command</em>}' class.
+	 * The meta object id for the '{@link robotScriptModel.Statement <em>Statement</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.Command
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getCommand()
+	 * @see robotScriptModel.Statement
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getStatement()
 	 * @generated
 	 */
-	int COMMAND = 3;
+	int STATEMENT = 28;
 
 	/**
-	 * The number of structural features of the '<em>Command</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int COMMAND_FEATURE_COUNT = 0;
-
-	/**
-	 * The number of operations of the '<em>Command</em>' class.
+	 * The number of structural features of the '<em>Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMMAND_OPERATION_COUNT = 0;
+	int STATEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.VarDeclImpl <em>Var Decl</em>}' class.
+	 * The number of operations of the '<em>Statement</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.VarDeclImpl
+	 * @generated
+	 * @ordered
+	 */
+	int STATEMENT_OPERATION_COUNT = 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.VarDecl <em>Var Decl</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.VarDecl
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getVarDecl()
 	 * @generated
 	 */
-	int VAR_DECL = 4;
+	int VAR_DECL = 3;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -231,7 +231,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECL__TYPE = COMMAND_FEATURE_COUNT + 0;
+	int VAR_DECL__TYPE = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -240,7 +240,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECL__NAME = COMMAND_FEATURE_COUNT + 1;
+	int VAR_DECL__NAME = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Var Decl</em>' class.
@@ -249,7 +249,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECL_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 2;
+	int VAR_DECL_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
 
 	/**
 	 * The number of operations of the '<em>Var Decl</em>' class.
@@ -258,7 +258,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VAR_DECL_OPERATION_COUNT = COMMAND_OPERATION_COUNT + 0;
+	int VAR_DECL_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.impl.VoidTypeImpl <em>Void Type</em>}' class.
@@ -268,7 +268,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getVoidType()
 	 * @generated
 	 */
-	int VOID_TYPE = 5;
+	int VOID_TYPE = 4;
 
 	/**
 	 * The number of structural features of the '<em>Void Type</em>' class.
@@ -289,14 +289,14 @@ public interface RobotScriptModelPackage extends EPackage {
 	int VOID_TYPE_OPERATION_COUNT = ANY_TYPE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.DataType <em>Data Type</em>}' class.
+	 * The meta object id for the '{@link robotScriptModel.impl.DataTypeImpl <em>Data Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.DataType
+	 * @see robotScriptModel.impl.DataTypeImpl
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getDataType()
 	 * @generated
 	 */
-	int DATA_TYPE = 6;
+	int DATA_TYPE = 5;
 
 	/**
 	 * The number of structural features of the '<em>Data Type</em>' class.
@@ -317,255 +317,6 @@ public interface RobotScriptModelPackage extends EPackage {
 	int DATA_TYPE_OPERATION_COUNT = ANY_TYPE_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.NumberTypeImpl <em>Number Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.NumberTypeImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNumberType()
-	 * @generated
-	 */
-	int NUMBER_TYPE = 7;
-
-	/**
-	 * The number of structural features of the '<em>Number Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMBER_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Number Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMBER_TYPE_OPERATION_COUNT = DATA_TYPE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.BooleanTypeImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBooleanType()
-	 * @generated
-	 */
-	int BOOLEAN_TYPE = 8;
-
-	/**
-	 * The number of structural features of the '<em>Boolean Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_TYPE_FEATURE_COUNT = DATA_TYPE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Boolean Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BOOLEAN_TYPE_OPERATION_COUNT = DATA_TYPE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.ControlStructure <em>Control Structure</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.ControlStructure
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getControlStructure()
-	 * @generated
-	 */
-	int CONTROL_STRUCTURE = 13;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROL_STRUCTURE__BODY = COMMAND_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Cond</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROL_STRUCTURE__COND = COMMAND_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Control Structure</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROL_STRUCTURE_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>Control Structure</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int CONTROL_STRUCTURE_OPERATION_COUNT = COMMAND_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.LoopImpl <em>Loop</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.LoopImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLoop()
-	 * @generated
-	 */
-	int LOOP = 9;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP__BODY = CONTROL_STRUCTURE__BODY;
-
-	/**
-	 * The feature id for the '<em><b>Cond</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP__COND = CONTROL_STRUCTURE__COND;
-
-	/**
-	 * The number of structural features of the '<em>Loop</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP_FEATURE_COUNT = CONTROL_STRUCTURE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Loop</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LOOP_OPERATION_COUNT = CONTROL_STRUCTURE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.IfImpl <em>If</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.IfImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getIf()
-	 * @generated
-	 */
-	int IF = 10;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF__BODY = CONTROL_STRUCTURE__BODY;
-
-	/**
-	 * The feature id for the '<em><b>Cond</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF__COND = CONTROL_STRUCTURE__COND;
-
-	/**
-	 * The number of structural features of the '<em>If</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_FEATURE_COUNT = CONTROL_STRUCTURE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>If</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_OPERATION_COUNT = CONTROL_STRUCTURE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.IfElseImpl <em>If Else</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.IfElseImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getIfElse()
-	 * @generated
-	 */
-	int IF_ELSE = 11;
-
-	/**
-	 * The feature id for the '<em><b>Body</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_ELSE__BODY = IF__BODY;
-
-	/**
-	 * The feature id for the '<em><b>Cond</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_ELSE__COND = IF__COND;
-
-	/**
-	 * The feature id for the '<em><b>Body Else</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_ELSE__BODY_ELSE = IF_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>If Else</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_ELSE_FEATURE_COUNT = IF_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>If Else</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int IF_ELSE_OPERATION_COUNT = IF_OPERATION_COUNT + 0;
-
-	/**
 	 * The meta object id for the '{@link robotScriptModel.Expression <em>Expression</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -573,7 +324,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getExpression()
 	 * @generated
 	 */
-	int EXPRESSION = 12;
+	int EXPRESSION = 6;
 
 	/**
 	 * The number of structural features of the '<em>Expression</em>' class.
@@ -601,16 +352,16 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAssign()
 	 * @generated
 	 */
-	int ASSIGN = 14;
+	int ASSIGN = 7;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN__EXPRESSION = COMMAND_FEATURE_COUNT + 0;
+	int ASSIGN__EXPR = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Assign</em>' class.
@@ -619,7 +370,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 1;
+	int ASSIGN_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Assign</em>' class.
@@ -628,72 +379,26 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_OPERATION_COUNT = COMMAND_OPERATION_COUNT + 0;
+	int ASSIGN_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.AssignAtDeclImpl <em>Assign At Decl</em>}' class.
+	 * The meta object id for the '{@link robotScriptModel.impl.AssignVarImpl <em>Assign Var</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.AssignAtDeclImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAssignAtDecl()
+	 * @see robotScriptModel.impl.AssignVarImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAssignVar()
 	 * @generated
 	 */
-	int ASSIGN_AT_DECL = 15;
+	int ASSIGN_VAR = 8;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGN_AT_DECL__EXPRESSION = ASSIGN__EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Vardecl</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ASSIGN_AT_DECL__VARDECL = ASSIGN_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Assign At Decl</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGN_AT_DECL_FEATURE_COUNT = ASSIGN_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Assign At Decl</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ASSIGN_AT_DECL_OPERATION_COUNT = ASSIGN_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.ReAssignImpl <em>Re Assign</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.ReAssignImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getReAssign()
-	 * @generated
-	 */
-	int RE_ASSIGN = 16;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RE_ASSIGN__EXPRESSION = ASSIGN__EXPRESSION;
+	int ASSIGN_VAR__EXPR = ASSIGN__EXPR;
 
 	/**
 	 * The feature id for the '<em><b>Var</b></em>' reference.
@@ -702,25 +407,25 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int RE_ASSIGN__VAR = ASSIGN_FEATURE_COUNT + 0;
+	int ASSIGN_VAR__VAR = ASSIGN_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Re Assign</em>' class.
+	 * The number of structural features of the '<em>Assign Var</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RE_ASSIGN_FEATURE_COUNT = ASSIGN_FEATURE_COUNT + 1;
+	int ASSIGN_VAR_FEATURE_COUNT = ASSIGN_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of operations of the '<em>Re Assign</em>' class.
+	 * The number of operations of the '<em>Assign Var</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int RE_ASSIGN_OPERATION_COUNT = ASSIGN_OPERATION_COUNT + 0;
+	int ASSIGN_VAR_OPERATION_COUNT = ASSIGN_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.impl.SetSpeedImpl <em>Set Speed</em>}' class.
@@ -730,16 +435,16 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSetSpeed()
 	 * @generated
 	 */
-	int SET_SPEED = 17;
+	int SET_SPEED = 9;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_SPEED__EXPRESSION = ASSIGN__EXPRESSION;
+	int SET_SPEED__EXPR = ASSIGN__EXPR;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' attribute.
@@ -751,13 +456,13 @@ public interface RobotScriptModelPackage extends EPackage {
 	int SET_SPEED__UNIT = ASSIGN_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Speedstate</b></em>' reference.
+	 * The feature id for the '<em><b>Speed</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SET_SPEED__SPEEDSTATE = ASSIGN_FEATURE_COUNT + 1;
+	int SET_SPEED__SPEED = ASSIGN_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Set Speed</em>' class.
@@ -778,207 +483,32 @@ public interface RobotScriptModelPackage extends EPackage {
 	int SET_SPEED_OPERATION_COUNT = ASSIGN_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.UnOp <em>Un Op</em>}' class.
+	 * The meta object id for the '{@link robotScriptModel.PrimaryBoolExpr <em>Primary Bool Expr</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.UnOp
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getUnOp()
+	 * @see robotScriptModel.PrimaryBoolExpr
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getPrimaryBoolExpr()
 	 * @generated
 	 */
-	int UN_OP = 18;
+	int PRIMARY_BOOL_EXPR = 10;
 
 	/**
-	 * The feature id for the '<em><b>Op</b></em>' containment reference.
+	 * The number of structural features of the '<em>Primary Bool Expr</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UN_OP__OP = EXPRESSION_FEATURE_COUNT + 0;
+	int PRIMARY_BOOL_EXPR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Un Op</em>' class.
+	 * The number of operations of the '<em>Primary Bool Expr</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UN_OP_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of operations of the '<em>Un Op</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int UN_OP_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.BinOp <em>Bin Op</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.BinOp
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBinOp()
-	 * @generated
-	 */
-	int BIN_OP = 19;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN_OP__RIGHT_OP = EXPRESSION_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN_OP__LEFT_OP = EXPRESSION_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Bin Op</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN_OP_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
-
-	/**
-	 * The number of operations of the '<em>Bin Op</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BIN_OP_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.NegImpl <em>Neg</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.NegImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNeg()
-	 * @generated
-	 */
-	int NEG = 20;
-
-	/**
-	 * The feature id for the '<em><b>Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEG__OP = UN_OP__OP;
-
-	/**
-	 * The number of structural features of the '<em>Neg</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEG_FEATURE_COUNT = UN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Neg</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEG_OPERATION_COUNT = UN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.NotImpl <em>Not</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.NotImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNot()
-	 * @generated
-	 */
-	int NOT = 21;
-
-	/**
-	 * The feature id for the '<em><b>Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NOT__OP = UN_OP__OP;
-
-	/**
-	 * The number of structural features of the '<em>Not</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NOT_FEATURE_COUNT = UN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Not</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NOT_OPERATION_COUNT = UN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.GreaterImpl <em>Greater</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.GreaterImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getGreater()
-	 * @generated
-	 */
-	int GREATER = 22;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GREATER__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GREATER__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>Greater</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GREATER_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Greater</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GREATER_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
+	int PRIMARY_BOOL_EXPR_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.impl.AndImpl <em>And</em>}' class.
@@ -988,25 +518,16 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAnd()
 	 * @generated
 	 */
-	int AND = 23;
+	int AND = 11;
 
 	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
+	 * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int AND__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int AND__LEFT_OP = BIN_OP__LEFT_OP;
+	int AND__EXPRS = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>And</em>' class.
@@ -1015,7 +536,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
+	int AND_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>And</em>' class.
@@ -1024,7 +545,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int AND_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
+	int AND_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.impl.AddImpl <em>Add</em>}' class.
@@ -1034,25 +555,16 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAdd()
 	 * @generated
 	 */
-	int ADD = 24;
+	int ADD = 12;
 
 	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
+	 * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ADD__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ADD__LEFT_OP = BIN_OP__LEFT_OP;
+	int ADD__EXPRS = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Add</em>' class.
@@ -1061,7 +573,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
+	int ADD_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Add</em>' class.
@@ -1070,53 +582,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ADD_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.LessImpl <em>Less</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.LessImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLess()
-	 * @generated
-	 */
-	int LESS = 25;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LESS__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LESS__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>Less</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LESS_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Less</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LESS_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
+	int ADD_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.impl.OrImpl <em>Or</em>}' class.
@@ -1126,25 +592,16 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getOr()
 	 * @generated
 	 */
-	int OR = 26;
+	int OR = 13;
 
 	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
+	 * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OR__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int OR__LEFT_OP = BIN_OP__LEFT_OP;
+	int OR__EXPRS = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Or</em>' class.
@@ -1153,7 +610,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
+	int OR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Or</em>' class.
@@ -1162,329 +619,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OR_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.SubImpl <em>Sub</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.SubImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSub()
-	 * @generated
-	 */
-	int SUB = 27;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUB__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUB__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>Sub</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUB_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Sub</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SUB_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.GEqImpl <em>GEq</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.GEqImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getGEq()
-	 * @generated
-	 */
-	int GEQ = 28;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GEQ__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GEQ__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>GEq</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GEQ_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>GEq</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int GEQ_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.EquImpl <em>Equ</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.EquImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getEqu()
-	 * @generated
-	 */
-	int EQU = 29;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EQU__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EQU__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>Equ</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EQU_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Equ</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EQU_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.MulImpl <em>Mul</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.MulImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getMul()
-	 * @generated
-	 */
-	int MUL = 30;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MUL__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MUL__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>Mul</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MUL_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Mul</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MUL_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.LEqImpl <em>LEq</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.LEqImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLEq()
-	 * @generated
-	 */
-	int LEQ = 31;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEQ__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEQ__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>LEq</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEQ_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>LEq</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEQ_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.NEqImpl <em>NEq</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.NEqImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNEq()
-	 * @generated
-	 */
-	int NEQ = 32;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEQ__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEQ__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>NEq</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEQ_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>NEq</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NEQ_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.DivImpl <em>Div</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.DivImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getDiv()
-	 * @generated
-	 */
-	int DIV = 33;
-
-	/**
-	 * The feature id for the '<em><b>Right Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIV__RIGHT_OP = BIN_OP__RIGHT_OP;
-
-	/**
-	 * The feature id for the '<em><b>Left Op</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIV__LEFT_OP = BIN_OP__LEFT_OP;
-
-	/**
-	 * The number of structural features of the '<em>Div</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIV_FEATURE_COUNT = BIN_OP_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Div</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int DIV_OPERATION_COUNT = BIN_OP_OPERATION_COUNT + 0;
+	int OR_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.Movement <em>Movement</em>}' class.
@@ -1494,16 +629,16 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getMovement()
 	 * @generated
 	 */
-	int MOVEMENT = 34;
+	int MOVEMENT = 14;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MOVEMENT__EXPRESSION = COMMAND_FEATURE_COUNT + 0;
+	int MOVEMENT__EXPR = STATEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of structural features of the '<em>Movement</em>' class.
@@ -1512,7 +647,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MOVEMENT_FEATURE_COUNT = COMMAND_FEATURE_COUNT + 1;
+	int MOVEMENT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of operations of the '<em>Movement</em>' class.
@@ -1521,7 +656,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MOVEMENT_OPERATION_COUNT = COMMAND_OPERATION_COUNT + 0;
+	int MOVEMENT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.impl.RotationImpl <em>Rotation</em>}' class.
@@ -1531,16 +666,16 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getRotation()
 	 * @generated
 	 */
-	int ROTATION = 35;
+	int ROTATION = 15;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ROTATION__EXPRESSION = MOVEMENT__EXPRESSION;
+	int ROTATION__EXPR = MOVEMENT__EXPR;
 
 	/**
 	 * The number of structural features of the '<em>Rotation</em>' class.
@@ -1561,23 +696,23 @@ public interface RobotScriptModelPackage extends EPackage {
 	int ROTATION_OPERATION_COUNT = MOVEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.Linear <em>Linear</em>}' class.
+	 * The meta object id for the '{@link robotScriptModel.impl.LinearImpl <em>Linear</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.Linear
+	 * @see robotScriptModel.impl.LinearImpl
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLinear()
 	 * @generated
 	 */
-	int LINEAR = 36;
+	int LINEAR = 16;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LINEAR__EXPRESSION = MOVEMENT__EXPRESSION;
+	int LINEAR__EXPR = MOVEMENT__EXPR;
 
 	/**
 	 * The feature id for the '<em><b>Unit</b></em>' attribute.
@@ -1607,188 +742,32 @@ public interface RobotScriptModelPackage extends EPackage {
 	int LINEAR_OPERATION_COUNT = MOVEMENT_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.FrontImpl <em>Front</em>}' class.
+	 * The meta object id for the '{@link robotScriptModel.PrimaryAriExpr <em>Primary Ari Expr</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.FrontImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getFront()
+	 * @see robotScriptModel.PrimaryAriExpr
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getPrimaryAriExpr()
 	 * @generated
 	 */
-	int FRONT = 37;
+	int PRIMARY_ARI_EXPR = 23;
 
 	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * The number of structural features of the '<em>Primary Ari Expr</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FRONT__EXPRESSION = LINEAR__EXPRESSION;
+	int PRIMARY_ARI_EXPR_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Unit</b></em>' attribute.
+	 * The number of operations of the '<em>Primary Ari Expr</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FRONT__UNIT = LINEAR__UNIT;
-
-	/**
-	 * The number of structural features of the '<em>Front</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FRONT_FEATURE_COUNT = LINEAR_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Front</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FRONT_OPERATION_COUNT = LINEAR_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.BackImpl <em>Back</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.BackImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBack()
-	 * @generated
-	 */
-	int BACK = 38;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BACK__EXPRESSION = LINEAR__EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Unit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BACK__UNIT = LINEAR__UNIT;
-
-	/**
-	 * The number of structural features of the '<em>Back</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BACK_FEATURE_COUNT = LINEAR_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Back</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int BACK_OPERATION_COUNT = LINEAR_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.RightImpl <em>Right</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.RightImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getRight()
-	 * @generated
-	 */
-	int RIGHT = 39;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RIGHT__EXPRESSION = LINEAR__EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Unit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RIGHT__UNIT = LINEAR__UNIT;
-
-	/**
-	 * The number of structural features of the '<em>Right</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RIGHT_FEATURE_COUNT = LINEAR_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Right</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int RIGHT_OPERATION_COUNT = LINEAR_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.LeftImpl <em>Left</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.LeftImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLeft()
-	 * @generated
-	 */
-	int LEFT = 40;
-
-	/**
-	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEFT__EXPRESSION = LINEAR__EXPRESSION;
-
-	/**
-	 * The feature id for the '<em><b>Unit</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEFT__UNIT = LINEAR__UNIT;
-
-	/**
-	 * The number of structural features of the '<em>Left</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEFT_FEATURE_COUNT = LINEAR_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Left</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int LEFT_OPERATION_COUNT = LINEAR_OPERATION_COUNT + 0;
+	int PRIMARY_ARI_EXPR_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.Value <em>Value</em>}' class.
@@ -1798,7 +777,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getValue()
 	 * @generated
 	 */
-	int VALUE = 41;
+	int VALUE = 17;
 
 	/**
 	 * The number of structural features of the '<em>Value</em>' class.
@@ -1807,7 +786,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
+	int VALUE_FEATURE_COUNT = PRIMARY_ARI_EXPR_FEATURE_COUNT + 0;
 
 	/**
 	 * The number of operations of the '<em>Value</em>' class.
@@ -1816,147 +795,91 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int VALUE_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+	int VALUE_OPERATION_COUNT = PRIMARY_ARI_EXPR_OPERATION_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.TimeSensorImpl <em>Time Sensor</em>}' class.
+	 * The meta object id for the '{@link robotScriptModel.impl.SensorImpl <em>Sensor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.TimeSensorImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getTimeSensor()
+	 * @see robotScriptModel.impl.SensorImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSensor()
 	 * @generated
 	 */
-	int TIME_SENSOR = 42;
+	int SENSOR = 18;
 
 	/**
-	 * The number of structural features of the '<em>Time Sensor</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TIME_SENSOR_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Time Sensor</em>' class.
+	 * The number of structural features of the '<em>Sensor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TIME_SENSOR_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int SENSOR_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.DistSensorImpl <em>Dist Sensor</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.DistSensorImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getDistSensor()
-	 * @generated
-	 */
-	int DIST_SENSOR = 43;
-
-	/**
-	 * The number of structural features of the '<em>Dist Sensor</em>' class.
+	 * The number of operations of the '<em>Sensor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIST_SENSOR_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+	int SENSOR_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Dist Sensor</em>' class.
+	 * The meta object id for the '{@link robotScriptModel.impl.LiteralImpl <em>Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.LiteralImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLiteral()
+	 * @generated
+	 */
+	int LITERAL = 19;
+
+	/**
+	 * The number of structural features of the '<em>Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DIST_SENSOR_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int LITERAL_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.BoolLiteralImpl <em>Bool Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.BoolLiteralImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBoolLiteral()
-	 * @generated
-	 */
-	int BOOL_LITERAL = 44;
-
-	/**
-	 * The number of structural features of the '<em>Bool Literal</em>' class.
+	 * The number of operations of the '<em>Literal</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOL_LITERAL_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
+	int LITERAL_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
-	 * The number of operations of the '<em>Bool Literal</em>' class.
+	 * The meta object id for the '{@link robotScriptModel.impl.SpeedImpl <em>Speed</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.SpeedImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSpeed()
+	 * @generated
+	 */
+	int SPEED = 20;
+
+	/**
+	 * The number of structural features of the '<em>Speed</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int BOOL_LITERAL_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int SPEED_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.NumberLiteralImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNumberLiteral()
-	 * @generated
-	 */
-	int NUMBER_LITERAL = 45;
-
-	/**
-	 * The number of structural features of the '<em>Number Literal</em>' class.
+	 * The number of operations of the '<em>Speed</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int NUMBER_LITERAL_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Number Literal</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int NUMBER_LITERAL_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link robotScriptModel.impl.SpeedStateImpl <em>Speed State</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see robotScriptModel.impl.SpeedStateImpl
-	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSpeedState()
-	 * @generated
-	 */
-	int SPEED_STATE = 46;
-
-	/**
-	 * The number of structural features of the '<em>Speed State</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPEED_STATE_FEATURE_COUNT = VALUE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of operations of the '<em>Speed State</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SPEED_STATE_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
+	int SPEED_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
 	 * The meta object id for the '{@link robotScriptModel.impl.VariableImpl <em>Variable</em>}' class.
@@ -1966,7 +889,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getVariable()
 	 * @generated
 	 */
-	int VARIABLE = 47;
+	int VARIABLE = 21;
 
 	/**
 	 * The feature id for the '<em><b>Var</b></em>' reference.
@@ -2003,7 +926,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getFunCall()
 	 * @generated
 	 */
-	int FUN_CALL = 48;
+	int FUN_CALL = 22;
 
 	/**
 	 * The feature id for the '<em><b>Fun</b></em>' reference.
@@ -2042,6 +965,430 @@ public interface RobotScriptModelPackage extends EPackage {
 	int FUN_CALL_OPERATION_COUNT = VALUE_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.NotImpl <em>Not</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.NotImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNot()
+	 * @generated
+	 */
+	int NOT = 24;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT__EXPR = PRIMARY_BOOL_EXPR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Not</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_FEATURE_COUNT = PRIMARY_BOOL_EXPR_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Not</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int NOT_OPERATION_COUNT = PRIMARY_BOOL_EXPR_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.CompareImpl <em>Compare</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.CompareImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getCompare()
+	 * @generated
+	 */
+	int COMPARE = 25;
+
+	/**
+	 * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPARE__EXPRS = PRIMARY_BOOL_EXPR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Compare</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPARE_FEATURE_COUNT = PRIMARY_BOOL_EXPR_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Compare</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int COMPARE_OPERATION_COUNT = PRIMARY_BOOL_EXPR_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.MulImpl <em>Mul</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.MulImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getMul()
+	 * @generated
+	 */
+	int MUL = 26;
+
+	/**
+	 * The feature id for the '<em><b>Exprs</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MUL__EXPRS = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Mul</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MUL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Mul</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MUL_OPERATION_COUNT = EXPRESSION_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.AriUnOpImpl <em>Ari Un Op</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.AriUnOpImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAriUnOp()
+	 * @generated
+	 */
+	int ARI_UN_OP = 27;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARI_UN_OP__EXPR = PRIMARY_ARI_EXPR_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Ari Un Op</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARI_UN_OP_FEATURE_COUNT = PRIMARY_ARI_EXPR_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Ari Un Op</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int ARI_UN_OP_OPERATION_COUNT = PRIMARY_ARI_EXPR_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.BlockImpl <em>Block</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.BlockImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBlock()
+	 * @generated
+	 */
+	int BLOCK = 29;
+
+	/**
+	 * The feature id for the '<em><b>Stmts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK__STMTS = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Block</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Block</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int BLOCK_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.SimpleVarDeclImpl <em>Simple Var Decl</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.SimpleVarDeclImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSimpleVarDecl()
+	 * @generated
+	 */
+	int SIMPLE_VAR_DECL = 30;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_VAR_DECL__TYPE = VAR_DECL__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_VAR_DECL__NAME = VAR_DECL__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Simple Var Decl</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_VAR_DECL_FEATURE_COUNT = VAR_DECL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of operations of the '<em>Simple Var Decl</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int SIMPLE_VAR_DECL_OPERATION_COUNT = VAR_DECL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.VarDeclInitImpl <em>Var Decl Init</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.VarDeclInitImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getVarDeclInit()
+	 * @generated
+	 */
+	int VAR_DECL_INIT = 31;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECL_INIT__TYPE = VAR_DECL__TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECL_INIT__NAME = VAR_DECL__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECL_INIT__EXPR = VAR_DECL_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Var Decl Init</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECL_INIT_FEATURE_COUNT = VAR_DECL_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Var Decl Init</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int VAR_DECL_INIT_OPERATION_COUNT = VAR_DECL_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.LoopStmtImpl <em>Loop Stmt</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.LoopStmtImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLoopStmt()
+	 * @generated
+	 */
+	int LOOP_STMT = 32;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_STMT__EXPR = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Stmt</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_STMT__STMT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Loop Stmt</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_STMT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of operations of the '<em>Loop Stmt</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int LOOP_STMT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.IfStmtImpl <em>If Stmt</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.IfStmtImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getIfStmt()
+	 * @generated
+	 */
+	int IF_STMT = 33;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STMT__EXPR = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Ifstmt</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STMT__IFSTMT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Elsestmt</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STMT__ELSESTMT = STATEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The number of structural features of the '<em>If Stmt</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STMT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 3;
+
+	/**
+	 * The number of operations of the '<em>If Stmt</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int IF_STMT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link robotScriptModel.impl.ReturnStmtImpl <em>Return Stmt</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see robotScriptModel.impl.ReturnStmtImpl
+	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getReturnStmt()
+	 * @generated
+	 */
+	int RETURN_STMT = 34;
+
+	/**
+	 * The feature id for the '<em><b>Expr</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_STMT__EXPR = STATEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Return Stmt</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_STMT_FEATURE_COUNT = STATEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Return Stmt</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int RETURN_STMT_OPERATION_COUNT = STATEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The meta object id for the '{@link robotScriptModel.Unit <em>Unit</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2049,7 +1396,7 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getUnit()
 	 * @generated
 	 */
-	int UNIT = 49;
+	int UNIT = 35;
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.EntryPoint <em>Entry Point</em>}'.
@@ -2105,15 +1452,15 @@ public interface RobotScriptModelPackage extends EPackage {
 	EReference getFunctionDef_ReturnType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link robotScriptModel.FunctionDef#getBody <em>Body</em>}'.
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.FunctionDef#getBlock <em>Block</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Body</em>'.
-	 * @see robotScriptModel.FunctionDef#getBody()
+	 * @return the meta object for the containment reference '<em>Block</em>'.
+	 * @see robotScriptModel.FunctionDef#getBlock()
 	 * @see #getFunctionDef()
 	 * @generated
 	 */
-	EReference getFunctionDef_Body();
+	EReference getFunctionDef_Block();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link robotScriptModel.FunctionDef#getInputs <em>Inputs</em>}'.
@@ -2135,16 +1482,6 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getAnyType();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Command <em>Command</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Command</em>'.
-	 * @see robotScriptModel.Command
-	 * @generated
-	 */
-	EClass getCommand();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.VarDecl <em>Var Decl</em>}'.
@@ -2199,67 +1536,6 @@ public interface RobotScriptModelPackage extends EPackage {
 	EClass getDataType();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.NumberType <em>Number Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Number Type</em>'.
-	 * @see robotScriptModel.NumberType
-	 * @generated
-	 */
-	EClass getNumberType();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.BooleanType <em>Boolean Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Boolean Type</em>'.
-	 * @see robotScriptModel.BooleanType
-	 * @generated
-	 */
-	EClass getBooleanType();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Loop <em>Loop</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Loop</em>'.
-	 * @see robotScriptModel.Loop
-	 * @generated
-	 */
-	EClass getLoop();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.If <em>If</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>If</em>'.
-	 * @see robotScriptModel.If
-	 * @generated
-	 */
-	EClass getIf();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.IfElse <em>If Else</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>If Else</em>'.
-	 * @see robotScriptModel.IfElse
-	 * @generated
-	 */
-	EClass getIfElse();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link robotScriptModel.IfElse#getBodyElse <em>Body Else</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Body Else</em>'.
-	 * @see robotScriptModel.IfElse#getBodyElse()
-	 * @see #getIfElse()
-	 * @generated
-	 */
-	EReference getIfElse_BodyElse();
-
-	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2268,38 +1544,6 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExpression();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.ControlStructure <em>Control Structure</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Control Structure</em>'.
-	 * @see robotScriptModel.ControlStructure
-	 * @generated
-	 */
-	EClass getControlStructure();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link robotScriptModel.ControlStructure#getBody <em>Body</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Body</em>'.
-	 * @see robotScriptModel.ControlStructure#getBody()
-	 * @see #getControlStructure()
-	 * @generated
-	 */
-	EReference getControlStructure_Body();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link robotScriptModel.ControlStructure#getCond <em>Cond</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Cond</em>'.
-	 * @see robotScriptModel.ControlStructure#getCond()
-	 * @see #getControlStructure()
-	 * @generated
-	 */
-	EReference getControlStructure_Cond();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Assign <em>Assign</em>}'.
@@ -2312,57 +1556,36 @@ public interface RobotScriptModelPackage extends EPackage {
 	EClass getAssign();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link robotScriptModel.Assign#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.Assign#getExpr <em>Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see robotScriptModel.Assign#getExpression()
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.Assign#getExpr()
 	 * @see #getAssign()
 	 * @generated
 	 */
-	EReference getAssign_Expression();
+	EReference getAssign_Expr();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.AssignAtDecl <em>Assign At Decl</em>}'.
+	 * Returns the meta object for class '{@link robotScriptModel.AssignVar <em>Assign Var</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Assign At Decl</em>'.
-	 * @see robotScriptModel.AssignAtDecl
+	 * @return the meta object for class '<em>Assign Var</em>'.
+	 * @see robotScriptModel.AssignVar
 	 * @generated
 	 */
-	EClass getAssignAtDecl();
+	EClass getAssignVar();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link robotScriptModel.AssignAtDecl#getVardecl <em>Vardecl</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Vardecl</em>'.
-	 * @see robotScriptModel.AssignAtDecl#getVardecl()
-	 * @see #getAssignAtDecl()
-	 * @generated
-	 */
-	EReference getAssignAtDecl_Vardecl();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.ReAssign <em>Re Assign</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Re Assign</em>'.
-	 * @see robotScriptModel.ReAssign
-	 * @generated
-	 */
-	EClass getReAssign();
-
-	/**
-	 * Returns the meta object for the reference '{@link robotScriptModel.ReAssign#getVar <em>Var</em>}'.
+	 * Returns the meta object for the reference '{@link robotScriptModel.AssignVar#getVar <em>Var</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Var</em>'.
-	 * @see robotScriptModel.ReAssign#getVar()
-	 * @see #getReAssign()
+	 * @see robotScriptModel.AssignVar#getVar()
+	 * @see #getAssignVar()
 	 * @generated
 	 */
-	EReference getReAssign_Var();
+	EReference getAssignVar_Var();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.SetSpeed <em>Set Speed</em>}'.
@@ -2386,98 +1609,25 @@ public interface RobotScriptModelPackage extends EPackage {
 	EAttribute getSetSpeed_Unit();
 
 	/**
-	 * Returns the meta object for the reference '{@link robotScriptModel.SetSpeed#getSpeedstate <em>Speedstate</em>}'.
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.SetSpeed#getSpeed <em>Speed</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Speedstate</em>'.
-	 * @see robotScriptModel.SetSpeed#getSpeedstate()
+	 * @return the meta object for the containment reference '<em>Speed</em>'.
+	 * @see robotScriptModel.SetSpeed#getSpeed()
 	 * @see #getSetSpeed()
 	 * @generated
 	 */
-	EReference getSetSpeed_Speedstate();
+	EReference getSetSpeed_Speed();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.UnOp <em>Un Op</em>}'.
+	 * Returns the meta object for class '{@link robotScriptModel.PrimaryBoolExpr <em>Primary Bool Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Un Op</em>'.
-	 * @see robotScriptModel.UnOp
+	 * @return the meta object for class '<em>Primary Bool Expr</em>'.
+	 * @see robotScriptModel.PrimaryBoolExpr
 	 * @generated
 	 */
-	EClass getUnOp();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link robotScriptModel.UnOp#getOp <em>Op</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Op</em>'.
-	 * @see robotScriptModel.UnOp#getOp()
-	 * @see #getUnOp()
-	 * @generated
-	 */
-	EReference getUnOp_Op();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.BinOp <em>Bin Op</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Bin Op</em>'.
-	 * @see robotScriptModel.BinOp
-	 * @generated
-	 */
-	EClass getBinOp();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link robotScriptModel.BinOp#getRightOp <em>Right Op</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Right Op</em>'.
-	 * @see robotScriptModel.BinOp#getRightOp()
-	 * @see #getBinOp()
-	 * @generated
-	 */
-	EReference getBinOp_RightOp();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link robotScriptModel.BinOp#getLeftOp <em>Left Op</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Left Op</em>'.
-	 * @see robotScriptModel.BinOp#getLeftOp()
-	 * @see #getBinOp()
-	 * @generated
-	 */
-	EReference getBinOp_LeftOp();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Neg <em>Neg</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Neg</em>'.
-	 * @see robotScriptModel.Neg
-	 * @generated
-	 */
-	EClass getNeg();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Not <em>Not</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Not</em>'.
-	 * @see robotScriptModel.Not
-	 * @generated
-	 */
-	EClass getNot();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Greater <em>Greater</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Greater</em>'.
-	 * @see robotScriptModel.Greater
-	 * @generated
-	 */
-	EClass getGreater();
+	EClass getPrimaryBoolExpr();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.And <em>And</em>}'.
@@ -2490,6 +1640,17 @@ public interface RobotScriptModelPackage extends EPackage {
 	EClass getAnd();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link robotScriptModel.And#getExprs <em>Exprs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Exprs</em>'.
+	 * @see robotScriptModel.And#getExprs()
+	 * @see #getAnd()
+	 * @generated
+	 */
+	EReference getAnd_Exprs();
+
+	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Add <em>Add</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2500,14 +1661,15 @@ public interface RobotScriptModelPackage extends EPackage {
 	EClass getAdd();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Less <em>Less</em>}'.
+	 * Returns the meta object for the containment reference list '{@link robotScriptModel.Add#getExprs <em>Exprs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Less</em>'.
-	 * @see robotScriptModel.Less
+	 * @return the meta object for the containment reference list '<em>Exprs</em>'.
+	 * @see robotScriptModel.Add#getExprs()
+	 * @see #getAdd()
 	 * @generated
 	 */
-	EClass getLess();
+	EReference getAdd_Exprs();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Or <em>Or</em>}'.
@@ -2520,74 +1682,15 @@ public interface RobotScriptModelPackage extends EPackage {
 	EClass getOr();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Sub <em>Sub</em>}'.
+	 * Returns the meta object for the containment reference list '{@link robotScriptModel.Or#getExprs <em>Exprs</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Sub</em>'.
-	 * @see robotScriptModel.Sub
+	 * @return the meta object for the containment reference list '<em>Exprs</em>'.
+	 * @see robotScriptModel.Or#getExprs()
+	 * @see #getOr()
 	 * @generated
 	 */
-	EClass getSub();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.GEq <em>GEq</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>GEq</em>'.
-	 * @see robotScriptModel.GEq
-	 * @generated
-	 */
-	EClass getGEq();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Equ <em>Equ</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Equ</em>'.
-	 * @see robotScriptModel.Equ
-	 * @generated
-	 */
-	EClass getEqu();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Mul <em>Mul</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Mul</em>'.
-	 * @see robotScriptModel.Mul
-	 * @generated
-	 */
-	EClass getMul();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.LEq <em>LEq</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>LEq</em>'.
-	 * @see robotScriptModel.LEq
-	 * @generated
-	 */
-	EClass getLEq();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.NEq <em>NEq</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>NEq</em>'.
-	 * @see robotScriptModel.NEq
-	 * @generated
-	 */
-	EClass getNEq();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Div <em>Div</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Div</em>'.
-	 * @see robotScriptModel.Div
-	 * @generated
-	 */
-	EClass getDiv();
+	EReference getOr_Exprs();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Movement <em>Movement</em>}'.
@@ -2600,15 +1703,15 @@ public interface RobotScriptModelPackage extends EPackage {
 	EClass getMovement();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link robotScriptModel.Movement#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.Movement#getExpr <em>Expr</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see robotScriptModel.Movement#getExpression()
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.Movement#getExpr()
 	 * @see #getMovement()
 	 * @generated
 	 */
-	EReference getMovement_Expression();
+	EReference getMovement_Expr();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Rotation <em>Rotation</em>}'.
@@ -2642,46 +1745,6 @@ public interface RobotScriptModelPackage extends EPackage {
 	EAttribute getLinear_Unit();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Front <em>Front</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Front</em>'.
-	 * @see robotScriptModel.Front
-	 * @generated
-	 */
-	EClass getFront();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Back <em>Back</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Back</em>'.
-	 * @see robotScriptModel.Back
-	 * @generated
-	 */
-	EClass getBack();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Right <em>Right</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Right</em>'.
-	 * @see robotScriptModel.Right
-	 * @generated
-	 */
-	EClass getRight();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.Left <em>Left</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Left</em>'.
-	 * @see robotScriptModel.Left
-	 * @generated
-	 */
-	EClass getLeft();
-
-	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Value <em>Value</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2692,54 +1755,34 @@ public interface RobotScriptModelPackage extends EPackage {
 	EClass getValue();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.TimeSensor <em>Time Sensor</em>}'.
+	 * Returns the meta object for class '{@link robotScriptModel.Sensor <em>Sensor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Time Sensor</em>'.
-	 * @see robotScriptModel.TimeSensor
+	 * @return the meta object for class '<em>Sensor</em>'.
+	 * @see robotScriptModel.Sensor
 	 * @generated
 	 */
-	EClass getTimeSensor();
+	EClass getSensor();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.DistSensor <em>Dist Sensor</em>}'.
+	 * Returns the meta object for class '{@link robotScriptModel.Literal <em>Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Dist Sensor</em>'.
-	 * @see robotScriptModel.DistSensor
+	 * @return the meta object for class '<em>Literal</em>'.
+	 * @see robotScriptModel.Literal
 	 * @generated
 	 */
-	EClass getDistSensor();
+	EClass getLiteral();
 
 	/**
-	 * Returns the meta object for class '{@link robotScriptModel.BoolLiteral <em>Bool Literal</em>}'.
+	 * Returns the meta object for class '{@link robotScriptModel.Speed <em>Speed</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Bool Literal</em>'.
-	 * @see robotScriptModel.BoolLiteral
+	 * @return the meta object for class '<em>Speed</em>'.
+	 * @see robotScriptModel.Speed
 	 * @generated
 	 */
-	EClass getBoolLiteral();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.NumberLiteral <em>Number Literal</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Number Literal</em>'.
-	 * @see robotScriptModel.NumberLiteral
-	 * @generated
-	 */
-	EClass getNumberLiteral();
-
-	/**
-	 * Returns the meta object for class '{@link robotScriptModel.SpeedState <em>Speed State</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Speed State</em>'.
-	 * @see robotScriptModel.SpeedState
-	 * @generated
-	 */
-	EClass getSpeedState();
+	EClass getSpeed();
 
 	/**
 	 * Returns the meta object for class '{@link robotScriptModel.Variable <em>Variable</em>}'.
@@ -2793,6 +1836,258 @@ public interface RobotScriptModelPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFunCall_Inputs();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.PrimaryAriExpr <em>Primary Ari Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Primary Ari Expr</em>'.
+	 * @see robotScriptModel.PrimaryAriExpr
+	 * @generated
+	 */
+	EClass getPrimaryAriExpr();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.Not <em>Not</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Not</em>'.
+	 * @see robotScriptModel.Not
+	 * @generated
+	 */
+	EClass getNot();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.Not#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.Not#getExpr()
+	 * @see #getNot()
+	 * @generated
+	 */
+	EReference getNot_Expr();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.Compare <em>Compare</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Compare</em>'.
+	 * @see robotScriptModel.Compare
+	 * @generated
+	 */
+	EClass getCompare();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link robotScriptModel.Compare#getExprs <em>Exprs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Exprs</em>'.
+	 * @see robotScriptModel.Compare#getExprs()
+	 * @see #getCompare()
+	 * @generated
+	 */
+	EReference getCompare_Exprs();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.Mul <em>Mul</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Mul</em>'.
+	 * @see robotScriptModel.Mul
+	 * @generated
+	 */
+	EClass getMul();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link robotScriptModel.Mul#getExprs <em>Exprs</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Exprs</em>'.
+	 * @see robotScriptModel.Mul#getExprs()
+	 * @see #getMul()
+	 * @generated
+	 */
+	EReference getMul_Exprs();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.AriUnOp <em>Ari Un Op</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Ari Un Op</em>'.
+	 * @see robotScriptModel.AriUnOp
+	 * @generated
+	 */
+	EClass getAriUnOp();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.AriUnOp#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.AriUnOp#getExpr()
+	 * @see #getAriUnOp()
+	 * @generated
+	 */
+	EReference getAriUnOp_Expr();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.Statement <em>Statement</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Statement</em>'.
+	 * @see robotScriptModel.Statement
+	 * @generated
+	 */
+	EClass getStatement();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.Block <em>Block</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Block</em>'.
+	 * @see robotScriptModel.Block
+	 * @generated
+	 */
+	EClass getBlock();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link robotScriptModel.Block#getStmts <em>Stmts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Stmts</em>'.
+	 * @see robotScriptModel.Block#getStmts()
+	 * @see #getBlock()
+	 * @generated
+	 */
+	EReference getBlock_Stmts();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.SimpleVarDecl <em>Simple Var Decl</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Simple Var Decl</em>'.
+	 * @see robotScriptModel.SimpleVarDecl
+	 * @generated
+	 */
+	EClass getSimpleVarDecl();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.VarDeclInit <em>Var Decl Init</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Var Decl Init</em>'.
+	 * @see robotScriptModel.VarDeclInit
+	 * @generated
+	 */
+	EClass getVarDeclInit();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.VarDeclInit#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.VarDeclInit#getExpr()
+	 * @see #getVarDeclInit()
+	 * @generated
+	 */
+	EReference getVarDeclInit_Expr();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.LoopStmt <em>Loop Stmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Loop Stmt</em>'.
+	 * @see robotScriptModel.LoopStmt
+	 * @generated
+	 */
+	EClass getLoopStmt();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.LoopStmt#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.LoopStmt#getExpr()
+	 * @see #getLoopStmt()
+	 * @generated
+	 */
+	EReference getLoopStmt_Expr();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.LoopStmt#getStmt <em>Stmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Stmt</em>'.
+	 * @see robotScriptModel.LoopStmt#getStmt()
+	 * @see #getLoopStmt()
+	 * @generated
+	 */
+	EReference getLoopStmt_Stmt();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.IfStmt <em>If Stmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>If Stmt</em>'.
+	 * @see robotScriptModel.IfStmt
+	 * @generated
+	 */
+	EClass getIfStmt();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.IfStmt#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.IfStmt#getExpr()
+	 * @see #getIfStmt()
+	 * @generated
+	 */
+	EReference getIfStmt_Expr();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.IfStmt#getIfstmt <em>Ifstmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Ifstmt</em>'.
+	 * @see robotScriptModel.IfStmt#getIfstmt()
+	 * @see #getIfStmt()
+	 * @generated
+	 */
+	EReference getIfStmt_Ifstmt();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.IfStmt#getElsestmt <em>Elsestmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Elsestmt</em>'.
+	 * @see robotScriptModel.IfStmt#getElsestmt()
+	 * @see #getIfStmt()
+	 * @generated
+	 */
+	EReference getIfStmt_Elsestmt();
+
+	/**
+	 * Returns the meta object for class '{@link robotScriptModel.ReturnStmt <em>Return Stmt</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Return Stmt</em>'.
+	 * @see robotScriptModel.ReturnStmt
+	 * @generated
+	 */
+	EClass getReturnStmt();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link robotScriptModel.ReturnStmt#getExpr <em>Expr</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expr</em>'.
+	 * @see robotScriptModel.ReturnStmt#getExpr()
+	 * @see #getReturnStmt()
+	 * @generated
+	 */
+	EReference getReturnStmt_Expr();
 
 	/**
 	 * Returns the meta object for enum '{@link robotScriptModel.Unit <em>Unit</em>}'.
@@ -2872,12 +2167,12 @@ public interface RobotScriptModelPackage extends EPackage {
 		EReference FUNCTION_DEF__RETURN_TYPE = eINSTANCE.getFunctionDef_ReturnType();
 
 		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Block</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION_DEF__BODY = eINSTANCE.getFunctionDef_Body();
+		EReference FUNCTION_DEF__BLOCK = eINSTANCE.getFunctionDef_Block();
 
 		/**
 		 * The meta object literal for the '<em><b>Inputs</b></em>' containment reference list feature.
@@ -2898,20 +2193,10 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass ANY_TYPE = eINSTANCE.getAnyType();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.Command <em>Command</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.VarDecl <em>Var Decl</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.Command
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getCommand()
-		 * @generated
-		 */
-		EClass COMMAND = eINSTANCE.getCommand();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.VarDeclImpl <em>Var Decl</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.VarDeclImpl
+		 * @see robotScriptModel.VarDecl
 		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getVarDecl()
 		 * @generated
 		 */
@@ -2944,72 +2229,14 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass VOID_TYPE = eINSTANCE.getVoidType();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.DataType <em>Data Type</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.impl.DataTypeImpl <em>Data Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.DataType
+		 * @see robotScriptModel.impl.DataTypeImpl
 		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getDataType()
 		 * @generated
 		 */
 		EClass DATA_TYPE = eINSTANCE.getDataType();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.NumberTypeImpl <em>Number Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.NumberTypeImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNumberType()
-		 * @generated
-		 */
-		EClass NUMBER_TYPE = eINSTANCE.getNumberType();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.BooleanTypeImpl <em>Boolean Type</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.BooleanTypeImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBooleanType()
-		 * @generated
-		 */
-		EClass BOOLEAN_TYPE = eINSTANCE.getBooleanType();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.LoopImpl <em>Loop</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.LoopImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLoop()
-		 * @generated
-		 */
-		EClass LOOP = eINSTANCE.getLoop();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.IfImpl <em>If</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.IfImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getIf()
-		 * @generated
-		 */
-		EClass IF = eINSTANCE.getIf();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.IfElseImpl <em>If Else</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.IfElseImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getIfElse()
-		 * @generated
-		 */
-		EClass IF_ELSE = eINSTANCE.getIfElse();
-
-		/**
-		 * The meta object literal for the '<em><b>Body Else</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference IF_ELSE__BODY_ELSE = eINSTANCE.getIfElse_BodyElse();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.Expression <em>Expression</em>}' class.
@@ -3022,32 +2249,6 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass EXPRESSION = eINSTANCE.getExpression();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.ControlStructure <em>Control Structure</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.ControlStructure
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getControlStructure()
-		 * @generated
-		 */
-		EClass CONTROL_STRUCTURE = eINSTANCE.getControlStructure();
-
-		/**
-		 * The meta object literal for the '<em><b>Body</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONTROL_STRUCTURE__BODY = eINSTANCE.getControlStructure_Body();
-
-		/**
-		 * The meta object literal for the '<em><b>Cond</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference CONTROL_STRUCTURE__COND = eINSTANCE.getControlStructure_Cond();
-
-		/**
 		 * The meta object literal for the '{@link robotScriptModel.Assign <em>Assign</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3058,40 +2259,22 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass ASSIGN = eINSTANCE.getAssign();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ASSIGN__EXPRESSION = eINSTANCE.getAssign_Expression();
+		EReference ASSIGN__EXPR = eINSTANCE.getAssign_Expr();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.AssignAtDeclImpl <em>Assign At Decl</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.impl.AssignVarImpl <em>Assign Var</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.AssignAtDeclImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAssignAtDecl()
+		 * @see robotScriptModel.impl.AssignVarImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAssignVar()
 		 * @generated
 		 */
-		EClass ASSIGN_AT_DECL = eINSTANCE.getAssignAtDecl();
-
-		/**
-		 * The meta object literal for the '<em><b>Vardecl</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference ASSIGN_AT_DECL__VARDECL = eINSTANCE.getAssignAtDecl_Vardecl();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.ReAssignImpl <em>Re Assign</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.ReAssignImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getReAssign()
-		 * @generated
-		 */
-		EClass RE_ASSIGN = eINSTANCE.getReAssign();
+		EClass ASSIGN_VAR = eINSTANCE.getAssignVar();
 
 		/**
 		 * The meta object literal for the '<em><b>Var</b></em>' reference feature.
@@ -3099,7 +2282,7 @@ public interface RobotScriptModelPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference RE_ASSIGN__VAR = eINSTANCE.getReAssign_Var();
+		EReference ASSIGN_VAR__VAR = eINSTANCE.getAssignVar_Var();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.impl.SetSpeedImpl <em>Set Speed</em>}' class.
@@ -3120,86 +2303,22 @@ public interface RobotScriptModelPackage extends EPackage {
 		EAttribute SET_SPEED__UNIT = eINSTANCE.getSetSpeed_Unit();
 
 		/**
-		 * The meta object literal for the '<em><b>Speedstate</b></em>' reference feature.
+		 * The meta object literal for the '<em><b>Speed</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SET_SPEED__SPEEDSTATE = eINSTANCE.getSetSpeed_Speedstate();
+		EReference SET_SPEED__SPEED = eINSTANCE.getSetSpeed_Speed();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.UnOp <em>Un Op</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.PrimaryBoolExpr <em>Primary Bool Expr</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.UnOp
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getUnOp()
+		 * @see robotScriptModel.PrimaryBoolExpr
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getPrimaryBoolExpr()
 		 * @generated
 		 */
-		EClass UN_OP = eINSTANCE.getUnOp();
-
-		/**
-		 * The meta object literal for the '<em><b>Op</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference UN_OP__OP = eINSTANCE.getUnOp_Op();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.BinOp <em>Bin Op</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.BinOp
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBinOp()
-		 * @generated
-		 */
-		EClass BIN_OP = eINSTANCE.getBinOp();
-
-		/**
-		 * The meta object literal for the '<em><b>Right Op</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BIN_OP__RIGHT_OP = eINSTANCE.getBinOp_RightOp();
-
-		/**
-		 * The meta object literal for the '<em><b>Left Op</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference BIN_OP__LEFT_OP = eINSTANCE.getBinOp_LeftOp();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.NegImpl <em>Neg</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.NegImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNeg()
-		 * @generated
-		 */
-		EClass NEG = eINSTANCE.getNeg();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.NotImpl <em>Not</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.NotImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNot()
-		 * @generated
-		 */
-		EClass NOT = eINSTANCE.getNot();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.GreaterImpl <em>Greater</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.GreaterImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getGreater()
-		 * @generated
-		 */
-		EClass GREATER = eINSTANCE.getGreater();
+		EClass PRIMARY_BOOL_EXPR = eINSTANCE.getPrimaryBoolExpr();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.impl.AndImpl <em>And</em>}' class.
@@ -3212,6 +2331,14 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass AND = eINSTANCE.getAnd();
 
 		/**
+		 * The meta object literal for the '<em><b>Exprs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference AND__EXPRS = eINSTANCE.getAnd_Exprs();
+
+		/**
 		 * The meta object literal for the '{@link robotScriptModel.impl.AddImpl <em>Add</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3222,14 +2349,12 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass ADD = eINSTANCE.getAdd();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.LessImpl <em>Less</em>}' class.
+		 * The meta object literal for the '<em><b>Exprs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.LessImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLess()
 		 * @generated
 		 */
-		EClass LESS = eINSTANCE.getLess();
+		EReference ADD__EXPRS = eINSTANCE.getAdd_Exprs();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.impl.OrImpl <em>Or</em>}' class.
@@ -3242,74 +2367,12 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass OR = eINSTANCE.getOr();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.SubImpl <em>Sub</em>}' class.
+		 * The meta object literal for the '<em><b>Exprs</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.SubImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSub()
 		 * @generated
 		 */
-		EClass SUB = eINSTANCE.getSub();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.GEqImpl <em>GEq</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.GEqImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getGEq()
-		 * @generated
-		 */
-		EClass GEQ = eINSTANCE.getGEq();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.EquImpl <em>Equ</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.EquImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getEqu()
-		 * @generated
-		 */
-		EClass EQU = eINSTANCE.getEqu();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.MulImpl <em>Mul</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.MulImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getMul()
-		 * @generated
-		 */
-		EClass MUL = eINSTANCE.getMul();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.LEqImpl <em>LEq</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.LEqImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLEq()
-		 * @generated
-		 */
-		EClass LEQ = eINSTANCE.getLEq();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.NEqImpl <em>NEq</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.NEqImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNEq()
-		 * @generated
-		 */
-		EClass NEQ = eINSTANCE.getNEq();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.DivImpl <em>Div</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.DivImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getDiv()
-		 * @generated
-		 */
-		EClass DIV = eINSTANCE.getDiv();
+		EReference OR__EXPRS = eINSTANCE.getOr_Exprs();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.Movement <em>Movement</em>}' class.
@@ -3322,12 +2385,12 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass MOVEMENT = eINSTANCE.getMovement();
 
 		/**
-		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MOVEMENT__EXPRESSION = eINSTANCE.getMovement_Expression();
+		EReference MOVEMENT__EXPR = eINSTANCE.getMovement_Expr();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.impl.RotationImpl <em>Rotation</em>}' class.
@@ -3340,10 +2403,10 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass ROTATION = eINSTANCE.getRotation();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.Linear <em>Linear</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.impl.LinearImpl <em>Linear</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.Linear
+		 * @see robotScriptModel.impl.LinearImpl
 		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLinear()
 		 * @generated
 		 */
@@ -3358,46 +2421,6 @@ public interface RobotScriptModelPackage extends EPackage {
 		EAttribute LINEAR__UNIT = eINSTANCE.getLinear_Unit();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.FrontImpl <em>Front</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.FrontImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getFront()
-		 * @generated
-		 */
-		EClass FRONT = eINSTANCE.getFront();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.BackImpl <em>Back</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.BackImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBack()
-		 * @generated
-		 */
-		EClass BACK = eINSTANCE.getBack();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.RightImpl <em>Right</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.RightImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getRight()
-		 * @generated
-		 */
-		EClass RIGHT = eINSTANCE.getRight();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.LeftImpl <em>Left</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.LeftImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLeft()
-		 * @generated
-		 */
-		EClass LEFT = eINSTANCE.getLeft();
-
-		/**
 		 * The meta object literal for the '{@link robotScriptModel.Value <em>Value</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -3408,54 +2431,34 @@ public interface RobotScriptModelPackage extends EPackage {
 		EClass VALUE = eINSTANCE.getValue();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.TimeSensorImpl <em>Time Sensor</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.impl.SensorImpl <em>Sensor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.TimeSensorImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getTimeSensor()
+		 * @see robotScriptModel.impl.SensorImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSensor()
 		 * @generated
 		 */
-		EClass TIME_SENSOR = eINSTANCE.getTimeSensor();
+		EClass SENSOR = eINSTANCE.getSensor();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.DistSensorImpl <em>Dist Sensor</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.impl.LiteralImpl <em>Literal</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.DistSensorImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getDistSensor()
+		 * @see robotScriptModel.impl.LiteralImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLiteral()
 		 * @generated
 		 */
-		EClass DIST_SENSOR = eINSTANCE.getDistSensor();
+		EClass LITERAL = eINSTANCE.getLiteral();
 
 		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.BoolLiteralImpl <em>Bool Literal</em>}' class.
+		 * The meta object literal for the '{@link robotScriptModel.impl.SpeedImpl <em>Speed</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.BoolLiteralImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBoolLiteral()
+		 * @see robotScriptModel.impl.SpeedImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSpeed()
 		 * @generated
 		 */
-		EClass BOOL_LITERAL = eINSTANCE.getBoolLiteral();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.NumberLiteralImpl <em>Number Literal</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.NumberLiteralImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNumberLiteral()
-		 * @generated
-		 */
-		EClass NUMBER_LITERAL = eINSTANCE.getNumberLiteral();
-
-		/**
-		 * The meta object literal for the '{@link robotScriptModel.impl.SpeedStateImpl <em>Speed State</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see robotScriptModel.impl.SpeedStateImpl
-		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSpeedState()
-		 * @generated
-		 */
-		EClass SPEED_STATE = eINSTANCE.getSpeedState();
+		EClass SPEED = eINSTANCE.getSpeed();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.impl.VariableImpl <em>Variable</em>}' class.
@@ -3500,6 +2503,222 @@ public interface RobotScriptModelPackage extends EPackage {
 		 * @generated
 		 */
 		EReference FUN_CALL__INPUTS = eINSTANCE.getFunCall_Inputs();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.PrimaryAriExpr <em>Primary Ari Expr</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.PrimaryAriExpr
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getPrimaryAriExpr()
+		 * @generated
+		 */
+		EClass PRIMARY_ARI_EXPR = eINSTANCE.getPrimaryAriExpr();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.NotImpl <em>Not</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.NotImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getNot()
+		 * @generated
+		 */
+		EClass NOT = eINSTANCE.getNot();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference NOT__EXPR = eINSTANCE.getNot_Expr();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.CompareImpl <em>Compare</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.CompareImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getCompare()
+		 * @generated
+		 */
+		EClass COMPARE = eINSTANCE.getCompare();
+
+		/**
+		 * The meta object literal for the '<em><b>Exprs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference COMPARE__EXPRS = eINSTANCE.getCompare_Exprs();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.MulImpl <em>Mul</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.MulImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getMul()
+		 * @generated
+		 */
+		EClass MUL = eINSTANCE.getMul();
+
+		/**
+		 * The meta object literal for the '<em><b>Exprs</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference MUL__EXPRS = eINSTANCE.getMul_Exprs();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.AriUnOpImpl <em>Ari Un Op</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.AriUnOpImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getAriUnOp()
+		 * @generated
+		 */
+		EClass ARI_UN_OP = eINSTANCE.getAriUnOp();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference ARI_UN_OP__EXPR = eINSTANCE.getAriUnOp_Expr();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.Statement <em>Statement</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.Statement
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getStatement()
+		 * @generated
+		 */
+		EClass STATEMENT = eINSTANCE.getStatement();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.BlockImpl <em>Block</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.BlockImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getBlock()
+		 * @generated
+		 */
+		EClass BLOCK = eINSTANCE.getBlock();
+
+		/**
+		 * The meta object literal for the '<em><b>Stmts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference BLOCK__STMTS = eINSTANCE.getBlock_Stmts();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.SimpleVarDeclImpl <em>Simple Var Decl</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.SimpleVarDeclImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getSimpleVarDecl()
+		 * @generated
+		 */
+		EClass SIMPLE_VAR_DECL = eINSTANCE.getSimpleVarDecl();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.VarDeclInitImpl <em>Var Decl Init</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.VarDeclInitImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getVarDeclInit()
+		 * @generated
+		 */
+		EClass VAR_DECL_INIT = eINSTANCE.getVarDeclInit();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference VAR_DECL_INIT__EXPR = eINSTANCE.getVarDeclInit_Expr();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.LoopStmtImpl <em>Loop Stmt</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.LoopStmtImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getLoopStmt()
+		 * @generated
+		 */
+		EClass LOOP_STMT = eINSTANCE.getLoopStmt();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOP_STMT__EXPR = eINSTANCE.getLoopStmt_Expr();
+
+		/**
+		 * The meta object literal for the '<em><b>Stmt</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference LOOP_STMT__STMT = eINSTANCE.getLoopStmt_Stmt();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.IfStmtImpl <em>If Stmt</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.IfStmtImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getIfStmt()
+		 * @generated
+		 */
+		EClass IF_STMT = eINSTANCE.getIfStmt();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_STMT__EXPR = eINSTANCE.getIfStmt_Expr();
+
+		/**
+		 * The meta object literal for the '<em><b>Ifstmt</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_STMT__IFSTMT = eINSTANCE.getIfStmt_Ifstmt();
+
+		/**
+		 * The meta object literal for the '<em><b>Elsestmt</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference IF_STMT__ELSESTMT = eINSTANCE.getIfStmt_Elsestmt();
+
+		/**
+		 * The meta object literal for the '{@link robotScriptModel.impl.ReturnStmtImpl <em>Return Stmt</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see robotScriptModel.impl.ReturnStmtImpl
+		 * @see robotScriptModel.impl.RobotScriptModelPackageImpl#getReturnStmt()
+		 * @generated
+		 */
+		EClass RETURN_STMT = eINSTANCE.getReturnStmt();
+
+		/**
+		 * The meta object literal for the '<em><b>Expr</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference RETURN_STMT__EXPR = eINSTANCE.getReturnStmt_Expr();
 
 		/**
 		 * The meta object literal for the '{@link robotScriptModel.Unit <em>Unit</em>}' enum.

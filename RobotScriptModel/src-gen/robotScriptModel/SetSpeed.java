@@ -12,7 +12,7 @@ package robotScriptModel;
  * </p>
  * <ul>
  *   <li>{@link robotScriptModel.SetSpeed#getUnit <em>Unit</em>}</li>
- *   <li>{@link robotScriptModel.SetSpeed#getSpeedstate <em>Speedstate</em>}</li>
+ *   <li>{@link robotScriptModel.SetSpeed#getSpeed <em>Speed</em>}</li>
  * </ul>
  *
  * @see robotScriptModel.RobotScriptModelPackage#getSetSpeed()
@@ -46,25 +46,25 @@ public interface SetSpeed extends Assign {
 	void setUnit(Unit value);
 
 	/**
-	 * Returns the value of the '<em><b>Speedstate</b></em>' reference.
+	 * Returns the value of the '<em><b>Speed</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Speedstate</em>' reference.
-	 * @see #setSpeedstate(SpeedState)
-	 * @see robotScriptModel.RobotScriptModelPackage#getSetSpeed_Speedstate()
-	 * @model required="true"
+	 * @return the value of the '<em>Speed</em>' containment reference.
+	 * @see #setSpeed(Speed)
+	 * @see robotScriptModel.RobotScriptModelPackage#getSetSpeed_Speed()
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
-	SpeedState getSpeedstate();
+	Speed getSpeed();
 
 	/**
-	 * Sets the value of the '{@link robotScriptModel.SetSpeed#getSpeedstate <em>Speedstate</em>}' reference.
+	 * Sets the value of the '{@link robotScriptModel.SetSpeed#getSpeed <em>Speed</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Speedstate</em>' reference.
-	 * @see #getSpeedstate()
+	 * @param value the new value of the '<em>Speed</em>' containment reference.
+	 * @see #getSpeed()
 	 * @generated
 	 */
-	void setSpeedstate(SpeedState value);
+	void setSpeed(Speed value);
 
 } // SetSpeed
