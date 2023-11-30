@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: robotScriptXText
+Bundle-ManifestVersion: 2
+Bundle-Name: robotScriptXText
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0.qualifier
+Bundle-SymbolicName: robotScriptXText; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: RobotScriptModel,
+ org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.16.0",
+ io.typefox.xtext2langium;bundle-version="0.4.0",
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtext.util,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: robotScriptXText.validation,
+ robotScriptXText.formatting2,
+ robotScriptXText.parser.antlr.internal,
+ robotScriptXText.parser.antlr,
+ robotScriptXText.generator,
+ robotScriptXText,
+ robotScriptXText.serializer,
+ robotScriptXText.services,
+ robotScriptXText.scoping
+Import-Package: org.apache.log4j
