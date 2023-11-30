@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/RobotScriptModel/src-gen" creationIcons="false"
+    editDirectory="/RobotScriptModel.edit/src-gen" editorDirectory="/RobotScriptModel.editor/src-gen"
+    modelPluginID="RobotScriptModel" modelName="RobotScriptModel" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="17.0"
+    copyrightFields="false" operationReflection="true" importOrganizing="true">
+  <foreignModel>robotScriptModel.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="RobotScriptModel" disposableProviderFactory="true" ecorePackage="robotScriptModel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="robotScriptModel.ecore#//Unit">
+      <genEnumLiterals ecoreEnumLiteral="robotScriptModel.ecore#//Unit/m"/>
+      <genEnumLiterals ecoreEnumLiteral="robotScriptModel.ecore#//Unit/dm"/>
+      <genEnumLiterals ecoreEnumLiteral="robotScriptModel.ecore#//Unit/cm"/>
+      <genEnumLiterals ecoreEnumLiteral="robotScriptModel.ecore#//Unit/mm"/>
+    </genEnums>
+    <genClasses ecoreClass="robotScriptModel.ecore#//EntryPoint">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//EntryPoint/functions"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//FunctionDef">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute robotScriptModel.ecore#//FunctionDef/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//FunctionDef/returnType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//FunctionDef/block"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//FunctionDef/inputs"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//AnyType"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//VarDecl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//VarDecl/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute robotScriptModel.ecore#//VarDecl/name"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//VoidType"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//DataType"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Expression"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Assign">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Assign/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//AssignVar">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//AssignVar/var"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//SetSpeed">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute robotScriptModel.ecore#//SetSpeed/unit"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//SetSpeed/speed"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//PrimaryBoolExpr"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//And">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//And/exprs"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Add">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Add/exprs"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Or">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Or/exprs"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Movement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Movement/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Rotation"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Linear">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute robotScriptModel.ecore#//Linear/unit"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Value"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Sensor"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Literal"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Speed"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Variable">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Variable/var"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//FunCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//FunCall/fun"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//FunCall/inputs"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//PrimaryAriExpr"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Not">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Not/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Compare">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Compare/exprs"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Mul">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Mul/exprs"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//AriUnOp">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//AriUnOp/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Statement"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//Block/stmts"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//SimpleVarDecl"/>
+    <genClasses ecoreClass="robotScriptModel.ecore#//VarDeclInit">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//VarDeclInit/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//LoopStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//LoopStmt/expr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//LoopStmt/stmt"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//IfStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//IfStmt/expr"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//IfStmt/ifstmt"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//IfStmt/elsestmt"/>
+    </genClasses>
+    <genClasses ecoreClass="robotScriptModel.ecore#//ReturnStmt">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference robotScriptModel.ecore#//ReturnStmt/expr"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

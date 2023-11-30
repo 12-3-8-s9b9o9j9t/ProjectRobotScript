@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="robotScriptModel" nsURI="http://www.example.org/robotScriptModel"
+    nsPrefix="robotScriptModel">
+  <eClassifiers xsi:type="ecore:EClass" name="EntryPoint">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//FunctionDef" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionDef">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" lowerBound="1"
+        eType="#//AnyType" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="block" lowerBound="1" eType="#//Block"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//SimpleVarDecl" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyType" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VarDecl" abstract="true" interface="true"
+      eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" lowerBound="1" eType="#//DataType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="VoidType" eSuperTypes="#//AnyType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DataType" eSuperTypes="#//AnyType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Expression" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Assign" abstract="true" interface="true"
+      eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssignVar" eSuperTypes="#//Assign">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="var" lowerBound="1" eType="#//VarDecl"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SetSpeed" eSuperTypes="#//Assign">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//Unit"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="speed" lowerBound="1" eType="#//Speed"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="Unit">
+    <eLiterals name="m" literal="m"/>
+    <eLiterals name="dm" value="1" literal="dm"/>
+    <eLiterals name="cm" value="2" literal="cm"/>
+    <eLiterals name="mm" value="3" literal="mm"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimaryBoolExpr" abstract="true" interface="true"
+      eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="And" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exprs" lowerBound="1" upperBound="-1"
+        eType="#//PrimaryBoolExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Add" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exprs" lowerBound="1" upperBound="-1"
+        eType="#//Mul" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Or" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exprs" lowerBound="1" upperBound="-1"
+        eType="#//And" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Movement" abstract="true" interface="true"
+      eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rotation" eSuperTypes="#//Movement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Linear" eSuperTypes="#//Movement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="unit" eType="#//Unit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Value" abstract="true" interface="true"
+      eSuperTypes="#//PrimaryAriExpr"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Sensor" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Literal" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Speed" eSuperTypes="#//Value"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//Value">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="var" lowerBound="1" eType="#//VarDecl"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunCall" eSuperTypes="#//Value #//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fun" lowerBound="1" eType="#//FunctionDef"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputs" upperBound="-1"
+        eType="#//Expression" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrimaryAriExpr" abstract="true" interface="true"
+      eSuperTypes="#//Expression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Not" eSuperTypes="#//PrimaryBoolExpr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Compare"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Compare" eSuperTypes="#//PrimaryBoolExpr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exprs" lowerBound="1" upperBound="-1"
+        eType="#//Add" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Mul" eSuperTypes="#//Expression">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exprs" lowerBound="1" upperBound="-1"
+        eType="#//PrimaryAriExpr" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AriUnOp" eSuperTypes="#//PrimaryAriExpr">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Statement" abstract="true" interface="true"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Block" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stmts" upperBound="-1"
+        eType="#//Statement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SimpleVarDecl" eSuperTypes="#//VarDecl"/>
+  <eClassifiers xsi:type="ecore:EClass" name="VarDeclInit" eSuperTypes="#//VarDecl">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LoopStmt" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="stmt" lowerBound="1" eType="#//Statement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfStmt" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" lowerBound="1" eType="#//Expression"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ifstmt" lowerBound="1"
+        eType="#//Statement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="elsestmt" eType="#//Statement"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReturnStmt" eSuperTypes="#//Statement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expr" eType="#//Expression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>
