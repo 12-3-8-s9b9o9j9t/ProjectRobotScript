@@ -3,7 +3,7 @@ import 'Terminals'
 import 'robotScriptModel-types'
 
 entry EntryPoint returns EntryPoint:
-    {EntryPoint} 'EntryPoint' '{' ('functions' '{' functions+=FunctionDef  ("," functions+=FunctionDef  )* '}' )? '}'  
+    {EntryPoint} (functions+=FunctionDef)*
 ;
 
 AnyType returns AnyType:
@@ -11,7 +11,7 @@ AnyType returns AnyType:
 ;
 
 Statement returns Statement:
-    AssignVar | SetSpeed | Rotation | Linear | FunCall | Block | SimpleVarDecl | VarDeclInit | LoopStmt | IfStmt | ReturnStmt 
+    AssignVar | SetSpeed | Rotation | Linear | FunCall | Block | VarDecl | LoopStmt | IfStmt | ReturnStmt 
 ;
 
 Expression returns Expression:
@@ -19,7 +19,7 @@ Expression returns Expression:
 ;
 
 VarDecl returns VarDecl:
-    SimpleVarDecl | VarDeclInit 
+    (SimpleVarDecl | VarDeclInit ) ';'
 ;
 
 PrimaryBoolExpr returns PrimaryBoolExpr:
@@ -31,75 +31,71 @@ PrimaryAriExpr returns PrimaryAriExpr:
 ;
 
 FunctionDef returns FunctionDef:
-    'FunctionDef' name=EString  '{' 'returnType' returnType=AnyType  'block' block=Block  ('inputs' '{' inputs+=SimpleVarDecl  ("," inputs+=SimpleVarDecl  )* '}' )? '}'  
-;
-
-EString returns string:
-    STRING | ID 
+    returnType=AnyType  name=ID '('(inputs+=SimpleVarDecl  (',' inputs+=SimpleVarDecl)* )? ')' block=Block
 ;
 
 Block returns Block:
-    {Block} 'Block' '{' ('stmts' '{' stmts+=Statement  ("," stmts+=Statement  )* '}' )? '}'  
+    {Block} '{' (stmts+=Statement)* '}'
 ;
 
 SimpleVarDecl returns SimpleVarDecl:
-    'SimpleVarDecl' name=EString  '{' 'type' ^type=DataType  '}'  
+    ^type=DataType name=ID  
 ;
 
 VoidType returns VoidType:
-    {VoidType} 'VoidType'  
+    {VoidType} 'void'  
 ;
 
 DataType returns DataType:
-    {DataType} 'DataType'  
+    {DataType} 'bool' | 'number'  
 ;
 
 AssignVar returns AssignVar:
-    'AssignVar' '{' 'var' var=[VarDecl:EString ] 'expr' expr=Expression  '}'  
+    var=[VarDecl:ID ] '=' expr=Expression ';'
 ;
 
 SetSpeed returns SetSpeed:
-    'SetSpeed' '{' ('unit' unit=Unit  )? 'expr' expr=Expression  'speed' speed=Speed  '}'  
+    speed=Speed '=' expr=Expression (unit=Unit)? ';'  
 ;
 
 Rotation returns Rotation:
-    'Rotation' '{' 'expr' expr=Expression  '}'  
+    'Rotate' expr=Expression ';'
 ;
 
 Linear returns Linear:
-    'Linear' '{' ('unit' unit=Unit  )? 'expr' expr=Expression  '}'  
+    'Move' expr=Expression (unit=Unit)? ';'
 ;
 
 FunCall returns FunCall:
-    'FunCall' '{' 'fun' fun=[FunctionDef:EString ] ('inputs' '{' inputs+=Expression  ("," inputs+=Expression  )* '}' )? '}'  
+    fun=[FunctionDef:ID ] '(' (inputs+=Expression  (',' inputs+=Expression  )* )? ')'  ';'
 ;
 
 VarDeclInit returns VarDeclInit:
-    'VarDeclInit' name=EString  '{' 'type' ^type=DataType  'expr' expr=Expression  '}'  
+    ^type=DataType name=ID '=' expr=Expression
 ;
 
 LoopStmt returns LoopStmt:
-    'LoopStmt' '{' 'expr' expr=Expression  'stmt' stmt=Statement  '}'  
+    'loop' '(' expr=Expression ')' stmt=Statement  
 ;
 
 IfStmt returns IfStmt:
-    'IfStmt' '{' 'expr' expr=Expression  'ifstmt' ifstmt=Statement  ('elsestmt' elsestmt=Statement  )? '}'  
+    'if' '(' expr=Expression ')' ifstmt=Statement  ('else' elsestmt=Statement  )?  
 ;
 
 ReturnStmt returns ReturnStmt:
-    {ReturnStmt} 'ReturnStmt' '{' ('expr' expr=Expression  )? '}'  
+    {ReturnStmt} 'return' ('expr' expr=Expression  )? ';'  
 ;
 
 And returns And:
-    'And' '{' 'exprs' '{' exprs+=PrimaryBoolExpr  ("," exprs+=PrimaryBoolExpr  )* '}' '}'  
+    exprs+=PrimaryBoolExpr  ('&&' exprs+=PrimaryBoolExpr  )*  
 ;
 
 Add returns Add:
-    'Add' '{' 'exprs' '{' exprs+=Mul  ("," exprs+=Mul  )* '}' '}'  
+    exprs+=Mul  ('+' exprs+=Mul  )*  
 ;
 
 Or returns Or:
-    'Or' '{' 'exprs' '{' exprs+=And  ("," exprs+=And  )* '}' '}'  
+    exprs+=And  ('||' exprs+=And  )*
 ;
 
 Sensor returns Sensor:
@@ -107,7 +103,7 @@ Sensor returns Sensor:
 ;
 
 Literal returns Literal:
-    {Literal} 'Literal'  
+    {Literal} 'true' | 'false' 
 ;
 
 Speed returns Speed:
@@ -115,23 +111,23 @@ Speed returns Speed:
 ;
 
 Variable returns Variable:
-    'Variable' '{' 'var' var=[VarDecl:EString ] '}'  
+    var=[VarDecl:ID ]  
 ;
 
 Not returns Not:
-    'Not' '{' 'expr' expr=Compare  '}'  
+    '!' expr=Compare
 ;
 
 Compare returns Compare:
-    'Compare' '{' 'exprs' '{' exprs+=Add  ("," exprs+=Add  )* '}' '}'  
+    exprs+=Add  ('==' exprs+=Add  )*
 ;
 
 Mul returns Mul:
-    'Mul' '{' 'exprs' '{' exprs+=PrimaryAriExpr  ("," exprs+=PrimaryAriExpr  )* '}' '}'  
+    exprs+=PrimaryAriExpr  ('*' exprs+=PrimaryAriExpr  )*
 ;
 
 AriUnOp returns AriUnOp:
-    'AriUnOp' '{' 'expr' expr=Expression  '}'  
+    '-'expr=Expression | '(' expr=Expression ')'
 ;
 
 Unit returns Unit:
