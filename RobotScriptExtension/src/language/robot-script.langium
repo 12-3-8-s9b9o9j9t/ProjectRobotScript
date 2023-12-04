@@ -2,139 +2,129 @@ grammar RobotScript
 import 'Terminals'
 import 'robotScriptModel-types'
 
-entry EntryPoint returns EntryPoint:
-    {EntryPoint} (functions+=FunctionDef)*
+entry EntryPoint:
+    (funs+=FunDef)*
 ;
 
-AnyType returns AnyType:
-    VoidType | DataType 
+FunDef:
+    ^type=AnyType  name=ID '('(params+=SimpleVarDecl  (',' params+=SimpleVarDecl)* )? ')' body=Block
 ;
 
-Statement returns Statement:
-    AssignVar | SetSpeed | Rotation | Linear | FunCall | Block | VarDecl | LoopStmt | IfStmt | ReturnStmt 
+AnyType:
+    VoidType | DataType
 ;
 
-Expression returns Expression:
-    And | Add | Or | Sensor | Literal | Speed | Variable | FunCall | Not | Compare | Mul | AriUnOp 
+VoidType infers AnyType:
+    name='void'
 ;
 
-VarDecl returns VarDecl:
-    (SimpleVarDecl | VarDeclInit ) ';'
+DataType infers AnyType:
+    name=('bool' | 'number')
 ;
 
-PrimaryBoolExpr returns PrimaryBoolExpr:
-    Not | Compare 
-;
+VarDecl: SimpleVarDecl | VarDeclInit;
 
-PrimaryAriExpr returns PrimaryAriExpr:
-    Sensor | Literal | Speed | Variable | FunCall | AriUnOp 
-;
-
-FunctionDef returns FunctionDef:
-    returnType=AnyType  name=ID '('(inputs+=SimpleVarDecl  (',' inputs+=SimpleVarDecl)* )? ')' block=Block
-;
-
-Block returns Block:
-    {Block} '{' (stmts+=Statement)* '}'
-;
-
-SimpleVarDecl returns SimpleVarDecl:
+SimpleVarDecl infers VarDecl:
     ^type=DataType name=ID  
 ;
 
-VoidType returns VoidType:
-    {VoidType} 'void'  
-;
-
-DataType returns DataType:
-    {DataType} 'bool' | 'number'  
-;
-
-AssignVar returns AssignVar:
-    var=[VarDecl:ID ] '=' expr=Expression ';'
-;
-
-SetSpeed returns SetSpeed:
-    speed=Speed '=' expr=Expression (unit=Unit)? ';'  
-;
-
-Rotation returns Rotation:
-    'Rotate' expr=Expression ';'
-;
-
-Linear returns Linear:
-    'Move' expr=Expression (unit=Unit)? ';'
-;
-
-FunCall returns FunCall:
-    fun=[FunctionDef:ID ] '(' (inputs+=Expression  (',' inputs+=Expression  )* )? ')'  ';'
-;
-
-VarDeclInit returns VarDeclInit:
+VarDeclInit infers VarDecl:
     ^type=DataType name=ID '=' expr=Expression
 ;
 
-LoopStmt returns LoopStmt:
+Expression:
+    Or
+;
+
+Or infers Expression:
+    And ({infer BinExpr.expr1=current} op='||' expr2=And)*
+;
+
+And infers Expression:
+    PrimBoolExpr ({infer BinExpr.expr1=current} op='&&' expr2=PrimBoolExpr)*
+;
+
+PrimBoolExpr infers Expression:
+    Not | Compare 
+;
+
+Not infers UnExpr:
+    op='!' expr=Compare
+;
+
+Compare infers Expression:
+    Add ({infer BinExpr.expr1=current} op=('=='|'!='|'<='|'>='|'<'|'>') expr2=Add)*
+;
+
+Add infers Expression:
+    Mul ({infer BinExpr.expr1=current} op=('+'|'-') expr2=Mul)*
+;
+
+Mul infers Expression:
+    PrimExpr ({infer BinExpr.expr1=current} op=('*'|'/') expr2=PrimExpr)*
+;
+
+PrimExpr infers Expression:
+    Neg | Group | Lit | Ref | FunCall
+;
+
+Neg infers UnExpr:
+    op='-' expr=Expression
+;
+
+Group infers Expression:
+    '(' Expression ')'
+;
+
+Lit:
+    val=(BOOL|INT)
+;
+
+Ref:
+    val=[VarDecl:ID]  
+;
+
+FunCall:
+    fun=[FunDef:ID] '(' (args+=Expression  (',' args+=Expression  )* )? ')'  
+;
+
+Statement:
+    Block | VarDecl | AssignVar | FunCall | LoopStmt | IfStmt | ReturnStmt | Linear | Rotation
+;
+
+Block:
+    '{' (stmts+=Statement)* '}'
+;
+
+AssignVar:
+    ref=[VarDecl:ID ] '=' expr=Expression 
+;
+
+LoopStmt:
     'loop' '(' expr=Expression ')' stmt=Statement  
 ;
 
-IfStmt returns IfStmt:
-    'if' '(' expr=Expression ')' ifstmt=Statement  ('else' elsestmt=Statement  )?  
+IfStmt:
+    'if' '(' expr=Expression ')' ^stmt1=Statement  ('else' ^stmt2=Statement  )?  
 ;
 
-ReturnStmt returns ReturnStmt:
-    {ReturnStmt} 'return' ('expr' expr=Expression  )? ';'  
+ReturnStmt:
+    'return' (expr=Expression )?   
 ;
 
-And returns And:
-    exprs+=PrimaryBoolExpr  ('&&' exprs+=PrimaryBoolExpr  )*  
+Linear:
+    'Move' expr=Expression (unit=Unit)? 
 ;
 
-Add returns Add:
-    exprs+=Mul  ('+' exprs+=Mul  )*  
-;
-
-Or returns Or:
-    exprs+=And  ('||' exprs+=And  )*
-;
-
-Sensor returns Sensor:
-    {Sensor} 'Sensor'  
-;
-
-Literal returns Literal:
-    {Literal} 'true' | 'false' 
-;
-
-Speed returns Speed:
-    {Speed} 'Speed'  
-;
-
-Variable returns Variable:
-    var=[VarDecl:ID ]  
-;
-
-Not returns Not:
-    '!' expr=Compare
-;
-
-Compare returns Compare:
-    exprs+=Add  ('==' exprs+=Add  )*
-;
-
-Mul returns Mul:
-    exprs+=PrimaryAriExpr  ('*' exprs+=PrimaryAriExpr  )*
-;
-
-AriUnOp returns AriUnOp:
-    '-'expr=Expression | '(' expr=Expression ')'
+Rotation:
+    'Rotate' expr=Expression 
 ;
 
 Unit returns Unit:
     Unit_m | Unit_dm | Unit_cm | Unit_mm
 ;
+
 Unit_m returns Unit_m: 'm' ;
 Unit_dm returns Unit_dm: 'dm' ;
 Unit_cm returns Unit_cm: 'cm' ;
 Unit_mm returns Unit_mm: 'mm' ;
-
