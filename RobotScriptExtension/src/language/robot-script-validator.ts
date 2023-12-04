@@ -23,6 +23,7 @@ import {
 } from './generated/ast.js'
 import type { RobotScriptServices } from './robot-script-module.js'
 import { evalBin, evalUn } from './robot-script-utils.js'
+import { TreeScope } from './tree-scope.js'
 
 /**
  * Register custom validation checks.
@@ -52,8 +53,6 @@ export function registerValidationChecks(services: RobotScriptServices) {
     registry.register(checks, validator)
 }
 
-
-type Scope = Map<string, {varDecl : VarDecl, isUsed: boolean}>
 
 /**
  * Implementation of custom validations.
@@ -221,7 +220,7 @@ export class RobotScriptValidator {
     }
 
     private checkScopeFun(fun: FunDef, accept: ValidationAcceptor): void {
-        const scope : Scope = new Map()
+        const scope : TreeScope = new TreeScope()
 
         fun.params.forEach((param) => {
             !scope.has(param.name) ||
@@ -236,9 +235,21 @@ export class RobotScriptValidator {
         this.checkScopeBlock(fun.body, accept, scope)
     }
 
-    private checkScopeBlock(block: Block, accept: ValidationAcceptor, outScope: Scope): void {
-        const scope : Scope = isFunDef(block.$container) ? outScope : new Map()
+    private checkScopeBlock(block: Block, accept: ValidationAcceptor, parent: TreeScope): void {
+        const scope = new TreeScope(parent)
 
+        block.stmts.forEach((stmt) => {
+            if (isVarDecl(stmt)) {
+                !scope.has(stmt.name) ||
+                    accept('error', `Duplicate variable '${stmt.name}'.`, {
+                        node: stmt,
+                        property: 'name',
+                    })
+                
+                scope.set(stmt.name, {varDecl: stmt, isUsed: false})
+            }
+            stmt.$type
+        })
 
     }
 
