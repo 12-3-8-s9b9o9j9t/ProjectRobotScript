@@ -31,13 +31,17 @@ export function registerValidationChecks(services: RobotScriptServices) {
     const registry = services.validation.ValidationRegistry
     const validator = services.validation.RobotScriptValidator
     const checks: ValidationChecks<RobotScriptAstType> = {
-        EntryPoint: [validator.checkFunDefDuplicate, validator.checkScope],
+        EntryPoint: [
+            validator.checkMainDefined,
+            validator.checkFunDefDuplicate,
+            validator.checkScope],
         FunDef: [validator.checkMainSignature, validator.checkReturn],
         FunCall: [
             validator.checkFunCallParamNumber,
             validator.checkFunCallNotMain,
         ],
         VarDecl: [validator.checkVarDeclInsideBlock],
+        Expression: [validator.checkFunCallExprNotVoid]
     }
     registry.register(checks, validator)
 }
@@ -46,6 +50,16 @@ export function registerValidationChecks(services: RobotScriptServices) {
  * Implementation of custom validations.
  */
 export class RobotScriptValidator {
+
+    checkMainDefined(ep: EntryPoint, accept: ValidationAcceptor): void {
+        ep.funs &&
+            ep.funs.find((fun) => fun && fun.name === 'main') ||
+            accept('error', "Function 'main' is not defined.", {
+                node: ep,
+                property: 'funs',
+            })
+    }
+
     checkFunDefDuplicate(ep: EntryPoint, accept: ValidationAcceptor): void {
         const funSet = new Set<string>()
         ep.funs &&
@@ -312,7 +326,11 @@ export class RobotScriptValidator {
             const val1 = this.reduceExpr(expr.expr1)
             const val2 = this.reduceExpr(expr.expr2)
             if (val1 !== undefined && val2 !== undefined && expr.op) {
-                return evalBin(expr.op, val1, val2)
+                try {
+                    return evalBin(expr.op, val1, val2)
+                } catch (e: any) { // division by zero
+                    return undefined
+                }
             }
         }
         return undefined
@@ -359,6 +377,20 @@ export class RobotScriptValidator {
             accept('error', 'Variable declaration must be inside a block.', {
                 node: varDecl,
             })
+        }
+    }
+
+    checkFunCallExprNotVoid(
+        expr: Expression,
+        accept: ValidationAcceptor
+    ): void {
+        if (isFunCall(expr) && expr.fun && expr.fun.ref && expr.fun.ref.name && expr.fun.ref.type && !isBlock(expr.$container)) {
+            if (expr.fun.ref.type.name === 'void') {
+                accept('error', `Function ${expr.fun.ref.name} cannot be used as an expression.`, {
+                    node: expr,
+                    property: 'fun'
+                })
+            }
         }
     }
 }

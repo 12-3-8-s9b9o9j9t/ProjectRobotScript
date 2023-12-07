@@ -7,7 +7,7 @@ entry EntryPoint:
 ;
 
 FunDef:
-    ^type=AnyType name=ID '('(params+=SimpleVarDecl  (',' params+=SimpleVarDecl)* )? ')' body=Block
+    type=AnyType name=ID '('(params+=SimpleVarDecl  (',' params+=SimpleVarDecl)* )? ')' body=Block
 ;
 
 AnyType:
@@ -25,7 +25,7 @@ DataType infers AnyType:
 VarDecl: SimpleVarDecl | VarDeclInit;
 
 SimpleVarDecl infers VarDecl:
-    ^type=DataType name=ID
+    type=DataType name=ID
 ;
 
 VarDeclInit infers VarDecl:
@@ -65,7 +65,7 @@ Mul infers Expression:
 ;
 
 PrimExpr infers Expression:
-    Neg | Group | Lit | Ref | FunCall
+    Neg | Group | Lit | Ref | FunCall | GetSpeed | Sensor
 ;
 
 Neg infers UnExpr:
@@ -84,20 +84,49 @@ Ref:
     val=[VarDecl:ID]  
 ;
 
-FunCall:
-    fun=[FunDef:ID] '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
+GetSpeed:
+    Speed ('in' unit=Unit)?
 ;
 
-Statement:
-    Block | VarDecl | AssignVar | FunCall | WhileStmt | IfStmt | ReturnStmt | Linear | Rotation
+Speed:
+    val='Speed'
+;
+
+Sensor:
+    Distance | Time
+;
+
+Distance:
+    val='Distance' (UnitCast)?
+;
+
+Time:
+    val='TimeStamp'
+;
+
+FunCall:
+    fun=[FunDef:ID] '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
 ;
 
 Block:
     '{' (stmts+=Statement)* '}'
 ;
 
+Statement:
+    Block | VarDecl | Assign | FunCall | WhileStmt | IfStmt | ReturnStmt | Linear | Rotation
+;
+
+
+Assign:
+    AssignVar | SetSpeed
+;
+
 AssignVar:
     ref=[VarDecl:ID ] '=' expr=Expression 
+;
+
+SetSpeed:
+    Speed '=' expr=Expression (UnitCast)?
 ;
 
 WhileStmt:
@@ -105,7 +134,7 @@ WhileStmt:
 ;
 
 IfStmt:
-    'if' '(' expr=Expression ')' ^stmt1=Statement  ('else' ^stmt2=Statement  )?  
+    'if' '(' expr=Expression ')' stmt1=Statement  ('else' stmt2=Statement  )?  
 ;
 
 ReturnStmt:
@@ -113,11 +142,15 @@ ReturnStmt:
 ;
 
 Linear:
-    'Move' expr=Expression (unit=Unit)? 
+    dir=('Forward' | 'Sideways') expr=Expression (UnitCast)? 
 ;
 
 Rotation:
     'Rotate' expr=Expression 
+;
+
+UnitCast:
+    'in' unit=Unit
 ;
 
 Unit returns Unit:

@@ -1,5 +1,4 @@
 import type {
-    DeepPartial,
     DefaultSharedModuleContext,
     LangiumServices,
     LangiumSharedServices,
@@ -15,7 +14,6 @@ import {
     RobotScriptValidator,
     registerValidationChecks,
 } from './robot-script-validator.js'
-import { RobotScriptWorkspaceManager } from './robot-script-workspace.js'
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -46,17 +44,6 @@ export const RobotScriptModule: Module<
     },
 }
 
-export type RobotScriptSharedServices = LangiumSharedServices
-
-export const RobotScriptSharedModule: Module<
-    RobotScriptSharedServices,
-    DeepPartial<RobotScriptSharedServices>
-> = {
-    workspace: {
-        WorkspaceManager: (services) =>
-            new RobotScriptWorkspaceManager(services),
-    },
-}
 
 /**
  * Create the full set of services required by Langium.
@@ -81,8 +68,7 @@ export function createRobotScriptServices(
 } {
     const shared = inject(
         createDefaultSharedModule(context),
-        RobotScriptGeneratedSharedModule,
-        RobotScriptSharedModule
+        RobotScriptGeneratedSharedModule
     )
     const RobotScript = inject(
         createDefaultModule({ shared }),
