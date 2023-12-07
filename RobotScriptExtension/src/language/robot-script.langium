@@ -1,13 +1,13 @@
 grammar RobotScript
-import 'Terminals'
-import 'robotScriptModel-types'
+import 'terminals'
+import 'robot-script-model-types'
 
 entry EntryPoint:
     (funs+=FunDef)*
 ;
 
 FunDef:
-    ^type=AnyType  name=ID '('(params+=SimpleVarDecl  (',' params+=SimpleVarDecl)* )? ')' body=Block
+    ^type=AnyType name=ID '('(params+=SimpleVarDecl  (',' params+=SimpleVarDecl)* )? ')' body=Block
 ;
 
 AnyType:
@@ -25,11 +25,11 @@ DataType infers AnyType:
 VarDecl: SimpleVarDecl | VarDeclInit;
 
 SimpleVarDecl infers VarDecl:
-    ^type=DataType name=ID  
+    ^type=DataType name=ID
 ;
 
 VarDeclInit infers VarDecl:
-    ^type=DataType name=ID '=' expr=Expression
+    SimpleVarDecl '=' expr=Expression
 ;
 
 Expression:
@@ -85,11 +85,11 @@ Ref:
 ;
 
 FunCall:
-    fun=[FunDef:ID] '(' (args+=Expression  (',' args+=Expression  )* )? ')'  
+    fun=[FunDef:ID] '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
 ;
 
 Statement:
-    Block | VarDecl | AssignVar | FunCall | LoopStmt | IfStmt | ReturnStmt | Linear | Rotation
+    Block | VarDecl | AssignVar | FunCall | WhileStmt | IfStmt | ReturnStmt | Linear | Rotation
 ;
 
 Block:
@@ -100,8 +100,8 @@ AssignVar:
     ref=[VarDecl:ID ] '=' expr=Expression 
 ;
 
-LoopStmt:
-    'loop' '(' expr=Expression ')' stmt=Statement  
+WhileStmt:
+    'while' '(' expr=Expression ')' stmt=Statement  
 ;
 
 IfStmt:

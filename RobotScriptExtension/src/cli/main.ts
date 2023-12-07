@@ -1,14 +1,15 @@
-import type { EntryPoint } from '../language/generated/ast.js'
-import chalk from 'chalk'
+//import chalk from 'chalk'
 import { Command } from 'commander'
 import { RobotScriptLanguageMetaData } from '../language/generated/module.js'
 import { createRobotScriptServices } from '../language/robot-script-module.js'
 import { extractAstNode } from './cli-util.js'
-import { generateJavaScript } from './generator.js'
+//import { generateJavaScript } from './generator.js'
 import { NodeFileSystem } from 'langium/node'
 import * as url from 'node:url'
 import * as fs from 'node:fs/promises'
 import * as path from 'node:path'
+import { InterpretorVisitor } from '../semantics/interpretor-visitor.js'
+import { EntryPointVisitor } from '../semantics/visitor.js'
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const packagePath = path.resolve(__dirname, '..', '..', 'package.json')
@@ -19,8 +20,8 @@ export const generateAction = async (
     opts: GenerateOptions
 ): Promise<void> => {
     const services = createRobotScriptServices(NodeFileSystem).RobotScript
-    const model = await extractAstNode<EntryPoint>(fileName, services)
-    const generatedFilePath = generateJavaScript(
+    const model = await extractAstNode<EntryPointVisitor>(fileName, services)
+    /*const generatedFilePath = generateJavaScript(
         model,
         fileName,
         opts.destination
@@ -29,7 +30,10 @@ export const generateAction = async (
         chalk.green(
             `JavaScript code generated successfully: ${generatedFilePath}`
         )
-    )
+    )*/
+
+    const visitor = new InterpretorVisitor()
+    visitor.visitEntryPoint(model)
 }
 
 export type GenerateOptions = {
@@ -43,7 +47,7 @@ export default function (): void {
 
     const fileExtensions = RobotScriptLanguageMetaData.fileExtensions.join(', ')
     program
-        .command('generate')
+        .command('interpret')
         .argument(
             '<file>',
             `source file (possible file extensions: ${fileExtensions})`

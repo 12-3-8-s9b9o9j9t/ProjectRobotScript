@@ -3,27 +3,31 @@ import {
     DefaultWorkspaceManager,
     LangiumDocument,
     LangiumDocumentFactory,
-    LangiumSharedServices
-} from "langium";
-import { WorkspaceFolder } from 'vscode-languageserver';
-import { URI } from "vscode-uri";
-import { builtinRobotScript } from './builtins.js';
+    LangiumSharedServices,
+} from 'langium'
+import { WorkspaceFolder } from 'vscode-languageserver'
+import { URI } from 'vscode-uri'
+import { builtinRobotScript } from './builtins.js'
 
 export class RobotScriptWorkspaceManager extends DefaultWorkspaceManager {
-
-    private documentFactory: LangiumDocumentFactory;
+    private documentFactory: LangiumDocumentFactory
 
     constructor(services: LangiumSharedServices) {
-        super(services);
-        this.documentFactory = services.workspace.LangiumDocumentFactory;
+        super(services)
+        this.documentFactory = services.workspace.LangiumDocumentFactory
     }
 
     protected override async loadAdditionalDocuments(
         folders: WorkspaceFolder[],
         collector: (document: LangiumDocument<AstNode>) => void
     ): Promise<void> {
-        await super.loadAdditionalDocuments(folders, collector);
+        await super.loadAdditionalDocuments(folders, collector)
         // Load our library using the `builtin` URI schema
-        collector(this.documentFactory.fromString(builtinRobotScript, URI.parse('builtin:///library.ros')));
+        collector(
+            this.documentFactory.fromString(
+                builtinRobotScript,
+                URI.parse('builtin:///library.ros')
+            )
+        )
     }
 }

@@ -16,4 +16,3 @@ number getDistance() {
     return 0
 }
 `.trimStart()
-

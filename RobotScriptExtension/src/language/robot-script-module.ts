@@ -43,15 +43,19 @@ export const RobotScriptModule: Module<
 > = {
     validation: {
         RobotScriptValidator: () => new RobotScriptValidator(),
-    }
+    },
 }
 
-export type RobotScriptSharedServices = LangiumSharedServices;
+export type RobotScriptSharedServices = LangiumSharedServices
 
-export const RobotScriptSharedModule: Module<RobotScriptSharedServices, DeepPartial<RobotScriptSharedServices>> = {
+export const RobotScriptSharedModule: Module<
+    RobotScriptSharedServices,
+    DeepPartial<RobotScriptSharedServices>
+> = {
     workspace: {
-        WorkspaceManager: (services) => new RobotScriptWorkspaceManager(services)
-    }
+        WorkspaceManager: (services) =>
+            new RobotScriptWorkspaceManager(services),
+    },
 }
 
 /**
