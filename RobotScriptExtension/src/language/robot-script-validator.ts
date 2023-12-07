@@ -34,14 +34,15 @@ export function registerValidationChecks(services: RobotScriptServices) {
         EntryPoint: [
             validator.checkMainDefined,
             validator.checkFunDefDuplicate,
-            validator.checkScope],
+            validator.checkScope,
+        ],
         FunDef: [validator.checkMainSignature, validator.checkReturn],
         FunCall: [
             validator.checkFunCallParamNumber,
             validator.checkFunCallNotMain,
         ],
         VarDecl: [validator.checkVarDeclInsideBlock],
-        Expression: [validator.checkFunCallExprNotVoid]
+        Expression: [validator.checkFunCallExprNotVoid],
     }
     registry.register(checks, validator)
 }
@@ -50,10 +51,8 @@ export function registerValidationChecks(services: RobotScriptServices) {
  * Implementation of custom validations.
  */
 export class RobotScriptValidator {
-
     checkMainDefined(ep: EntryPoint, accept: ValidationAcceptor): void {
-        ep.funs &&
-            ep.funs.find((fun) => fun && fun.name === 'main') ||
+        ;(ep.funs && ep.funs.find((fun) => fun && fun.name === 'main')) ||
             accept('error', "Function 'main' is not defined.", {
                 node: ep,
                 property: 'funs',
@@ -328,7 +327,8 @@ export class RobotScriptValidator {
             if (val1 !== undefined && val2 !== undefined && expr.op) {
                 try {
                     return evalBin(expr.op, val1, val2)
-                } catch (e: any) { // division by zero
+                } catch (e: any) {
+                    // division by zero
                     return undefined
                 }
             }
@@ -384,12 +384,23 @@ export class RobotScriptValidator {
         expr: Expression,
         accept: ValidationAcceptor
     ): void {
-        if (isFunCall(expr) && expr.fun && expr.fun.ref && expr.fun.ref.name && expr.fun.ref.type && !isBlock(expr.$container)) {
+        if (
+            isFunCall(expr) &&
+            expr.fun &&
+            expr.fun.ref &&
+            expr.fun.ref.name &&
+            expr.fun.ref.type &&
+            !isBlock(expr.$container)
+        ) {
             if (expr.fun.ref.type.name === 'void') {
-                accept('error', `Function ${expr.fun.ref.name} cannot be used as an expression.`, {
-                    node: expr,
-                    property: 'fun'
-                })
+                accept(
+                    'error',
+                    `Function ${expr.fun.ref.name} cannot be used as an expression.`,
+                    {
+                        node: expr,
+                        property: 'fun',
+                    }
+                )
             }
         }
     }

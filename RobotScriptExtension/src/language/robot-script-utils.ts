@@ -2,7 +2,7 @@ import { BinExpr, UnExpr } from './generated/ast.js'
 
 export class DivisionByZeroError extends Error {}
 
-export function evalBin (
+export function evalBin(
     op: BinExpr['op'],
     a: number | boolean,
     b: number | boolean

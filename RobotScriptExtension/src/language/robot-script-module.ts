@@ -44,7 +44,6 @@ export const RobotScriptModule: Module<
     },
 }
 
-
 /**
  * Create the full set of services required by Langium.
  *
