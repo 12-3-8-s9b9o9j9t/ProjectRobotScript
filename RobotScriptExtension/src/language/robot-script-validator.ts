@@ -1,24 +1,24 @@
 import type { ValidationAcceptor, ValidationChecks } from 'langium'
 import {
-    FunDef,
+    type AnyType,
     type EntryPoint,
+    type Expression,
+    type FunCall,
+    type FunDef,
     type RobotScriptAstType,
-    FunCall,
-    isReturnStmt,
-    isFunDef,
-    isVarDecl,
-    VarDecl,
-    isBlock,
-    isIfStmt,
-    Statement,
-    isWhileStmt,
-    AnyType,
-    Expression,
-    isRef,
-    isFunCall,
+    type Statement,
+    type VarDecl,
     isBinExpr,
-    isUnExpr,
+    isBlock,
+    isFunCall,
+    isFunDef,
+    isIfStmt,
     isLit,
+    isRef,
+    isReturnStmt,
+    isUnExpr,
+    isVarDecl,
+    isWhileStmt,
 } from './generated/ast.js'
 import type { RobotScriptServices } from './robot-script-module.js'
 import { evalBin, evalUn } from './robot-script-utils.js'
@@ -55,7 +55,10 @@ export class RobotScriptValidator {
         ;(ep.funs && ep.funs.find((fun) => fun && fun.name === 'main')) ||
             accept('error', "Function 'main' is not defined.", {
                 node: ep,
-                property: 'funs',
+                range: {
+                    start: { line: 0, character: 0 },
+                    end: { line: 0, character: 0 },
+                },
             })
     }
 
@@ -188,17 +191,15 @@ export class RobotScriptValidator {
     }
 
     checkReturn(fun: FunDef, accept: ValidationAcceptor): void {
-        ;(fun.name &&
-            fun.body &&
-            fun.type &&
-            fun.type.name &&
-            this.checkReturnRec(fun.body, accept, fun.type.name)) ||
-            fun.type.name === 'void' ||
-            accept(
-                'error',
-                `Function '${fun.name}' must return a value of type '${fun.type.name}'.`,
-                { node: fun, property: 'type' }
-            )
+        if (fun.name && fun.body && fun.type && fun.type.name) {
+            this.checkReturnRec(fun.body, accept, fun.type.name) ||
+                fun.type.name === 'void' ||
+                accept(
+                    'error',
+                    `Function '${fun.name}' must return a value of type '${fun.type.name}'.`,
+                    { node: fun, property: 'type' }
+                )
+        }
     }
 
     private checkReturnRec(

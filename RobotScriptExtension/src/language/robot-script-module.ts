@@ -1,11 +1,12 @@
 import type {
     DefaultSharedModuleContext,
+    //ExecuteCommandAcceptor,
     LangiumServices,
     LangiumSharedServices,
     Module,
     PartialLangiumServices,
 } from 'langium'
-import { createDefaultModule, createDefaultSharedModule, inject } from 'langium'
+import { /*AbstractExecuteCommandHandler,*/ createDefaultModule, createDefaultSharedModule, inject } from 'langium'
 import {
     RobotScriptGeneratedModule,
     RobotScriptGeneratedSharedModule,
@@ -14,13 +15,16 @@ import {
     RobotScriptValidator,
     registerValidationChecks,
 } from './robot-script-validator.js'
+import { RobotScriptAcceptWeaver } from '../semantics/accept-weaver.js'
+//import { parseAndGenerate } from '../web/index.js'
 
 /**
  * Declaration of custom services - add your own service classes here.
  */
 export type RobotScriptAddedServices = {
     validation: {
-        RobotScriptValidator: RobotScriptValidator
+        RobotScriptValidator: RobotScriptValidator,
+        RobotScriptAcceptWeaver: RobotScriptAcceptWeaver
     }
 }
 
@@ -41,6 +45,7 @@ export const RobotScriptModule: Module<
 > = {
     validation: {
         RobotScriptValidator: () => new RobotScriptValidator(),
+        RobotScriptAcceptWeaver: () => new RobotScriptAcceptWeaver(),
     },
 }
 
@@ -74,7 +79,18 @@ export function createRobotScriptServices(
         RobotScriptGeneratedModule,
         RobotScriptModule
     )
+    //shared.lsp.ExecuteCommandHandler = new RobotScriptScene()
     shared.ServiceRegistry.register(RobotScript)
     registerValidationChecks(RobotScript)
     return { shared, RobotScript }
 }
+
+/*
+class RobotScriptScene extends AbstractExecuteCommandHandler {
+    override registerCommands(acceptor: ExecuteCommandAcceptor): void {
+        acceptor('parseAndGenerate', args => {
+            // invoke generator on this data, and return the response
+            return parseAndGenerate(args[0]);
+        });
+    }
+}*/

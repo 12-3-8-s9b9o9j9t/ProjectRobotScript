@@ -1,0 +1,21 @@
+[
+  {
+    "name": "main",
+    "params": [],
+    "type": "void"
+  },
+  {
+    "name": "a",
+    "params": [
+      {
+        "name": "x",
+        "type": "number"
+      },
+      {
+        "name": "y",
+        "type": "number"
+      }
+    ],
+    "type": "bool"
+  }
+]

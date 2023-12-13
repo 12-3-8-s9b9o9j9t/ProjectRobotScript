@@ -12,13 +12,13 @@
     "moduleResolution": "Node16",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "rootDir": "src"
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
      "src/**/*.ts"
   ],
   "exclude": [
+     "out",
      "node_modules"
   ]
 }

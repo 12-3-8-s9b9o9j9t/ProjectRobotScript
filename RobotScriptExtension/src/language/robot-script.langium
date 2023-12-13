@@ -101,7 +101,7 @@ Distance:
 ;
 
 Time:
-    val='TimeStamp'
+    val='Time'
 ;
 
 FunCall:
