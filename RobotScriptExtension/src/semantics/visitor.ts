@@ -4,7 +4,7 @@ import {isAssignVar, isSetSpeed } from '../language/generated/ast.js'
 
 //import { Reference } from 'langium';
 
-export interface RoboScriptVisitor {
+export interface RobotScriptVisitor {
     visitAnyType(node: AnyType): any;
     // visitAssign(node: Assign): any;
     visitAssignVar(node: AssignVar): any;
@@ -39,7 +39,7 @@ export class EntryPointVisitor implements ASTInterfaces.EntryPoint {
     // the constructor must take all attribute of the implemented interface
     constructor(public $type: 'EntryPoint') {}
     funs: ASTInterfaces.FunDef[] = []
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         console.log('EntryPointVisitor')
         visitor.visitEntryPoint(this);
         this.funs.forEach(fun => fun.accept(visitor));
@@ -57,7 +57,7 @@ export class AnyType implements ASTInterfaces.AnyType {
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
 
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitAnyType(this);
     }
 }
@@ -74,7 +74,7 @@ export class AssignVar implements ASTInterfaces.AssignVar {
     expr!: ASTInterfaces.Expression;
     ref!: Reference<ASTInterfaces.VarDecl>;
 
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitAssignVar(this);
     }
 }
@@ -87,7 +87,7 @@ export class BinExpr implements ASTInterfaces.BinExpr {
     expr2!: ASTInterfaces.Expression
     op!: '!=' | '&&' | '*' | '+' | '-' | '/' | '<' | '<=' | '==' | '>' | '>=' | '||'
 
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitBinExpr(this);
     }
 }
@@ -103,7 +103,7 @@ export class Block implements ASTInterfaces.Block {
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
     type!: 'Block';
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitBlock(this);
     }
 }
@@ -117,7 +117,7 @@ export class Distance implements ASTInterfaces.Distance {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitDistance(this);
     }
 }
@@ -131,7 +131,7 @@ export class EntryPoint implements ASTInterfaces.EntryPoint {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitEntryPoint(this);
     }
 }
@@ -144,7 +144,7 @@ export class FunCall implements ASTInterfaces.FunCall {
     $container!: ASTInterfaces.AssignVar | ASTInterfaces.BinExpr | ASTInterfaces.Block | ASTInterfaces.FunCall | ASTInterfaces.IfStmt | ASTInterfaces.Linear | ASTInterfaces.ReturnStmt | ASTInterfaces.Rotation | ASTInterfaces.SetSpeed | ASTInterfaces.UnExpr | ASTInterfaces.VarDecl | ASTInterfaces.WhileStmt;
     fun!: Reference<ASTInterfaces.FunDef>
     params!: Array<ASTInterfaces.Expression>
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitFunCall(this);
     }
 }
@@ -162,7 +162,7 @@ export class FunDef implements ASTInterfaces.FunDef {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitFunDef(this);
     }
 }
@@ -176,7 +176,7 @@ export class GetSpeed implements ASTInterfaces.GetSpeed {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitGetSpeed(this);
     }
 }
@@ -192,7 +192,7 @@ export class IfStmt implements ASTInterfaces.IfStmt {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitIfStmt(this);
     }
 }
@@ -207,7 +207,7 @@ export class Linear implements ASTInterfaces.Linear {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitLinear(this);
     }
 }
@@ -219,7 +219,7 @@ export class Lit implements ASTInterfaces.Lit {
     $container?: AssignVar | BinExpr | FunCall | IfStmt | Linear | ReturnStmt | Rotation | SetSpeed | UnExpr | VarDecl | WhileStmt;
     $type: 'Lit';
     val!: boolean | number
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitLit(this);
     }
 }
@@ -228,7 +228,7 @@ export class Lit implements ASTInterfaces.Lit {
 // Ref
 export class Ref implements ASTInterfaces.Ref {
     constructor(public $type: 'Ref') {}
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitRef(this);
     }
 }
@@ -237,7 +237,7 @@ export class Ref implements ASTInterfaces.Ref {
 // ReturnStmt
 export class ReturnStmt implements ASTInterfaces.ReturnStmt {
     constructor(public $type: 'ReturnStmt') {}
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitReturnStmt(this);
     }
 }
@@ -253,7 +253,7 @@ export class Rotation implements ASTInterfaces.Rotation {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitRotation(this);
     }
 }
@@ -264,7 +264,7 @@ export class Rotation implements ASTInterfaces.Rotation {
 // SetSpeed
 export class SetSpeed implements ASTInterfaces.SetSpeed {
     constructor(public $type: 'SetSpeed') {}
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitSetSpeed(this);
     }
 }
@@ -281,7 +281,7 @@ export class Speed implements ASTInterfaces.Speed {
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
     expr!: ASTInterfaces.Expression;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitSpeed(this);
     }
 }
@@ -290,7 +290,7 @@ export class Speed implements ASTInterfaces.Speed {
 // Time
 export class Time implements ASTInterfaces.Time {
     constructor(public $type: 'Time') {}
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitTime(this);
     }
 }
@@ -298,7 +298,7 @@ export class Time implements ASTInterfaces.Time {
 // UnExpr
 export class UnExpr implements ASTInterfaces.UnExpr {
     constructor(public $type: 'UnExpr') {}
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitUnExpr(this);
     }
 }
@@ -315,7 +315,7 @@ export class UnitCast implements ASTInterfaces.UnitCast {
     $document?: LangiumDocument<AstNode> | undefined;
     dir!: 'Forward' | 'Sideways';
     expr!: ASTInterfaces.Expression;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitUnitCast(this);
     }
 }
@@ -331,7 +331,7 @@ export class VarDecl implements ASTInterfaces.VarDecl {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitVarDecl(this);
     }
 }
@@ -347,7 +347,7 @@ export class WhileStmt implements ASTInterfaces.WhileStmt {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     $document?: LangiumDocument<AstNode> | undefined;
-    accept(visitor: RoboScriptVisitor): any {
+    accept(visitor: RobotScriptVisitor): any {
         return visitor.visitWhileStmt(this);
     }
 }
