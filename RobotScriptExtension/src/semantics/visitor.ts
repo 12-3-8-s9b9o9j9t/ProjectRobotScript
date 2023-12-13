@@ -84,7 +84,7 @@ export class Distance implements AST.Distance {
 
 export class EntryPoint implements AST.EntryPoint {
     constructor(public $type: 'EntryPoint') {}
-    funs!: AST.FunDef[];
+    funs!: FunDef[];
     $cstNode?: CstNode | undefined;
     accept(visitor: RobotScriptVisitor): any {};
 }
@@ -92,7 +92,7 @@ export class EntryPoint implements AST.EntryPoint {
 export class FunCall implements AST.FunCall {
     constructor(public $type: 'FunCall') {}
     $container!: AST.AssignVar | AST.BinExpr | AST.Block | AST.FunCall | AST.IfStmt | AST.Linear | AST.ReturnStmt | AST.Rotation | AST.SetSpeed | AST.UnExpr | AST.VarDecl | AST.WhileStmt;
-    fun!: Reference<AST.FunDef>
+    fun!: Reference<FunDef>
     params!: Array<AST.Expression>
     accept(visitor: RobotScriptVisitor): any {};
 }
@@ -100,10 +100,10 @@ export class FunCall implements AST.FunCall {
 export class FunDef implements AST.FunDef {
     constructor(public $type: 'FunDef') {}
     $container!: AST.EntryPoint;
-    body!: AST.Block;
+    body!: Block;
     name!: string;
-    params!: AST.VarDecl[];
-    type!: AST.AnyType;
+    params!: VarDecl[];
+    type!: AnyType;
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined; 
@@ -152,14 +152,14 @@ export class Lit implements AST.Lit {
 export class Ref implements AST.Ref {
     constructor(public $type: 'Ref') {}
     $container!: AST.AssignVar | AST.BinExpr | AST.FunCall | AST.IfStmt | AST.Linear | AST.ReturnStmt | AST.Rotation | AST.SetSpeed | AST.UnExpr | AST.VarDecl | AST.WhileStmt;
-    val!: Reference<AST.VarDecl>
+    val!: Reference<VarDecl>
     accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class ReturnStmt implements AST.ReturnStmt {
     constructor(public $type: 'ReturnStmt') {}
     $container!: AST.Block | AST.IfStmt | AST.WhileStmt;
-    expr?: AST.Expression | undefined;
+    expr?: AST.Expression;
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
@@ -229,9 +229,9 @@ export class UnitCast implements AST.UnitCast {
 export class VarDecl implements AST.VarDecl {
     constructor(public $type: 'VarDecl') {}
     $container!: AST.Block | AST.IfStmt | AST.WhileStmt | AST.FunDef;
-    expr?: AST.Expression | undefined;
+    expr?: AST.Expression;
     name!: string;
-    type!: AST.AnyType;
+    type!: AnyType;
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
