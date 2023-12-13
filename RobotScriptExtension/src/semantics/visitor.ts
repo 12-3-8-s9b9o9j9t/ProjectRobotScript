@@ -38,7 +38,7 @@ export class AnyType implements AST.AnyType {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
-    
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class AssignVar implements AST.AssignVar {
@@ -49,6 +49,7 @@ export class AssignVar implements AST.AssignVar {
     $cstNode?: CstNode | undefined;
     expr!: AST.Expression;
     ref!: Reference<AST.VarDecl>;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class BinExpr implements AST.BinExpr {
@@ -57,6 +58,7 @@ export class BinExpr implements AST.BinExpr {
     expr1!: AST.Expression
     expr2!: AST.Expression
     op!: '!=' | '&&' | '*' | '+' | '-' | '/' | '<' | '<=' | '==' | '>' | '>=' | '||'
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class Block implements AST.Block {
@@ -67,6 +69,7 @@ export class Block implements AST.Block {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     type!: 'Block';
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class Distance implements AST.Distance {
@@ -76,12 +79,14 @@ export class Distance implements AST.Distance {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class EntryPoint implements AST.EntryPoint {
     constructor(public $type: 'EntryPoint') {}
     funs!: AST.FunDef[];
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class FunCall implements AST.FunCall {
@@ -89,6 +94,7 @@ export class FunCall implements AST.FunCall {
     $container!: AST.AssignVar | AST.BinExpr | AST.Block | AST.FunCall | AST.IfStmt | AST.Linear | AST.ReturnStmt | AST.Rotation | AST.SetSpeed | AST.UnExpr | AST.VarDecl | AST.WhileStmt;
     fun!: Reference<AST.FunDef>
     params!: Array<AST.Expression>
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class FunDef implements AST.FunDef {
@@ -100,7 +106,8 @@ export class FunDef implements AST.FunDef {
     type!: AST.AnyType;
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
-    $cstNode?: CstNode | undefined;  
+    $cstNode?: CstNode | undefined; 
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class GetSpeed implements AST.GetSpeed {
@@ -110,6 +117,7 @@ export class GetSpeed implements AST.GetSpeed {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class IfStmt implements AST.IfStmt {
@@ -121,6 +129,7 @@ export class IfStmt implements AST.IfStmt {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class Linear implements AST.Linear {
@@ -136,13 +145,15 @@ export class Linear implements AST.Linear {
 export class Lit implements AST.Lit {
     constructor(public $type: 'Lit') {}
     $container!: AST.AssignVar | AST.BinExpr | AST.FunCall | AST.IfStmt | AST.Linear | AST.ReturnStmt | AST.Rotation | AST.SetSpeed | AST.UnExpr | AST.VarDecl | AST.WhileStmt;
-    val!: boolean | number;  
+    val!: boolean | number; 
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class Ref implements AST.Ref {
     constructor(public $type: 'Ref') {}
     $container!: AST.AssignVar | AST.BinExpr | AST.FunCall | AST.IfStmt | AST.Linear | AST.ReturnStmt | AST.Rotation | AST.SetSpeed | AST.UnExpr | AST.VarDecl | AST.WhileStmt;
-    val!: Reference<AST.VarDecl> 
+    val!: Reference<AST.VarDecl>
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class ReturnStmt implements AST.ReturnStmt {
@@ -152,6 +163,7 @@ export class ReturnStmt implements AST.ReturnStmt {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class Rotation implements AST.Rotation {
@@ -161,6 +173,7 @@ export class Rotation implements AST.Rotation {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class SetSpeed implements AST.SetSpeed {
@@ -170,6 +183,7 @@ export class SetSpeed implements AST.SetSpeed {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class Speed implements AST.Speed {
@@ -181,12 +195,14 @@ export class Speed implements AST.Speed {
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
     expr!: AST.Expression;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class Time implements AST.Time {
     constructor(public $type: 'Time') {}
     $container!: AST.AssignVar | AST.BinExpr | AST.FunCall | AST.IfStmt | AST.Linear | AST.ReturnStmt | AST.Rotation |AST.SetSpeed | AST.UnExpr | AST.VarDecl | AST.WhileStmt;
     val!: 'Time'
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class UnExpr implements AST.UnExpr {
@@ -194,6 +210,7 @@ export class UnExpr implements AST.UnExpr {
     $container!: AST.AssignVar | AST.BinExpr | AST.FunCall | AST.IfStmt | AST.Linear | AST.ReturnStmt | AST.Rotation | AST.SetSpeed | AST.UnExpr | AST.VarDecl | AST.WhileStmt;
     expr!: AST.Expression
     op!: '!' | '-'
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class UnitCast implements AST.UnitCast {
@@ -206,6 +223,7 @@ export class UnitCast implements AST.UnitCast {
     $cstNode?: CstNode | undefined;
     dir!: 'Forward' | 'Sideways';
     expr!: AST.Expression;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class VarDecl implements AST.VarDecl {
@@ -217,6 +235,7 @@ export class VarDecl implements AST.VarDecl {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }
 
 export class WhileStmt implements AST.WhileStmt {
@@ -227,4 +246,5 @@ export class WhileStmt implements AST.WhileStmt {
     $containerProperty?: string | undefined;
     $containerIndex?: number | undefined;
     $cstNode?: CstNode | undefined;
+    accept(visitor: RobotScriptVisitor): any {};
 }

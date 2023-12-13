@@ -1,3 +1,7 @@
+import { Assign, Expression, Sensor, Statement } from "../language/generated/ast.js";
+import { AnyType, AssignVar, BinExpr, Block, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, Speed, Time, UnExpr, UnitCast, VarDecl, WhileStmt } from "./visitor.js";
+
+
 export class Compiler implements RobotScriptVisitor{
     visitAnyType(node: AnyType) {
         throw new Error('Method not implemented.');
