@@ -9,3 +9,4 @@ export function generateScene(ep: EntryPoint): Object {
         }
     })
 }
+

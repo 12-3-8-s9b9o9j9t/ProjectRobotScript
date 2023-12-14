@@ -7,8 +7,6 @@ import * as url from 'node:url'
 import * as fs from 'node:fs'
 import * as fsp from 'node:fs/promises'
 import * as path from 'node:path'
-//import { InterpretorVisitor } from '../semantics/interpretor-visitor.js'
-//import { EntryPointVisitor } from '../semantics/visitor.js'
 import chalk from 'chalk'
 import { generateScene } from './generator.js'
 
@@ -24,7 +22,7 @@ export const generate = async (
     opts: GenerateOptions
 ): Promise<void> => {
     const services = createRobotScriptServices(NodeFileSystem).RobotScript
-    const ep = await extractAstNode<EntryPoint/*Visitor*/>(fileName, services)
+    const ep = await extractAstNode<EntryPoint>(fileName, services)
 
     const data = extractDestinationAndName(fileName, opts.destination)
     const generatedFilePath = `${path.join(data.destination, data.name)}.json`
@@ -40,9 +38,6 @@ export const generate = async (
     console.log(
         chalk.green(`Scene generated successfully: ${generatedFilePath}`)
     )
-
-    //const visitor = new InterpretorVisitor()
-    //visitor.visitEntryPoint(ep)
 }
 
 export type GenerateOptions = {

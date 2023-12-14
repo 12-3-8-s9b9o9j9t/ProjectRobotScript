@@ -19,17 +19,14 @@ editorConfig.theme = 'vs-dark';
 editorConfig.useLanguageClient = true;
 editorConfig.useWebSocket = false;
 
-const parseAndValidate = (async () => {
-    console.info('validating current code...');
-    // To implement
-});
-
 const execute = (async () => {
     console.info('running current code...');
     // To implement
+
+    //runSimulation(scene);
 });
 
-const setupSimulator = (scene) => {
+const runSimulation = (scene) => {
     const wideSide = max(scene.size.x, scene.size.y);
     let factor = 1000 / wideSide;
 
@@ -65,8 +62,7 @@ const setupSimulator = (scene) => {
 }
 
 window.execute = execute;
-window.parseAndValidate = parseAndValidate;
-window.setupSimulator = setupSimulator;
+//window.setupSimulator = setupSimulator;
 
 const workerURL = new URL('./robot-script-server-worker.js', import.meta.url);
 console.log(workerURL.href);

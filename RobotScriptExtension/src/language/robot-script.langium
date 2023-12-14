@@ -2,162 +2,138 @@ grammar RobotScript
 import 'terminals'
 import 'robot-script-model-types'
 
-entry EntryPoint:
-    (funs+=FunDef)*
+entry EntryPoint returns EntryPoint:
+    (funs+=FunDef)* 
 ;
 
-FunDef:
-    type=AnyType name=ID '('(params+=SimpleVarDecl  (',' params+=SimpleVarDecl)* )? ')' body=Block
+FunDef returns FunDef:
+    type=AnyType name=ID '('(params+=SimpleVarDecl (',' params+=SimpleVarDecl)* )? ')' body=Block   
 ;
 
-AnyType:
-    VoidType | DataType
+AnyType returns AnyType:
+    VoidType | DataType 
 ;
 
-VoidType infers AnyType:
-    name='void'
+VoidType returns VoidType:
+    name='void'  
 ;
 
-DataType infers AnyType:
-    name=('bool' | 'number')
+DataType returns DataType:
+    name=('bool'|'number') 
 ;
 
-VarDecl: SimpleVarDecl | VarDeclInit;
-
-SimpleVarDecl infers VarDecl:
-    type=DataType name=ID
+SimpleVarDecl returns SimpleVarDecl:
+    type=DataType name=ID   
 ;
 
-VarDeclInit infers VarDecl:
-    SimpleVarDecl '=' expr=Expression
+VarDeclInit returns VarDeclInit:
+    type=DataType name=ID '=' expr=Expression   
 ;
 
-Expression:
-    Or
+Expression returns Expression:
+    Or 
 ;
 
-Or infers Expression:
-    And ({infer BinExpr.expr1=current} op='||' expr2=And)*
+Or returns Expression:
+    And ({BinExpr.expr1=current} op='||' expr2=And)*  
 ;
 
-And infers Expression:
-    PrimBoolExpr ({infer BinExpr.expr1=current} op='&&' expr2=PrimBoolExpr)*
+And returns Expression:
+    PrimBoolExpr ({BinExpr.expr1=current} op='&&' expr2=PrimBoolExpr)*  
 ;
 
-PrimBoolExpr infers Expression:
+PrimBoolExpr returns Expression:
     Not | Compare 
 ;
 
-Not infers UnExpr:
-    op='!' expr=Compare
+Not returns UnExpr:
+    op='!'  expr=Compare   
 ;
 
-Compare infers Expression:
-    Add ({infer BinExpr.expr1=current} op=('=='|'!='|'<='|'>='|'<'|'>') expr2=Add)*
+Compare returns Expression:
+    Add ({BinExpr.expr1=current} op=('=='|'!='|'<='|'>='|'<'|'>') expr2=Add)*  
 ;
 
-Add infers Expression:
-    Mul ({infer BinExpr.expr1=current} op=('+'|'-') expr2=Mul)*
+Add returns Expression:
+    Mul ({BinExpr.expr1=current} op=('+'|'-') expr2=Mul)*  
 ;
 
-Mul infers Expression:
-    PrimExpr ({infer BinExpr.expr1=current} op=('*'|'/') expr2=PrimExpr)*
+Mul returns Expression:
+    PrimExpr ({BinExpr.expr1=current} op=('*'|'/') expr2=PrimExpr)*  
 ;
 
-PrimExpr infers Expression:
-    Neg | Group | Lit | Ref | FunCall | GetSpeed | Sensor
+PrimExpr returns Expression:
+    Neg | Group | Lit | Ref | FunCall | GetSpeed | Distance | Time 
 ;
 
-Neg infers UnExpr:
-    op='-' expr=Expression
+Neg returns UnExpr:
+    op='-' expr=Expression   
 ;
 
-Group infers Expression:
-    '(' Expression ')'
+Group returns Expression:
+    '(' Expression ')'  
 ;
 
-Lit:
-    val=(BOOL|INT)
+Lit returns Lit:
+    val=(BOOL|INT)  
 ;
 
-Ref:
-    val=[VarDecl:ID]  
+Ref returns Ref:
+    val=[VarDecl:ID ] 
 ;
 
-GetSpeed:
-    Speed ('in' unit=Unit)?
+GetSpeed returns GetSpeed:
+    {GetSpeed} 'Speed' (unit=UnitCast)?  
 ;
 
-Speed:
-    val='Speed'
+Distance returns Distance:
+    {Distance} 'Distance' (unit=UnitCast )?  
 ;
 
-Sensor:
-    Distance | Time
+Time returns Time:
+    {Time} 'Time'  
 ;
 
-Distance:
-    val='Distance' (UnitCast)?
+FunCall returns FunCall:
+    fun=[FunDef:ID ] '(' (params+=Expression (',' params+=Expression)* )? ')'  
 ;
 
-Time:
-    val='Time'
+Block returns Block:
+    {Block} '{' (stmts+=Statement )* '}'  
 ;
 
-FunCall:
-    fun=[FunDef:ID] '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
+Statement returns Statement:
+    Block | SimpleVarDecl | VarDeclInit | AssignVar | SetSpeed | FunCall | WhileStmt | IfStmt | ReturnStmt | Linear | Rotation 
 ;
 
-Block:
-    '{' (stmts+=Statement)* '}'
+AssignVar returns AssignVar:
+    ref=[VarDecl:ID ] '=' expr=Expression   
 ;
 
-Statement:
-    Block | VarDecl | Assign | FunCall | WhileStmt | IfStmt | ReturnStmt | Linear | Rotation
+SetSpeed returns SetSpeed:
+    'Speed' '=' expr=Expression (unit=UnitCast)?  
 ;
 
-
-Assign:
-    AssignVar | SetSpeed
+WhileStmt returns WhileStmt:
+    'while' '(' expr=Expression ')' stmt=Statement   
 ;
 
-AssignVar:
-    ref=[VarDecl:ID ] '=' expr=Expression 
+IfStmt returns IfStmt:
+    'if' '(' expr=Expression ')' stmt1=Statement ('else' stmt2=Statement)?  
 ;
 
-SetSpeed:
-    Speed '=' expr=Expression (UnitCast)?
+ReturnStmt returns ReturnStmt:
+    {ReturnStmt} 'return' (expr=Expression)?  
 ;
 
-WhileStmt:
-    'while' '(' expr=Expression ')' stmt=Statement  
+Linear returns Linear:
+    dir=('Forward'|'Sideways') expr=Expression (unit=UnitCast )?  
 ;
 
-IfStmt:
-    'if' '(' expr=Expression ')' stmt1=Statement  ('else' stmt2=Statement  )?  
+Rotation returns Rotation:
+    'Rotate' expr=Expression   
 ;
 
-ReturnStmt:
-    'return' (expr=Expression )?   
+UnitCast returns UnitCast:
+    'in' unit=('m'|'dm'|'cm'|'mm')   
 ;
-
-Linear:
-    dir=('Forward' | 'Sideways') expr=Expression (UnitCast)? 
-;
-
-Rotation:
-    'Rotate' expr=Expression 
-;
-
-UnitCast:
-    'in' unit=Unit
-;
-
-Unit returns Unit:
-    Unit_m | Unit_dm | Unit_cm | Unit_mm
-;
-
-Unit_m returns Unit_m: 'm' ;
-Unit_dm returns Unit_dm: 'dm' ;
-Unit_cm returns Unit_cm: 'cm' ;
-Unit_mm returns Unit_mm: 'mm' ;

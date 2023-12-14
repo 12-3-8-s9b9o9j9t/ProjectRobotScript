@@ -19,6 +19,10 @@ import {
     isUnExpr,
     isVarDecl,
     isWhileStmt,
+    isVarDeclInit,
+    isAssign,
+    isMovement,
+    isVoidType,
 } from './generated/ast.js'
 import type { RobotScriptServices } from './robot-script-module.js'
 import { evalBin, evalUn } from './robot-script-utils.js'
@@ -128,7 +132,7 @@ export class RobotScriptValidator {
                 })
             })
         } else if (isVarDecl(stmt)) {
-            stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
+            isVarDeclInit(stmt) && stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
             if (stmt.name) {
                 outScope.addDecl(stmt) ||
                     accept('error', `Duplicate variable '${stmt.name}'.`, {
@@ -145,7 +149,7 @@ export class RobotScriptValidator {
             stmt.stmt2 && this.checkScopeStatement(stmt.stmt2, accept, outScope)
         } else if (isFunCall(stmt)) {
             this.checkScopeExpr(stmt, accept, outScope)
-        } else {
+        } else if (isAssign(stmt) || isMovement(stmt) || isReturnStmt(stmt)) {
             stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
         }
     }
@@ -182,7 +186,7 @@ export class RobotScriptValidator {
                     node: fun,
                     property: 'name',
                 })
-            ;(fun.type && fun.type.name === 'void') ||
+            ;(fun.type && isVoidType(fun.type)) ||
                 accept('error', "Function 'main' must return void.", {
                     node: fun,
                     property: 'name',
@@ -191,9 +195,9 @@ export class RobotScriptValidator {
     }
 
     checkReturn(fun: FunDef, accept: ValidationAcceptor): void {
-        if (fun.name && fun.body && fun.type && fun.type.name) {
-            this.checkReturnRec(fun.body, accept, fun.type.name) ||
-                fun.type.name === 'void' ||
+        if (fun.name && fun.body && fun.type && fun.type) {
+            this.checkReturnRec(fun.body, accept, fun.type) ||
+                isVoidType(fun.type) ||
                 accept(
                     'error',
                     `Function '${fun.name}' must return a value of type '${fun.type.name}'.`,
@@ -205,19 +209,20 @@ export class RobotScriptValidator {
     private checkReturnRec(
         stmt: Statement,
         accept: ValidationAcceptor,
-        retType: AnyType['name']
+        retType: AnyType
     ): boolean {
         if (isReturnStmt(stmt)) {
-            if (stmt.expr && retType === 'void') {
+            if (stmt.expr && isVoidType(retType)) {
                 accept('error', "Cannot assign a value to type 'void'.", {
                     node: stmt,
                 })
-            } else if (!stmt.expr && retType !== 'void') {
-                accept(
-                    'error',
-                    `Cannot assign a value of type 'void' to type '${retType}'.`,
-                    { node: stmt }
-                )
+            } else if (!stmt.expr && !isVoidType(retType)) {
+                retType.name &&
+                    accept(
+                        'error',
+                        `Cannot assign a value of type 'void' to type '${retType.name}'.`,
+                        { node: stmt }
+                    )
             }
             return true
         } else if (isWhileStmt(stmt) && stmt.expr) {

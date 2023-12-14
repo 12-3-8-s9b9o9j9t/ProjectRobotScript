@@ -7,7 +7,7 @@ import com.google.inject.Inject
 import org.eclipse.xtext.formatting2.AbstractFormatter2
 import org.eclipse.xtext.formatting2.IFormattableDocument
 import robotScriptModel.EntryPoint
-import robotScriptModel.FunctionDef
+import robotScriptModel.FunDef
 import robotScriptXText.services.RobotScriptGrammarAccess
 
 class RobotScriptFormatter extends AbstractFormatter2 {
@@ -16,19 +16,19 @@ class RobotScriptFormatter extends AbstractFormatter2 {
 
 	def dispatch void format(EntryPoint entryPoint, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		for (functionDef : entryPoint.functions) {
-			functionDef.format
+		for (funDef : entryPoint.funs) {
+			funDef.format
 		}
 	}
 
-	def dispatch void format(FunctionDef functionDef, extension IFormattableDocument document) {
+	def dispatch void format(FunDef funDef, extension IFormattableDocument document) {
 		// TODO: format HiddenRegions around keywords, attributes, cross references, etc. 
-		functionDef.returnType.format
-		functionDef.block.format
-		for (simpleVarDecl : functionDef.inputs) {
+		funDef.type.format
+		for (simpleVarDecl : funDef.params) {
 			simpleVarDecl.format
 		}
+		funDef.body.format
 	}
 	
-	// TODO: implement for Block, SimpleVarDecl, AssignVar, SetSpeed, Rotation, Linear, FunCall, VarDeclInit, LoopStmt, IfStmt, ReturnStmt, And, Add, Or, Not, Compare, Mul, AriUnOp
+	// TODO: implement for SimpleVarDecl, VarDeclInit, BinExpr, UnExpr, GetSpeed, Distance, FunCall, Block, AssignVar, SetSpeed, WhileStmt, IfStmt, ReturnStmt, Linear, Rotation
 }

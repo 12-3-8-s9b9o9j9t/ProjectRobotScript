@@ -5,18 +5,23 @@ type Unit_dm = 'dm';
 type Unit_cm = 'cm';
 type Unit_mm = 'mm';
 
+type Direction = Direction_Forward | Direction_Sideways;
+type Direction_Forward = 'Forward';
+type Direction_Sideways = 'Sideways';
+
 interface EntryPoint {
-	functions: FunctionDef[]
+	funs: FunDef[]
 }
 
-interface FunctionDef {
-	name?: string
-	returnType: AnyType
-	block: Block
-	inputs: SimpleVarDecl[]
+interface FunDef {
+	name: string
+	^type: AnyType
+	body: Block
+	params: SimpleVarDecl[]
 }
 
 interface AnyType {
+	name: string
 }
 
 interface Block extends Statement {
@@ -31,26 +36,69 @@ interface SimpleVarDecl extends VarDecl {
 
 interface VarDecl extends Statement {
 	^type: DataType
-	name?: string
+	name: string
 }
 
 interface DataType extends AnyType {
 }
 
-interface Expression {
-}
-
-interface PrimaryBoolExpr extends Expression {
-}
-
-interface PrimaryAriExpr extends Expression {
-}
-
 interface VoidType extends AnyType {
 }
 
+interface VarDeclInit extends VarDecl {
+	expr: Expression
+}
+
+interface Expression {
+}
+
+interface BinExpr extends Expression {
+	op: string
+	expr1: Expression
+	expr2: Expression
+}
+
+interface UnExpr extends Expression {
+	op: string
+	expr: Expression
+}
+
+interface Lit extends PrimExpr {
+	val: number
+}
+
+interface PrimExpr extends Expression {
+}
+
+interface Ref extends PrimExpr {
+	val: @VarDecl
+}
+
+interface GetSpeed extends PrimExpr {
+	unit?: UnitCast
+}
+
+interface UnitCast {
+	unit: Unit
+}
+
+interface Distance extends Sensor {
+	unit?: UnitCast
+}
+
+interface Sensor extends PrimExpr {
+}
+
+interface Time extends Sensor {
+}
+
+interface FunCall extends Statement, PrimExpr {
+	fun: @FunDef
+	params: Expression[]
+}
+
 interface AssignVar extends Assign {
-	var: @VarDecl
+	ref: @VarDecl
 }
 
 interface Assign extends Statement {
@@ -58,86 +106,33 @@ interface Assign extends Statement {
 }
 
 interface SetSpeed extends Assign {
-	unit?: Unit
-	speed: Speed
+	unit?: UnitCast
 }
 
-interface Speed extends Value {
-}
-
-interface Value extends PrimaryAriExpr {
-}
-
-interface Rotation extends Movement {
-}
-
-interface Movement extends Statement {
-	expr: Expression
-}
-
-interface Linear extends Movement {
-	unit?: Unit
-}
-
-interface FunCall extends Value, Statement {
-	fun: @FunctionDef
-	inputs: Expression[]
-}
-
-interface VarDeclInit extends VarDecl {
-	expr: Expression
-}
-
-interface LoopStmt extends Statement {
+interface WhileStmt extends Statement {
 	expr: Expression
 	stmt: Statement
 }
 
 interface IfStmt extends Statement {
 	expr: Expression
-	ifstmt: Statement
-	elsestmt?: Statement
+	stmt1: Statement
+	stmt2?: Statement
 }
 
 interface ReturnStmt extends Statement {
 	expr?: Expression
 }
 
-interface And extends Expression {
-	exprs: PrimaryBoolExpr[]
+interface Linear extends Movement {
+	unit?: UnitCast
+	dir: Direction
 }
 
-interface Add extends Expression {
-	exprs: Mul[]
-}
-
-interface Mul extends Expression {
-	exprs: PrimaryAriExpr[]
-}
-
-interface Or extends Expression {
-	exprs: And[]
-}
-
-interface Sensor extends Value {
-}
-
-interface Literal extends Value {
-}
-
-interface Variable extends Value {
-	var: @VarDecl
-}
-
-interface Not extends PrimaryBoolExpr {
-	expr: Compare
-}
-
-interface Compare extends PrimaryBoolExpr {
-	exprs: Add[]
-}
-
-interface AriUnOp extends PrimaryAriExpr {
+interface Movement extends Statement {
 	expr: Expression
+}
+
+interface Rotation extends Movement {
 }
 

@@ -3,135 +3,139 @@ import 'Terminals'
 import 'robotScriptModel-types'
 
 entry EntryPoint returns EntryPoint:
-    {EntryPoint} 'EntryPoint' '{' ('functions' '{' functions+=FunctionDef  ("," functions+=FunctionDef  )* '}' )? '}'  
+    (funs+=FunDef )* 
+;
+
+FunDef returns FunDef:
+    ^type=AnyType  name=ID  '(' (params+=SimpleVarDecl  (',' params+=SimpleVarDecl  )* )? ')' body=Block   
 ;
 
 AnyType returns AnyType:
     VoidType | DataType 
 ;
 
-Statement returns Statement:
-    AssignVar | SetSpeed | Rotation | Linear | FunCall | Block | SimpleVarDecl | VarDeclInit | LoopStmt | IfStmt | ReturnStmt 
-;
-
-Expression returns Expression:
-    And | Add | Or | Sensor | Literal | Speed | Variable | FunCall | Not | Compare | Mul | AriUnOp 
-;
-
-VarDecl returns VarDecl:
-    SimpleVarDecl | VarDeclInit 
-;
-
-PrimaryBoolExpr returns PrimaryBoolExpr:
-    Not | Compare 
-;
-
-PrimaryAriExpr returns PrimaryAriExpr:
-    Sensor | Literal | Speed | Variable | FunCall | AriUnOp 
-;
-
-FunctionDef returns FunctionDef:
-    'FunctionDef' name=EString  '{' 'returnType' returnType=AnyType  'block' block=Block  ('inputs' '{' inputs+=SimpleVarDecl  ("," inputs+=SimpleVarDecl  )* '}' )? '}'  
-;
-
-EString returns string:
-    STRING | ID 
-;
-
-Block returns Block:
-    {Block} 'Block' '{' ('stmts' '{' stmts+=Statement  ("," stmts+=Statement  )* '}' )? '}'  
-;
-
-SimpleVarDecl returns SimpleVarDecl:
-    'SimpleVarDecl' name=EString  '{' 'type' ^type=DataType  '}'  
-;
-
 VoidType returns VoidType:
-    {VoidType} 'VoidType'  
+    name='void'  
 ;
 
 DataType returns DataType:
-    {DataType} 'DataType'  
+    name=('bool' | 'number' ) 
 ;
 
-AssignVar returns AssignVar:
-    'AssignVar' '{' 'var' var=[VarDecl:EString ] 'expr' expr=Expression  '}'  
-;
-
-SetSpeed returns SetSpeed:
-    'SetSpeed' '{' ('unit' unit=Unit  )? 'expr' expr=Expression  'speed' speed=Speed  '}'  
-;
-
-Rotation returns Rotation:
-    'Rotation' '{' 'expr' expr=Expression  '}'  
-;
-
-Linear returns Linear:
-    'Linear' '{' ('unit' unit=Unit  )? 'expr' expr=Expression  '}'  
-;
-
-FunCall returns FunCall:
-    'FunCall' '{' 'fun' fun=[FunctionDef:EString ] ('inputs' '{' inputs+=Expression  ("," inputs+=Expression  )* '}' )? '}'  
+SimpleVarDecl returns SimpleVarDecl:
+    ^type=DataType  name=ID   
 ;
 
 VarDeclInit returns VarDeclInit:
-    'VarDeclInit' name=EString  '{' 'type' ^type=DataType  'expr' expr=Expression  '}'  
+    ^type=DataType  name=ID  '=' expr=Expression   
 ;
 
-LoopStmt returns LoopStmt:
-    'LoopStmt' '{' 'expr' expr=Expression  'stmt' stmt=Statement  '}'  
+Expression returns Expression:
+    Or 
+;
+
+Or returns Expression:
+    And ({BinExpr.expr1=current} op='||'  expr2=And  )*  
+;
+
+And returns Expression:
+    PrimBoolExpr ({BinExpr.expr1=current} op='&&'  expr2=PrimBoolExpr  )*  
+;
+
+PrimBoolExpr returns Expression:
+    Not | Compare 
+;
+
+Not returns UnExpr:
+    op='!'  expr=Expression   
+;
+
+Compare returns Expression:
+    Add ({BinExpr.expr1=current} op=('==' | '!=' | '<=' | '>=' | '<' | '>' ) expr2=Add  )*  
+;
+
+Add returns Expression:
+    Mul ({BinExpr.expr1=current} op=('+' | '-' ) expr2=Mul  )*  
+;
+
+Mul returns Expression:
+    PrimExpr ({BinExpr.expr1=current} op=('*' | '/' ) expr2=PrimExpr  )*  
+;
+
+PrimExpr returns Expression:
+    Neg | Group | Lit | Ref | FunCall | GetSpeed | Distance | Time 
+;
+
+Neg returns UnExpr:
+    op='-'  expr=Expression   
+;
+
+Group returns Expression:
+    '(' Expression ')'  
+;
+
+Lit returns Lit:
+    val=INT  
+;
+
+Ref returns Ref:
+    val=[VarDecl:ID ] 
+;
+
+GetSpeed returns GetSpeed:
+    {GetSpeed} 'Speed' (unit=UnitCast )?  
+;
+
+Distance returns Distance:
+    {Distance} 'Distance' (unit=UnitCast )?  
+;
+
+Time returns Time:
+    {Time} 'Time'  
+;
+
+FunCall returns FunCall:
+    fun=[FunDef:ID ] '(' (params+=Expression  (',' params+=Expression  )* )? ')'  
+;
+
+Block returns Block:
+    {Block} '{' (stmts+=Statement )* '}'  
+;
+
+Statement returns Statement:
+    Block | SimpleVarDecl | VarDeclInit | AssignVar | SetSpeed | FunCall | WhileStmt | IfStmt | ReturnStmt | Linear | Rotation 
+;
+
+AssignVar returns AssignVar:
+    ref=[VarDecl:ID ] '=' expr=Expression   
+;
+
+SetSpeed returns SetSpeed:
+    'Speed' '=' expr=Expression  (unit=UnitCast )?  
+;
+
+WhileStmt returns WhileStmt:
+    'while' '(' expr=Expression  ')' stmt=Statement   
 ;
 
 IfStmt returns IfStmt:
-    'IfStmt' '{' 'expr' expr=Expression  'ifstmt' ifstmt=Statement  ('elsestmt' elsestmt=Statement  )? '}'  
+    'if' '(' expr=Expression  ')' stmt1=Statement  ('else' stmt2=Statement  )?  
 ;
 
 ReturnStmt returns ReturnStmt:
-    {ReturnStmt} 'ReturnStmt' '{' ('expr' expr=Expression  )? '}'  
+    {ReturnStmt} 'return' (expr=Expression )?  
 ;
 
-And returns And:
-    'And' '{' 'exprs' '{' exprs+=PrimaryBoolExpr  ("," exprs+=PrimaryBoolExpr  )* '}' '}'  
+Linear returns Linear:
+    dir=Direction  expr=Expression  (unit=UnitCast )?  
 ;
 
-Add returns Add:
-    'Add' '{' 'exprs' '{' exprs+=Mul  ("," exprs+=Mul  )* '}' '}'  
+Rotation returns Rotation:
+    'Rotate' expr=Expression   
 ;
 
-Or returns Or:
-    'Or' '{' 'exprs' '{' exprs+=And  ("," exprs+=And  )* '}' '}'  
-;
-
-Sensor returns Sensor:
-    {Sensor} 'Sensor'  
-;
-
-Literal returns Literal:
-    {Literal} 'Literal'  
-;
-
-Speed returns Speed:
-    {Speed} 'Speed'  
-;
-
-Variable returns Variable:
-    'Variable' '{' 'var' var=[VarDecl:EString ] '}'  
-;
-
-Not returns Not:
-    'Not' '{' 'expr' expr=Compare  '}'  
-;
-
-Compare returns Compare:
-    'Compare' '{' 'exprs' '{' exprs+=Add  ("," exprs+=Add  )* '}' '}'  
-;
-
-Mul returns Mul:
-    'Mul' '{' 'exprs' '{' exprs+=PrimaryAriExpr  ("," exprs+=PrimaryAriExpr  )* '}' '}'  
-;
-
-AriUnOp returns AriUnOp:
-    'AriUnOp' '{' 'expr' expr=Expression  '}'  
+UnitCast returns UnitCast:
+    'in' unit=Unit   
 ;
 
 Unit returns Unit:
@@ -141,4 +145,10 @@ Unit_m returns Unit_m: 'm' ;
 Unit_dm returns Unit_dm: 'dm' ;
 Unit_cm returns Unit_cm: 'cm' ;
 Unit_mm returns Unit_mm: 'mm' ;
+
+Direction returns Direction:
+    Direction_Forward | Direction_Sideways
+;
+Direction_Forward returns Direction_Forward: 'Forward' ;
+Direction_Sideways returns Direction_Sideways: 'Sideways' ;
 

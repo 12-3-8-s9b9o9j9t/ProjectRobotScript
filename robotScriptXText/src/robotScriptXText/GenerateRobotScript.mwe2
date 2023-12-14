@@ -37,7 +37,7 @@ Workflow {
 			
 			// fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment2 auto-inject {}
 			fragment = io.typefox.xtext2langium.Xtext2LangiumFragment {
-				outputPath = './langium'
+			    outputPath = './langium'
 			}
 
 			formatter = {
