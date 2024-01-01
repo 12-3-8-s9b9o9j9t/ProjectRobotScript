@@ -77,7 +77,7 @@ export class Compiler implements RobotScriptVisitor{
         if( "stmt2" in node) {
             elseStatement = "else {\n" + node.stmt2?.accept(this) + "}" 
         }
-        return ifStatement + elseStatement;
+        return ifStatement + elseStatement + ";";
     }
 
 
@@ -102,32 +102,51 @@ export class Compiler implements RobotScriptVisitor{
     }
 
     visitVoidType(node: VoidType) {
-        throw new Error("Method not implemented.");
+        // name='void'  
+        return "void";
+    ;
     }
     visitDataType(node: DataType) {
-        throw new Error("Method not implemented.");
+        // name=('bool'|'number') 
+        var ans : string;
+        if(node.name == "bool"){
+            ans = "bool";
+        }else{
+            ans = "number";
+        }
+        return ans;
     }
 
     visitSimpleVarDecl(node: SimpleVarDecl) {
-        throw new Error("Method not implemented.");
+        // type=DataType name=ID  
+        return node.type.accept(this) +" "+node.name; // pas sur de accept ici
     }
+
     visitVarDeclInit(node: VarDeclInit) {
-        throw new Error("Method not implemented.");
+        // type=DataType name=ID '=' expr=Expression  
+        return node.type.accept(this) +" "+node.name+" = "+node.expr; // pas sur de accept ici aussi
     }
 
     visitBinExpr(node: BinExpr) {
         throw new Error("Method not implemented.");
     }
+
+
     visitUnExpr(node: UnExpr) {
         throw new Error("Method not implemented.");
     }
 
+
     visitLit(node: Lit) {
         throw new Error("Method not implemented.");
     }
+
+
     visitRef(node: Ref) {
         throw new Error("Method not implemented.");
     }
+
+
     visitGetSpeed(node: GetSpeed) {
         throw new Error("Method not implemented.");
     }
