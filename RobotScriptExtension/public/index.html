@@ -6,14 +6,13 @@
         <link href="styles.css" rel="stylesheet"/>
         <title>RobotScript in Langium</title>
 
-        <script src="https://cdn.jsdelivr.net/npm/p5@1.7.0/lib/p5.js"></script>
-        <!-- <script src="simulator/libraries/p5.js"></script> -->
-        <script src="simulator/libraries/p5.sound.min.js"></script>
+        <!--<script src="https://cdn.jsdelivr.net/npm/p5@1.9.0/lib/p5.js"></script>-->
+        <script src="simulator/libraries/p5.js"></script>
     </head>
     <body>
         <h1>RobotScript in Langium</h1>
         <div id="buttons">
-            <input class="build" type="button" value="Parse and Validate" onclick="window.parseAndValidate()">
+            <input class="build" type="button" value="Validate" onclick="window.validate()">
             <input class="build" type="button" value="Execute Simulation" onclick="window.execute()">
             <input class="build" type="button" value="Restart Simulation" onclick="window.resetSimulation()">
             <input class="build" type="button" value="Clear Data" onclick="window.setup()">
@@ -41,6 +40,7 @@
         <script src="simulator/wall.js"></script>
         <script src="simulator/block.js"></script>
         <script src="simulator/robot.js"></script>
+        
         <script src="simulator/sketch.js"></script>
     </body>
 </html>

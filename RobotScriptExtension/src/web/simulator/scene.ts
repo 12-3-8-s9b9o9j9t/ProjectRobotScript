@@ -9,7 +9,7 @@ export interface Scene{
     timestamps:Array<Entities.Timestamp>;
 }
 
-export class BaseScene{
+export class BaseScene implements Scene {
     size:Vector;
     entities:Entities.Entities[] = [];
     robot: Entities.Robot;

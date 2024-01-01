@@ -4,47 +4,43 @@ import { createRobotScriptServices } from '../language/robot-script-module.js'
 import { extractAstNode, extractDestinationAndName, extractDocument } from './cli-util.js'
 import { NodeFileSystem } from 'langium/node'
 import * as url from 'node:url'
-import * as fs from 'node:fs'
 import * as fsp from 'node:fs/promises'
+import * as fs from 'node:fs'
 import * as path from 'node:path'
 import chalk from 'chalk'
-import { generateScene } from './generator.js'
 
-import { EntryPoint } from '../language/generated/ast.js'
+import { EntryPoint } from '../semantics/visitor.js';
+import { Compiler } from '../semantics/compiler.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
 const packagePath = path.resolve(__dirname, '..', '..', 'package.json')
 const packageContent = await fsp.readFile(packagePath, 'utf-8')
 
-export const generate = async (
-    fileName: string,
-    opts: GenerateOptions
-): Promise<void> => {
-    const services = createRobotScriptServices(NodeFileSystem).RobotScript
-    const ep = await extractAstNode<EntryPoint>(fileName, services)
-
-    const data = extractDestinationAndName(fileName, opts.destination)
-    const generatedFilePath = `${path.join(data.destination, data.name)}.json`
+export const compileAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
+    const services = createRobotScriptServices(NodeFileSystem).RobotScript;
+    const ep = await extractAstNode<EntryPoint>(fileName, services);
+    
+    const data = extractDestinationAndName(fileName, opts.destination);
+    const generatedFilePath = `${path.join(data.destination, data.name)}.ino`;
 
     if (!fs.existsSync(data.destination)) {
-        fs.mkdirSync(data.destination, { recursive: true })
+        fs.mkdirSync(data.destination, { recursive: true });
     }
 
-    const res = generateScene(ep)
+    const compiler = new Compiler();
+    const result = compiler.visitEntryPoint(ep);
 
-    fs.writeFileSync(generatedFilePath, JSON.stringify(res, undefined, 2))
-
-    console.log(
-        chalk.green(`Scene generated successfully: ${generatedFilePath}`)
-    )
-}
+    fs.writeFileSync(generatedFilePath, result);
+    
+    console.log(chalk.green(`MiniLogo commands generated successfully: ${generatedFilePath}`));
+};
 
 export type GenerateOptions = {
     destination?: string
 }
 
-export const validate = async (fileName: string): Promise<void> => {
+export const validateAction = async (fileName: string): Promise<void> => {
     // retrieve the services for our language
     const services = createRobotScriptServices(NodeFileSystem).RobotScript
     // extract a document for our program
@@ -54,7 +50,8 @@ export const validate = async (fileName: string): Promise<void> => {
     // verify no lexer, parser, or general diagnostic errors show up
     if (
         parseResult.lexerErrors.length === 0 &&
-        parseResult.parserErrors.length === 0
+        parseResult.parserErrors.length === 0 &&
+        document.diagnostics?.filter(d => d.severity === 1 /*Error*/).length === 0
     ) {
         console.log(
             chalk.green(`Parsed and validated ${fileName} successfully!`)
@@ -71,28 +68,17 @@ export default function (): void {
 
     const fileExtensions = RobotScriptLanguageMetaData.fileExtensions.join(', ')
     program
-        .command('generate')
-        .argument(
-            '<file>',
-            `source file (possible file extensions: ${fileExtensions})`
-        )
-        .option(
-            '-d, --destination <dir>',
-            'destination directory of generating'
-        )
-        .description('generates scene from source file for simulation')
-        .action(generate)
+        .command('compile')
+        .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)
+        .option('-d, --destination <dir>', 'destination directory of generating')
+        .description('generates arduino code from a given source file')
+        .action(compileAction);
 
     program
         .command('validate')
-        .argument(
-            '<file>',
-            `Source file to parse & validate (ending in ${fileExtensions})`
-        )
-        .description(
-            'Indicates where a program parses & validates successfully, but produces no output code'
-        )
-        .action(validate)
+        .argument('<file>', `Source file to parse & validate (ending in ${fileExtensions})`)
+        .description('Indicates where a program parses & validates successfully, but produces no output code')
+        .action(validateAction)
 
     program.parse(process.argv)
 }

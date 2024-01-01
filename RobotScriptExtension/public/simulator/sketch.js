@@ -5,7 +5,7 @@ function setup() {
   window.time = 0;
   window.lastTimestamp = 0;
   window.scene = null;
-  window.p5robot = new Robot(1, width/2, height/2);
+  //window.p5robot = new Robot(1, width/2, height/2);
 }
 
 function draw() {

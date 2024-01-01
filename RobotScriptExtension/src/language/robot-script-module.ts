@@ -1,12 +1,12 @@
 import type {
     DefaultSharedModuleContext,
-    //ExecuteCommandAcceptor,
+    ExecuteCommandAcceptor,
     LangiumServices,
     LangiumSharedServices,
     Module,
     PartialLangiumServices,
 } from 'langium'
-import { /*AbstractExecuteCommandHandler,*/ createDefaultModule, createDefaultSharedModule, inject } from 'langium'
+import { AbstractExecuteCommandHandler, createDefaultModule, createDefaultSharedModule, inject } from 'langium'
 import {
     RobotScriptGeneratedModule,
     RobotScriptGeneratedSharedModule,
@@ -16,7 +16,7 @@ import {
     registerValidationChecks,
 } from './robot-script-validator.js'
 import { RobotScriptAcceptWeaver } from '../semantics/accept-weaver.js'
-//import { parseAndGenerate } from '../web/index.js'
+import { generateScene, validateCode } from '../web/index.js'
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -25,6 +25,21 @@ export type RobotScriptAddedServices = {
     validation: {
         RobotScriptValidator: RobotScriptValidator,
         RobotScriptAcceptWeaver: RobotScriptAcceptWeaver
+    }
+}
+
+class RobotScriptCommandHandler extends AbstractExecuteCommandHandler {
+    registerCommands(acceptor: ExecuteCommandAcceptor): void {
+        // accept a single command called 'parseAndGenerate'
+        acceptor('generateScene', args => {
+            // invoke generator on this data, and return the response
+            return generateScene(args[0]);
+        });
+
+        acceptor('validateCode', args => {
+            // invoke generator on this data, and return the response
+            return validateCode(args[0]);
+        });
     }
 }
 
@@ -79,18 +94,8 @@ export function createRobotScriptServices(
         RobotScriptGeneratedModule,
         RobotScriptModule
     )
-    //shared.lsp.ExecuteCommandHandler = new RobotScriptScene()
+    shared.lsp.ExecuteCommandHandler = new RobotScriptCommandHandler()
     shared.ServiceRegistry.register(RobotScript)
     registerValidationChecks(RobotScript)
     return { shared, RobotScript }
 }
-
-/*
-class RobotScriptScene extends AbstractExecuteCommandHandler {
-    override registerCommands(acceptor: ExecuteCommandAcceptor): void {
-        acceptor('parseAndGenerate', args => {
-            // invoke generator on this data, and return the response
-            return parseAndGenerate(args[0]);
-        });
-    }
-}*/

@@ -1,4 +1,4 @@
-import { MonacoEditorLanguageClientWrapper } from './monaco-editor-wrapper/index.js';
+import { MonacoEditorLanguageClientWrapper, vscode } from './monaco-editor-wrapper/index.js';
 import { buildWorkerDefinition } from "./monaco-editor-workers/index.js";
 import monarchSyntax from "./syntaxes/robot-script.monarch.js";
 import { defaultCode } from "./default-code.js";
@@ -19,11 +19,27 @@ editorConfig.theme = 'vs-dark';
 editorConfig.useLanguageClient = true;
 editorConfig.useWebSocket = false;
 
+const validate = (async () => {
+    const code = client.editor.getValue();
+    const diagnostics = await vscode.commands.executeCommand('validateCode', code)
+
+    if (diagnostics.length === 0) {
+        console.info('code is valid');
+    } else {
+        console.error('code is invalid');
+        for (const diagnostic of diagnostics) {
+            console.error(diagnostic);
+        }
+    }
+});
+
 const execute = (async () => {
     console.info('running current code...');
-    // To implement
+    
+    const code = client.editor.getValue();
+    const scene = await vscode.commands.executeCommand('generateScene', code)
 
-    //runSimulation(scene);
+    runSimulation(scene);
 });
 
 const runSimulation = (scene) => {
@@ -61,6 +77,7 @@ const runSimulation = (scene) => {
     );
 }
 
+window.validate = validate;
 window.execute = execute;
 //window.setupSimulator = setupSimulator;
 

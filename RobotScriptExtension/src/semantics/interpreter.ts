@@ -1,8 +1,9 @@
+import { BaseScene } from "../web/simulator/scene.js";
 import { AssignVar, BinExpr, Block, DataType, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, SimpleVarDecl, Time, UnExpr, UnitCast, VarDeclInit, VoidType, WhileStmt } from "./visitor.js";
 
 export class Interpreter implements RobotScriptVisitor {
     visitEntryPoint(node: EntryPoint) {
-        throw new Error("Method not implemented.");
+        return new BaseScene();
     }
     visitFunDef(node: FunDef) {
         throw new Error("Method not implemented.");

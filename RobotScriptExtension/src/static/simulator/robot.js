@@ -22,8 +22,6 @@ class Robot {
         const h = (Math.sqrt(3)/2) * (this.width/3)
         triangle(-0.5*h, -(this.height/6), -0.5*h, this.height/6, 0.5*h, 0);
         pop();
-
-        
     }
   
     turn(angle){
