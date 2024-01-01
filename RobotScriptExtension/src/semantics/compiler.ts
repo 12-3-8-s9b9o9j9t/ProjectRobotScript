@@ -41,20 +41,64 @@ export class Compiler implements RobotScriptVisitor{
     visitFunDef(node: FunDef) {
         var nameFunc : string;
         var listParams : string = "";
+        var typeFunc : string;
         if(node.name == "main") {
             nameFunc = "loop";
+            typeFunc = "void";
         }else{
             nameFunc = node.name;
             listParams = node.params.map(param => param.accept(this)).join(",");
+            typeFunc = node.type.toString();
         }
         // Block intègre les {}
-        return "void " + nameFunc + "("+listParams+")\n " + node.body;
+        return typeFunc + nameFunc + "("+listParams+")\n " + node.body;
     }
 
 
     visitBlock(node: Block) {
+        var ans : string = "{\n";
+        var statements =  node.stmts;
+        statements.forEach(statement => {
+            ans = ans + statement.accept(this); // on incorpore tt la syntax dans statement
+        });
+        ans = ans + "}\n";
         // statement accept
-        throw new Error('Method not implemented.');
+        return ans;
+    }
+
+    visitIfStmt(node: IfStmt) {
+        // Arduino : if (condition) { X } else { Y };
+        // AST : 'if' '(' expr=Expression ')' stmt1=Statement ('else' stmt2=Statement)?  
+
+        var ifStatement : string = "if (" + node.expr.accept(this) + ")"
+            + "{\n" + node.stmt1.accept(this) + "}\n";
+
+        var elseStatement  : string = "";
+        if( "stmt2" in node) {
+            elseStatement = "else {\n" + node.stmt2?.accept(this) + "}" 
+        }
+        return ifStatement + elseStatement;
+    }
+
+
+    // ###### Probleme avec les accepts
+    visitWhileStmt(node: WhileStmt) {
+        // Arduino : while (condition) { X };
+        // AST : 'while' '(' expr=Expression ')' stmt=Statement   
+        var whileStatement: string = "while (" +  node.expr + ")"
+            + "{\n" + node.stmt + "}\n";
+        return whileStatement;
+    }
+
+
+    visitReturnStmt(node: ReturnStmt) {
+        var ret : string;
+        if("expr" in node){
+            ret = "return" + node.expr?.accept(this) + ";"
+        }else{
+            ret = "";
+        }
+        return ret;
     }
 
     visitVoidType(node: VoidType) {
@@ -105,15 +149,7 @@ export class Compiler implements RobotScriptVisitor{
     visitSetSpeed(node: SetSpeed) {
         throw new Error("Method not implemented.");
     }
-    visitWhileStmt(node: WhileStmt) {
-        throw new Error("Method not implemented.");
-    }
-    visitIfStmt(node: IfStmt) {
-        throw new Error("Method not implemented.");
-    }
-    visitReturnStmt(node: ReturnStmt) {
-        throw new Error("Method not implemented.");
-    }
+
 
     visitLinear(node: Linear) {
         throw new Error("Method not implemented.");
