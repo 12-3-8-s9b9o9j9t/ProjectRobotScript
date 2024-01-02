@@ -1,6 +1,7 @@
 import { Block, FunDef, VarDecl, isFunDef } from './generated/ast.js'
 
 export type Symb = FunDef | VarDecl
+export type Node = FunDef | Block
 export enum SymbState { undeclared, undefined, defined, used }
 export type Scope = Map<string, {symb: Symb, state: SymbState}>
 
@@ -15,14 +16,14 @@ export class TreeScope {
         return new TreeScope()
     }
 
-    public createChild(node: FunDef | Block): TreeScope {
+    public createChild(node: Node): TreeScope {
         const child = new TreeScope()
         child.parent = this
         this.children.set(node, child)
         return child
     }
 
-    public getChild(node: FunDef | Block): TreeScope | undefined {
+    public getChild(node: Node): TreeScope | undefined {
         return this.children.get(node)
     }
 

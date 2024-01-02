@@ -1,5 +1,5 @@
 terminal BOOL returns boolean: /true|false/;
-terminal INT returns number: /[0-9]+(\.[0-9]+)?/;
+terminal NUMBER returns number: /(?:0|[1-9][0-9]*)(?:\.[0-9]+)?/;
 terminal ID returns string: /[a-zA-Z_][a-zA-Z0-9_]*/ ;
 
 hidden terminal ML_COMMENT returns string:'/*'  -> '*/'  ;

@@ -12,5 +12,5 @@ void a() {
     {
         bool b = a
     }
-    bool x = b
+    bool x = 1
 }

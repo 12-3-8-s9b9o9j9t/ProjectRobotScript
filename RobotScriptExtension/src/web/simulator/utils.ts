@@ -80,8 +80,8 @@ export class Ray {
         }
     }
 
-    getPoiFinder() : (p1: Vector, p2: Vector) => Vector | undefined{
-        return (p1:Vector, p2:Vector) : Vector | undefined =>{
+    getPoiFinder() : (p1: Vector, p2: Vector) => Vector | undefined {
+        return (p1:Vector, p2:Vector) : Vector | undefined => {
             const P = p1.minus(p2);
             const V = this.vector;
     

@@ -19,7 +19,7 @@ VoidType returns VoidType:
 ;
 
 DataType returns DataType:
-    name=('bool'|'number') 
+    name=('bool'|'number')
 ;
 
 SimpleVarDecl returns SimpleVarDecl:
@@ -75,7 +75,7 @@ Group returns Expression:
 ;
 
 Lit returns Lit:
-    val=(BOOL|INT)  
+    val=(BOOL|NUMBER)  
 ;
 
 Ref returns Ref:

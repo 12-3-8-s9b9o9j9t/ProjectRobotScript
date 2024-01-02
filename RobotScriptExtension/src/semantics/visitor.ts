@@ -37,7 +37,7 @@ export interface RobotScriptVisitor {
 
 export class EntryPoint implements AST.EntryPoint {
     constructor(public $type: 'EntryPoint') {}
-    funs!: FunDef[];
+    funs!: Array<FunDef>;
     $cstNode?: CstNode;
     $document?: LangiumDocument<AstNode> | undefined;
     accept(visitor: RobotScriptVisitor): any {};
@@ -51,7 +51,7 @@ export class FunDef implements AST.FunDef {
     $cstNode?: CstNode; 
     body!: Block;
     name!: string;
-    params!: SimpleVarDecl[];
+    params!: Array<SimpleVarDecl>;
     type!: AnyType;
     accept(visitor: RobotScriptVisitor): any {};
 }
@@ -193,6 +193,7 @@ export class Distance extends Sensor implements AST.Distance {
     constructor(override $type: 'Distance') {
         super($type);
     }
+    unit?: UnitCast;
     override accept(visitor: RobotScriptVisitor): any {};
 }
 
@@ -229,7 +230,7 @@ export class Block extends Statement implements AST.Block {
         super($type);
     }
     // $container needs to be commented in language/generated/ast.ts
-    stmts!: Statement[];
+    stmts!: Array<Statement>;
     override accept(visitor: RobotScriptVisitor): any {};
 }
 
@@ -301,6 +302,7 @@ export class Linear extends Movement implements AST.Linear {
         super($type);
     }
     dir!: 'Forward' | 'Sideways';
+    unit?: UnitCast;
     override accept(visitor: RobotScriptVisitor): any {};
 }
 
