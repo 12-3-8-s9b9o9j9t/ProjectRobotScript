@@ -16,7 +16,7 @@ import {
     registerValidationChecks,
 } from './robot-script-validator.js'
 import { RobotScriptAcceptWeaver } from '../semantics/accept-weaver.js'
-import { generateScene, validateCode } from '../web/index.js'
+import { generateScene, validateCode } from '../web/api.js'
 
 /**
  * Declaration of custom services - add your own service classes here.

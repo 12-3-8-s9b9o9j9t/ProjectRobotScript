@@ -1,11 +1,9 @@
 import { TreeScope } from "../language/tree-scope.js";
-import { BaseScene, Scene } from "../web/simulator/scene.js";
+import { baseScene, Scene } from "../web/simulator/scene.js";
 import { AssignVar, BinExpr, Block, DataType, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, SimpleVarDecl, Time, UnExpr, UnitCast, VarDeclInit, VoidType, WhileStmt } from "./visitor.js";
 
 export class Interpreter implements RobotScriptVisitor {
-    private scene: Scene = new BaseScene();
-    //private time: number = 0;
-    //private speed: number = 0;
+    private scene: Scene = baseScene;
 
     constructor(
         private scope: TreeScope

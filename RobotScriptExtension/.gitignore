@@ -6,3 +6,5 @@ node_modules/
 out/
 syntaxes/
 src/language/generated/
+dist/
+static/worker
