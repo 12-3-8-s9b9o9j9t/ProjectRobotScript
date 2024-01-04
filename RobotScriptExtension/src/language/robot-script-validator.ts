@@ -1,8 +1,8 @@
 import type { AstNode, LangiumDocument, ValidationAcceptor, ValidationChecks } from 'langium'
-import { AnyType, EntryPoint, Expression, FunCall, FunDef, RobotScriptAstType, Statement, VarDecl, isBinExpr, isBlock, isFunCall, isFunDef, isIfStmt, isLit, isRef, isReturnStmt, isUnExpr, isVarDecl, isWhileStmt, isVarDeclInit, isAssign, isMovement, isVoidType } from './generated/ast.js'
 import type { RobotScriptServices } from './robot-script-module.js'
 import { evalBin, evalUn } from './robot-script-utils.js'
 import { SymbState, TreeScope } from './tree-scope.js'
+import { AnyType, EntryPoint, Expression, FunCall, FunDef, RobotScriptAstType, Statement, VarDecl, isBinExpr, isBlock, isFunCall, isFunDef, isIfStmt, isLit, isRef, isReturnStmt, isUnExpr, isVarDecl, isWhileStmt } from './generated/ast.js'
 
 /**
  * Register custom validation checks.
@@ -112,8 +112,8 @@ export class RobotScriptValidator {
                 })
             })
         } else if (isVarDecl(stmt)) {
-            isVarDeclInit(stmt) && this.checkScopeExpr(stmt.expr, accept, outScope)
-            if (stmt.name && !outScope.addSymb(stmt, isVarDeclInit(stmt))) {
+            stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
+            if (stmt.name && !outScope.addSymb(stmt, stmt.expr !== undefined)) {
                 accept('error', `Duplicate variable '${stmt.name}'.`, {
                     node: stmt,
                     property: 'name',
@@ -128,7 +128,7 @@ export class RobotScriptValidator {
             stmt.stmt2 && this.checkScopeStatement(stmt.stmt2, accept, outScope)
         } else if (isFunCall(stmt)) {
             this.checkScopeExpr(stmt, accept, outScope)
-        } else if (isAssign(stmt) || isMovement(stmt) || isReturnStmt(stmt)) {
+        } else {
             stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
         }
     }
@@ -138,14 +138,14 @@ export class RobotScriptValidator {
         accept: ValidationAcceptor,
         scope: TreeScope
     ): void {
-        if (isFunCall(expr) && expr.fun?.ref) {
-            const ref = expr.fun.ref
-            if (ref.name === 'main') {
+        if (isFunCall(expr)) {
+            const ref = expr.fun?.ref
+            if (ref?.name === 'main') {
                 accept('error', "Function 'main' cannot be called.", {
                     node: expr,
                     property: 'fun',
                 })
-            } else {
+            } else if(ref) {
                 scope.setState(ref, SymbState.used)
                 expr.params?.forEach((param) => {
                     this.checkScopeExpr(param, accept, scope)
@@ -156,9 +156,9 @@ export class RobotScriptValidator {
             this.checkScopeExpr(expr.expr2, accept, scope)
         } else if (isUnExpr(expr)) {
             this.checkScopeExpr(expr.expr, accept, scope)
-        } else if (isRef(expr) && expr.val?.ref) {
-            const ref = expr.val.ref
-            if (ref.name) {
+        } else if (isRef(expr)) {
+            const ref = expr.val?.ref
+            if (ref?.name) {
                 const state = scope.setState(ref, SymbState.used)
                 if (state === SymbState.undefined) {
                     accept('error', `Variable '${ref.name}' used before being defined.`, {
@@ -183,7 +183,7 @@ export class RobotScriptValidator {
                     property: 'name',
                 })
 
-            isVoidType(fun.type) ||
+            fun.type?.name === 'void' ||
                 accept('error', "Function 'main' must return void.", {
                     node: fun,
                     property: 'name',
@@ -194,7 +194,7 @@ export class RobotScriptValidator {
     checkReturn(fun: FunDef, accept: ValidationAcceptor): void {
         if (fun.name) {
             this.checkReturnRec(fun.body, accept, fun.type) ||
-                isVoidType(fun.type) ||
+            fun.type?.name === 'void' ||
                 accept('error',
                     `Function '${fun.name}' must return a value of type '${fun.type.name}'.`,
                     { node: fun, property: 'type' }
@@ -208,11 +208,11 @@ export class RobotScriptValidator {
         type: AnyType
     ): boolean {
         if (isReturnStmt(stmt)) {
-            if (stmt.expr && isVoidType(type)) {
+            if (stmt.expr && type?.name === 'void') {
                 accept('error', "Cannot assign a value to type 'void'.", {
                     node: stmt,
                 })
-            } else if (!stmt.expr && !isVoidType(type)) {
+            } else if (!stmt.expr && type?.name !== 'void') {
                 type?.name &&
                     accept('error',
                         `Cannot assign a value of type 'void' to type '${type.name}'.`,

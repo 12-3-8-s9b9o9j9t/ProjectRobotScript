@@ -1,95 +1,114 @@
+import { evalBin, evalUn } from "../language/robot-script-utils.js";
 import { TreeScope } from "../language/tree-scope.js";
-import { baseScene, Scene } from "../web/simulator/scene.js";
-import { AssignVar, BinExpr, Block, DataType, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, SimpleVarDecl, Time, UnExpr, UnitCast, VarDeclInit, VoidType, WhileStmt } from "./visitor.js";
+import { getBaseScene, Scene } from "../web/simulator/scene.js";
+import { AnyType, AssignVar, BinExpr, Block, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, Time, UnExpr, UnitCast, VarDecl, WhileStmt } from "./visitor.js";
 
 export class Interpreter implements RobotScriptVisitor {
-    private scene: Scene = baseScene;
+    private scene: Scene = getBaseScene();
 
     constructor(
         private scope: TreeScope
     ) {}
-    
-    
-    visitEntryPoint(ep: EntryPoint) {
-        ep.funs.find((fun) => fun.name === 'main')?.accept(this);
-        this.scope.getLocalUnused()
+
+    visitEntryPoint(ep: EntryPoint): Scene {
+        ep.funs.find(fun => fun.name === "main")?.accept(this);
+        this.scope
         return this.scene;
     }
 
-    visitFunDef(fun: FunDef) {
+    visitFunDef(fun: FunDef): void {
         fun.body.accept(this);
     }
 
-    visitVoidType(node: VoidType) {
+    visitAnyType(type: AnyType) {
         throw new Error("Method not implemented.");
     }
 
-    visitDataType(node: DataType) {
+    visitVarDecl(decl: VarDecl) {
         throw new Error("Method not implemented.");
     }
 
-    visitSimpleVarDecl(node: SimpleVarDecl) {
-        throw new Error("Method not implemented.");
+    visitBinExpr(binex: BinExpr): number| boolean {
+        const left = binex.expr1.accept(this);
+        const right = binex.expr2.accept(this);
+        return evalBin(binex.op, left, right);
     }
-    visitVarDeclInit(node: VarDeclInit) {
-        throw new Error("Method not implemented.");
+
+    visitUnExpr(unex: UnExpr): number | boolean {
+        const expr = unex.expr.accept(this);
+        return evalUn(unex.op, expr);
     }
-    visitBinExpr(node: BinExpr) {
-        throw new Error("Method not implemented.");
-    }
-    visitUnExpr(node: UnExpr) {
-        throw new Error("Method not implemented.");
-    }
-    visitLit(lit: Lit): boolean | number {
+
+    visitLit(lit: Lit): number | boolean {
         return lit.val;
     }
-    visitRef(node: Ref): boolean | number {
-        throw new Error("Method not implemented.");
-    }
-    visitGetSpeed(node: GetSpeed) {
-        throw new Error("Method not implemented.");
-    }
-    visitDistance(node: Distance) {
-        throw new Error("Method not implemented.");
-    }
-    visitTime(node: Time) {
-        throw new Error("Method not implemented.");
-    }
-    visitFunCall(node: FunCall) {
+
+    visitRef(ref: Ref) {
         throw new Error("Method not implemented.");
     }
 
-    visitBlock(block: Block) {
-        block.stmts.forEach((stmt) => stmt.accept(this));
+    visitGetSpeed(speed: GetSpeed): number {
+        const factor = speed.unit?.accept(this) || 1;
+        return this.scene.robot.speed / factor;
     }
 
-    visitAssignVar(node: AssignVar) {
+    visitDistance(dist: Distance) {
         throw new Error("Method not implemented.");
     }
-    visitSetSpeed(node: SetSpeed) {
+
+    visitTime(time: Time) {
         throw new Error("Method not implemented.");
     }
-    visitWhileStmt(node: WhileStmt) {
+
+    visitFunCall(call: FunCall) {
         throw new Error("Method not implemented.");
     }
-    visitIfStmt(node: IfStmt) {
+
+    visitBlock(block: Block): void {
+        block.stmts.forEach(stmt => stmt.accept(this));
+    }
+
+    visitAssignVar(assign: AssignVar) {
         throw new Error("Method not implemented.");
     }
-    visitReturnStmt(node: ReturnStmt) {
+
+    visitSetSpeed(set: SetSpeed): void {
+        const speed = set.expr.accept(this);
+        const factor = set.unit?.accept(this) || 1;
+        this.scene.robot.speed = speed * factor;
+    }
+
+    visitWhileStmt(stmt: WhileStmt) {
+        while (stmt.expr.accept(this)) {
+            stmt.stmt.accept(this);
+        }
+    }
+
+    visitIfStmt(stmt: IfStmt) {
+        if (stmt.expr.accept(this)) {
+            stmt.stmt1.accept(this);
+        } else if (stmt.stmt2) {
+            stmt.stmt2.accept(this);
+        }
+    }
+
+    visitReturnStmt(stmt: ReturnStmt) {
         throw new Error("Method not implemented.");
     }
 
     visitLinear(lin: Linear) {
         const dist = lin.expr.accept(this);
-        const scale = lin.unit?.accept(this) as number || 1;
+        const factor = lin.unit?.accept(this) || 1;
         switch (lin.dir) {
             case "Forward":
-                this.scene.robot.move(dist*scale);
+                this.scene.robot.move(dist * factor);
                 break;
             case "Sideways":
-                this.scene.robot.side(dist*scale);
+                this.scene.robot.side(dist * factor);
                 break;
-        }    
+            default:
+                throw new Error("Unknown direction");
+        }
     }
 
     visitRotation(rot: Rotation) {
@@ -107,8 +126,10 @@ export class Interpreter implements RobotScriptVisitor {
                 return 10;
             case "mm":
                 return 1;
+            default:
+                throw new Error("Unknown unit");
         }
     }
-    
-    
+
+
 }

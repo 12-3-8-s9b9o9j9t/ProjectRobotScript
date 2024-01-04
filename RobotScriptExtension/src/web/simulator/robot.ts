@@ -27,8 +27,9 @@ export class Robot {
         } else if (this.angle >= 360){
             this.angle -= 360;
         }*/
-        const rad = this.angle * Math.PI / 180;
-        const dt = rad / this.speed * 1000;
+        /*const rad = Math.abs(angle) * Math.PI / 180;
+        const dt = rad / this.speed * 1000;*/
+        const dt = Math.abs(angle) / this.speed * 1000;
         this.scene.addTimestamp(dt);
     }
 
@@ -41,7 +42,7 @@ export class Robot {
         this.x += Math.cos(rad)*dist;
         this.y += Math.sin(rad)*dist;
 
-        const dt = dist / this.speed * 1000;
+        const dt = Math.abs(dist) / this.speed * 1000;
         this.scene.addTimestamp(dt);
     }
 
@@ -54,7 +55,7 @@ export class Robot {
         this.x -= Math.sin(rad)*dist;
         this.y += Math.cos(rad)*dist;
 
-        const dt = dist / this.speed * 1000;
+        const dt = Math.abs(dist) / this.speed * 1000;
         this.scene.addTimestamp(dt);
     }
     

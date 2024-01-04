@@ -1,5 +1,4 @@
-import { AssignVar, BinExpr, Block, DataType, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, SimpleVarDecl, Time, UnExpr, UnitCast, VarDeclInit, VoidType, WhileStmt } from "./visitor.js";
-
+import { AnyType, AssignVar, BinExpr, Block, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, Time, UnExpr, UnitCast, VarDecl, WhileStmt } from "./visitor.js";
 
 export class Compiler implements RobotScriptVisitor{
         /** 
@@ -101,15 +100,12 @@ export class Compiler implements RobotScriptVisitor{
         return ret;
     }
 
-    visitVoidType(node: VoidType) {
-        // name='void'  
-        return "void";
-    ;
-    }
-    visitDataType(node: DataType) {
-        // name=('bool'|'number') 
+    visitAnyType(node: AnyType) {
+        // name=('bool'|'number'|'void') 
         var ans : string;
-        if(node.name == "bool"){
+        if(node.name == "void"){
+            ans = "void";
+        } else if(node.name == "bool"){
             ans = "bool";
         }else{
             ans = "number";
@@ -117,14 +113,13 @@ export class Compiler implements RobotScriptVisitor{
         return ans;
     }
 
-    visitSimpleVarDecl(node: SimpleVarDecl) {
-        // type=DataType name=ID  
-        return node.type.accept(this) +" "+node.name; // pas sur de accept ici
-    }
 
-    visitVarDeclInit(node: VarDeclInit) {
-        // type=DataType name=ID '=' expr=Expression  
-        return node.type.accept(this) +" "+node.name+" = "+node.expr; // pas sur de accept ici aussi
+    visitVarDecl(node: VarDecl) {
+        // type=DataType name=ID '=' expr?=Expression
+        if (node.expr) {
+            return node.type.accept(this) +" "+node.name+" = "+node.expr.accept(this)+";";
+        } 
+        return node.type.accept(this) +" "+node.name; // pas sur de accept ici aussi
     }
 
     visitBinExpr(node: BinExpr) {

@@ -15,7 +15,7 @@ import {
     RobotScriptValidator,
     registerValidationChecks,
 } from './robot-script-validator.js'
-import { RobotScriptAcceptWeaver } from '../semantics/accept-weaver.js'
+import { RobotScriptAcceptWeaver, weaveAcceptMethods } from '../semantics/accept-weaver.js'
 import { generateScene, validateCode } from '../web/api.js'
 
 /**
@@ -97,5 +97,6 @@ export function createRobotScriptServices(
     shared.lsp.ExecuteCommandHandler = new RobotScriptCommandHandler()
     shared.ServiceRegistry.register(RobotScript)
     registerValidationChecks(RobotScript)
+    weaveAcceptMethods(RobotScript)
     return { shared, RobotScript }
 }

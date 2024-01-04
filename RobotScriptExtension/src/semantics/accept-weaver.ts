@@ -1,7 +1,7 @@
 import type { ValidationAcceptor, ValidationChecks } from 'langium';
 import type { RobotScriptAstType } from '../language/generated/ast.js';
-import * as InterfaceAST from '../language/generated/ast.js';
-import * as ClassAST from './visitor.js';
+import * as ToWeave from '../language/generated/ast.js';
+import * as Weaved from './visitor.js';
 import { RobotScriptVisitor } from './visitor.js';
 import type { RobotScriptServices } from '../language/robot-script-module.js';
 
@@ -15,10 +15,8 @@ export function weaveAcceptMethods(services: RobotScriptServices) {
     const checks: ValidationChecks<RobotScriptAstType> = {
         EntryPoint: weaver.weaveEntryPoint,
         FunDef: weaver.weaveFunDef,
-        VoidType: weaver.weaveVoidType,
-        DataType: weaver.weaveDataType,
-        SimpleVarDecl: weaver.weaveSimpleVarDecl,
-        VarDeclInit: weaver.weaveVarDeclInit,
+        AnyType: weaver.weaveAnyType,
+        VarDecl: weaver.weaveVarDecl,
         BinExpr: weaver.weaveBinExpr,
         UnExpr: weaver.weaveUnExpr,
         Lit: weaver.weaveLit,
@@ -30,7 +28,7 @@ export function weaveAcceptMethods(services: RobotScriptServices) {
         Block: weaver.weaveBlock,
         AssignVar: weaver.weaveAssignVar,
         SetSpeed: weaver.weaveSetSpeed,
-        WhileStmt: weaver.wheaveWhileStmt,
+        WhileStmt: weaver.weaveWhileStmt,
         IfStmt: weaver.weaveIfStmt,
         ReturnStmt: weaver.weaveReturnStmt,
         Linear: weaver.weaveLinear,
@@ -46,96 +44,109 @@ export function weaveAcceptMethods(services: RobotScriptServices) {
  * you will also need to fill the check data structure to map the weaving function to the Type of node
  */
 export class RobotScriptAcceptWeaver {
-    weaveEntryPoint(node : InterfaceAST.EntryPoint, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitEntryPoint(node as unknown as ClassAST.EntryPoint);}
+    weaveEntryPoint(ep : ToWeave.EntryPoint, accept : ValidationAcceptor) : void{
+        (ep as Weaved.EntryPoint)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitEntryPoint(ep as Weaved.EntryPoint);}
     }
 
-    weaveFunDef(node : InterfaceAST.FunDef, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitFunDef(node as unknown as ClassAST.FunDef);}
+    weaveFunDef(fun : ToWeave.FunDef, accept : ValidationAcceptor) : void{
+        (fun as Weaved.FunDef)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitFunDef(fun as Weaved.FunDef);}
     }
 
-    weaveVoidType(node : InterfaceAST.VoidType, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitVoidType(node as unknown as ClassAST.VoidType);}
+    weaveAnyType(any : ToWeave.AnyType, accept : ValidationAcceptor) : void{
+        (any as Weaved.AnyType)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitAnyType(any as Weaved.AnyType);}
     }
 
-    weaveDataType(node : InterfaceAST.DataType, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitDataType(node as unknown as ClassAST.DataType);}
+    weaveVarDecl(varDecl : ToWeave.VarDecl, accept : ValidationAcceptor) : void{
+        (varDecl as Weaved.VarDecl)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitVarDecl(varDecl as Weaved.VarDecl);}
     }
 
-    weaveSimpleVarDecl(node : InterfaceAST.SimpleVarDecl, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitSimpleVarDecl(node as unknown as ClassAST.SimpleVarDecl);}
+    weaveBinExpr(binExpr : ToWeave.BinExpr, accept : ValidationAcceptor) : void{
+        (binExpr as Weaved.BinExpr)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitBinExpr(binExpr as Weaved.BinExpr);}
     }
 
-    weaveVarDeclInit(node : InterfaceAST.VarDeclInit, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitVarDeclInit(node as unknown as ClassAST.VarDeclInit);}
+    weaveUnExpr(unExpr : ToWeave.UnExpr, accept : ValidationAcceptor) : void{
+        (unExpr as Weaved.UnExpr)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitUnExpr(unExpr as Weaved.UnExpr);}
     }
 
-    weaveBinExpr(node : InterfaceAST.BinExpr, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitBinExpr(node as unknown as ClassAST.BinExpr);}
+    weaveLit(lit : ToWeave.Lit, accept : ValidationAcceptor) : void{
+        (lit as Weaved.Lit)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitLit(lit as Weaved.Lit);}
     }
 
-    weaveUnExpr(node : InterfaceAST.UnExpr, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitUnExpr(node as unknown as ClassAST.UnExpr);}
+    weaveRef(ref : ToWeave.Ref, accept : ValidationAcceptor) : void{
+        (ref as Weaved.Ref)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitRef(ref as Weaved.Ref);}
     }
 
-    weaveLit(node : InterfaceAST.Lit, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitLit(node as unknown as ClassAST.Lit);}
+    weaveGetSpeed(getSpeed : ToWeave.GetSpeed, accept : ValidationAcceptor) : void{
+        (getSpeed as Weaved.GetSpeed)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitGetSpeed(getSpeed as Weaved.GetSpeed);}
     }
 
-    weaveRef(node : InterfaceAST.Ref, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitRef(node as unknown as ClassAST.Ref);}
+    weaveDistance(distance : ToWeave.Distance, accept : ValidationAcceptor) : void{
+        (distance as Weaved.Distance)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitDistance(distance as Weaved.Distance);}
     }
 
-    weaveGetSpeed(node : InterfaceAST.GetSpeed, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitGetSpeed(node as unknown as ClassAST.GetSpeed);}
+    weaveTime(time : ToWeave.Time, accept : ValidationAcceptor) : void{
+        (time as Weaved.Time)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitTime(time as Weaved.Time);}
     }
 
-    weaveDistance(node : InterfaceAST.Distance, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitDistance(node as unknown as ClassAST.Distance);}
+    weaveFunCall(funCall : ToWeave.FunCall, accept : ValidationAcceptor) : void{
+        (funCall as Weaved.FunCall)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitFunCall(funCall as Weaved.FunCall);}
     }
 
-    weaveTime(node : InterfaceAST.Time, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitTime(node as unknown as ClassAST.Time);}
+    weaveBlock(block : ToWeave.Block, accept : ValidationAcceptor) : void{
+        (block as Weaved.Block)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitBlock(block as Weaved.Block);}
     }
 
-    weaveFunCall(node : InterfaceAST.FunCall, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitFunCall(node as unknown as ClassAST.FunCall);}
+    weaveAssignVar(assignVar : ToWeave.AssignVar, accept : ValidationAcceptor) : void{
+        (assignVar as Weaved.AssignVar)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitAssignVar(assignVar as Weaved.AssignVar);}
     }
 
-    weaveBlock(node : InterfaceAST.Block, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitBlock(node as unknown as ClassAST.Block);}
+    weaveSetSpeed(setSpeed : ToWeave.SetSpeed, accept : ValidationAcceptor) : void{
+        (setSpeed as Weaved.SetSpeed)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitSetSpeed(setSpeed as Weaved.SetSpeed);}
     }
 
-    weaveAssignVar(node : InterfaceAST.AssignVar, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitAssignVar(node as unknown as ClassAST.AssignVar);}
+    weaveWhileStmt(whileStmt : ToWeave.WhileStmt, accept : ValidationAcceptor) : void{
+        (whileStmt as Weaved.WhileStmt)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitWhileStmt(whileStmt as Weaved.WhileStmt);}
     }
 
-    weaveSetSpeed(node : InterfaceAST.SetSpeed, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitSetSpeed(node as unknown as ClassAST.SetSpeed);}
+    weaveIfStmt(ifStmt : ToWeave.IfStmt, accept : ValidationAcceptor) : void{
+        (ifStmt as Weaved.IfStmt)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitIfStmt(ifStmt as Weaved.IfStmt);}
     }
 
-    wheaveWhileStmt(node : InterfaceAST.WhileStmt, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitWhileStmt(node as unknown as ClassAST.WhileStmt);}
+    weaveReturnStmt(returnStmt : ToWeave.ReturnStmt, accept : ValidationAcceptor) : void{
+        (returnStmt as Weaved.ReturnStmt)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitReturnStmt(returnStmt as Weaved.ReturnStmt);}
     }
 
-    weaveIfStmt(node : InterfaceAST.IfStmt, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitIfStmt(node as unknown as ClassAST.IfStmt);}
+    weaveLinear(linear : ToWeave.Linear, accept : ValidationAcceptor) : void{
+        (linear as Weaved.Linear)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitLinear(linear as Weaved.Linear);}
     }
 
-    weaveReturnStmt(node : InterfaceAST.ReturnStmt, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitReturnStmt(node as unknown as ClassAST.ReturnStmt);}
+    weaveRotation(rotation : ToWeave.Rotation, accept : ValidationAcceptor) : void{
+        (rotation as Weaved.Rotation)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitRotation(rotation as Weaved.Rotation);}
     }
 
-    weaveLinear(node : InterfaceAST.Linear, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitLinear(node as unknown as ClassAST.Linear);}
-    }
-
-    weaveRotation(node : InterfaceAST.Rotation, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitRotation(node as unknown as ClassAST.Rotation);}
-    }
-
-    weaveUnitCast(node : InterfaceAST.UnitCast, accept : ValidationAcceptor) : void{
-        (<any> node).accept = (visitor: RobotScriptVisitor) => {return visitor.visitUnitCast(node as unknown as ClassAST.UnitCast);}
+    weaveUnitCast(unitCast : ToWeave.UnitCast, accept : ValidationAcceptor) : void{
+        (unitCast as Weaved.UnitCast)
+            .accept = (visitor: RobotScriptVisitor) => {return visitor.visitUnitCast(unitCast as Weaved.UnitCast);}
     }
 
 }

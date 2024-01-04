@@ -40,7 +40,7 @@ export class Scene {
     }
 }
 
-export const baseScene = new Scene(
+export const getBaseScene = () => new Scene(
     1000,
     1000,
     [
