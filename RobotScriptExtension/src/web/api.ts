@@ -29,11 +29,6 @@ export async function validateCode (code: string): Promise<string[]> {
     return Promise.resolve(err);
 }
 
-/**
- * Parses a RobotScript program & generates output as a Scene
- * @param code RobotScript program to parse
- * @returns Generated scene from this RobotScript program
- */
 export async function generateScene (code: string): Promise<SceneDTO> {
     const doc = await documentFromString<EntryPoint>(code);
     const scope = doc.scope;

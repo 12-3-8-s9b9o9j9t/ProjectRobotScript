@@ -17,7 +17,7 @@
         "build:worker": "npm run build && esbuild --minify ./out/language/main-browser.js --bundle --format=iife --outfile=./static/ls-worker/robot-script-server-worker.js",
         "copy:monaco-workers": "shx mkdir -p ./static/monaco-workers && shx cp -f ./node_modules/monaco-editor-workers/dist/workers/*-iife.js ./static/monaco-workers",
         "build:web": "npm run build:worker && npm run copy:monaco-workers && tsc && vite build",
-        "build-dev:web": "npm run build:worker && vite",
+        "build:web:dev": "npm run build:worker && vite",
         "dev": "vite",
         "serve": "vite preview --host"
     },

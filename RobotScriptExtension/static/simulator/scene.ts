@@ -45,7 +45,7 @@ export class Scene {
             
             this.robot.x = p5.map(this.time, last.time, next.time, last.x, next.x, true)
             this.robot.y = p5.map(this.time, last.time, next.time, last.y, next.y, true)
-            this.robot.angle = p5.map(this.time, last.time, next.time, last.angle, next.angle, true)
+            this.robot.angle = p5.map(this.time, last.time, next.time, normalize(last.angle), next.angle, true)
             
             if(this.time >= next.time){
                 this.time = next.time;
@@ -69,6 +69,12 @@ export class Scene {
     }*/
 
 }
+
+function normalize(angle: number): number {
+    const tmp = angle % 360;
+    return tmp < 0 ? tmp + 360 : tmp;
+}
+
 /*
 export const baseScene = new Scene(
     1000,

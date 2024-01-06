@@ -25,10 +25,10 @@ export class Block extends Entity {
     }
 
     show(p5: P5CanvasInstance): void {
-        p5.line(this.x             , this.y              , this.x + this.width, this.y);
-        p5.line(this.x             , this.y              , this.x             , this.y + this.height);
-        p5.line(this.x + this.width, this.y              , this.x + this.width, this.y + this.height);
-        p5.line(this.x             , this.y + this.height, this.x + this.width, this.y + this.height);
+        p5.line  (this.x             , this.y              , this.x + this.width, this.y)
+            .line(this.x             , this.y              , this.x             , this.y + this.height)
+            .line(this.x + this.width, this.y              , this.x + this.width, this.y + this.height)
+            .line(this.x             , this.y + this.height, this.x + this.width, this.y + this.height)
     }
 
     /*toDTO(): EntityDTO {

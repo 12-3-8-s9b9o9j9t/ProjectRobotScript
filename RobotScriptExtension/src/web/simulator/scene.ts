@@ -1,5 +1,5 @@
 import { SceneDTO, TimestampDTO as Timestamp } from './dto.js'
-import { Entity, Wall } from './entity.js';
+import { Block, Entity, Wall } from './entity.js';
 import { Robot } from './robot.js';
 import { Vector } from "./utils.js"
 
@@ -47,7 +47,8 @@ export const getBaseScene = () => new Scene(
         new Wall(new Vector(0,0), new Vector(1000,0)),
         new Wall(new Vector(0,0), new Vector(0,1000)),
         new Wall(new Vector(1000,1000), new Vector(0,1000)),
-        new Wall(new Vector(1000,1000), new Vector(1000,0))
+        new Wall(new Vector(1000,1000), new Vector(1000,0)),
+        new Block(new Vector(100,100), new Vector(200,200)),
     ],
     {
         x: 500,

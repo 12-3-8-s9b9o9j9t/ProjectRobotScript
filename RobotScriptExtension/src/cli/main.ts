@@ -33,7 +33,7 @@ export const compileAction = async (fileName: string, opts: GenerateOptions): Pr
 
     fs.writeFileSync(generatedFilePath, result);
     
-    console.log(chalk.green(`MiniLogo commands generated successfully: ${generatedFilePath}`));
+    console.log(chalk.green(`Program compiled successfully: ${generatedFilePath}`));
 };
 
 export type GenerateOptions = {

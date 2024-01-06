@@ -22,15 +22,12 @@ export class Robot {
      */
     turn(angle:number) : void {
         this.angle += angle;
-        /*if(this.angle<0){
-            this.angle += 360;
-        } else if (this.angle >= 360){
-            this.angle -= 360;
-        }*/
-        /*const rad = Math.abs(angle) * Math.PI / 180;
-        const dt = rad / this.speed * 1000;*/
+
         const dt = Math.abs(angle) / this.speed * 1000;
         this.scene.addTimestamp(dt);
+        
+        this.angle %= 360;
+        if (this.angle < 0) this.angle += 360;
     }
 
     /**
@@ -40,7 +37,7 @@ export class Robot {
     move(dist:number) : void {
         const rad = this.angle * Math.PI / 180;
         this.x += Math.cos(rad)*dist;
-        this.y += Math.sin(rad)*dist;
+        this.y -= Math.sin(rad)*dist;
 
         const dt = Math.abs(dist) / this.speed * 1000;
         this.scene.addTimestamp(dt);
@@ -52,7 +49,7 @@ export class Robot {
      */
     side(dist:number) : void {
         const rad = this.angle * Math.PI / 180;
-        this.x -= Math.sin(rad)*dist;
+        this.x += Math.sin(rad)*dist;
         this.y += Math.cos(rad)*dist;
 
         const dt = Math.abs(dist) / this.speed * 1000;

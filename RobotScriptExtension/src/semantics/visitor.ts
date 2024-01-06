@@ -25,15 +25,26 @@ export interface RobotScriptVisitor {
     visitUnitCast(node: UnitCast): any;
 }
 
-type Acceptor<T> = {
+/**
+ * Type auxiliaire à `Acceptor<T>`
+ */
+type ToAcceptor<T> =
+    // T est un AstNode (laisse les types unions intacts, ex: Expression)
+    [T] extends [AstNode] ? Acceptor<T>
+    :T extends Reference<infer U> ? Reference<Acceptor<U>> 
+    :T extends Array<infer U> ? Array<ToAcceptor<U>>
+    :T;
+
+/**
+ * Type permettant d'ajouter la méthode accept à un type
+ */
+type Acceptor<T extends AstNode> = {
     [P in Exclude<keyof T, keyof AstNode>]
-    :T[P] extends AstNode ? Acceptor<T[P]>
-    :undefined extends T[P] ? Acceptor<Exclude<T[P], undefined>> | undefined
-    :T[P] extends Array<infer U extends AstNode> ? Array<Acceptor<U>>
-    :T[P] extends Reference<infer U extends AstNode> ? Reference<Acceptor<U>>
-    :T[P]
+    // permet d'extraire undefined des propriétés optionnelles
+    :undefined extends T[P] ? ToAcceptor<Exclude<T[P], undefined>> | undefined
+    :ToAcceptor<T[P]>;
 } & {
-    [K in Extract<keyof T, keyof AstNode>]: T[K];
+    [P in Extract<keyof T, keyof AstNode>]:T[P];
 } & { accept: (visitor: RobotScriptVisitor) => any };
 
 export type EntryPoint = Acceptor<AST.EntryPoint>;

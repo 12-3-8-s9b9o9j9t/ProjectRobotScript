@@ -2,7 +2,7 @@ import type { AstNode, LangiumDocument, ValidationAcceptor, ValidationChecks } f
 import type { RobotScriptServices } from './robot-script-module.js'
 import { evalBin, evalUn } from './robot-script-utils.js'
 import { SymbState, TreeScope } from './tree-scope.js'
-import { AnyType, EntryPoint, Expression, FunCall, FunDef, RobotScriptAstType, Statement, VarDecl, isBinExpr, isBlock, isFunCall, isFunDef, isIfStmt, isLit, isRef, isReturnStmt, isUnExpr, isVarDecl, isWhileStmt } from './generated/ast.js'
+import { AnyType, BinExpr, EntryPoint, Expression, FunCall, FunDef, Ref, RobotScriptAstType, Statement, VarDecl, isAssignVar, isBinExpr, isBlock, isFunCall, isFunDef, isIfStmt, isLit, isRef, isReturnStmt, isUnExpr, isVarDecl, isWhileStmt } from './generated/ast.js'
 
 /**
  * Register custom validation checks.
@@ -16,15 +16,40 @@ export function registerValidationChecks(services: RobotScriptServices) {
             validator.checkMainSignature,
             validator.checkReturn
         ],
-        FunCall: [validator.checkFunCallParamNumber],
+        FunCall: [
+            validator.checkFunCallParamNumber,
+            validator.checkFunCallExprNotVoid
+        ],
         VarDecl: [validator.checkVarDeclInsideBlock],
-        Expression: [validator.checkFunCallExprNotVoid]
     }
     registry.register(checks, validator)
 }
 
-export interface DocWithScope<T extends AstNode> extends LangiumDocument<T> {
-    scope: TreeScope
+/**
+ * Type permettant de stocker le scope calculé dans le document
+ */
+export type DocWithScope<T extends AstNode> = LangiumDocument<T> & { scope: TreeScope }
+
+/**
+ * Type permettant de savoir si un appel de fonction est utilisé comme une expression ou une instruction
+ */
+export type UsageRestrictedFunCall = FunCall & { usage?: 'stmt' | 'expr'}
+
+/**
+ * Type permettant de stocker une valeur précalculée
+ */
+export type Precomputed<T extends AstNode> = T & { pcval?: number | boolean }
+
+/**
+     * Fonction permettant de récupérer la valeur précalculée d'un noeud
+     * @param node Un noeud de l'AST
+     * @returns La valeur précalculée du noeud ou `undefined` si elle n'existe pas
+     */
+export function getPcval<T extends Expression>(node: T): number | boolean | undefined {
+    if (isLit(node)) {
+        return node.val
+    }
+    return (node as Precomputed<T>)?.pcval
 }
 
 /**
@@ -32,6 +57,12 @@ export interface DocWithScope<T extends AstNode> extends LangiumDocument<T> {
  */
 export class RobotScriptValidator {
 
+    /**
+     * Permet de vérifier que le scope est correctement défini.
+     * De plus, précalcule les valeurs des expressions constantes.
+     * @param ep Le noeud de point d'entrée
+     * @param accept le callback permettant de signaler une erreur
+     */
     checkScope(ep: EntryPoint, accept: ValidationAcceptor): void {
         const scope = TreeScope.createRoot()
         ep.funs?.forEach((fun) => {
@@ -41,13 +72,15 @@ export class RobotScriptValidator {
                         node: fun,
                         property: 'name',
                     })
-                this.checkScopeFun(fun, accept, scope)
             }
+        })
+        ep.funs?.forEach((fun) => {
+            this.checkScopeFun(fun, accept, scope)
         })
 
         const main = ep.funs?.find((fun) => fun?.name === 'main')
         if (main) {
-            scope.setState(main, SymbState.used)
+            scope.setUsed(main)
         } else {
             accept('error', "Function 'main' is not defined.", {
                 node: ep,
@@ -71,6 +104,12 @@ export class RobotScriptValidator {
         doc.scope = scope
     }
 
+    /**
+     * Fonction auxiliaire de `checkScope` permettant de vérifier le scope d'une fonction
+     * @param fun Un noeud de fonction
+     * @param accept Le callback permettant de signaler une erreur
+     * @param scope Le scope parent
+     */
     private checkScopeFun(
         fun: FunDef,
         accept: ValidationAcceptor,
@@ -90,6 +129,12 @@ export class RobotScriptValidator {
         this.checkScopeStatement(fun.body, accept, scope)
     }
 
+    /**
+     * Fonction auxiliaire de `checkScope` permettant de vérifier le scope d'une instruction
+     * @param stmt Un noeud d'instruction
+     * @param accept Le callback permettant de signaler une erreur
+     * @param outScope Le scope parent
+     */
     private checkScopeStatement(
         stmt: Statement,
         accept: ValidationAcceptor,
@@ -112,7 +157,11 @@ export class RobotScriptValidator {
                 })
             })
         } else if (isVarDecl(stmt)) {
-            stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
+            if (stmt.expr) {
+                this.checkScopeExpr(stmt.expr, accept, outScope)
+                const pcv = stmt as Precomputed<VarDecl>
+                pcv.pcval = getPcval(stmt.expr)
+            }
             if (stmt.name && !outScope.addSymb(stmt, stmt.expr !== undefined)) {
                 accept('error', `Duplicate variable '${stmt.name}'.`, {
                     node: stmt,
@@ -128,15 +177,42 @@ export class RobotScriptValidator {
             stmt.stmt2 && this.checkScopeStatement(stmt.stmt2, accept, outScope)
         } else if (isFunCall(stmt)) {
             this.checkScopeExpr(stmt, accept, outScope)
+        } else if (isAssignVar(stmt)) {
+            if (stmt.expr) {
+                this.checkScopeExpr(stmt.expr, accept, outScope)
+                const rvar = stmt.ref.ref
+                if (rvar) {
+                    const prevPcval = outScope.getPcval(rvar)
+                    let nextPcval = getPcval(stmt.expr)
+                    if (stmt.op !== '=' && prevPcval !== undefined && nextPcval !== undefined) {
+                        try {
+                            nextPcval = evalBin(stmt.op.slice(0, -1) as BinExpr['op'], prevPcval, nextPcval)
+                        } catch (e: any) {
+                            nextPcval = undefined
+                            accept('error', 'Division by zero detected.', {
+                                node: stmt,
+                                property: 'op',
+                            })
+                        }
+                    }
+                    outScope.setPcval(rvar, nextPcval)
+                }
+            }
         } else {
-            stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
+            stmt?.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
         }
     }
 
+    /**
+     * Fonction auxiliaire de `checkScope` permettant de vérifier le scope d'une expression
+     * @param expr Un noeud d'expression
+     * @param accept Le callback permettant de signaler une erreur
+     * @param outScope Le scope parent
+     */
     private checkScopeExpr(
         expr: Expression,
         accept: ValidationAcceptor,
-        scope: TreeScope
+        outScope: TreeScope
     ): void {
         if (isFunCall(expr)) {
             const ref = expr.fun?.ref
@@ -146,35 +222,75 @@ export class RobotScriptValidator {
                     property: 'fun',
                 })
             } else if(ref) {
-                scope.setState(ref, SymbState.used)
+                outScope.setUsed(ref)
                 expr.params?.forEach((param) => {
-                    this.checkScopeExpr(param, accept, scope)
+                    this.checkScopeExpr(param, accept, outScope)
                 })
             }
         } else if (isBinExpr(expr)) {
-            this.checkScopeExpr(expr.expr1, accept, scope)
-            this.checkScopeExpr(expr.expr2, accept, scope)
+            this.checkScopeExpr(expr.expr1, accept, outScope)
+            this.checkScopeExpr(expr.expr2, accept, outScope)
+            const pce = expr as Precomputed<Expression>
+            pce.pcval = this.preCompute(expr, accept)
         } else if (isUnExpr(expr)) {
-            this.checkScopeExpr(expr.expr, accept, scope)
+            this.checkScopeExpr(expr.expr, accept, outScope)
+            const pce = expr as Precomputed<Expression>
+            pce.pcval = this.preCompute(expr, accept)
         } else if (isRef(expr)) {
-            const ref = expr.val?.ref
-            if (ref?.name) {
-                const state = scope.setState(ref, SymbState.used)
+            const rvar = expr.val?.ref
+            if (rvar?.name) {
+                const state = outScope.setUsed(rvar)
                 if (state === SymbState.undefined) {
-                    accept('error', `Variable '${ref.name}' used before being defined.`, {
+                    accept('error', `Variable '${rvar.name}' used before being defined.`, {
                         node: expr,
                         property: 'val',
                     })
                 } else if (state === SymbState.undeclared) {
-                    accept('error', `Variable '${ref.name}' used before being declared.`, {
+                    accept('error', `Variable '${rvar.name}' used before being declared.`, {
                         node: expr,
                         property: 'val',
                     })
                 }
+                const pcr = expr as Precomputed<Ref>
+                pcr.pcval = outScope.getPcval(rvar)
             }
         }
     }
 
+    /**
+     * Fonction permettant de précalculer une expression
+     * @param expr Un noeud d'expression
+     * @param accept Le callback permettant de signaler une erreur
+     * @returns La valeur précalculée de l'expression ou `undefined` si elle ne peut pas être précalculée
+     */
+    private preCompute(expr: Expression, accept: ValidationAcceptor): number | boolean | undefined {
+        if (isUnExpr(expr)) {
+            const val = getPcval(expr.expr)
+            if (val !== undefined && expr.op) {
+                return evalUn(expr.op, val)
+            }
+        } else if (isBinExpr(expr)) {
+            const val1 = getPcval(expr.expr1)
+            const val2 = getPcval(expr.expr2)
+            if (val1 !== undefined && val2 !== undefined && expr.op) {
+                try {
+                    return evalBin(expr.op, val1, val2)
+                } catch (e: any) {
+                    accept('error', 'Division by zero detected.', {
+                        node: expr,
+                        property: 'op',
+                    })
+                }
+            }
+        }
+        return undefined
+    }
+
+    /**
+     * Permet de vérifier que la signature de la fonction main est correcte
+     * @param fun Un noeud de fonction
+     * @param accept Le callback permettant de signaler une erreur
+     */
     checkMainSignature(fun: FunDef, accept: ValidationAcceptor): void {
         if (fun.name === 'main') {
             fun.params?.length === 0 ||
@@ -191,6 +307,11 @@ export class RobotScriptValidator {
         }
     }
 
+    /**
+     * Permet de vérifier qu'une fonction retourne une valeur conforme à son type
+     * @param fun Un noeud de fonction
+     * @param accept Le callback permettant de signaler une erreur
+     */
     checkReturn(fun: FunDef, accept: ValidationAcceptor): void {
         if (fun.name) {
             this.checkReturnRec(fun.body, accept, fun.type) ||
@@ -202,6 +323,13 @@ export class RobotScriptValidator {
         }
     }
 
+    /**
+     * Fonction auxiliaire de `checkReturn` permettant de vérifier qu'une fonction retourne une valeur conforme à son type
+     * @param stmt Un noeud d'instruction
+     * @param accept Le callback permettant de signaler une erreur
+     * @param type Le type de retour de la fonction
+     * @returns `true` si le noeud retourne une valeur, `false` sinon
+     */
     private checkReturnRec(
         stmt: Statement,
         accept: ValidationAcceptor,
@@ -221,15 +349,14 @@ export class RobotScriptValidator {
             }
             return true
         } else if (isWhileStmt(stmt)) {
-            const cond = this.reduceExpr(stmt.expr)
-
-            if (cond !== undefined && !cond) {
-                accept('warning', 'Loop condition will always evaluate to false.', {
+            const cond = getPcval(stmt.expr)
+            if (cond !== undefined) {
+                accept(cond ? 'hint' : 'warning', `Loop condition will always evaluate to ${!!cond}.`, {
                     node: stmt.expr,
                     tags: [1],
                 })
                 stmt.stmt &&
-                    accept('warning', 'Unreachable code.', {
+                    accept('hint', 'Unreachable code.', {
                         node: stmt.stmt,
                         tags: [1],
                     })
@@ -240,9 +367,9 @@ export class RobotScriptValidator {
                 )
             }
         } else if (isIfStmt(stmt)) {
-            const cond = this.reduceExpr(stmt.expr)
+            const cond = getPcval(stmt.expr)
             if (cond !== undefined) {
-                accept('warning', `If condition will always evaluate to ${!!cond}.`, {
+                accept('hint', `If condition will always evaluate to ${!!cond}.`, {
                     node: stmt.expr,
                     tags: [1],
                 })
@@ -255,14 +382,14 @@ export class RobotScriptValidator {
                 return ifRet && elseRet
             } else if (cond) {
                 stmt.stmt2 &&
-                    accept('warning', 'Unreachable code.', {
+                    accept('hint', 'Unreachable code.', {
                         node: stmt.stmt2,
                         tags: [1],
                     })
                 return this.checkReturnRec(stmt.stmt1, accept, type)
             } else {
                 stmt.stmt1 &&
-                    accept('warning', 'Unreachable code.', {
+                    accept('hint', 'Unreachable code.', {
                         node: stmt.stmt1,
                         tags: [1],
                     })
@@ -280,8 +407,7 @@ export class RobotScriptValidator {
                 retStmt?.$containerIndex !== undefined &&
                 retStmt.$containerIndex !== stmt.stmts.length - 1
             ) {
-                const startNode =
-                    stmt.stmts[retStmt.$containerIndex + 1].$cstNode
+                const startNode = stmt.stmts[retStmt.$containerIndex + 1].$cstNode
                 const endNode = stmt.stmts[stmt.stmts.length - 1].$cstNode
 
                 startNode &&
@@ -300,29 +426,11 @@ export class RobotScriptValidator {
         return false
     }
 
-    private reduceExpr(expr: Expression): number | boolean | undefined {
-        if (isLit(expr)) {
-            return expr.val
-        } else if (isUnExpr(expr)) {
-            const val = this.reduceExpr(expr.expr)
-            if (val !== undefined && expr.op) {
-                return evalUn(expr.op, val)
-            }
-        } else if (isBinExpr(expr)) {
-            const val1 = this.reduceExpr(expr.expr1)
-            const val2 = this.reduceExpr(expr.expr2)
-            if (val1 !== undefined && val2 !== undefined && expr.op) {
-                try {
-                    return evalBin(expr.op, val1, val2)
-                } catch (e: any) {
-                    // division by zero
-                    return undefined
-                }
-            }
-        }
-        return undefined
-    }
-
+    /**
+     * Permet de vérifier que le nombre de paramètres d'un appel de fonction est correct
+     * @param call Un noeud d'appel de fonction
+     * @param accept Le callback permettant de signaler une erreur
+     */
     checkFunCallParamNumber(call: FunCall, accept: ValidationAcceptor): void {
         if (
             call.fun.ref?.params &&
@@ -343,6 +451,11 @@ export class RobotScriptValidator {
         }
     }
 
+    /**
+     * Permet de vérifier que la déclaration d'une variable est bien effectuée dans un bloc
+     * @param varDecl Un noeud de déclaration de variable
+     * @param accept Le callback permettant de signaler une erreur
+     */
     checkVarDeclInsideBlock(
         varDecl: VarDecl,
         accept: ValidationAcceptor
@@ -355,20 +468,28 @@ export class RobotScriptValidator {
         }
     }
 
+    /**
+     * Permet de vérifier qu'un appel de fonction n'est pas utilisé comme une expression si la fonction retourne 'void'
+     * @param call Un noeud d'appel de fonction
+     * @param accept Le callback permettant de signaler une erreur
+     */
     checkFunCallExprNotVoid(
-        expr: Expression,
+        call: FunCall,
         accept: ValidationAcceptor
     ): void {
-        if (
-            isFunCall(expr) &&
-            expr.fun.ref?.name &&
-            expr.fun.ref.type?.name === 'void' &&
-            !isBlock(expr.$container)
-        ) {
-            accept('error', `Function ${expr.fun.ref.name} cannot be used as an expression.`, {
-                node: expr,
-                property: 'fun',
-            })
+        const restr = call as UsageRestrictedFunCall
+        const container = call.$container
+        if (isBlock(container) || (isIfStmt(container) || isWhileStmt(container)) && container.expr !== call) {
+            restr.usage = 'stmt'
+        } else{
+            restr.usage = 'expr'
+            const fun = call.fun.ref
+            if (fun && fun.type?.name === 'void') {
+                accept('error', "Function retuning 'void' cannot be used as an expression.", {
+                    node: call,
+                    property: 'fun',
+                })
+            }
         }
     }
 }

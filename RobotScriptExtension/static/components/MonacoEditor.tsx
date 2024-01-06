@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import { MonacoEditorLanguageClientWrapper, monaco } from "monaco-editor-wrapper";
 import { defaultCode } from "../default-code";
 import monarchSyntax from "../../syntaxes/robot-script.monarch.js";
@@ -65,6 +65,7 @@ const MonacoEditor: FC<MonacoEditorProps> = ({onEditorDidMount}) => {
                 onEditorDidMount(client.getEditor())
             })
             .catch((e: Error) => console.error(e));
+
     }, [])
     
     return (

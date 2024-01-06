@@ -22,9 +22,9 @@ const sketch: Sketch<SimulationSketchProps> = p5 => {
     }
 
     p5.draw = () => {
-        p5.background(0);
-        p5.stroke(255);
-        p5.strokeWeight(1);
+        p5.background(0)
+            .stroke(255)
+            .strokeWeight(1);
 
         setScene(s => s?.update(p5 as P5CanvasInstance));
     }

@@ -6,7 +6,7 @@ entry EntryPoint:
 ;
 
 FunDef:
-    type=AnyType name=ID '('(params+=SimpleVarDecl (',' params+=SimpleVarDecl)* )? ')' body=Block   
+    type=AnyType name=ID '('(params+=Param (',' params+=Param)* )? ')' body=Block   
 ;
 
 AnyType:
@@ -21,16 +21,16 @@ DataType infers AnyType:
     name=('bool'|'number')
 ;
 
+fragment VarSign:
+    type=DataType name=ID
+;
+
 VarDecl: 
-    SimpleVarDecl | VarDeclInit
+    VarSign ('=' expr=Expression)?
 ;
 
-SimpleVarDecl infers VarDecl:
-    type=DataType name=ID   
-;
-
-VarDeclInit infers VarDecl:
-    type=DataType name=ID '=' expr=Expression   
+Param infers VarDecl:
+    VarSign
 ;
 
 Expression:
@@ -46,15 +46,19 @@ And infers Expression:
 ;
 
 PrimBoolExpr infers Expression:
-    Not | Compare 
+    Not | Equ 
 ;
 
 Not infers UnExpr:
-    op='!'  expr=Compare   
+    op='!'  expr=Equ
 ;
 
-Compare infers Expression:
-    Add ({infer BinExpr.expr1=current} op=('=='|'!='|'<='|'>='|'<'|'>') expr2=Add)*  
+Equ infers Expression:
+    Comp ({infer BinExpr.expr1=current} op=('=='|'!=') expr2=Add)*  
+;
+
+Comp infers Expression:
+    Add ({infer BinExpr.expr1=current} op=('<'|'<='|'>'|'>=') expr2=Add)*
 ;
 
 Add infers Expression:
@@ -62,7 +66,7 @@ Add infers Expression:
 ;
 
 Mul infers Expression:
-    PrimExpr ({infer BinExpr.expr1=current} op=('*'|'/') expr2=PrimExpr)*  
+    PrimExpr ({infer BinExpr.expr1=current} op=('*'|'/'|'%') expr2=PrimExpr)*  
 ;
 
 PrimExpr infers Expression:
@@ -82,11 +86,11 @@ Lit:
 ;
 
 Ref:
-    val=[VarDecl:ID ] 
+    val=[VarDecl:ID] 
 ;
 
 GetSpeed:
-    'Speed' (unit=UnitCast)?  
+    'Speed' (unit=UnitCast)?
 ;
 
 Distance:
@@ -106,15 +110,19 @@ Block:
 ;
 
 Statement:
-    Block | VarDecl | AssignVar | SetSpeed | FunCall | WhileStmt | IfStmt | ReturnStmt | Linear | Rotation 
+    Block | WhileStmt | IfStmt | (VarDecl | AssignVar | SetSpeed | FunCall | ReturnStmt | Linear | Rotation) ';' 
+;
+
+fragment Assign:
+    op=('||='|'&&='|'+='|'-='|'*='|'/='|'%='|'=') expr=Expression
 ;
 
 AssignVar:
-    ref=[VarDecl:ID ] '=' expr=Expression   
+    ref=[VarDecl:ID ] Assign
 ;
 
 SetSpeed:
-    'Speed' '=' expr=Expression (unit=UnitCast)?  
+    'Speed' Assign (unit=UnitCast)?  
 ;
 
 WhileStmt:

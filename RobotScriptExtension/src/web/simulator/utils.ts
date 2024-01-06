@@ -51,7 +51,7 @@ export class Ray {
         this.vector = vector;
     }
 
-    intersect(entities:Entity[]){
+    intersect(entities:Entity[]): Vector | undefined{
         let pois:Vector[] = [];
         for (var i = 0; i < entities.length; i++) {
             let e = entities[i];
@@ -63,7 +63,7 @@ export class Ray {
         return this.findClosestIntersection(pois);
     }
 
-    findClosestIntersection(pois: Vector[]) : Vector | undefined {
+    findClosestIntersection(pois: Vector[]): Vector | undefined {
         let idx = 0;
         let minDist = Infinity;
         if (pois.length > 0) {

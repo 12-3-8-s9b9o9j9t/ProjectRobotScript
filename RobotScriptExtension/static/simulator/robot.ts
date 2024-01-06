@@ -14,17 +14,15 @@ export class Robot {
     ) {}
   
     show(p5: P5CanvasInstance) {
-        p5.push();
-        const canvasX = this.x;
-        const canvasY = this.y;
-        p5.translate(canvasX, canvasY);
-        p5.rotate(this.angle);
-        p5.stroke(255, 255, 255);
-        p5.rect(-this.height/2, -this.width/2, this.height, this.width);
-        p5.stroke(255, 0, 0);
-        p5.fill(255, 0, 0);
+        p5.push()
         const h = (Math.sqrt(3)/2) * (this.width/3)
-        p5.triangle(-0.5*h, -(this.height/6), -0.5*h, this.height/6, 0.5*h, 0);
+        p5.translate(this.x, this.y)
+            .rotate(-this.angle)
+            .stroke(255, 255, 255)
+            .rect(-this.height/2, -this.width/2, this.height, this.width)
+            .stroke(255, 0, 0)
+            .fill(255, 0, 0)
+            .triangle(-0.5*h, -(this.height/6), -0.5*h, this.height/6, 0.5*h, 0);
         p5.pop();
     }
 }

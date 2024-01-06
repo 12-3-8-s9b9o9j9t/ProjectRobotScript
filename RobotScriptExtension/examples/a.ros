@@ -1,16 +1,16 @@
 
 void main() {
-    a()
+    if(a()) a();
+    number x = b();
+    while(a()) {
+        
+    }
 }
 
-void a() {
-    bool c = x
+bool a() {
+    return true;
+}
 
-    bool a = c
-    bool a = c
-
-    {
-        bool b = a
-    }
-    bool x = 1
+void b() {
+    return;
 }
