@@ -32,6 +32,10 @@ jobs:
           api_location: "" # Api source code path - optional
           output_location: "/RobotScriptExtension/dist/" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
+        env:
+          CUSTOM_BUILD_COMMAND: "npm ci"
+          NODE_VERSION: "18.18.2"
+          RUN_BUILD_COMMAND: "npm run build:web"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
