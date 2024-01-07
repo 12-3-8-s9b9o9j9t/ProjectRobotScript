@@ -33,9 +33,8 @@ jobs:
           output_location: "/RobotScriptExtension/dist/" # Built app content directory - optional
           ###### End of Repository/Build Configurations ######
         env:
-          CUSTOM_BUILD_COMMAND: "npm ci"
+          CUSTOM_BUILD_COMMAND: "npm ci && npm run build:web"
           NODE_VERSION: "18.x"
-          RUN_BUILD_COMMAND: "npm run build:web"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
