@@ -34,7 +34,7 @@ jobs:
           ###### End of Repository/Build Configurations ######
         env:
           CUSTOM_BUILD_COMMAND: "npm ci"
-          NODE_VERSION: "18.18.2"
+          NODE_VERSION: "18.x"
           RUN_BUILD_COMMAND: "npm run build:web"
 
   close_pull_request_job:
