@@ -77,8 +77,8 @@ Neg infers UnExpr:
     op='-' expr=Expression   
 ;
 
-Group infers Expression:
-    '(' Expression ')'  
+Group:
+    '(' expr=Expression ')'  
 ;
 
 Lit:

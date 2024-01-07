@@ -9,6 +9,7 @@ export interface RobotScriptVisitor {
     visitBinExpr(node: BinExpr): any;
     visitUnExpr(node: UnExpr): any;
     visitLit(node: Lit): any;
+    visitGroup(node: Group): any;
     visitRef(node: Ref): any;
     visitGetSpeed(node: GetSpeed): any;
     visitDistance(node: Distance): any;
@@ -54,6 +55,7 @@ export type VarDecl = Acceptor<AST.VarDecl>;
 export type BinExpr = Acceptor<AST.BinExpr>;
 export type UnExpr = Acceptor<AST.UnExpr>;
 export type Lit = Acceptor<AST.Lit>;
+export type Group = Acceptor<AST.Group>;
 export type Ref = Acceptor<AST.Ref>;
 export type GetSpeed = Acceptor<AST.GetSpeed>;
 export type Distance = Acceptor<AST.Distance>;

@@ -36,6 +36,32 @@ const App = () => {
         setScene(new Scene(width, height, entities, timestamps));
     })
 
+    const compile = (async () => {
+        console.info('compiling current code...');
+        
+        const code = editorRef.current?.getValue();
+        const inocode = await vscode.commands.executeCommand<string>('generateCode', code)
+        
+        if (inocode) {
+            // Create a Blob containing the inocode
+            const blob = new Blob([inocode], { type: 'text/plain' });
+    
+            // Create a link element
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.download = 'compiled_code.ino'; // Set the desired file name with .ino extension
+    
+            // Append the link to the body
+            document.body.appendChild(link);
+    
+            // Trigger a click on the link to start the download
+            link.click();
+    
+            // Remove the link from the body
+            document.body.removeChild(link);
+        }
+    })
+
     return (
         <>
             <h1>RobotScript in Langium</h1>
@@ -43,6 +69,7 @@ const App = () => {
                 <input className="build" type="button" value="Validate" onClick={() => validate()}/>
                 <input className="build" type="button" value="Execute Simulation" onClick={() => execute()}/>
                 <input className="build" type="button" value="Restart Simulation" onClick={() => setScene(s => s?.reset())}/>
+                <input className="build" type="button" value="Compile" onClick={() => compile()}/>
             </div>
 
             <div id="page-wrapper">

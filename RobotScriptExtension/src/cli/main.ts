@@ -11,6 +11,7 @@ import chalk from 'chalk'
 
 import { EntryPoint } from '../semantics/visitor.js';
 import { Compiler } from '../semantics/compiler.js'
+import { DocWithScope } from '../language/robot-script-validator.js'
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url))
 
@@ -28,7 +29,9 @@ export const compileAction = async (fileName: string, opts: GenerateOptions): Pr
         fs.mkdirSync(data.destination, { recursive: true });
     }
 
-    const compiler = new Compiler();
+    const scope = (ep.$document as DocWithScope<EntryPoint>).scope;
+
+    const compiler = new Compiler(scope);
     const result = compiler.visitEntryPoint(ep);
 
     fs.writeFileSync(generatedFilePath, result);

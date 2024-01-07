@@ -21,7 +21,8 @@
     "node_modules",
     "out",
     "static",
-    "dist"
+    "dist",
+    "lib"
   ]
 }
   

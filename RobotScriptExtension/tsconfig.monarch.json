@@ -16,5 +16,5 @@
     "include": [
         "syntaxes/robot-script.monarch.ts"
     ],
-    "exclude": ["out", "node_modules"]
+    "exclude": ["out", "node_modules", "dist", "lib", "static"]
 }

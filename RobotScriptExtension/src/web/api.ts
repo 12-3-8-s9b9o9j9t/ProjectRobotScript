@@ -6,6 +6,7 @@ import { Interpreter } from "../semantics/interpreter.js";
 import { DocWithScope } from "../language/robot-script-validator.js";
 import { SceneDTO } from "./simulator/dto.js";
 import { Scene } from "./simulator/scene.js";
+import { Compiler } from "../semantics/compiler.js";
 
 async function documentFromString<T extends AstNode>(content: string): Promise<DocWithScope<T>> {
     const services = createRobotScriptServices(EmptyFileSystem).RobotScript;
@@ -36,4 +37,13 @@ export async function generateScene (code: string): Promise<SceneDTO> {
     const interpreter = new Interpreter(scope);
     const scene = ep.accept(interpreter) as Scene;
     return Promise.resolve(scene.toDTO());
+}
+
+export async function generateCode (code: string): Promise<string> {
+    const doc = await documentFromString<EntryPoint>(code);
+    const scope = doc.scope;
+    const ep = doc.parseResult.value;
+    const compiler = new Compiler(scope);
+    const inocode = ep.accept(compiler);
+    return Promise.resolve(inocode);
 }

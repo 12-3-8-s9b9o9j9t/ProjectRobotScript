@@ -1,6 +1,6 @@
 import { evalBin, evalUn } from "../language/robot-script-utils.js";
 import { getBaseScene, Scene } from "../web/simulator/scene.js";
-import { AnyType, AssignVar, BinExpr, Block, Distance, EntryPoint, FunCall, FunDef, GetSpeed, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, Time, UnExpr, UnitCast, VarDecl, WhileStmt } from "./visitor.js";
+import { AnyType, AssignVar, BinExpr, Block, Distance, EntryPoint, FunCall, FunDef, GetSpeed, Group, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, Time, UnExpr, UnitCast, VarDecl, WhileStmt } from "./visitor.js";
 import * as AST from "../language/generated/ast.js";
 import { UsageRestrictedFunCall, getPcval } from "../language/robot-script-validator.js";
 import { ScopeNode, TreeScope } from "../language/tree-scope.js";
@@ -200,6 +200,16 @@ export class Interpreter implements RobotScriptVisitor {
     }
 
     /**
+     * Permet de récupérer la valeur d'un groupe
+     * @param group Un noeud de groupe
+     * @returns La valeur du groupe
+     */
+    visitGroup(group: Group): number | boolean {
+        const pc = getPcval(group as AST.Expression)
+        return pc ?? group.expr.accept(this);
+    }
+
+    /**
      * Permet de récupérer la valeur d'une référence
      * @param ref Un noeud de référence
      * @returns La valeur de la référence
@@ -357,6 +367,10 @@ export class Interpreter implements RobotScriptVisitor {
         if (set.op !== '=') {
             const op = set.op.replace('=', '') as BinExpr['op'];
             speed = evalBin(op, speed, speed);
+        }
+
+        if (+speed < 0) {
+            throw new Error(`Negative speed: ${speed}`);
         }
 
         const factor = set.unit?.accept(this) || 1;

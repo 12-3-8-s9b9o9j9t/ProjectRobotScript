@@ -16,7 +16,7 @@ import {
     registerValidationChecks,
 } from './robot-script-validator.js'
 import { RobotScriptAcceptWeaver, weaveAcceptMethods } from '../semantics/accept-weaver.js'
-import { generateScene, validateCode } from '../web/api.js'
+import { generateCode, generateScene, validateCode } from '../web/api.js'
 
 /**
  * Declaration of custom services - add your own service classes here.
@@ -30,15 +30,20 @@ export type RobotScriptAddedServices = {
 
 class RobotScriptCommandHandler extends AbstractExecuteCommandHandler {
     registerCommands(acceptor: ExecuteCommandAcceptor): void {
-        // accept a single command called 'parseAndGenerate'
+
+        acceptor('validateCode', args => {
+            // invoke generator on this data, and return the response
+            return validateCode(args[0]);
+        });
+        
         acceptor('generateScene', args => {
             // invoke generator on this data, and return the response
             return generateScene(args[0]);
         });
 
-        acceptor('validateCode', args => {
+        acceptor('generateCode', args => {
             // invoke generator on this data, and return the response
-            return validateCode(args[0]);
+            return generateCode(args[0]);
         });
     }
 }

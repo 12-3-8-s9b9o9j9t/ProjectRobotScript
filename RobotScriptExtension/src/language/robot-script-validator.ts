@@ -2,7 +2,7 @@ import type { AstNode, LangiumDocument, ValidationAcceptor, ValidationChecks } f
 import type { RobotScriptServices } from './robot-script-module.js'
 import { evalBin, evalUn } from './robot-script-utils.js'
 import { SymbState, TreeScope } from './tree-scope.js'
-import { AnyType, BinExpr, EntryPoint, Expression, FunCall, FunDef, Ref, RobotScriptAstType, Statement, VarDecl, isAssignVar, isBinExpr, isBlock, isFunCall, isFunDef, isIfStmt, isLit, isRef, isReturnStmt, isUnExpr, isVarDecl, isWhileStmt } from './generated/ast.js'
+import { AnyType, BinExpr, EntryPoint, Expression, FunCall, FunDef, Ref, RobotScriptAstType, Statement, VarDecl, isAssignVar, isBinExpr, isBlock, isFunCall, isFunDef, isGroup, isIfStmt, isLit, isRef, isReturnStmt, isSetSpeed, isUnExpr, isVarDecl, isWhileStmt } from './generated/ast.js'
 
 /**
  * Register custom validation checks.
@@ -45,7 +45,7 @@ export type Precomputed<T extends AstNode> = T & { pcval?: number | boolean }
      * @param node Un noeud de l'AST
      * @returns La valeur précalculée du noeud ou `undefined` si elle n'existe pas
      */
-export function getPcval<T extends Expression>(node: T): number | boolean | undefined {
+export function getPcval<T extends Expression>(node: T|undefined): number | boolean | undefined {
     if (isLit(node)) {
         return node.val
     }
@@ -157,12 +157,8 @@ export class RobotScriptValidator {
                 })
             })
         } else if (isVarDecl(stmt)) {
-            if (stmt.expr) {
-                this.checkScopeExpr(stmt.expr, accept, outScope)
-                const pcv = stmt as Precomputed<VarDecl>
-                pcv.pcval = getPcval(stmt.expr)
-            }
-            if (stmt.name && !outScope.addSymb(stmt, stmt.expr !== undefined)) {
+            stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
+            if (stmt.name && !outScope.addSymb(stmt, !!stmt.expr, getPcval(stmt.expr))) {
                 accept('error', `Duplicate variable '${stmt.name}'.`, {
                     node: stmt,
                     property: 'name',
@@ -198,6 +194,17 @@ export class RobotScriptValidator {
                     outScope.setPcval(rvar, nextPcval)
                 }
             }
+        } else if (isSetSpeed(stmt)) {
+            if (stmt.expr) {
+                const pc = getPcval(stmt.expr)
+                if (pc !== undefined && +pc < 0) {
+                    accept('error', 'Negative speed detected.', {
+                        node: stmt.expr,
+                        property: 'val',
+                    })
+                }
+            }
+            
         } else {
             stmt?.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
         }
@@ -236,6 +243,10 @@ export class RobotScriptValidator {
             this.checkScopeExpr(expr.expr, accept, outScope)
             const pce = expr as Precomputed<Expression>
             pce.pcval = this.preCompute(expr, accept)
+        } else if (isGroup(expr)) {
+            this.checkScopeExpr(expr.expr, accept, outScope)
+            const pce = expr as Precomputed<Expression>
+            pce.pcval = getPcval(expr.expr)
         } else if (isRef(expr)) {
             const rvar = expr.val?.ref
             if (rvar?.name) {
