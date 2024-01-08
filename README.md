@@ -54,11 +54,23 @@ Nous avons utilisé le mapping de type de TypeScript pour convertir n'importe qu
 
 ## Compilation
 
-
+Le code compilé été en partie testé et validé avec Arduino IDE, seul le contrôle du capteur de distance n'a pas été implémenté, la raison étant que nous n'avons pas compris comment l'utiliser.
 
 ## Interpétation
 
+L'interprétaion a été en partie testée avec le simulateur fournit (ce dernier à subit quelques modification pour faciliter notre compréhension du fonctionnement). Seul la simulation du capteur de distance et la gestion des collisions n'ont pas étés implémentés, la raison étant que nous préférions avancer à un stade correcte à la fois l'interpréteur et le compilateur plutôt que de passer plus de temps à essayer de les implémenter (la simulation du capteur de distance et la gestion des collisions).
 
+## Application Web sur Azure
+
+Accessible à [ce lien](https://robotscriptlang.azurewebsites.net), le projet met à disposition un exemple de programme.
+
+Il y a 4 boutons :
+ - Le premier sert à valider le code (le résultat est dans la console)
+ - Le deuxième sert à générer tester l'interprétation et exécuter la simulation
+ - Le troisième sert à recommencer la simulation
+ - Le dernier sert à tester la compilation et télécharger un fichier source arduino
+
+Le projet se génère correctement sur nos pc sous windows, mais en essayant de deployer sur azure avec un github workflow, nous avons rencontré un problème lorsque le runner, sous linux (ubuntu), lançait le processus de build. Le problème en question concernait la résolution de modules à la transpilation de TypeScript en JavaScript pour le language server. En essayent plusieurs version d'ubuntu et de node, nous avons rencontré le même problème, nous avaons donc d'autant plus souhaité rendre disponible le projet, c'est pourquoi nous avons simplement build localement et créé un conteneur local contenant l'application statique.
 
 ## Mémo
 
