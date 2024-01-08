@@ -2,7 +2,7 @@ import type { AstNode, LangiumDocument, ValidationAcceptor, ValidationChecks } f
 import type { RobotScriptServices } from './robot-script-module.js'
 import { evalBin, evalUn } from './robot-script-utils.js'
 import { SymbState, TreeScope } from './tree-scope.js'
-import { AnyType, BinExpr, EntryPoint, Expression, FunCall, FunDef, Ref, RobotScriptAstType, Statement, VarDecl, isAssignVar, isBinExpr, isBlock, isFunCall, isFunDef, isGroup, isIfStmt, isLit, isRef, isReturnStmt, isSetSpeed, isUnExpr, isVarDecl, isWhileStmt } from './generated/ast.js'
+import { AnyType, EntryPoint, Expression, FunCall, FunDef, RobotScriptAstType, Statement, VarDecl, isBinExpr, isBlock, isFunCall, isFunDef, isGroup, isIfStmt, isLit, isRef, isReturnStmt, isSetSpeed, isUnExpr, isVarDecl, isWhileStmt } from './generated/ast.js'
 
 /**
  * Register custom validation checks.
@@ -158,7 +158,7 @@ export class RobotScriptValidator {
             })
         } else if (isVarDecl(stmt)) {
             stmt.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
-            if (stmt.name && !outScope.addSymb(stmt, !!stmt.expr, getPcval(stmt.expr))) {
+            if (stmt.name && !outScope.addSymb(stmt, !!stmt.expr)) {
                 accept('error', `Duplicate variable '${stmt.name}'.`, {
                     node: stmt,
                     property: 'name',
@@ -173,27 +173,6 @@ export class RobotScriptValidator {
             stmt.stmt2 && this.checkScopeStatement(stmt.stmt2, accept, outScope)
         } else if (isFunCall(stmt)) {
             this.checkScopeExpr(stmt, accept, outScope)
-        } else if (isAssignVar(stmt)) {
-            if (stmt.expr) {
-                this.checkScopeExpr(stmt.expr, accept, outScope)
-                const rvar = stmt.ref.ref
-                if (rvar) {
-                    const prevPcval = outScope.getPcval(rvar)
-                    let nextPcval = getPcval(stmt.expr)
-                    if (stmt.op !== '=' && prevPcval !== undefined && nextPcval !== undefined) {
-                        try {
-                            nextPcval = evalBin(stmt.op.slice(0, -1) as BinExpr['op'], prevPcval, nextPcval)
-                        } catch (e: any) {
-                            nextPcval = undefined
-                            accept('error', 'Division by zero detected.', {
-                                node: stmt,
-                                property: 'op',
-                            })
-                        }
-                    }
-                    outScope.setPcval(rvar, nextPcval)
-                }
-            }
         } else if (isSetSpeed(stmt)) {
             if (stmt.expr) {
                 const pc = getPcval(stmt.expr)
@@ -204,7 +183,6 @@ export class RobotScriptValidator {
                     })
                 }
             }
-            
         } else {
             stmt?.expr && this.checkScopeExpr(stmt.expr, accept, outScope)
         }
@@ -262,8 +240,6 @@ export class RobotScriptValidator {
                         property: 'val',
                     })
                 }
-                const pcr = expr as Precomputed<Ref>
-                pcr.pcval = outScope.getPcval(rvar)
             }
         }
     }

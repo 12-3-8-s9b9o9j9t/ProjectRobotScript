@@ -33,20 +33,28 @@ int speed = 0;
 
 void loop() {
     speed = 100;
-    rs_a(4);
+    float rs_a = 3;
+    float rs_b = 30;
+    while (rs_a > 0) {
+        rs_c(rs_b);
+        rs_a -= 1;
+        rs_b *= 2;
+    }
     return;
 }
 
-void rs_a(float rs_b) {
-    if (rs_b > 0) {
-        rs_a(rs_b - 1);
+void rs_c(float rs_b) {
+    float rs_d = 4;
+    while (rs_d > 0) {
+        float rs_e = rs_b;
+        Omni.setCarMove(speed, rs_e<0 ? PI*3/2 : PI/2);
+        Omni.delayMS(abs(rs_e)/speed);
+        Omni.setCarStop();
+        float rs_f = speed/(sqrt(pow(Omni.getWheelspan()/2,2)*2));
+        Omni.setCarMove(0, 0, rs_f);
+        Omni.delayMS(90/rs_f);
+        Omni.setCarStop();
+        rs_d -= 1;
     }
-    Omni.setCarMove(speed, PI/2);
-    Omni.delayMS(100/speed);
-    Omni.setCarStop();
-    float rs_c = speed/(sqrt(pow(Omni.getWheelspan()/2,2)*2));
-    Omni.setCarMove(0, 0, rs_c);
-    Omni.delayMS(90/rs_c);
-    Omni.setCarStop();
     return;
 }

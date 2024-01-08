@@ -3,7 +3,7 @@ import { getBaseScene, Scene } from "../web/simulator/scene.js";
 import { AnyType, AssignVar, BinExpr, Block, Distance, EntryPoint, FunCall, FunDef, GetSpeed, Group, IfStmt, Linear, Lit, Ref, ReturnStmt, RobotScriptVisitor, Rotation, SetSpeed, Time, UnExpr, UnitCast, VarDecl, WhileStmt } from "./visitor.js";
 import * as AST from "../language/generated/ast.js";
 import { UsageRestrictedFunCall, getPcval } from "../language/robot-script-validator.js";
-import { ScopeNode, TreeScope } from "../language/tree-scope.js";
+import { ScopeNode, Symb, SymbState, TreeScope } from "../language/tree-scope.js";
 
 /**
  * Classe permettant de gérer les scopes au cours de l'interprétation
@@ -151,12 +151,15 @@ export class Interpreter implements RobotScriptVisitor {
         if (this.scopeStack === undefined) {
             throw new Error(`Scope stack is undefined in declaration of variable '${decl.name}'`)
         }
-        if (decl.expr) {
-            const type = decl.type.accept(this) as AnyType["name"];
-            const val = decl.expr.accept(this) as number | boolean;
-            this.scopeStack.create(decl.name, {type, val})
-        } else {    
-            this.scopeStack.create(decl.name)
+        const status = this.pcScope.getStatus(decl as Symb)
+        if (status === SymbState.used) {
+            if (decl.expr) {
+                const type = decl.type.accept(this) as AnyType["name"];
+                const val = decl.expr.accept(this) as number | boolean;
+                this.scopeStack.create(decl.name, {type, val})
+            } else {    
+                this.scopeStack.create(decl.name)
+            }
         }
         return false
     }
@@ -340,18 +343,19 @@ export class Interpreter implements RobotScriptVisitor {
         } else if(this.scopeStack === undefined) {
             throw new Error(`Scope stack is undefined in assignment to variable '${rvar.name}'`)
         }
-        let val = this.pcScope.getPcval(rvar as AST.VarDecl)
 
-        if (val === undefined) {
-            val = assign.expr.accept(this) as number | boolean;
+        const status = this.pcScope.getStatus(rvar as Symb)
+        
+        if (status === SymbState.used) {
+            let val = assign.expr.accept(this) as number | boolean;
             if (assign.op !== '=') {
                 const op = assign.op.slice(0, -1) as BinExpr['op'];
                 val = evalBin(op, this.scopeStack.get(rvar.name), val);
             }
+            
+            const type = rvar.type.accept(this) as AnyType["name"];
+            this.scopeStack.update(rvar.name, {type, val})
         }
-        
-        const type = rvar.type.accept(this) as AnyType["name"];
-        this.scopeStack.update(rvar.name, {type, val})
 
         return false
     }

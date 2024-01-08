@@ -106,7 +106,7 @@ export class Compiler implements RobotScriptVisitor{
             text = `${type} ${name}`;
         } else {
             const status = this.pcScope.getStatus(decl as Symb);
-            if (status === SymbState.used && !this.pcScope.isPcable(decl as Symb)) {
+            if (status === SymbState.used) {
                 const type = decl.type.accept(this);
                 const name = this.symMgr.getTranslation(decl.name);
                 const expr = decl.expr ? ` = ${decl.expr.accept(this)}` : '';
@@ -241,7 +241,7 @@ export class Compiler implements RobotScriptVisitor{
             throw new Error('Reference to refered variable is broken');
         }
         const status = this.pcScope.getStatus(rvar as Symb);
-        if (status === SymbState.used && !this.pcScope.isPcable(rvar as Symb)) {
+        if (status === SymbState.used) {
             const name = this.symMgr.getTranslation(rvar.name);
             const expr = assign.expr.accept(this);
             const op = assign.op
