@@ -8,13 +8,13 @@ export class DivisionByZeroError extends Error {}
  * @param a Le premier opérande
  * @param b Le second opérande
  * @returns Le résultat de l'opération
- * 
+ *
  * @throws `DivisionByZeroError` Si une division par zéro est détectée
  */
 export function evalBin(
     op: BinExpr['op'],
     a: number | boolean,
-    b: number | boolean
+    b: number | boolean,
 ): number | boolean {
     switch (op) {
         case '+':
@@ -58,10 +58,7 @@ export function evalBin(
  * @param a L'opérande
  * @returns Le résultat de l'opération
  */
-export function evalUn(
-    op: UnExpr['op'],
-    a: number | boolean
-): number | boolean {
+export function evalUn(op: UnExpr['op'], a: number | boolean): number | boolean {
     switch (op) {
         case '-':
             return -a

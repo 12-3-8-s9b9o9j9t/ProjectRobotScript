@@ -2,18 +2,21 @@ import { Block, FunDef, VarDecl, isFunDef } from './generated/ast.js'
 
 export type Symb = FunDef | VarDecl
 export type SymbType = Symb['$type']
-export enum SymbState { undeclared, undefined, unused, used }
-export type SymbData = {symb: Symb, state: SymbState}
+export enum SymbState {
+    undeclared,
+    undefined,
+    unused,
+    used,
+}
+export type SymbData = { symb: Symb; state: SymbState }
 export type ScopeNode = Block | FunDef
 export type Scope = Map<string, SymbData>
 
 export class TreeScope {
     private local: Scope = new Map()
     private children: Map<ScopeNode, TreeScope> = new Map()
-    
-    private constructor(
-        private parent?: TreeScope
-    ) {}
+
+    private constructor(private parent?: TreeScope) {}
 
     public static createRoot(): TreeScope {
         return new TreeScope()
@@ -40,7 +43,7 @@ export class TreeScope {
         }
         this.local.set(name, {
             symb,
-            state: isDef ? SymbState.unused : SymbState.undefined
+            state: isDef ? SymbState.unused : SymbState.undefined,
         })
         return true
     }
@@ -51,7 +54,7 @@ export class TreeScope {
         if (value) {
             const prev = value.state
             const next = SymbState.used
-            this.local.set(name, {...value, state: next})
+            this.local.set(name, { ...value, state: next })
             if (prev === SymbState.undefined) {
                 return SymbState.undefined
             }
@@ -88,5 +91,4 @@ export class TreeScope {
     public getLocalUnused(): Symb[] {
         return this.findAllLocal((v) => v.state === SymbState.unused)
     }
-
 }

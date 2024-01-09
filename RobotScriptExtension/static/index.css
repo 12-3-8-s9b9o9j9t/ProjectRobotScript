@@ -1,95 +1,64 @@
-html,body {
-    background: rgb(33,33,33);
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    color: white;
-    margin: 0;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    color-scheme: dark;
+  }
 }
-h1 {
-    text-align: center;
+
+html,
+body {
+  background: rgb(33, 33, 33);
+  color: white;
+  margin: 0;
 }
+
 footer {
-    text-align: center;
-    color: #444;
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-/* for monaco */
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-}
-
-#monaco-editor-root {
-    flex-grow: 1;
+  text-align: center;
+  color: #444;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 /* for p5.js */
 canvas {
-    display: block;
+  display: block;
 }
 
 #buttons {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .build {
-    display: inline;
-    margin: 8px 10px;
-    width: 300px;
-    height: 30px;
-    background: none;
-    border: 2px #fff solid;
-    color: #fff;
-    transition: 0.3s;
-    font-size: 1.2rem;
-    border-radius: 4px;
+  display: inline;
+  margin: 8px 10px;
+  width: 300px;
+  height: 30px;
+  background: none;
+  border: 2px #fff solid;
+  color: #fff;
+  transition: 0.3s;
+  font-size: 1.2rem;
+  border-radius: 4px;
 }
 .build:hover {
-    border-color: #6cf;
-    color: #6cf;
-    cursor: pointer;
+  border-color: #6cf;
+  color: #6cf;
+  cursor: pointer;
 }
 .build:active {
-    color: #fff;
-    border-color: #fff;
-} 
+  color: #fff;
+  border-color: #fff;
+}
 
 #page-wrapper {
-    display: flex;
-    max-width: 2000px;
-    margin: 4px auto;
-    padding: 4px;
-    min-height: 80vh;
-    justify-content: center;
-}
-#page-wrapper .editor {
-    display: flex;
-    width: 45%;
-}
-
-#page-wrapper .simulator {
-    display: flex;
-    width: 55%;
-}
-
-@media(max-width: 1000px) {
-    #page-wrapper {
-        display: block;
-    }
-    #page-wrapper .editor,
-    #page-wrapper .simulator
-    {
-        display: block;
-        width: auto;
-    }
-    #fsm-canvas {
-        margin-top: 32px;
-    }
-    #page-wrapper {
-        min-height: auto;
-    }
+  display: flex;
+  max-width: 2000px;
+  margin: 4px auto;
+  padding: 4px;
+  min-height: 80vh;
+  justify-content: center;
 }

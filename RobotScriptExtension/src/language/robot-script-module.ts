@@ -6,15 +6,14 @@ import type {
     Module,
     PartialLangiumServices,
 } from 'langium'
-import { AbstractExecuteCommandHandler, createDefaultModule, createDefaultSharedModule, inject } from 'langium'
 import {
-    RobotScriptGeneratedModule,
-    RobotScriptGeneratedSharedModule,
-} from './generated/module.js'
-import {
-    RobotScriptValidator,
-    registerValidationChecks,
-} from './robot-script-validator.js'
+    AbstractExecuteCommandHandler,
+    createDefaultModule,
+    createDefaultSharedModule,
+    inject,
+} from 'langium'
+import { RobotScriptGeneratedModule, RobotScriptGeneratedSharedModule } from './generated/module.js'
+import { RobotScriptValidator, registerValidationChecks } from './robot-script-validator.js'
 import { RobotScriptAcceptWeaver, weaveAcceptMethods } from '../semantics/accept-weaver.js'
 import { generateCode, generateScene, validateCode } from '../web/api.js'
 
@@ -23,28 +22,27 @@ import { generateCode, generateScene, validateCode } from '../web/api.js'
  */
 export type RobotScriptAddedServices = {
     validation: {
-        RobotScriptValidator: RobotScriptValidator,
+        RobotScriptValidator: RobotScriptValidator
         RobotScriptAcceptWeaver: RobotScriptAcceptWeaver
     }
 }
 
 class RobotScriptCommandHandler extends AbstractExecuteCommandHandler {
     registerCommands(acceptor: ExecuteCommandAcceptor): void {
+        acceptor('validateCode', (args) => {
+            // invoke generator on this data, and return the response
+            return validateCode(args[0])
+        })
 
-        acceptor('validateCode', args => {
+        acceptor('generateScene', (args) => {
             // invoke generator on this data, and return the response
-            return validateCode(args[0]);
-        });
-        
-        acceptor('generateScene', args => {
-            // invoke generator on this data, and return the response
-            return generateScene(args[0]);
-        });
+            return generateScene(args[0])
+        })
 
-        acceptor('generateCode', args => {
+        acceptor('generateCode', (args) => {
             // invoke generator on this data, and return the response
-            return generateCode(args[0]);
-        });
+            return generateCode(args[0])
+        })
     }
 }
 
@@ -84,20 +82,15 @@ export const RobotScriptModule: Module<
  * @param context Optional module context with the LSP connection
  * @returns An object wrapping the shared services and the language-specific services
  */
-export function createRobotScriptServices(
-    context: DefaultSharedModuleContext
-): {
+export function createRobotScriptServices(context: DefaultSharedModuleContext): {
     shared: LangiumSharedServices
     RobotScript: RobotScriptServices
 } {
-    const shared = inject(
-        createDefaultSharedModule(context),
-        RobotScriptGeneratedSharedModule
-    )
+    const shared = inject(createDefaultSharedModule(context), RobotScriptGeneratedSharedModule)
     const RobotScript = inject(
         createDefaultModule({ shared }),
         RobotScriptGeneratedModule,
-        RobotScriptModule
+        RobotScriptModule,
     )
     shared.lsp.ExecuteCommandHandler = new RobotScriptCommandHandler()
     shared.ServiceRegistry.register(RobotScript)

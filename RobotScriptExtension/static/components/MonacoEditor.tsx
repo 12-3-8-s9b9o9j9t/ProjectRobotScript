@@ -1,24 +1,24 @@
-import { FC, useEffect } from "react";
-import { MonacoEditorLanguageClientWrapper, monaco } from "monaco-editor-wrapper";
-import { defaultCode } from "../default-code";
-import monarchSyntax from "../../syntaxes/robot-script.monarch.js";
+import { FC, useEffect, useRef } from 'react'
+import { MonacoEditorLanguageClientWrapper, monaco } from 'monaco-editor-wrapper'
+import { defaultCode } from '../default-code'
+import monarchSyntax from '../../syntaxes/robot-script.monarch.js'
 
-export type Editor = monaco.editor.IStandaloneCodeEditor;
+export type Editor = monaco.editor.IStandaloneCodeEditor
 
 export interface MonacoEditorProps {
-    onEditorDidMount: (editor: Editor|undefined) => void;
+    onEditorDidMount: (editor: Editor | undefined) => void
 }
 
 const buildWorker = (url: URL, name: string) => {
     return new Worker(url.href, {
         type: 'classic',
-        name
+        name,
     })
 }
 
 self.MonacoEnvironment = {
     getWorker(_, label) {
-        console.log('getWorker: workerId: ' + _ + ' label: ' + label);
+        console.log('getWorker: workerId: ' + _ + ' label: ' + label)
         let workerUrl: URL
         if (label === 'json') {
             workerUrl = new URL('../monaco-workers/jsonWorker-iife.js', import.meta.url)
@@ -34,8 +34,8 @@ self.MonacoEnvironment = {
         }
         workerUrl = new URL('../monaco-workers/editorWorker-iife.js', import.meta.url)
         return buildWorker(workerUrl, label)
-    }  
-};
+    },
+}
 
 //MonacoEditorLanguageClientWrapper.addMonacoStyles('monaco-editor-styles');
 
@@ -52,27 +52,26 @@ editorConfig.setUseWebSocket(false)
 const workerUrl = new URL('../ls-worker/robot-script-server-worker.js', import.meta.url)
 const lsWorker = new Worker(workerUrl.href, {
     type: 'classic',
-    name: 'RobotScript Language Server'
+    name: 'RobotScript Language Server',
 })
 client.setWorker(lsWorker)
 
-const MonacoEditor: FC<MonacoEditorProps> = ({onEditorDidMount}) => {
+const MonacoEditor: FC<MonacoEditorProps> = ({ onEditorDidMount }) => {
+    const rootRef = useRef<HTMLDivElement>(null)
 
     useEffect(() => {
-        client.startEditor(document.getElementById('monaco-editor-root') as HTMLElement)
+        client
+            .startEditor(rootRef.current!)
             .then((s) => {
                 console.log(s)
                 onEditorDidMount(client.getEditor())
             })
-            .catch((e: Error) => console.error(e));
-
+            .catch((e: Error) => console.error(e))
     }, [])
-    
+
     return (
-        <div className="editor">
-            <div className="wrapper">
-                <div id="monaco-editor-root"></div>
-            </div>
+        <div className="flex h-full w-full flex-col">
+            <div className="flex-grow" ref={rootRef} />
         </div>
     )
 }

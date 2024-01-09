@@ -27,4 +27,4 @@ void square(number dist) {
     }
 }
 
-`.trimStart();
+`.trimStart()

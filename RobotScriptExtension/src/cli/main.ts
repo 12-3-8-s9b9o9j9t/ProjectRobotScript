@@ -9,7 +9,7 @@ import * as fs from 'node:fs'
 import * as path from 'node:path'
 import chalk from 'chalk'
 
-import { EntryPoint } from '../semantics/visitor.js';
+import { EntryPoint } from '../semantics/visitor.js'
 import { Compiler } from '../semantics/compiler.js'
 import { DocWithScope } from '../language/robot-script-validator.js'
 
@@ -19,25 +19,25 @@ const packagePath = path.resolve(__dirname, '..', '..', 'package.json')
 const packageContent = await fsp.readFile(packagePath, 'utf-8')
 
 export const compileAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
-    const services = createRobotScriptServices(NodeFileSystem).RobotScript;
-    const ep = await extractAstNode<EntryPoint>(fileName, services);
-    
-    const data = extractDestinationAndName(fileName, opts.destination);
-    const generatedFilePath = `${path.join(data.destination, data.name)}.ino`;
+    const services = createRobotScriptServices(NodeFileSystem).RobotScript
+    const ep = await extractAstNode<EntryPoint>(fileName, services)
+
+    const data = extractDestinationAndName(fileName, opts.destination)
+    const generatedFilePath = `${path.join(data.destination, data.name)}.ino`
 
     if (!fs.existsSync(data.destination)) {
-        fs.mkdirSync(data.destination, { recursive: true });
+        fs.mkdirSync(data.destination, { recursive: true })
     }
 
-    const scope = (ep.$document as DocWithScope<EntryPoint>).scope;
+    const scope = (ep.$document as DocWithScope<EntryPoint>).scope
 
-    const compiler = new Compiler(scope);
-    const result = compiler.visitEntryPoint(ep);
+    const compiler = new Compiler(scope)
+    const result = compiler.visitEntryPoint(ep)
 
-    fs.writeFileSync(generatedFilePath, result);
-    
-    console.log(chalk.green(`Program compiled successfully: ${generatedFilePath}`));
-};
+    fs.writeFileSync(generatedFilePath, result)
+
+    console.log(chalk.green(`Program compiled successfully: ${generatedFilePath}`))
+}
 
 export type GenerateOptions = {
     destination?: string
@@ -54,11 +54,9 @@ export const validateAction = async (fileName: string): Promise<void> => {
     if (
         parseResult.lexerErrors.length === 0 &&
         parseResult.parserErrors.length === 0 &&
-        document.diagnostics?.filter(d => d.severity === 1 /*Error*/).length === 0
+        document.diagnostics?.filter((d) => d.severity === 1 /*Error*/).length === 0
     ) {
-        console.log(
-            chalk.green(`Parsed and validated ${fileName} successfully!`)
-        )
+        console.log(chalk.green(`Parsed and validated ${fileName} successfully!`))
     } else {
         console.log(chalk.red(`Failed to parse and validate ${fileName}!`))
     }
@@ -75,12 +73,14 @@ export default function (): void {
         .argument('<file>', `source file (possible file extensions: ${fileExtensions})`)
         .option('-d, --destination <dir>', 'destination directory of generating')
         .description('generates arduino code from a given source file')
-        .action(compileAction);
+        .action(compileAction)
 
     program
         .command('validate')
         .argument('<file>', `Source file to parse & validate (ending in ${fileExtensions})`)
-        .description('Indicates where a program parses & validates successfully, but produces no output code')
+        .description(
+            'Indicates where a program parses & validates successfully, but produces no output code',
+        )
         .action(validateAction)
 
     program.parse(process.argv)

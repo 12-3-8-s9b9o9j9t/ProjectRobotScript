@@ -1,5 +1,5 @@
-import { useContext } from "react"
-import { SceneContext } from "../components/SceneProvider"
+import { useContext } from 'react'
+import { SceneContext } from '../components/SceneProvider'
 
 const useScene = () => {
     return useContext(SceneContext)
